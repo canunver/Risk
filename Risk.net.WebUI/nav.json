@@ -1,0 +1,175 @@
+{
+  "version": "4.5",
+  "lists": [
+    {
+      "title": "MenuTanim.Surec",
+      "icon": "fal fa-ballot-check",
+      "roles": [ "*" ],
+      "href": "/Surec"
+    },
+    {
+      "title": "Menu.RiskIzleme",
+      "icon": "fal fa-globe-stand",
+      "roles": [ "*" ],
+      "href": "/RiskEvreni"
+    },
+    {
+      "title": "Menu.AnahtarRiskGostergesi",
+      "icon": "fal fa-percent",
+      "roles": [ "*" ],
+      "href": "/AnahtarRiskGostergesi"
+    },
+    {
+      "title": "Menu.RiskEvreni",
+      "icon": "fal fa-globe-stand",
+      "items": [
+        {
+          "title": "Menu.RiskEvreniKayit",
+          "roles": [ "*" ],
+          "href": "/RiskKaydi"
+        },
+        {
+          "title": "Menu.RiskEvreniOnay",
+          "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI", "BIRIMAMIRI", "ILKOORDINATOR", "MERKEZKOORDINATOR", "GENELKOORDINATOR", "BASKAN", "ICDENETIMKOORDINATOR" ],
+          "href": "/RiskKaydiOnay"
+        }
+      ]
+    },
+    {
+      "title": "Menu.RiskYonetilmesi",
+      "icon": "fal fa-people-carry",
+      "items": [
+        {
+          "title": "Menu.RiskYonetilmesiKayit",
+          "roles": [ "*" ],
+          "href": "/RisklerinDegerlendirilmesi"
+        },
+        {
+          "title": "Menu.RiskYonetilmesiOnay",
+          "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI", "BIRIMAMIRI", "ILKOORDINATOR", "MERKEZKOORDINATOR", "GENELKOORDINATOR", "BASKAN", "ICDENETIMKOORDINATOR" ],
+          "href": "/RisklerinDegerlendirilmesiOnay"
+        }
+      ]
+    },
+    {
+      "title": "Menu.RiskAzaltmaPlani",
+      "icon": "fal fa-tachometer-slowest",
+      "items": [
+        {
+          "title": "Menu.RiskAzaltmaPlaniKayit",
+          "roles": [ "*" ],
+          "href": "/RisklerinYonetilmesi"
+        },
+        {
+          "title": "Menu.RiskAzaltmaPlaniOnay",
+          "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI", "BIRIMAMIRI", "ILKOORDINATOR", "MERKEZKOORDINATOR", "GENELKOORDINATOR", "BASKAN", "ICDENETIMKOORDINATOR" ],
+          "href": "/RisklerinYonetilmesiOnay"
+        }
+      ]
+    },
+    {
+      "title": "Menu.OlayRaporlama",
+      "icon": "fal fa-box-full",
+      "items": [
+        {
+          "title": "Menu.OlayRaporlamaKayit",
+          "roles": [ "*" ],
+          "href": "/OlayRaporlama"
+        },
+        {
+          "title": "Menu.OlayRaporlamaOnay",
+          "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI", "BIRIMAMIRI", "ILKOORDINATOR", "MERKEZKOORDINATOR", "GENELKOORDINATOR", "BASKAN", "ICDENETIMKOORDINATOR" ],
+          "href": "/OlayRaporlamaOnay"
+        }
+      ]
+    },
+    {
+      "title": "Menu.BulguYonetimi",
+      "icon": "fal fa-clipboard-list-check",
+      "items": [
+        {
+          "title": "Menu.BulguYonetimiDenetimIc",
+          "roles": [ "SISTEMYONETICISI", "ICDENETIMUZMANI", "ICDENETIMKOORDINATOR" ],
+          "href": "/Denetim/IcDenetim"
+        },
+        {
+          "title": "Menu.BulguYonetimiDenetimDis",
+          "roles": [ "SISTEMYONETICISI", "ICDENETIMUZMANI", "ICDENETIMKOORDINATOR" ],
+          "href": "/Denetim/DisDenetim"
+        },
+        {
+          "title": "Menu.BulguYonetimiEylemPlani",
+          "roles": [ "*" ],
+          "href": "/Denetim/DenetimListe?tur=1"
+        },
+        {
+          "title": "Menu.BulguYonetimiIzlemeTakip",
+          "roles": [ "SISTEMYONETICISI", "ICDENETIMUZMANI", "ICDENETIMKOORDINATOR" ],
+          "href": "/Denetim/DenetimListe?tur=2"
+        },
+        {
+          "title": "Menu.BulguYonetimiCevap",
+          "roles": [ "*" ],
+          "href": "/BulguYonetimiCevap"
+        }
+      ]
+    },
+    {
+      "title": "Menu.StratejikPlan",
+      "icon": "fal fa-shield-alt",
+      "items": [
+        {
+          "title": "Menu.StratejikPlanKayit",
+          "roles": [ "*" ],
+          "href": "/StratejikPlan"
+        },
+        {
+          "title": "Menu.StratejikPlanIzleme",
+          "roles": [ "*" ],
+          "href": "/StratejikPlanIzleme"
+        },
+        {
+          "title": "Menu.StratejikPlanEylemPlani",
+          "roles": [ "SISTEMYONETICISI", "PLANLAMAUNITESI", "BIRIMAMIRI" ],
+          "href": "/StratejikPlanEylemPlani"
+        }
+      ]
+    },
+    {
+      "title": "Menu.BilgiMerkezi",
+      "icon": "fal fa-books",
+      "roles": [ "*" ],
+      "href": "/BilgiMerkezi"
+    },
+    {
+      "title": "Menu.BildirimSistemi",
+      "icon": "fal fa-megaphone",
+      "roles": [ "*" ],
+      "href": "/BildirimSistemi"
+    },
+    {
+      "title": "Menu.Raporlar",
+      "icon": "fal fa-clipboard-list-check",
+      "roles": [ "*" ],
+      "href": "/Raporlar"
+    },
+    {
+      "title": "Menu.Tanimlar",
+      "icon": "fal fa-puzzle-piece",
+      "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "ICDENETIMUZMANI", "ICDENETIMKOORDINATOR" ],
+      "href": "/TanimMenu"
+    },
+    {
+      "title": "Menu.RiskYonetimiTaahhutnamesi",
+      "icon": "fal fa-edit",
+      "roles": [ "SISTEMYONETICISI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI", "MERKEZKOORDINATOR", "ILKOORDINATOR" ],
+      "href": "/RiskYonetimiTaahhutnamesi"
+    },
+    {
+      "title": "Menu.BGYSRiskleri",
+      "icon": "fal fa-clipboard-list",
+      "roles": [ "*" ],
+      "href": "http://kbsikys.tkdk.local/RisklerinDegerlendirilmesi"
+    }
+  ]
+}

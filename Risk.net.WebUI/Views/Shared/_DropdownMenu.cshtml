@@ -1,0 +1,37 @@
+@{ 
+    var adiSoyadi = User.FindFirst("AdiSoyadi").Value;
+    var unvan = User.FindFirst("Unvan").Value;
+    var resimUrl = User.FindFirst("ResimUrl").Value;
+}
+
+<div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
+    <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
+        <span class="mr-2">
+            <img src="@resimUrl" class="rounded-circle profile-image" alt="@adiSoyadi">
+        </span>
+        <div class="info-card-text">
+            <div class="fs-lg text-truncate text-truncate-lg">@adiSoyadi</div>
+            <span class="text-truncate text-truncate-md opacity-80 fs-xs">@unvan</span>
+        </div>
+    </div>
+</div>
+<div class="dropdown-divider m-0"></div>
+<a href="#" class="dropdown-item" data-toggle="modal" data-target=".js-modal-settings">
+    @CustomResource["drpdwn.settings"]
+</a>
+<div class="dropdown-divider m-0"></div>
+<a href="#" class="dropdown-item" data-action="app-fullscreen">
+    @CustomResource["drpdwn.fullscreen"]
+    <i class="float-right text-muted fw-n">F11</i>
+</a>
+<div class="dropdown-multilevel dropdown-multilevel-left">
+    <div class="dropdown-item" data-i18n="drpdwn.lang">
+        @CustomResource["drpdwn.lang"]
+    </div>
+    <partial name="_Culture" />
+</div>
+
+<div class="dropdown-divider m-0"></div>
+<a class="dropdown-item fw-500 pt-3 pb-3" href="/account/logout">
+    @CustomResource["drpdwn.pagelogout"]
+</a>

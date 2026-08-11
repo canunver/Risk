@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DataContext\DatabaseContextFactory.cs" />
+    <Compile Remove="Entities\BulguYonetimiYedek.cs" />
+    <Compile Remove="Entities\TanimAmac.cs" />
+    <Compile Remove="Entities\TanimBirimKoordinatorluk.cs" />
+    <Compile Remove="Entities\TanimHedef.cs" />
+    <Compile Remove="Entities\TanimSehir.cs" />
+    <Compile Remove="Entities\TanimUlke.cs" />
+    <Compile Remove="Functions\TanimBirimData.cs" />
+    <Compile Remove="Functions\TanimKoordinatorlukData.cs" />
+    <Compile Remove="Interfaces\ITanimBirimData.cs" />
+    <Compile Remove="Interfaces\ITanimKoordinatorlukData.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Risk.net.Utilities\Risk.net.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

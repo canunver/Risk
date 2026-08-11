@@ -1,0 +1,311 @@
+@model Sonuc
+
+<input type="hidden" id="hdnDosyaBagliKod" value="@(Model.AnahtarAlan)" />
+<input type="hidden" id="hdnTmpBagliKod" />
+
+<div id="mdlDosyaKontrolModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="divDosyaKontrolModalAlan">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal gösterim sırasında aşağıdaki bölüm divDosyaKontrolModalAlan alanına taşınır*@
+<div id="tblDosyaKontrolListeAlan" class="p-3 rounded shadow-sm mb-g border border-faded">
+
+    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+        @if (!ViewBag.SadeceOkuma)
+        {
+            <div class="divInpuFileAlani">
+                <input type="file" id="flDinamikDosyaKontrol" class="form-control mb-3" @(ViewBag.MaxDosyaSayisi > 1 ? "multiple" : "")>
+            </div>
+        }
+        <div class="ml-auto">
+            <button type="button" class="btn btn-secondary close-button btn-sm dosyaKontrolKapatDugmesi" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+        </div>
+    </div>
+    <table id="tblDosyaKontrolListe" class="table table-hover table-striped table-sm w-100 mt-3">
+        <tbody></tbody>
+    </table>
+    <div class="invalid-feedback flDosyaKontrolListeBosOlamaz">
+        @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+    </div>
+</div>
+
+
+<script>
+    var modalGoster = false;
+    var zorunlu = false;
+    var silmeYetkisi = true;
+    var sadeceOkuma = false;
+    var maxDosyaSayisi = 999;
+
+    $(function () {
+
+        modalGoster = @(ViewBag.ModalGoster.ToString().ToLower());
+        zorunlu = @(ViewBag.Zorunlu.ToString().ToLower());
+        maxDosyaSayisi = @(ViewBag.MaxDosyaSayisi.ToString().ToLower());
+        silmeYetkisi = @(ViewBag.SilmeYetkisi.ToString().ToLower());
+        sadeceOkuma = @(ViewBag.SadeceOkuma.ToString().ToLower());
+        if (sadeceOkuma) {
+            silmeYetkisi = false;
+            zorunlu = false;
+        }
+        $(".flDosyaKontrolListeBosOlamaz").hide();
+
+        //Daha önce yüklenen dosyaları listeye eklemek için
+        @{
+            foreach (Dosya item in Model?.Liste)
+            {
+                <text>
+                    DosyaSatiriOlustur("@Html.Raw(item.Kod)", "@Html.Raw(item.Adi)", "@Html.Raw(item.Tipi)", "@Html.Raw(item.BoyutFormatli)", "@Html.Raw(item.KayitEden.AdiSoyadi)", "@Html.Raw(item.KayitTarihi)", "@Html.Raw(item.Aciklama)");
+                </text>
+            }
+        }
+
+        //Eğer dosya kontrolü modal olarak gösterilecekse
+        if (modalGoster) {
+
+            $("#tblDosyaKontrolListeAlan").appendTo("#divDosyaKontrolModalAlan")
+        }
+        else
+            $(".dosyaKontrolKapatDugmesi").hide();
+
+
+        //Bağlı kayıt yeni ise tmpKod kullanılacak
+        $("#hdnTmpBagliKod").val("!!!" + GuidUret());
+
+        //dosya kontrolünü oluştur
+        $("#flDinamikDosyaKontrol").fileinput({
+            showCaption: false,
+            showUpload: false,
+            showRemove: false,
+            showPreview: false,
+            dropZoneEnabled: false,
+            inputGroupClass: "input-group-sm",
+            language: "tr",
+            browseLabel: "Dosya Yükle"
+        });
+
+        //Dosya kontrolden yeni yüklenmek için dosya seçildiğinde
+        document.getElementById("flDinamikDosyaKontrol").onchange = function () {
+            //Bağlantı kodunu al. Eğer bağlı kayıt yeni kayıt ediliyorsa temp kodu kullan
+            var baglantiKod = $("#hdnDosyaBagliKod").val();
+            if (baglantiKod == "")
+                baglantiKod = $("#hdnTmpBagliKod").val();
+
+            //Yüklenmek için seçilen dosyaları al
+            var dosyaKontrol = $("#flDinamikDosyaKontrol").get(0);
+            var dosyalar = dosyaKontrol.files;
+
+            //Formdata oluştur
+            var dosyaData = new FormData();
+
+            //Formdataya yüklenmek için seçilen dosyaları ekle
+            for (var i = 0; i < dosyalar.length; i++) {
+                dosyaData.append(dosyalar[i].name, dosyalar[i]);
+            }
+
+            //JSON datasına bağlantı kodunu ekle
+            dosyaData.append("BaglantiKod", baglantiKod);
+
+            //Dosyaları kaydetmek için sunucuya gönder
+            $.ajax({
+                url: '/Dosya/Kaydet',
+                type: "POST",
+                contentType: false,
+                processData: false,
+                data: dosyaData,
+                success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            //Kayıt başarıyla yapıldıysa seçilen dosyaları listeye ekle
+                            $.each(result.Liste, function (i, b) {
+
+                                DosyaSatiriOlustur(b.Kod, b.Adi, b.Tipi, b.BoyutFormatli, b.KayitEden.AdiSoyadi, b.KayitTarihi, b.Aciklama);
+                            });
+
+                            //Aynı dosya tekrar seçilmek istendiğinde boş olmadığı için change event çalışmıyor. Boşaltmak gerekli
+                            $("#flDinamikDosyaKontrol").val("")
+                        }
+                        else {
+                            //Hata veya uyarıyı göster
+                        }
+                    },
+                error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+        };
+
+    });
+
+    //Eklenen dosya satırlarını ekranda göstermek için
+    function DosyaSatiriOlustur(kod, dosyaAdi, resim, boyut, ekleyen, tarih, aciklama) {
+
+        tarih = tarih.replace(" 00:00:00", "");
+
+        console.log("aciklama");
+
+        var aciklamaDugme = "<a title='" + "@Html.Raw(CustomResource["Dugme.DosyaAciklama"])" + "' data-id='" + kod + "' data-aciklama='" + aciklama + "' class='btn btn-info btn-xs btn-icon ml-2 text-white genelTooltip' style='margin-right:5px;' onClick='AciklamaYaz(this)'><i class='fal fa-pencil'></i></a>";
+        if (aciklama == null) aciklama = "";
+        if (sadeceOkuma) aciklamaDugme = "";
+
+        var satir = "<tr id='dosya_" + kod + "'>";
+        satir += "<td class='text-center' width='10px'>" + "<span class='mr-2 ml-2 fa-2x'>" + resim + "</span></td>";
+        satir += "<td><div>" + dosyaAdi + aciklamaDugme + "</div>";
+        satir += "<div class='text-danger fs-nano dAciklama_" + kod + "'>" + aciklama + "</div>";
+        satir += "<span class='text-muted fs-nano'>" + ekleyen + " tarafından " + tarih + " tarihinde yüklendi.</span><span class='text-muted fs-nano ml-2'>" + boyut + "</span></td>";
+        satir += "<td>" + "<i data-kod='" + kod + "' title='İndir' onClick='DinamikDosyaIndir(this);return false;' class='dosyaKontrolIndir fal fa-download fa-2x text-primary cursor-pointer genelTooltip'></i>" + "</td>";
+
+        if (silmeYetkisi)
+            satir += "<td>" + "<i data-kod='" + kod + "' title='Sil' onClick='DinamikDosyaSil(this);return false;' class='dosyaKontrolSil fal fa-times fa-2x text-danger cursor-pointer genelTooltip'></i>" + "</td>";
+
+        var tabloSatirAlan = $("#tblDosyaKontrolListe tbody");
+        tabloSatirAlan.append(satir);
+
+        //Eğer eklenecek dosya sayısı kısıtlaması varsa Yükleme düğmesini gizlemek için
+        EklenenDosyaSayisiKontrolEt();
+
+        //Zorunluluk varsa uyarı göstermek/gizlemek için
+        DinamikDosyaListesiZorunluKontrol();
+    }
+
+    //Kaç tane dosya eklenmiş kontrolü
+    function EklenenDosyaSayisiKontrolEt() {
+        var satirSayisi = $('#tblDosyaKontrolListe tbody tr').length;
+
+        DosyaDugmesineSayiYaz(satirSayisi, dosyaEkleDugmesiAdi);
+
+        if (satirSayisi >= maxDosyaSayisi) {
+            $(".divInpuFileAlani").hide();
+        }
+        else {
+            $(".divInpuFileAlani").show();
+        }
+    }
+
+    //İstenilen Dosyayı indirmek için
+    function DinamikDosyaIndir(kontrol) {
+        var kod = $(kontrol).attr("data-kod");
+
+        $.ajax({
+            url: "/Dosya/DosyaIndir",
+            type: "POST",
+            data: { kod: kod },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob, status, xhr) {
+
+                DosyaIndirJS(blob, status, xhr);
+
+            },
+            error: function (jqXHR, exception) {
+                IslemYapiliyorBitir($("#btnDosyaIndir" + baglantiKod))
+                alert(exception);
+            },
+        });
+    }
+
+    //İstenilen dosyayı silmek için
+    function DinamikDosyaSil(kontrol) {
+        var kod = $(kontrol).attr("data-kod");
+        Swal.fire({
+        title: "@CustomResource["Baslik.Onay"]",
+        html: "@CustomResource["Onay.DosyaSil"]",
+        showCancelButton: true,
+        confirmButtonText: '@CustomResource["Dugme.Evet"]',
+        cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+            $.ajax({
+                url: "/Dosya/Sil",
+                data: { kod: kod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        $("#dosya_" + kod).remove();
+                        EklenenDosyaSayisiKontrolEt();
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+            }
+        });
+    }
+
+    //zorunluluk mesajı göstermek ve ana sayfadaki kaydı engellemek için
+    function DinamikDosyaListesiZorunluKontrol() {
+        $(".flDosyaKontrolListeBosOlamaz").hide();
+        if (!zorunlu) return true;
+
+        var satirSayisi = $('#tblDosyaKontrolListe tbody tr').length;
+        if (satirSayisi > 0) return true;
+
+        $(".flDosyaKontrolListeBosOlamaz").show();
+        return false;
+    }
+
+    //Bazı durumlarda ana kayıt ekranından Listeyi dosyalar silinmeden boşaltmak gerekiyor
+    function DinamikDosyaListesiBosalt(kodAlaniBosalt) {
+        //Listeyi boşalt
+        $("#tblDosyaKontrolListe > tbody").empty();
+
+        //Zorunluk varsa ve yükleme düğmesi gizliyse göster
+        EklenenDosyaSayisiKontrolEt();
+
+        if (kodAlaniBosalt)
+            $("#hdnDosyaBagliKod").val("");
+    }
+
+    function AciklamaYaz(kontrol) {
+        var dosyaKod = $(kontrol).attr("data-id");
+        var aciklama = $(kontrol).attr("data-aciklama");
+        
+        console.log("aciklama");
+        let aciklamaYeni = prompt("Dosyaya açıklama bilgisi girin", aciklama);
+        if (aciklamaYeni != null) {
+
+            var form = {
+                Kod: dosyaKod,
+                Aciklama: aciklamaYeni,
+            };
+
+            $.ajax({
+                url: "/Dosya/AciklamaKaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        $(".dAciklama_" + dosyaKod).html(aciklamaYeni);
+                    }
+                }
+            });
+        }
+    }
+
+</script>

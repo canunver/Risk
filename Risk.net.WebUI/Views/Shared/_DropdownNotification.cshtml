@@ -1,0 +1,22 @@
+@if (Settings.Features.Notification)
+{
+
+    <div class="dropdown-header bg-trans-gradient d-flex justify-content-center align-items-center rounded-top mb-2">
+        <h4 class="m-0 text-center color-white">
+            @if (ViewBag.BildirimSayisi > 0)
+            {
+
+                <span class="spnBildirimSayi">@ViewBag.BildirimSayisi</span>
+                <small class="mb-0 opacity-80">@CustomResource["Bildirim.BildirimMesaj"]</small>
+            }
+            else
+            {
+                <small class="mb-0 opacity-80">@CustomResource["Bildirim.BildirimYokMesaj"]</small>
+            }
+
+        </h4>
+    </div>
+
+    <div class="py-2 px-3 bg-faded d-block rounded-bottom text-right border-faded border-bottom-0 border-right-0 border-left-0">
+        <a href="/BildirimSistemi" class="fs-xs fw-500 ml-auto">@CustomResource["Bildirim.ButunBildirimleriGor"]</a>
+    </div>}

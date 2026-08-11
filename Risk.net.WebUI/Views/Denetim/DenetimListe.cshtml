@@ -1,0 +1,240 @@
+@{
+    ViewData["Title"] = ViewBag.Baslik;
+    ViewData["PageName"] = "DenetimListe?tur=" + ViewBag.Tur;
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["DenetimListe.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/Denetim/TabloDoldur?tur=" + ViewBag.Tur;//post işleminde QueryString 2 parameter okutulamadı bundan dolayı denetimKaynak=0 gönderilmiyor
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+    tablo.islemler.silme = false;
+    tablo.islemler.duzenleme = false;
+    tablo.islemler.digerIslemler = "<a title='" + CustomResource["Dugme.BulguGoster"] + "' class='btn btn-success btn-sm btn-icon text-white genelTooltip' style='margin-right:5px;' onClick='BulguListesiGoster(this,!!DATA!!)'><i class='fal fa-clipboard-list-check'></i></a>";
+    tablo.siralamaKolonNo = -1;
+
+    if (@ViewBag.Gorevlendirme == 1)
+        tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DenetimGorevlendirme"] + "' class='btn btn-primary btn-sm btn-icon text-white genelTooltip' style='margin-right:5px;' onClick='DenetimGorevlendirme(this,!!DATA!!)'><i class='fal fa-calendar'></i></a>";
+
+    if (@ViewBag.Tur == "1")
+        tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DenetimTamamla"] + "' class='btn btn-info btn-sm btn-icon text-white genelTooltip' style='margin-right:5px;' onClick='DenetimTamamla(this,!!DATA!!)'><i class='fal fa-check'></i></a>";
+
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.TarihceGoster"] + "' class='btn btn-info btn-sm btn-icon text-white genelTooltip' style='margin-right:5px;' onClick='TarihceGoster(!!DATA!!)'><i class='fal fa-history'></i></a>";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kaynak",
+                adi = @CustomResource["Denetim.Alan.Kaynak"],
+                tipi = "int",
+                genislik = "10%",
+                render = "KaynakAdiVer(data)",
+                aramaTipi = "combo",
+                aramaAlanAdi = "Kaynak",
+                aramaListeDoldurMetodu = "KaynakDoldur()",
+                aramadaGoster = true
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Yil",
+                tipi = "int",
+                adi = @CustomResource["Denetim.Alan.DenetimYil"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "DenetimNo",
+                adi = @CustomResource["Denetim.Alan.DenetimNo"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "DenetimAdi",
+                adi = @CustomResource["Denetim.Alan.DenetimAdi"],
+                aramadaGoster = false,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "DenetimYapanKurum.Adi",
+                adi = @CustomResource["Denetim.Alan.DenetimYapanKurum"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "DenetimYapanKurumKod",
+                aramaListeDoldurUrl = "/TanimGenel/SelectListesiVer",
+                aramaListeDoldurKosul = "{tur:'DENETIMYAPANKURUM'}"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kod",
+                adi = @CustomResource["Denetim.Alan.BulguOzetDurumu"],
+                render = "BulguOzetDurumu(row)",
+                aramadaGoster = false,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                adi = @CustomResource["Denetim.Alan.Denetci"],
+                render = "Denetciler(row)",
+                siralama = false,
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguDenetciKod",
+                aramaListeDoldurUrl = "/TanimYetki/SelectListesiVerIcKontrol",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tablodaGoster = true,
+                render = "DurumAdiVer(data,'DEVAMEDEN')",
+                tipi = "int",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','DEVAMEDEN',false)",
+            });
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+
+    function BulguOzetDurumu(row) {
+        var acik = 0;
+        var kapali = 0;
+
+        $.each(row.Bulgular, function (a, b) {
+            if (b.Durum == 11 || b.Durum == 12) kapali++;
+            else
+                acik++;
+        });
+
+        return "Açık Bulgu Sayısı: " + acik + "<br>Kapalı Bulgu Sayısı: " + kapali;
+    }
+
+    function DenetimGorevlendirme(kontrol, kod) {
+
+        var tur = @ViewBag.Tur;
+
+        var kontrol = $("#divDinamikDenetimGorevlendirmeAlani").html();
+        if (kontrol == undefined)
+            $("<div id='divDinamikDenetimGorevlendirmeAlani'></div>").appendTo("body");
+        else {
+            $("#divDinamikDenetimGorevlendirmeAlani").html("");
+        }
+
+        $.ajax({
+            type: "GET",
+            url: "/ViewComponent/DenetimGorevlendirmeGoster",
+            data: { denetimKodu: kod, tip: tur },
+            success: function (result) {
+                $("#divDinamikDenetimGorevlendirmeAlani").html(result);
+                //$("#pnlYardimTamEkran").trigger('click');
+                jModalShow("mdlDinamikDenetimGorevlendirmeModal", "Denetim Görevlendirme");
+            }
+        });
+
+
+    }
+
+    function DenetimTamamla(kontrol, kod) {
+
+        var tur = @ViewBag.Tur;
+
+        Swal.fire({
+            title: "@CustomResource["Baslik.Onay"]",
+            html: "@CustomResource["Denetim.Tamamla"]",
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Denetim/Tamamla",
+                    data: { kod: kod },
+                    success: function (result) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                    }
+                });
+
+
+            }
+        });
+
+    }
+
+    function BulguListesiGoster(kontrol, kod) {
+
+        var url = "";
+        var tur = @ViewBag.Tur;
+        if (tur == "1")
+            url = "/DenetimEylemPlani?denetimKodu=" + kod;
+        else if (tur == "2")
+            url = "/DenetimIzlemeTakip?denetimKodu=" + kod;
+
+        PenceredeGoster(kontrol, url);
+
+        //Eğer Bulgu kaydında değişiklik olduysa Denetim listesi yenilensin
+        $(kontrol).on('onCloseAfter.lg', function (event) {
+            if (pencereVerisiDegisti) {
+                TabloVeriYenile();//Datatables viewcontrolünde
+                pencereVerisiDegisti = false;
+            }
+        });
+    }
+
+    function KaynakAdiVer(data) {
+
+        var kaynakAdi = "";
+        if (data == "1") kaynakAdi = "İç Denetim";
+        if (data == "2") kaynakAdi = "Dış Denetim";
+        return kaynakAdi;
+    }
+
+    function KaynakDoldur() {
+
+        var data = [
+            { id: "1", text: "İç Denetim" },
+            { id: "2", text: "Dış Denetim" }
+        ];
+
+        Select2Yap("ddlAramaKaynak", true, data);
+    }
+
+    function Denetciler(row) {
+        var ad = "";
+        $.each(row.Denetciler, function (a, b) {
+            if (ad != "") ad += ", ";
+            ad += b.Denetci?.AdiSoyadi;
+        });
+        return ad;
+    }
+
+</script>

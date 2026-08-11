@@ -1,0 +1,63 @@
+@model Sonuc
+
+<div id="mdlAktifRolSecModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover table-striped table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>Seç</th>
+                            <th>Rol Adı</th>
+                            <th>Koordinatörlük</th>
+                            <th>Birim/Ünite</th>
+                        </tr>
+                    </thead>
+                    @foreach (ViewYetki item in Model.Liste)
+                    {
+                        <tr>
+                            <td align="center"><a class="btn btn-success btn-xs btn-icon text-white" onclick="AktifRolSec('@item.Rol','@item.Koordinatorluk?.Kod','@item.Birim?.Kod');"><i class="fal fa-check"></i></a></td>
+                            <td>@CustomResource["YETKI_"+@item.Rol]</td>
+                            <td>@item.Koordinatorluk?.Adi</td>
+                            <td>@item.Birim?.Adi</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function AktifRolSec(rolAdi, koorKod, birimKod) {
+
+
+        $.ajax({
+            url: "/ViewComponent/AktifRolKaydet",
+            data: { rolAdi: rolAdi, koordinatorlukKod: koorKod, birimKod: birimKod },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+                    window.location.href = "/";
+                }
+                else {
+
+                    HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                }
+            }
+        });
+
+    }
+
+</script>

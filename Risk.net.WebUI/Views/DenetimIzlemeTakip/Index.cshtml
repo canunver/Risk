@@ -1,0 +1,959 @@
+@{
+    ViewData["Title"] = CustomResource["DenetimIzlemeTakip.SayfaBaslik"];
+    ViewData["PageName"] = "DenetimIzlemeTakip";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["DenetimIzlemeTakip.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/DenetimIzlemeTakip/TabloDoldur?denetimKodu=" + ViewBag.DenetimKodu;
+    tablo.duzenleUrl = "/DenetimIzlemeTakip/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "10%";
+    if (ViewBag.KayitYetki)
+    {
+
+        tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.KisiyeGonder"] + "' class='btn btn-warning btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='KisiyeGonderAc(!!DATA!!)'><i class='fal fa-paper-plane'></i></a>";
+    }
+    tablo.islemler.silme = false;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Denetim.Kaynak",
+                adi = @CustomResource["Denetim.Alan.Kaynak"],
+                tipi = "int",
+                genislik = "10%",
+                render = "KaynakAdiVer(data)",
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguKaynak",
+                aramaListeDoldurMetodu = "KaynakDoldur()",
+                aramadaGoster = true,
+                aramaAlaniSecimTetikle = "DenetimDoldur('ddlAramaDenetimKod','ddlAramaSorguKaynak', false)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                adi = @CustomResource["Denetim.Alan.DenetimAdi"],
+                tablodaGoster = false,
+                aramaTipi = "combo",
+                aramaAlanAdi = "DenetimKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaDenetimKod', false, null, true)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "BulguNo",
+                adi = @CustomResource["BulguYonetimi.Alan.BulguNo"],
+                aramaAlanAdi = "BulguNo",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "OnemDuzeyi.Adi",
+                adi = @CustomResource["BulguYonetimi.Alan.OnemDuzeyi"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "OnemDuzeyiKod",
+                aramaListeDoldurMetodu = "TanimGenelComboDoldur('ddlAramaOnemDuzeyiKod', 'BULGUONEMDUZEYI');",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "BulguTanimi",
+                adi = @CustomResource["BulguYonetimi.Alan.BulguTanimi"],
+                aramadaGoster = false
+            }); ;
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Oneriler",
+                adi = @CustomResource["BulguYonetimiCevap.Alan.Onerilen"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kod",
+                adi = @CustomResource["Denetim.Alan.KoordinatorlukBirim"],
+                render = "BirimYaz(row)",
+                siralama = false,
+                aramaAdi = @CustomResource["RiskEvreni.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguKoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+                aramaAlaniSecimTetikle = "BirimDoldur('ddlAramaSorguBirimKod','ddlAramaSorguKoordinatorlukKod', false)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                adi = @CustomResource["RiskEvreni.Alan.Birim"],
+                tablodaGoster = false,
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguBirimKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaSorguBirimKod', false, null, true)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "SonCevapTarihi",
+                adi = @CustomResource["BulguYonetimiCevap.Alan.SonCevapTarihi"],
+                render = "CevapDurumRender(row)",
+                aramaTipi = "tarihAralik",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'BULGUYONETIMI')",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','BULGUYONETIMI',false)",
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2><span><span class="text-danger"></span>@ViewBag.DenetimAdi @ViewBag.DenetimYapanKurumAdi</span></h2>
+                <div class="panel-toolbar">
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnBulguYonetimiKod" />
+                    <input type="hidden" id="hdnBulguYonetimiCevapKod" />
+                    <input type="hidden" id="hdnDenetimKod" value="@ViewBag.DenetimKodu" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="panel p-2">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label class="form-label">@CustomResource["DenetimEylemPlani.Alan.YilDenetimNo"]</label>
+                                <input type="text" readonly class="form-control form-control-sm lblDenetimYil" />
+                            </div>
+                            <div class="col-md-8 divIcDenetim">
+                                <label class="form-label">@CustomResource["BulguYonetimi.Alan.DenetimAdi"]</label>
+                                <input type="text" readonly class="form-control form-control-sm lblDenetimAdi" />
+                            </div>
+                            <div class="col-md-8 divDisDenetim">
+                                <label class="form-label">@CustomResource["Denetim.Alan.DenetimYapanKurum"]</label>
+                                <input type="text" readonly class="form-control form-control-sm lblDenetimKurum" />
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">@CustomResource["Denetim.Alan.RaporNo"]</label>
+                                <input type="text" readonly id="txtDenetimRaporNo" class="form-control form-control-sm">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel p-2">
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <label class="form-label">@CustomResource["BulguYonetimi.Alan.BulguNo"]<span class="spnBulguDurum ml-1"></span></label>
+                                <input type="text" readonly class="form-control form-control-sm lblBulguNo" />
+                            </div>
+                            <div class="col-md-10">
+                                <label class="form-label">@CustomResource["BulguYonetimi.Alan.BulguTanimi"]</label>
+                                <textarea id="txtBulguTanimi" rows="1" type="text" readonly class="form-control form-control-sm lblBulguTanimi"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="form-label">@CustomResource["Denetim.Alan.KoordinatorlukBirim"]</label>
+                                <input type="text" readonly class="form-control form-control-sm lblKoordinatorlukBirim" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-label" for="lblOneriler">@CustomResource["BulguYonetimi.Alan.Oneriler"]</label>
+                                <textarea id="txtOneriler" rows="1" readonly class="form-control form-control-sm lblOneriler" style="max-height:300px;"></textarea>
+                            </div>
+                            <div class="col-md-6 divIcDenetim">
+                                <label class="form-label" for="lblBulguAciklama">@CustomResource["BulguYonetimi.Alan.BulguAciklama"]</label>
+                                <textarea id="txtBulguAciklama" rows="1" readonly class="form-control form-control-sm lblBulguAciklama" style="max-height:300px;"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="display:none">
+                            <div class="col-md-6">
+                                <label class="form-label" for="lblNedenler">@CustomResource["BulguYonetimi.Alan.Nedenler"]</label>
+                                <textarea id="txtNedenler" rows="1" readonly class="form-control form-control-sm lblNedenler"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="lblKriterler">@CustomResource["BulguYonetimi.Alan.Kriterler"]</label>
+                                <textarea id="txtKriterler" rows="1" readonly class="form-control form-control-sm lblKriterler"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="display:none">
+                            <div class="col-md-6 divIcDenetim">
+                                <label class="form-label" for="lblRiskler">@CustomResource["BulguYonetimi.Alan.Riskler"]</label>
+                                <textarea id="txtRiskler" rows="1" readonly class="form-control form-control-sm lblRiskler"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="form-label">@CustomResource["BulguYonetimiCevap.Alan.DenetimEkipGorusu"]</label>
+                                <textarea id="txtDenetimEkipGorusu" readonly rows="1" class="form-control form-control-sm lblDenetimEkipGorusu"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label class="form-label" for="txtDenetimTarihi">@CustomResource["DenetimIzlemeTakip.Alan.DenetimTarihi"]</label>
+                                <input type="text" autocomplete="off" id="txtDenetimTarihi" class="form-control form-control-sm tarihAlani" />
+                                <div class="invalid-feedback">
+                                    @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">@CustomResource["DenetimIzlemeTakip.Alan.EylemKarsilama"]<span class="text-danger ml-1">*</span></label><i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title='@CustomResource["DenetimIzlemeTakip.Alan.EylemKarsilamaUzun"]'></i>
+                                <select id="ddlEylemKarsilama" required></select>
+                                <div class="invalid-feedback">
+                                    @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">@CustomResource["BulguYonetimi.Alan.BulguDurum"]<span class="text-danger ml-1">*</span></label>
+                                <select id="ddlBulguDurum" required></select>
+                                <div class="invalid-feedback">
+                                    @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" style="display:none">
+                            <div class="col-md-12">
+                                <label class="form-label" for="txtEylemSonDurum">@CustomResource["DenetimIzlemeTakip.Alan.EylemSonDurum"]</label>
+                                <textarea id="txtEylemSonDurum" rows="1" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12 text-right">
+                                <button type="button" id="btnDosya" class="btn btn-info text-white mr-1">@CustomResource["Dugme.Dosya"]</button>
+                                <button type="button" id="btnKaydet" class="btn btn-primary text-white">@CustomResource["Dugme.Kaydet"]</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel p-2 pnlCevaplar">
+                        <label class="form-label">@CustomResource["BulguYonetimi.Alan.Cevaplar"]</label>
+                        <div id="divtblCevaplarVeriYok"></div>
+                        <table id="tblCevaplar" class="table table-bordered table-hover table-striped table-sm w-100">
+                            <thead>
+                                <tr>
+                                    <td style="width:20px">Detay</td>
+                                    <td style="width:30%">İlgili Personel</td>
+                                    <td style="width:20%">Atama Tarihi</td>
+                                    <td style="width:20%">Cevap Tarihi</td>
+                                    <td style="width:30%">Sorumlusu</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel p-2 pnlCevapDetay">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="fw-500">Cevap Detayı</span>
+                                <a class="genelTooltip cursor-pointer float-right" title="Kapat" onclick="CevapAlaniKapat();"><i class="fal fa-times fa-lg text-gray"></i></a>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="EylemPlaniCevap">
+                            <div class="form-group row divIcDenetim">
+                                <div class="col-md-4">
+                                    <label class="form-label">@CustomResource["BulguYonetimiCevap.Alan.BulguGorusu"]:</label>
+                                    <input type="text" readonly class="form-control form-control-sm lblBulguGorusu" />
+                                    <span class="lblBulguGorusuNeden text-danger"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="lblOneriGorusu">@CustomResource["BulguYonetimiCevap.Alan.OneriGorusu"]:</label>
+                                    <input type="text" readonly class="form-control form-control-sm lblOneriGorusu" />
+                                    <span class="lblOneriGorusuNeden text-danger"></span>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label class="form-label" for="lblOnemDuzeyiGorusu">@CustomResource["BulguYonetimiCevap.Alan.OnemDuzeyiGorusu"]:</label>
+                                    <input type="text" readonly class="form-control form-control-sm lblOnemDuzeyiGorusu" />
+                                    <span class="lblOnemDuzeyiGorusuNeden text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="lblSorumluKisi">@CustomResource["BulguYonetimiCevap.Alan.SorumluKisi"]</label>
+                                    <input type="text" readonly class="form-control form-control-sm lblSorumluKisi" />
+                                </div>
+
+                                <div class="col-md-6 divDisDenetim">
+                                    <label class="form-label" for="lblTamamlamaTarihi">@CustomResource["BulguYonetimiCevap.Alan.TamamlamaTarihi"]</label>
+                                    <input type="text" readonly class="form-control form-control-sm lblTamamlamaTarihi" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="lblEylem">@CustomResource["BulguYonetimiCevap.Alan.Eylem"]</label>
+                                    <textarea id="txtEylem" rows="1" readonly class="form-control form-control-sm lblEylem"></textarea>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="lblAciklama">@CustomResource["BulguYonetimiCevap.Alan.Aciklama"]</label>
+                                    <textarea id="txtAciklama" rows="1" readonly class="form-control form-control-sm lblAciklama"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row IzlemeTakipCevap">
+                            <div class="col-md-12">
+                                <label class="form-label" for="txtEylemSonDurum">@CustomResource["DenetimIzlemeTakip.Alan.EylemSonDurum"]</label>
+                                <textarea id="txtEylemSonDurumCevap" rows="1" class="form-control form-control-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="divDisDenetim">
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                            <button type="button" id="btnDosyaCevap" class="btn btn-info text-white mr-1">@CustomResource["Dugme.Dosya"]</button>
+                        </div>
+                    </div>
+
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <button type="button" id="btnYazdir" class="btn btn-warning text-white dropdown-toggle spinnerButton" data-toggle="dropdown" data-bekle-text="Rapor Hazırlanıyor...">@CustomResource["Dugme.Yazdir"]</button>
+                        <div class="dropdown-menu" style="">
+                            <a class="dropdown-item" href="javascript:RaporHazirla('XLSX');">Excel</a>
+                            <a class="dropdown-item" href="javascript:RaporHazirla('PDF')">PDF</a>
+                        </div>
+                        <div class="ml-auto">
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mdlKisiyeGonder" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                                <label class="form-label">@CustomResource["BulguYonetimi.Alan.KisiyeGonder"]</label>
+                                <div class="ml-auto">
+                                    <button type="button" id="btnKisiyeGonder" class="btn btn-warning text-white m-2">@CustomResource["Dugme.KisiyeGonder"]</button>
+                                </div>
+                            </div>
+
+                            <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                <div class="input-group input-group-sm mb-2 dtabloVeriGiris">
+
+                                    <div class="input-group input-group-sm mb-2 dtabloVeriGiris">
+                                        <div class="w-75">
+                                            <select id="ddlKisiyeGonderPersonel"></select>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-default" type="button" data-toggle="tooltip" title="@CustomResource[" Dugme.Temizle"]" onclick="DTabloKisiyeGonderAlanTemizle();"><i class="fal fa-eraser"></i></button>
+                                            <button class="btn btn-success" type="button" onclick="KisiyeGonderEkle();">@CustomResource["Dugme.Ekle"]</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div id="divtblKisiyeGonderVeriYok"></div>
+                                <table id="tblKisiyeGonder" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                    <thead></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section ScriptsBlock{
+    <script type="text/javascript">
+
+        SadeceIcerikGoster();
+        var kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+        var dosyaDuzenlemeYetkisi = true;
+
+        $(document).ready(function () {
+
+            DurumDoldur('ddlBulguDurum', 'BULGUYONETIMI', true);
+            DurumDoldur('ddlEylemKarsilama', 'EVETHAYIR', true);
+
+            if (!kayitYetki) {
+                $("#btnKaydet").hide();
+                dosyaDuzenlemeYetkisi = false;
+            }
+
+            $("#btnKaydet").click(function () {
+
+                $("#mdlTanimUyari").html("");
+                var formKontrol = ValidateForm();
+                if (!formKontrol) return;
+
+                var form = {
+                    Kod: $("#hdnBulguYonetimiKod").val(),
+                    Durum: $("#ddlBulguDurum").val(),
+                    DenetimTarihi: $("#txtDenetimTarihi").val(),
+                    EylemKarsilama: $("#ddlEylemKarsilama").val(),
+                    EylemSonDurum: $("#txtEylemSonDurum").val(),
+                };
+
+                $.ajax({
+                    url: "/BulguYonetimi/IzlemeTakipKaydet",
+                    data: { form: form },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                            TabloVeriYenile();//Datatables viewcontrolünde
+                            parent.pencereVerisiDegisti = true;//Eğer Bulgu kaydında değişiklik olduysa Denetim listesi yenilensin
+                        }
+                        else {
+
+                            HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                        }
+                    }
+                });
+
+            });
+
+            $("#btnDosya").click(function () {
+                var kod = $("#hdnBulguYonetimiKod").val();
+                DosyaKontrolGoster("", kod, false, 999, false, !dosyaDuzenlemeYetkisi);
+            });
+
+            $("#btnDosyaCevap").click(function () {
+                var kod = $("#hdnBulguYonetimiCevapKod").val();
+                DosyaKontrolGoster("", kod, false, 999, false, true);
+            });
+
+
+            //$(".btnBulguDurumKaydet").click(function () {
+
+            //    var form = {
+            //        Kod: $("#hdnBulguYonetimiKod").val(),
+            //        Durum: $("#ddlBulguDurum").val(),
+            //    };
+
+            //    $.ajax({
+            //        url: "/BulguYonetimi/DurumDegistir",
+            //        data: { form: form },
+            //        type: "POST",
+            //        success: function (result) {
+
+            //            if (result.IslemSonuc) {
+            //                ShowToastr("success", "toast-top-right", result.Mesaj);
+            //                TabloVeriYenile();//Datatables viewcontrolünde
+            //            }
+            //            else {
+
+            //                HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+            //            }
+            //        }
+            //    });
+
+            //});
+
+            $("#btnKisiyeGonder").click(function () {
+                KisiyeGonderKaydet();
+            });
+
+        });
+
+        function Duzenle(result) {
+            Temizle(result.Nesne);
+            $(".divIcDenetim").hide();
+            $(".divDisDenetim").hide();
+
+            if (result.Nesne.Denetim.Kaynak == 1) {
+                $(".divIcDenetim").show();
+            }
+            else {
+                $(".divDisDenetim").show();
+            }
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+        }
+
+        function Temizle(deger) {
+            ClearValidation();
+            $("#tblCevaplar > tbody").empty();
+            $(".pnlCevapDetay").hide();
+            $(".pnlCevaplar").show();
+
+            $('.btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+            $("#hdnBulguYonetimiKod").val(deger?.Kod);
+
+            $(".lblDenetimAdi").val(deger?.Denetim?.DenetimAdi);
+            $(".lblDenetimKurum").val(deger?.Denetim?.DenetimYapanKurum?.Adi);
+            $(".lblDenetimYil").val(deger?.Denetim?.Yil + " / " + deger?.Denetim?.DenetimNo);
+            $(".lblBulguNo").val(deger?.BulguNo);
+            //$(".lblBulguDurum").html(deger?.BulguDurum?.Adi);
+            $("#txtBulguAciklama").val(deger?.BulguAciklama).trigger('change');
+            $("#txtNedenler").val(deger?.Nedenler).trigger('change');
+            $("#txtKriterler").val(deger?.Kriterler).trigger('change');
+            $("#txtRiskler").val(deger?.Riskler).trigger('change');
+            $("#txtOneriler").val(deger?.Oneriler).trigger('change');
+            $("#txtBulguTanimi").val(deger?.BulguTanimi).trigger('change');
+            $("#ddlBulguDurum").val(deger?.Durum).trigger('change');
+            $("#txtDenetimRaporNo").val(deger?.Denetim?.RaporNo);
+            $("#txtDenetimEkipGorusu").val(deger?.NihaiGorus).trigger('change');
+
+            $("#txtDenetimTarihi").datepicker("update", TarihDegeriDDMMYYYY(deger?.DenetimTarihi));
+            $("#ddlEylemKarsilama").val(deger?.EylemKarsilama).trigger('change');
+            $("#txtEylemSonDurum").val(deger?.EylemSonDurum).trigger('change');
+
+
+            $(".spnBulguDurum").html(BulguNoRender(deger?.OnemDuzeyi?.Adi));
+
+            if (deger?.Denetim?.Kaynak == 1) {
+
+                $(".lblBulguGorusu").html(deger?.BulguGorusu?.Adi);
+                $(".lblOneriGorusu").html(deger?.OneriGorusu?.Adi);
+                $(".lblOnemDuzeyiGorusu").html(deger?.OnemDuzeyiGorusu?.Adi);
+                $("#txtAciklama").val(deger?.Aciklama).trigger('change');
+                $("#txtlEylem").val(deger?.Eylem).trigger('change');
+                $(".lblTamamlamaTarihi").html(TarihDegeriDDMMYYYY(deger?.TamamlamaTarihi));
+                $(".lblSorumluKisi").html(deger?.Sorumlusu);
+            }
+            else {
+                $(".lblAciklamaDis").html(deger?.Aciklama);
+                $(".lblEylemDis").html(deger?.Eylem);
+                $(".lblTamamlamaTarihiDis").html(TarihDegeriDDMMYYYY(deger?.TamamlamaTarihi));
+                $(".lblSorumluKisiDis").html(deger?.Sorumlusu);
+            }
+
+            var birimler = "";
+            $.each(deger?.Birimler, function (a, b) {
+                var koordinatorluk = b.Koordinatorluk?.Adi;
+                var birim = b.Birim?.Adi;
+
+                if (birimler != "") birimler += ", ";
+                birimler += koordinatorluk;
+                if (birim && birim != "undefined")
+                    birimler += "-" + birim;
+                birimler = birimler.replaceAll("undefined", "");
+
+                $(".lblKoordinatorlukBirim").val(birimler);
+            });
+
+            var tabloSatirAlan = $("#tblCevaplar tbody");
+            $.each(deger?.Cevaplar, function (a, b) {
+                var sorumlusu = b.Sorumlusu;
+                if (sorumlusu == null) sorumlusu = "";
+
+                var dugme = "<a class='btn btn-primary btn-sm btn-icon text-white genelTooltip' data-id=" + b.Kod + " title='@CustomResource["Dugme.CevapDetay"]' onclick='CevapDetayi(this);'><i class='fal fa-search'></i></a>"
+                var satirBilgisi = "<tr><td>" + dugme + "</td><td>" + b.IlgiliPersonel.AdiSoyadi + "</td><td>" + TarihDegeriDDMMYYYY(b.AtamaTarihi) + "</td><td>" + TarihDegeriDDMMYYYY(b.CevapTarihi) + "</td><td>" + sorumlusu + "</td></tr>";
+                tabloSatirAlan.append(satirBilgisi);
+            });
+
+            var satirSayisi = $('#tblCevaplar tbody tr').length;
+            if (satirSayisi == 0)
+                $("#divtblCevaplarVeriYok").html("<div class='text-center'><img src='/img/images/no-data-found.png' alt='' /><br />Gösterilecek kayıt yok</div>");
+            else
+                $("#divtblCevaplarVeriYok").html("");
+
+            DosyaDugmesineSayiOkuYaz(deger?.Kod, "#btnDosya");
+
+            $("#mdlTanimUyari").html("");
+        }
+
+        function KaynakAdiVer(data) {
+
+            var kaynakAdi = "";
+            if (data == "1") kaynakAdi = "İç Denetim";
+            if (data == "2") kaynakAdi = "Dış Denetim";
+            return kaynakAdi;
+        }
+
+        function KaynakDoldur() {
+
+            var data = [
+                { id: "1", text: "İç Denetim" },
+                { id: "2", text: "Dış Denetim" }
+            ];
+
+            Select2Yap("ddlAramaSorguKaynak", true, data);
+        }
+
+        function RaporHazirla(ciktiTur) {
+            IslemYapiliyorBasla("btnYazdir");
+
+            $.ajax({
+                url: "/DenetimIzlemeTakip/Yazdir",
+                type: "POST",
+                data: { denetimKod: $("#hdnDenetimKod").val(), ciktiTur: ciktiTur },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (blob, status, xhr) {
+
+                    DosyaIndirJS(blob, status, xhr);
+
+                    IslemYapiliyorBitir("btnYazdir");
+                },
+                error: function (jqXHR, exception) {
+
+                    IslemYapiliyorBitir("btnYazdir");
+
+                    alert(exception);
+                },
+            });
+
+        }
+
+        function CevapDurumRender(row) {
+            var deger = TarihDegeriDDMMYYYY(row.SonCevapTarihi);
+            var cevaplanmayan = "-2";
+
+            $.each(row.CevapDurum, function (a, b) {
+                if (b.Tur == 2) {
+                    cevaplanmayan = b.Cevaplanmayan;
+                }
+            });
+
+            if (cevaplanmayan == 0)
+                deger += "<br><span class='badge badge-success'>Tüm cevaplar alındı<span>";
+            else if (cevaplanmayan == -2)
+                deger += "<br><span class='badge badge-primary text-white'>Cevap istenmemiş<span>";
+            else
+                deger += "<br><span class='badge badge-primary text-white'>" + cevaplanmayan + " adet cevap bekleniyor<span>";
+
+            return deger;
+        }
+
+        function BirimYaz(row) {
+
+            var ad = "";
+            $.each(row.Birimler, function (a, b) {
+                if (ad != "") ad += "<br>";
+                var koordinatorluk = b.Koordinatorluk.Adi;
+                var birim = b.Birim?.Adi;
+                ad += "* " + koordinatorluk;
+                if (birim && birim != "")
+                    ad += "-" + birim;
+            });
+            return ad;
+        }
+
+        function BulguNoRender(onem) {
+
+            if (onem == undefined) return "";
+
+            var renk = "primary";
+            if (onem == "Yüksek") renk = "danger";
+            if (onem == "Orta") renk = "warning";
+
+            var deger = "<span class='badge badge-" + renk + " text-white'>" + onem.toUpperCase() + "<span>"
+
+            return deger;
+
+        }
+
+        function CevapDetayi(kontrol) {
+            var cevapKod = $(kontrol).attr("data-id");
+            ClearValidation();
+
+            $.ajax({
+                url: "/BulguYonetimiCevap/KayitGetir",
+                data: { kod: cevapKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc && result?.Nesne?.CevapTarihi != null) {
+
+                        $(".pnlCevapDetay").show();
+                        $(".pnlCevaplar").hide();
+
+                        $("#hdnBulguYonetimiCevapKod").val(result?.Nesne?.Kod);
+
+                        $(".lblBulguGorusu").val(result?.Nesne?.BulguGorusu?.Adi);
+                        $(".lblOneriGorusu").val(result?.Nesne?.OneriGorusu?.Adi);
+                        $(".lblOnemDuzeyiGorusu").val(result?.Nesne?.OnemDuzeyiGorusu?.Adi);
+
+                        var nedenBulguKatilmiyor = result?.Nesne?.NedenBulguKatilmiyor;
+                        var nedenOneriKatilmiyor = result?.Nesne?.NedenOneriKatilmiyor;
+                        var nedenOnemKatilmiyor = result?.Nesne?.NedenOnemKatilmiyor;
+
+                        $(".lblBulguGorusuNeden").html("");
+                        $(".lblOneriGorusuNeden").html("");
+                        $(".lblOnemDuzeyiGorusuNeden").html("");
+                        if (nedenBulguKatilmiyor != null && nedenBulguKatilmiyor != undefined && nedenBulguKatilmiyor != "") {
+                            $(".lblBulguGorusuNeden").html(nedenBulguKatilmiyor);
+                        }
+                        if (nedenOneriKatilmiyor != null && nedenOneriKatilmiyor != undefined && nedenOneriKatilmiyor != "") {
+                            $(".lblOneriGorusuNeden").html(nedenOneriKatilmiyor);
+                        }
+                        if (nedenOnemKatilmiyor != null && nedenOnemKatilmiyor != undefined && nedenOnemKatilmiyor != "") {
+                            $(".lblOnemDuzeyiGorusuNeden").html(nedenOnemKatilmiyor);
+                        }
+
+                        $(".lblSorumluKisi").val(result?.Nesne?.Sorumlusu);
+                        $(".lblTamamlamaTarihi").val(TarihDegeriDDMMYYYY(result?.Nesne?.TamamlamaTarihi));
+                        $("#txtEylem").val(result?.Nesne?.Eylem).trigger('change');
+                        $("#txtAciklama").val(result?.Nesne?.Aciklama).trigger('change');
+
+                        $("#txtEylemSonDurumCevap").val(result?.Nesne?.SonDurum).trigger('change');
+
+                        if (result?.Nesne?.Tur == 2) {
+                            $(".IzlemeTakipCevap").show();
+                            $(".EylemPlaniCevap").hide();
+                        }
+                        else {
+                            $(".IzlemeTakipCevap").hide();
+                            $(".EylemPlaniCevap").show();
+                        }
+
+
+                        DosyaDugmesineSayiOkuYaz(result?.Nesne?.Kod, "#btnDosyaCevap");
+                    }
+
+                    if (result.IslemSonuc && result?.Nesne?.CevapTarihi == null) {
+                        ShowToastr("warning", "toast-top-right", "Henüz cevap verilmemiş olduğu için detay bilgisi bulunmamaktadır");
+                    }
+
+                }
+            });
+
+        }
+
+        function CevapAlaniKapat() {
+            $(".pnlCevapDetay").hide();
+            $(".pnlCevaplar").show();
+
+        }
+
+        function DenetimDoldur(kontrolAdi, parentKontrolAdi, parentTanila) {
+
+            var parentKod = $("#" + parentKontrolAdi).val();
+
+            Select2Yap(kontrolAdi, parentTanila, null);
+            if (parentKod == undefined || parentKod == null || parentKod == "")
+                return;
+
+            $.ajax({
+                url: "/Denetim/SelectListesiVer",
+                data: { kaynak: parentKod },
+                type: "POST",
+                success: function (result) {
+
+                    Select2Yap(kontrolAdi, parentTanila, result);
+                }
+            });
+        }
+
+        function KisiyeGonderAc(bulguKod) {
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/BulguYonetimiCevap/Listele",
+                data: { bulguKod: bulguKod, tur: 2 },
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        $("#tblKisiyeGonder > tbody").empty();
+                        DinamikTabloVeriYok("tblKisiyeGonder")
+                        DTabloKisiyeGonderAlanTemizle();
+
+                        $.each(result?.Liste, function (index) {
+                            var bilgi = result.Liste[index]
+                            var kisiAdi = bilgi.IlgiliPersonel.AdiSoyadi;
+                            if (bilgi.AtamaTarihi != null)
+                                kisiAdi += "<span title='Atama Tarihi' class='text-muted fs-nano ml-1 genelTooltip'>" + TarihDegeriDDMMYYYY(bilgi.AtamaTarihi) + "</span>";
+                            if (bilgi.CevapTarihi != null)
+                                kisiAdi += "<span class='badge badge-success ml-1'>CEVAPLANDI</span>";
+                            DTabloKisiyeGonderSatirEkle(bilgi.Kod, kisiAdi)
+                        });
+
+                        var koordinatorlukListe = result?.Nesne;
+                        KisiListesiDoldur(koordinatorlukListe);
+
+                        $("#hdnBulguYonetimiKod").val(bulguKod);
+                        jModalShow("mdlKisiyeGonder", "@CustomResource["Baslik.KisiyeGonder"]");
+
+                    }
+                }
+            });
+        }
+
+        function KisiyeGonderKaydet() {
+
+            var kod = $("#hdnBulguYonetimiKod").val();
+
+            var yeniEklenenler = [];
+            var tabloSatirAlan = $("#tblKisiyeGonder tbody");
+            tabloSatirAlan.find("tr").each(function (index, element) {
+                var yeni = $($(element)[0]).find("td:eq(0)").html().indexOf(">YENİ<") > -1;
+
+                if (yeni) {
+
+                    var personelKod = $(element)[0].id.replace("sttb_", "");
+
+                    yeniEklenenler.push({ BulguYonetimiKod: kod, IlgiliPersonelKod: personelKod, Tur: 2 });//istek izleme takipten göneriliyor
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/BulguYonetimi/KisiyeGonderKaydet",
+                data: { nesne: yeniEklenenler },
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        jModalHide("mdlKisiyeGonder");
+                    }
+                    else {
+                        ShowToastr("warning", "toast-top-right", result.Mesaj);
+                    }
+                }
+            });
+        }
+
+        //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+        function KisiyeGonderEkle() {
+
+            var kod = $("#hdnBulguYonetimiKod").val();
+            var personelKod = $("#ddlKisiyeGonderPersonel").val();
+            var personelAdi = $("#ddlKisiyeGonderPersonel option:selected").text();
+
+            if ($.trim(personelKod) == "") return;
+
+            personelAdi = personelAdi + "<span class='badge badge-info ml-1'>YENİ</span>";
+
+            DTabloKisiyeGonderSatirEkle(personelKod, personelAdi);
+            DTabloKisiyeGonderAlanTemizle();
+        }
+
+        function KisiyeGonderSil(kontrol) {
+
+            var bulguKod = $("#hdnBulguYonetimiKod").val();
+            var kod = $(kontrol).closest('tr')[0].id;
+            var kontrolId = kod;
+
+            kod = kod.replace("sttb_", "");
+
+            Swal.fire({
+                title: "@CustomResource["Baslik.Onay"]",
+                html: "@CustomResource["Onay.Sil"]",
+                showCancelButton: true,
+                confirmButtonText: '@CustomResource["Dugme.Evet"]',
+                cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+            }).then(function (result) {
+                if (result.value) {
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/BulguYonetimi/KisiyeGonderSil",
+                        data: {
+                            kod: kod, bulguKod: bulguKod
+                        },
+                        success: function (result) {
+
+                            if (result.IslemSonuc) {
+                                ShowToastr("success", "toast-top-right", result.Mesaj);
+                                $("#" + kontrolId).remove();
+                            }
+                            else {
+                                ShowToastr("warning", "toast-top-right", result.Mesaj);
+                            }
+                        }
+                    });
+
+                }
+            });
+        }
+        //Dinamik tabloya satır eklemek için
+        function DTabloKisiyeGonderSatirEkle(kod, adi) {
+
+            var satirBilgi = "<td width='80%'>" + adi + "</td>";
+
+            var duzenle = ""
+            var sil = "KisiyeGonderSil";
+
+            DinamikTabloSatirEkle("tblKisiyeGonder", kod, satirBilgi, duzenle, sil, "")
+        }
+
+        //Dinamik tablo alanlarını temizlemek için
+        function DTabloKisiyeGonderAlanTemizle() {
+            $("#hdnAltSurecKod").val("");
+            $("#ddlKisiyeGonderPersonel").val("").trigger('change');
+        }
+        function KisiListesiDoldur(koordinatorluk) {
+
+            $.ajax({
+                url: "/TanimYetki/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorluk, birimKod: "" },
+                type: "POST",
+                success: function (result) {
+
+                    Select2Yap("ddlKisiyeGonderPersonel", true, result);
+
+                }
+            });
+        }
+    </script>
+}

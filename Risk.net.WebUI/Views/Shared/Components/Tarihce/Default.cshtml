@@ -1,0 +1,122 @@
+@model Sonuc
+
+<div id="mdlDinamikTarihceModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-bordered table-hover table-striped table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>Durum</th>
+                            <th>İşlem Yapan</th>
+                            <th>İşlem Yapan Rol</th>
+                            <th>İlgili Rol</th>
+                            <th>Tarihi</th>
+                            @*<th>Açıklama</th>*@
+                            <th>Güncelleme Bilgisi</th>
+                        </tr>
+                    </thead>
+                    @foreach (Tarihce item in Model.Liste)
+                    {
+                        <tr>
+                            <td>@item.DurumAdi</td>
+                            @if (item.Aciklama == "Sistem")
+                            {
+                                <th>Sistem</th>
+                            }
+                            else
+                            {
+                                <td>@item.IslemYapan?.AdiSoyadiUnvan</td>
+                            }
+                            <td>@item.IslemYapanRol</td>
+                            <td>@item.IlgiliRol</td>
+                            <td>@Arac.DateTimeToDDMMYYYYHHmmss(item.IslemTarihi)</td>
+                            @*<td>@item.Aciklama</td>*@
+                            <td align="center">
+                                @if (item.Durum == (int)ENUMDurum.Kopyalandı || item.Durum == (int)ENUMDurum.Pasif || item.Durum == (int)ENUMDurum.Sil)
+                                {
+                                    @item.Aciklama
+                                }
+                                else if ((item.SiraNo > 1 && item.DegisenDeger != "") || item.IlgiTur == EnumTarihceIslemTur.Konfigurasyon)
+                                {
+                                    <div style="display:none">@item.DegisenDeger</div>
+                                    <a title="" class="btn btn-success btn-sm btn-icon waves-effect waves-themed text-white genelTooltip" style="margin-right:5px;" onclick="TarihceDegisenDegerGoster(this, '@item.DurumAdi')" data-original-title="Göster"><i class="fal fa-eye"></i></a>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="mdlDinamikTarihceModalDegisenDeger" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="divDegisenDeger"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function TarihceDegisenDegerGoster(e, baslik) {
+        var jsonObj = JSON.parse($(e).prev().html());
+        //var jsonPretty = JSON.stringify(jsonObj, null, '\t');
+
+        var satirlar = "";
+        var tabloSablon = "<table class='table table-bordered table-hover table-striped table-sm w-100'>";
+        tabloSablon += "<tr>";
+        tabloSablon += "<th>Alan</th><th>Yeni</th><th>Eski</th>";
+        tabloSablon += "</tr>";
+
+        tabloSablon += "{SATIRLAR}";
+
+        tabloSablon += "</table>";
+
+        var satirSablon = "<tr>";
+        satirSablon += "<td>{ADI}</td><td>{YENI}</td><td>{ESKI}</td>";
+        satirSablon += "</tr>";
+
+        Object.keys(jsonObj).forEach(key => {
+
+            satirlar += TarihceSatiriIsle(key, jsonObj[key], satirSablon)
+        })
+
+        tabloSablon = tabloSablon.replace("{SATIRLAR}", satirlar);
+        $("#divDegisenDeger").html(tabloSablon);
+
+        jModalShow("mdlDinamikTarihceModalDegisenDeger", "Değişen Değer / " + baslik);
+    }
+
+    function TarihceSatiriIsle(alan, obj, satirSablon) {
+
+        var yeni = obj.yeni != undefined ? obj.yeni : ""
+        var eski = obj.eski != undefined ? obj.eski : "";
+
+        if (yeni instanceof Object) yeni = JSON.stringify(yeni, null, '\t');
+        if (eski instanceof Object) eski = JSON.stringify(eski, null, '\t');
+
+        var satir = satirSablon.replace("{ADI}", alan).replace("{YENI}", yeni).replace("{ESKI}", eski)
+
+        return satir;
+    }
+
+</script>

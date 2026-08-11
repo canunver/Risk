@@ -1,0 +1,82 @@
+{
+  "version": "4.5",
+  "lists": [
+    {
+      "title": "MenuTanim.GenelTanimlar",
+      "icon": "fal fa-info-circle",
+      "items": [
+        {
+          "title": "MenuTanim.RiskKategori",
+          "roles": [ "*" ],
+          "href": "/TanimRiskKategori"
+        },
+        {
+          "title": "MenuTanim.IlIrtibatOfisi",
+          "roles": [ "*" ],
+          "href": "/TanimIlIrtibatOfisi"
+        },
+        {
+          "title": "MenuTanim.OlayKategori",
+          "roles": [ "*" ],
+          "href": "/TanimOlayKategori"
+        },
+        {
+          "title": "MenuTanim.GenelTanim",
+          "roles": [ "SISTEMYONETICISI", "PLANLAMAUNITESI" ],
+          "href": "/TanimGenel"
+        },
+        {
+          "title": "MenuTanim.Konfigurasyon",
+          "roles": [ "SISTEMYONETICISI", "PLANLAMAUNITESI", "RISKSEKRETARYASI", "YETKILIRISKGOREVLISI" ],
+          "href": "/Konfigurasyon"
+        },
+        {
+          "title": "MenuTanim.RiskSahibiDegistir",
+          "roles": [ "PLANLAMAUNITESI", "RISKSEKRETARYASI" ],
+          "href": "/RiskSahibiDegistir"
+        },
+        {
+          "title": "MenuTanim.StratejikPlanDonem",
+          "roles": [ "PLANLAMAUNITESI", "RISKSEKRETARYASI" ],
+          "href": "/TanimStratejikPlanDonem"
+        }
+      ]
+    },
+    {
+      "title": "MenuTanim.Diger",
+      "icon": "fal fa-info-circle",
+      "items": [
+        {
+          "title": "MenuTanim.Koordinatorluk",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/TanimKoordinatorluk"
+        },
+        {
+          "title": "MenuTanim.Birim",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/TanimBirim"
+        },
+        {
+          "title": "MenuTanim.Personel",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/TanimPersonel"
+        },
+        {
+          "title": "MenuTanim.Yetki",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/TanimYetki"
+        },
+        {
+          "title": "MenuTanim.Unvan",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/TanimUnvan"
+        },
+        {
+          "title": "MenuTanim.Yardim",
+          "roles": [ "SISTEMYONETICISI" ],
+          "href": "/Yardim"
+        }
+      ]
+    }
+  ]
+}

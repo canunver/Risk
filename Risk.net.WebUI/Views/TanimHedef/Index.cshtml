@@ -1,0 +1,203 @@
+@{
+    ViewData["Title"] = CustomResource["TanimHedef.SayfaBaslik"];
+    ViewData["PageName"] = "/TanimHedef"; ;//Açılan sayfanın menüde gösterilmesi için
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["TanimHedef.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.listeUrl = "/TanimHedef/TabloDoldur";
+    tablo.silUrl = "/TanimHedef/Sil";
+    tablo.duzenleUrl = "/TanimHedef/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Adi",
+        adi = @CustomResource["Genel.Alan.Adi"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Amac.Adi",
+        adi = @CustomResource["TanimHedef.Alan.AmacAdi"],
+        genislik = "30%",
+        aramaAlanAdi = "AmacKod",
+        aramaTipi = "combo",
+        aramaListeDoldurUrl = "/TanimAmac/SelectListesiVer"
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Durum",
+        adi = @CustomResource["Genel.Alan.Durum"],
+        tipi = "int",
+        genislik = "10%",
+        render = "DurumAdiVer(data,'AKTIFPASIF')",
+        aramaTipi = "combo",
+        aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+
+
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["Genel.Alan.Adi"]</label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtAdi" class="form-control form-control-sm autofocus" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["TanimHedef.Alan.AmacAdi"]</label>
+                        <div class="col-md-9">
+                            <select id="ddlAmac" required></select>
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["Genel.Alan.Durum"]</label>
+                        <div class="col-md-9">
+                            <select id="ddlDurum" required>
+                            </select>
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                        <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/TanimAmac/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+                $('#ddlAmac').select2({
+                    placeholder: "@Html.Raw(@CustomResource["Lutfen.Seciniz"])",
+                    dropdownParent: $('#ddlAmac').closest('.modal'),
+                    data: result
+                });
+            }
+        });
+
+        DurumDoldur("ddlDurum", 'AKTIFPASIF', true);
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                Adi: $("#txtAdi").val(),
+                AmacKod: $("#ddlAmac").val(),
+                Durum: $("#ddlDurum").val(),
+            };
+
+            $.ajax({
+                url: "/TanimHedef/Kaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                        jModalHide("mdlTanim");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+    });
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#txtAdi").val(deger?.Adi);
+        $('#ddlAmac').val(deger?.AmacKod).trigger('change');
+        $("#ddlDurum").val(deger?.Durum).trigger('change');
+
+        $("#mdlTanimUyari").html("");
+
+    }
+
+</script>

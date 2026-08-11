@@ -1,0 +1,438 @@
+@model RiskYonetimiBeyannamesi
+@{
+    ViewData["Title"] = CustomResource["RiskYonetimiBeyannamesi.SayfaBaslik"];
+    ViewData["PageName"] = "RiskYonetimiTaahhutnamesi";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["RiskYonetimiBeyannamesi.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/RiskYonetimiTaahhutnamesi/TabloDoldur";
+    tablo.anahtarAlani = "Kod";
+    //tablo.islemler.goster = false;
+    //tablo.aramaAlaniGoster = false;
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "2%";
+    tablo.islemler.silme = false;
+    tablo.islemler.duzenleme = false;
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DokumaniGoster"] + "' class='btn btn-success btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='BeyannameGoster(!!DATA!!)'><i class='fal fa-eye'></i></a>";
+
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Yil",
+                adi = @CustomResource["RiskYonetimiBeyannamesi.Alan.Yil"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "Yil",
+                aramaListeDoldurUrl = "/RiskYonetimiTaahhutnamesi/SelectListesiVerBeyannemeYil",
+                tablodaGoster = true,
+                aramadaGoster = true
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Koordinatorluk.Adi",
+                adi = @CustomResource["RiskYonetimiBeyannamesi.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVerTumu",
+                aramadaGoster = true
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "IslemYapan.AdiSoyadi",
+                adi = @CustomResource["RiskYonetimiBeyannamesi.Alan.Onaylayan"],
+                tipi = "string",
+                aramaAlanAdi = "IslemYapanKod",
+                siralama = true,
+                genislik = "",
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "IslemTarihi",
+                adi = @CustomResource["RiskYonetimiBeyannamesi.Alan.IslemTarihi"],
+                tipi = "date",
+                render = "TarihDegeriDDMMYYYY(data)",
+                aramaTipi = "tarihAralik",
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'AKTIFPASIFONAYLI')",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIFONAYLI',false)",
+                aramadaGoster = true
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div id="divRapor" style="display:none;">
+                <div class="d-flex flex-row align-items-center flex-wrap">
+                    <div id="divRapor2" class="ml-auto mt-2 mr-3">
+                        <div class="input-group">
+                            <button type="button" id="btnHatirlatmaMailiGonder" style="display:none;" class="btn btn-info btn-sm text-white waves-effect waves-themed mr-2">@CustomResource["Dugme.HatirlatmaMailiGonder"]</button>
+                            <button type="button" id="btnHatirlatmaMailiGonderTarihce" style="display:none;" class="btn btn-info btn-sm text-white waves-effect waves-themed mr-2"><i class='fal fa-history'></i></button>
+                            <button type="button" id="btnYeniImzaSureciBaslat" style="display:none;" class="btn btn-danger btn-sm text-white waves-effect waves-themed mr-2">@CustomResource["Dugme.YeniImzaSureciBaslat"]</button>
+                            <input type="number" id="txtRaporYil" class="form-control" placeholder="@CustomResource["RiskYonetimiBeyannamesi.Alan.Yil"]" style="width:90px;" />
+                            <div class="input-group-append">
+                                <button type="button" id="btnRaporUret" class="btn btn-primary btn-sm text-white spinnerButton" data-bekle-text="Rapor Hazırlanıyor...">
+                                    <span class="fal fa-download mr-2"></span>@CustomResource["Dugme.RaporUret"]
+                                </button>
+                            </div>
+                            <div class="btn-group ml-2">
+                                <button type="button" id="btnCiktiTur" class="btn btn-outline-secondary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown">
+                                    PDF
+                                </button>
+                                <div class="dropdown-menu" style="">
+                                    <a class="dropdown-item" href="javascript:CiktiTurAyarla('PDF');">PDF</a>
+                                    <a class="dropdown-item" href="javascript:CiktiTurAyarla('XLSX');">XLSX</a>
+                                    <a class="dropdown-item" href="javascript:CiktiTurAyarla('ODS');">ODS</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Datatables alanı-->
+                <div class="panel-container">
+                    <div class="panel-content">
+                        <div class="frame-wrap">
+                            <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Datatables alanı -->
+            </div>
+            <div id="divOnay" class="panel-container" style="display:none;">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <div class="d-flex align-items-center">
+                                <div class="alert-icon width-6">
+                                    <span class="icon-stack icon-stack-lg">
+                                        <i class="base-2 icon-stack-3x color-warning-400"></i>
+                                        <i class="base-10 text-white icon-stack-1x"></i>
+                                        <i class="ni md-profile color-warning-800 icon-stack-2x"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-1">
+                                    <span id="spnKayitSecimYazisi"></span>
+                                </div>
+                                <button type="button" id="btnOnayla" style="display:none;" class="btn btn-warning text-white waves-effect waves-themed">@CustomResource["Dugme.Onayla"]</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-xl-2"></div>
+                            <div class="col-xl-8">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+
+                                    <p style="padding-top:30px; text-align: center;font-size:16pt;"><strong>YILLIK RİSK YÖNETİMİ TAAHHÜTNAMESİ</strong></p>
+                                    <p><strong>Koordinatörlük: </strong> <span id="spanKoordinatorlukAdi"></span></p>
+                                    <p>Kurumsal risk yönetimi kapsamında görevimin bir parçasının bu taahhütnameyi imzalamak olduğunu kabul ediyorum. Bu taahhütnameyi imzalayarak:</p>
+                                    <ul>
+                                        <li>Benim ve personelimin, sorumluluk alanlarımız dâhilinde kurumumuzun risk yönetimi politikalarına riayet edeceğimizi,</li>
+                                        <li>Benim, tüm risk kayıtlarını muhafaza edeceğimi ve gözden geçireceğimi ve bana tahsis edilen kurumsal risk iştahının üstünde kalan riskleri yönetmek konusunda gereken tüm önlemlerin alınıp alınmadığını izleyeceğimi,</li>
+                                        <li>İç ve dış denetim tarafından kararlaştırılan ve herhangi bir üçüncü taraf raporuyla yapılan tavsiyelerin uygulanması için hızlı hareket edeceğimi,</li>
+                                        <li>Personelimin aktif olarak riskleri tespit etmek ve yönetmek için sürece dahil olacağını ve gayret göstereceğini,</li>
+                                        <li>Personelimin aktif olarak yeni riskleri ve/veya alakalı olan konuları üst yönetimin dikkatine sunmaya gayret göstereceğini taahhüt ediyorum.</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-2"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdlBeyanname" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p style="padding-top:30px; text-align: center;font-size:16pt;"><strong>YILLIK RİSK YÖNETİMİ TAAHHÜTNAMESİ</strong></p>
+                    <p>Kurumsal risk yönetimi kapsamında görevimin bir parçasının bu taahhütnameyi imzalamak olduğunu kabul ediyorum. Bu taahhütnameyi imzalayarak:</p>
+                    <ul>
+                        <li>Benim ve personelimin, sorumluluk alanlarımız dâhilinde kurumumuzun risk yönetimi politikalarına riayet edeceğimizi,</li>
+                        <li>Benim, tüm risk kayıtlarını muhafaza edeceğimi ve gözden geçireceğimi ve bana tahsis edilen kurumsal risk iştahının üstünde kalan riskleri yönetmek konusunda gereken tüm önlemlerin alınıp alınmadığını izleyeceğimi,</li>
+                        <li>İç ve dış denetim tarafından kararlaştırılan ve herhangi bir üçüncü taraf raporuyla yapılan tavsiyelerin uygulanması için hızlı hareket edeceğimi,</li>
+                        <li>Personelimin aktif olarak riskleri tespit etmek ve yönetmek için sürece dahil olacağını ve gayret göstereceğini,</li>
+                        <li>Personelimin aktif olarak yeni riskleri ve/veya alakalı olan konuları üst yönetimin dikkatine sunmaya gayret göstereceğini taahhüt ediyorum.</li>
+                    </ul>
+                </div>
+
+                <div id="divBeyannameImza" style="padding:20px 0 20px 0; text-align: left;font-size:10pt; font-weight:500;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var onayYetki = @(ViewBag.OnayYetki.ToString().ToLower());
+    var tarihceYetki = @(ViewBag.TarihceYetki.ToString().ToLower());
+    var planlamaYetki = @(ViewBag.PlanlamaYetki.ToString().ToLower());
+    var koordinatorlukKod = '@(ViewBag.KoordinatorlukKod)';
+    var ciktiTur = '';
+
+    $(document).ready(function () {
+
+        $("#btnOnayla").click(function () {
+            Onayla();
+        });
+
+        $("#btnYeniImzaSureciBaslat").click(function () {
+            YeniImzaSureciBaslat();
+        });
+
+        $("#btnHatirlatmaMailiGonder").click(function () {
+            HatirlatmaMailiGonder();
+        });
+
+        $("#btnHatirlatmaMailiGonderTarihce").click(function () {
+            TarihceGoster("RiskYonetimiBeyannamesiMailGonder");
+        });
+
+        if (planlamaYetki)
+        {
+            $("#btnYeniImzaSureciBaslat").show();
+            $("#btnHatirlatmaMailiGonder").show();
+            $("#btnHatirlatmaMailiGonderTarihce").show();
+        }
+
+        $("#ddlCiktiTuru").select2({
+            allowClear: false,
+            data: ["PDF", "XLSX", "ODS"]
+        });
+
+        $("#txtRaporYil").val(new Date().getFullYear() - 1);
+
+        $("#btnRaporUret").click(function () {
+            RaporHazirla();
+        });
+
+        $.ajax({
+            url: "/TanimKoordinatorluk/KayitGetir",
+            data: { kod: koordinatorlukKod },
+            type: "POST",
+            success: function (result) {
+                $("#spanKoordinatorlukAdi").html(result?.Nesne?.Adi);
+            }
+        });
+
+        $.ajax({
+            url: "/RiskYonetimiTaahhutnamesi/DurumGetir",
+            type: "POST",
+            success: function (result) {
+                KayitSecimYazisi(result?.Liste?.length > 0 ? 10 : 0);
+            }
+        });
+
+
+    });
+
+    function KayitSecimYazisi(durum) {
+        $("#btnOnayla").hide();
+        $("#divRapor").hide();
+        $("#divOnay").hide();
+
+        var kayitSecim = "";
+
+        if (tarihceYetki) {
+            $("#divRapor").show();
+        }
+        else if (onayYetki) {
+            $("#divOnay").show();
+            if (durum == 10) {
+                kayitSecim = "<strong>Onaylı</strong> ";
+            }
+            else {
+                kayitSecim = "<strong>Onay Bekliyor</strong> ";
+                $("#btnOnayla").show();
+            }
+        }
+
+        $("#spnKayitSecimYazisi").html(kayitSecim);
+    }
+
+    function Onayla() {
+
+        Swal.fire({
+            title: '@CustomResource["Baslik.Onay"]',
+            html: '@CustomResource["Onay.Onay"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/RiskYonetimiTaahhutnamesi/Onayla",
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            KayitSecimYazisi(10);
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                        }
+                        else {
+                            HataPenceresiGoster(result.Mesaj);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function YeniImzaSureciBaslat() {
+
+        Swal.fire({
+            title: '@CustomResource["Baslik.YeniImzaSureciBaslat"]',
+            html: '@CustomResource["Onay.YeniImzaSureciBaslat"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/RiskYonetimiTaahhutnamesi/OnayKaldir",
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            TabloVeriYenile();
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                        }
+                        else {
+                            HataPenceresiGoster(result.Mesaj);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function HatirlatmaMailiGonder() {
+
+        Swal.fire({
+            title: '@CustomResource["Baslik.HatirlatmaMailiGonder"]',
+            html: '@CustomResource["Onay.HatirlatmaMailiGonder"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/RiskYonetimiTaahhutnamesi/HatirlatmaMailiGonder",
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                        }
+                        else {
+                            HataPenceresiGoster(result.Mesaj);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function CiktiTurAyarla(tur) {
+        ciktiTur = tur;
+        $("#btnCiktiTur").text(tur);
+        $("#btnCiktiTur").dropdown("toggle");
+    }
+
+    function RaporHazirla() {
+
+        IslemYapiliyorBasla("btnRaporUret");
+
+        var form = {
+            Kod: 'RPT015',
+            CiktiTur: ciktiTur,
+            Yil: $("#txtRaporYil").val() == '' ? 0 : $("#txtRaporYil").val()
+        };
+
+        $.ajax({
+            url: "/Raporlar/RaporHazirla",
+            type: "POST",
+            data: { form: JSON.stringify(form) },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob, status, xhr) {
+
+                DosyaIndirJS(blob, status, xhr);
+
+                IslemYapiliyorBitir("btnRaporUret");
+            },
+            error: function (jqXHR, exception) {
+
+                IslemYapiliyorBitir("btnRaporUret");
+
+                alert(exception);
+            },
+        });
+
+    }
+
+    function BeyannameGoster(kod) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/RiskYonetimiTaahhutnamesi/KayitGetir",
+            data: {
+                kod: kod,
+            },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    var imzaBilgisi = parseInt(result?.Nesne?.Yil) + " yılına ait Yıllık Risk Yönetimi Taahhütnamesi " + TarihDegeriDDMMYYYY(result?.Nesne?.IslemTarihi) + " tarihinde " + result?.Nesne?.Koordinatorluk?.Adi?.replace("Koordinatörlüğü", "Koordinatörü") + " " + result?.Nesne?.IslemYapan?.AdiSoyadi + " tarafından imzalanmıştır.";
+
+                    $("#divBeyannameImza").html(imzaBilgisi);
+
+                    jModalShow("mdlBeyanname", "@CustomResource["Baslik.RiskYonetimiBeyannamesi"]");
+                }
+            }
+        });
+    }
+
+</script>

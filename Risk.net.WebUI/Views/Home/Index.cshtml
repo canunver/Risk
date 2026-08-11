@@ -1,0 +1,1897 @@
+@{
+    ViewData["Title"] = CustomResource["YoneticiEkrani.SayfaBaslik"];
+    ViewData["PageName"] = "";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-user-chart'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["YoneticiEkrani.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+}
+
+@section HeadBlock {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    @*<link rel="stylesheet" media="screen, print" href="~/css/fa-solid.css">
+        <link rel="stylesheet" media="screen, print" href="~/css/theme-demo.css">*@
+}
+<style>
+    svg > g > g:last-child {
+        pointer-events: none
+    }
+
+
+    #tblRiskPaneli table, #tblRiskPaneli th, #tblRiskPaneli td {
+        border: 1px solid #bbb;
+        border-collapse: collapse;
+    }
+
+</style>
+<div id="divPanelAlani" class="card mb-g">
+
+    <div class="card-body">
+
+        <div class="panel p-3 bg-gray-200">
+            <div class="form-group row">
+                <div class="col-md-4">
+                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskBaslamaBitisTarihi"]</label>
+                    <div class="input-group">
+                        <input type="text" autocomplete="off" id="txtRiskPanoBaslamaTarih" class="form-control form-control-sm tarihAlani" />
+                        <div class="input-group-append input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fal fa-minus"></i>
+                            </span>
+                        </div>
+                        <input type="text" autocomplete="off" id="txtRiskPanoBitisTarih" class="form-control form-control-sm tarihAlani" />
+                        <div class="input-group-append">
+                            <button class="btn btn-xs btn-primary" type="button" onclick="GrafikleriYukle()">Yenile</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
+                    <label class="form-label" for="ddlKoordinatorluk">@CustomResource["RiskEvreni.Alan.Koordinatorluk"]</label>
+                    <select id="ddlKoordinatorluk" required></select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label" for="ddlBirim">@CustomResource["RiskEvreni.Alan.Birim"]</label>
+                    <select id="ddlBirim" required></select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div id="pnlRiskPanosu" class="panel" style="min-height:250px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Risk Paneli
+                            <i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Risk Sayısı, Çok Yüksek Risk Sayısı, Yüksek Risk Sayısı, Orta Risk Sayısı, Düşük Risk Sayısı ve Çok Düşük Risk Sayısı bilgilerinin Koordinatörlük, Birim ve Tarih bilgilerine göre filtrelendiği yapıdır.
+                                                                                                                   • Risk Sayısı, Risklerin Değerlendirilmesi ekranında onaylanmış risklerin bilgisidir. Risklerin Değerlendirilmesi ekranında girilen Yapısal Risk Seviyesi ve Artık Seviyesi alanlarına göre Çok Yüksek, Yüksek, Orta, Düşük ve Çok Düşük alanları gösterilir.
+                                                                                                                   • Sayıların üzerine tıklandığında ilgili risklerin listesi görünür. "></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content d-flex">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-6">
+                                <table id="tblRiskPaneli" class="table table-sm w-100">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="4" class="text-center bg-primary align-middle divRPToplamRiskSayisi"><span class="fs-xxl text-white">0</span></th>
+                                            <th colspan="5" class="text-center align-middle text-bold text-white" style="background-color:#aaa8a8"><h6>Yapısal Risk Seviyesi</h6></th>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <th class="divRPCokYuksekRiskSayisi1" style="background-color: #C00002; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPYuksekRiskSayisi1" style="background-color: #FD0003; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPOrtaRiskSayisi1" style="background-color: #FFC001; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPDusukRiskSayisi1" style="background-color: #00b24e; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPCokDusukRiskSayisi1" style="background-color: #93d14c; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                        </tr>
+                                        <tr class="text-center">
+                                            <th class="divRPCokYuksekRiskSayisi2" style="background-color: #C00002; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPYuksekRiskSayisi2" style="background-color: #FD0003; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPOrtaRiskSayisi2" style="background-color: #FFC001; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPDusukRiskSayisi2" style="background-color: #00b24e; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                            <th class="divRPCokDusukRiskSayisi2" style="background-color: #93d14c; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5" class="text-center align-middle text-bold text-white" style="background-color:#aaa8a8"><h6>Artık Risk Seviyesi</h6></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center align-middle" style="background-color:#eee">
+                                            <td>Risk Sayısı</td>
+                                            <td>Çok Yüksek <br>Risk Sayısı</td>
+                                            <td>Yüksek <br>Risk Sayısı</td>
+                                            <td>Orta <br>Risk Sayısı</td>
+                                            <td>Düşük <br>Risk Sayısı</td>
+                                            <td>Çok Düşük <br>Risk Sayısı</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                @* <div class="card-group">
+                                <div class="card">
+                                <div class="w-100 bg-primary rounded-top border-top-right-radius-0 divRPToplamRiskSayisi" style="padding: 20px 0 20px;"><span class="fs-xxl text-white">0</span></div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Risk Sayısı</span>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="w-100 rounded-top border-top-right-radius-0 divRPCokYuksekRiskSayisi" style="background-color: #C00002; padding: 20px 0 20px; ">
+                                <span class="fs-xxl text-white">0</span>
+                                </div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Çok Yüksek Risk Sayısı</span>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="w-100 rounded-top border-top-left-radius-0 divRPYuksekRiskSayisi" style="background-color: #FD0003; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Yüksek Risk Sayısı</span>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="w-100 rounded-top border-top-left-radius-0 divRPOrtaRiskSayisi" style="background-color: #FFC001; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Orta Risk Sayısı</span>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="w-100 rounded-top border-top-left-radius-0 divRPDusukRiskSayisi" style="background-color: #00b24e; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Düşük Risk Sayısı</span>
+                                </div>
+                                </div>
+                                <div class="card">
+                                <div class="w-100 rounded-top border-top-left-radius-0 divRPCokDusukRiskSayisi" style="background-color: #93d14c; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                <div class="card-body">
+                                <span class="card-title fs-sm">Çok Düşük Risk Sayısı</span>
+                                </div>
+                                </div>
+                                </div>*@
+
+                            </div>
+                            <div class="col-md-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlRiskKategori" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Risk Kategorileri<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış risklerin risk kategorilerine göre sayı ve yüzde olarak görüntülendiği grafiktir.
+                                                                                                                                                                                      • Risk Kaydı ekranında girilen riske ilişkin 'Risk Kategorisi' alanına göre ilgili bilgiler gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfRiskKategori'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div id="pnlYapisalRiskSeviyesi" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Yapısal Risk Seviyesi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış risklerin yapısal risk seviyelerine göre sayı ve yüzde olarak görüntülendiği grafiktir.
+                                                                                                                                                                                          • Risklerin Değerlendirilmesi ekranında girilen riske ilişkin 'Yapısal Risk Seviyesi' alanına göre ilgili bilgiler gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfYapisalRiskSeviyesi'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlSurec" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Süreçler<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Risklerin süreç bazlı görüntülendiği yapıdır. Süreç/Alt Süreç Tanımları ekranında tanımlanan süreç bilgileri ilgili alanda gösterilir ve Risk Kaydı ekranında süreçlerle ilişkilendirilip onaylanan risklerin sayısı ekranda gösterilir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id="grfSurec"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div id="pnlArtikRiskSeviyesi" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Artık Risk Seviyesi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış risklerin artık risk seviyelerine göre sayı ve yüzde olarak görüntülendiği grafiktir.
+                                                                                                                                                                                        • Risklerin Değerlendirilmesi ekranında girilen riske ilişkin 'Artık Risk Seviyesi' alanına göre ilgili bilgiler gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfArtikRiskSeviyesi'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div id="pnlBulguOnemDuzeyi" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Bulgu Önem Düzeyi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Bulgu Yönetimi ekranında kaydedilen bulguların önem düzeyinin görüntülendiği grafiktir.
+                                                                                                                                                                                      • Bulgu Yönetimi ekranındaki bulgulara ilişkin 'Bulgunun Önem Düzeyi' alanından gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfBulguOnemDuzeyi'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlBulguDurum" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Bulgu Durumu<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Bulgu Yönetimi ekranında kaydedilen bulguların durumunun görüntülendiği grafiktir.
+                                                                                                                                                                                 • Bulgu Yönetimi ekranındaki bulgulara ilişkin 'Bulgunun Durumu' alanından gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfBulguDurum'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlRiskPuani" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-bar text-primary mr-2"></i>Risk Puanı<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Artık risk seviyesi orta ve üzeri olan onaylanmış riskler için, artık risk ve yapısal risk puanlarının risk numaralarına göre görüntülenebildiği bir grafiktir.
+                                                                                                                                                                               • Yapısal Risk Puanı, Artık Risk Puanı ve Risk Numarası bilgileri Risklerin Değerlendirilmesi ekranından gelmektedir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfRiskPuani'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*<div class="col-md-6">
+            <div id="pnlEylemDurumu" class="panel" style="min-height:400px" data-panel-close>
+            <div class="panel-hdr">
+            <h2>
+            <i class="fad fa-chart-pie text-primary mr-2"></i>Eylem Durumu<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="Açıklama"></i>
+            </h2>
+            </div>
+            <div class="panel-container">
+            <div class="panel-content">
+            <div id='grfEylemDurumu'></div>
+            </div>
+            </div>
+            </div>
+            </div>*@
+
+            @*<div class="col-md-6">
+            <div id="pnlRiskIzlemeMatrisi" class="panel" style="min-height:400px" data-panel-close>
+            <div class="panel-hdr">
+            <h2>
+            <i class="fad fa-chart-pie text-primary mr-2"></i>Risk İzleme Matrisi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="Açıklama"></i>
+            </h2>
+            </div>
+            <div class="panel-container">
+            <div class="panel-content">
+            <div id='grfRiskIzlemeMatrisi'></div>
+            </div>
+            </div>
+            </div>
+            </div>*@
+
+           @* <div class="col-md-6">
+                <div id="pnlAnahtarRiskGostergesi" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Anahtar Risk Göstergesi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış riskler için, anahtar risk göstergeleri durum bilgisinin risk kategorilerine göre görüntülendiği grafiktir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfAnahtarRiskGostergesi'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+            
+            <div class="col-md-6">
+                <div id="pnlKRITolerans" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-bar text-primary mr-2"></i>Anahtar Risk Göstergesi<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış riskler için, anahtar risk göstergeleri durum bilgisinin risk kategorilerine göre görüntülendiği grafiktir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfKRITolerans'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlRiskeVerilenYanit" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Riske Verilen Cevap<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Onaylanmış risklere verilen cevapların sayı ve yüzde olarak görüntülendiği grafiktir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfRiskeVerilenYanit'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div id="pnlKRIToleransPie" class="panel" style="min-height:400px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Anahtar Risk Göstergesi Durum<i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Anahtar risk göstergesi girilmiş ve onaylanmış risklerin durum bilgisine göre sayı ve yüzde olarak görüntülendiği grafiktir."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content">
+                            <div id='grfKRIToleransPie'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div id="pnlPerformansIzleme" class="panel" style="min-height:250px" data-panel-close>
+                    <div class="panel-hdr">
+                        <h2>
+                            <i class="fad fa-chart-pie text-primary mr-2"></i>Performans İzleme Paneli
+                            <i class="fas fa-question-circle cursor-pointer ml-1 text-primary genelTooltip" title="• Risk bildiriminin Risk Sekretaryası tarafından  onaylanması ile kaydının tamamlanması ile riske cevap verilmesi arasında geçen ortalama süre
+                                                                                                                   • Bir önceki yıla göre azalan olay raporlaması sayısı
+                                                                                                                   • Mevcut kontroller ile risk iştahının altına düşürülen risklerin sayısı
+                                                                                                                   • Risk azaltma planlarının uygulanması sonrası risk iştahının altına düşürülen risklerin sayısı
+                                                                                                                   • Yıl içinde risk yönetimi yazılımı üzerinden risk belirleyen personel sayısının tüm personele oranı
+                                                                                                                   • Yıl içinde oluşturulan risk azaltma planı sayısının yıl içinde belirlenen risklere oranı."></i>
+                        </h2>
+                    </div>
+                    <div class="panel-container">
+                        <div class="panel-content d-flex">
+                            <div class="col-md-12">
+                                <center>
+
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme1" style="background-color: #4679cc; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Risk bildiriminin Risk Sekretaryası tarafından  onaylanması ile kaydının tamamlanması ile riske cevap verilmesi arasında geçen ortalama süre</span>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme2" style="background-color: #4679cc; padding: 20px 0 20px; "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Bir önceki yıla göre azalan olay raporlaması sayısı</span>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme3" style="background-color: #4679cc; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Mevcut kontroller ile risk iştahının altına düşürülen risklerin sayısı</span>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme4" style="background-color: #4679cc; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Risk azaltma planlarının uygulanması sonrası risk iştahının altına düşürülen risklerin sayısı</span>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme5" style="background-color: #4679cc; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Yıl içinde risk yönetimi yazılımı üzerinden risk belirleyen personel sayısının tüm personele oranı</span>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="w-100 rounded-top border-top-left-radius-0 divPerformansIzleme6" style="background-color: #4679cc; padding: 20px 0 20px "><span class="fs-xxl text-white">0</span></div>
+                                            <div class="card-body">
+                                                <span class="card-title fs-sm">Yıl içinde oluşturulan risk azaltma planı sayısının yıl içinde belirlenen risklere oranı</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="mdlRiskListe" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="tblRiskListesi" class="table table-bordered table-hover table-striped table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>Koordinatorlük</th>
+                            <th>Birim/Ünite</th>
+                            <th>Risk No</th>
+                            <th>Risk Adı</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdlArgListe" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table id="tblArgListesi" class="table table-bordered table-hover table-striped table-sm w-100">
+                    <thead>
+                        <tr>
+                            <th>Risk Kategorisi</th>
+                            <th>Anahtar Risk Göstergesi Adı</th>
+                            <th class="text-center">Durum</th>
+                            <th class="text-center">Trend</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsBlock {
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script>
+        var veriYok = "<div class='text-center'><img src='/img/images/no-data-found.png' alt='' /><br />Gösterilecek veri yok</div>";
+        var sKoordinatorlukKod = "";
+        var sBirimKod = "";
+        var grafikleriYenile = false;
+        var gTabloKolonSayisi = 0;
+
+        var aktifPanel;
+        Select2Yap("ddlKoordinatorluk", true, null);
+        Select2Yap("ddlBirim", true, null);
+
+        $('#divPanelAlani').smartPanel({
+            localStorage: true,
+            onChange: function (pnl) {
+                aktifPanel = pnl;
+                //alert("change");
+                PanelYenile(aktifPanel)
+            },
+            onSave: function () { },
+            opacity: 1,
+            deleteSettingsKey: '#deletesettingskey-options',
+            settingsKeyLabel: 'Reset settings?',
+            deletePositionKey: '#deletepositionkey-options',
+            positionKeyLabel: 'Reset position?',
+            sortable: false,
+            buttonOrder: '%collapse% %fullscreen% %close%',
+            buttonOrderDropdown: '%refresh% %custom% %reset%',//%locked%  %color%
+            customButton: false,
+            customButtonLabel: "Custom Button",
+            onCustom: function () { },
+            closeButton: true,
+            onClosepanel: function () {
+                if (myapp_config.debugState)
+                    console.log($(this).closest(".panel").attr('id') + " onClosepanel")
+            },
+            fullscreenButton: true,
+            onFullscreen: function () {
+                aktifPanel = $(this).closest(".panel");
+                //alert("fullscreen");
+                PanelYenile(aktifPanel)
+            },
+            collapseButton: false,
+            onCollapse: function () {
+                if (myapp_config.debugState)
+                    console.log($(this).closest(".panel").attr('id') + " onCollapse")
+            },
+            lockedButton: true,
+            lockedButtonLabel: "Kilitle",
+            onLocked: function () {
+                if (myapp_config.debugState)
+                    console.log($(this).closest(".panel").attr('id') + " onLocked")
+            },
+            refreshButton: true,
+            refreshButtonLabel: "Yenile",
+            onRefresh: function () {
+                aktifPanel = $(this).closest(".panel");
+                //alert("refresh");
+                PanelYenile(aktifPanel)
+            },
+            colorButton: true,
+            colorButtonLabel: "Başlık Rengi",
+            onColor: function () {
+                if (myapp_config.debugState)
+                    console.log($(this).closest(".panel").attr('id') + " onColor")
+            },
+            panelColors: [
+                'bg-primary-300 bg-success-gradient',
+                'bg-primary-500 bg-info-gradient',
+                'bg-primary-600 bg-primary-gradient',
+                'bg-info-300    bg-primray-gradient',
+                'bg-info-500    bg-info-gradient',
+                'bg-info-600    bg-success-gradient',
+                'bg-success-300 bg-info-gradient',
+                'bg-success-500 bg-primary-gradient',
+                'bg-success-600 bg-success-gradient',
+                'bg-danger-300  bg-success-gradient',
+                'bg-danger-500  bg-info-gradient',
+                'bg-danger-600  bg-primary-gradient',
+                'bg-warning-300 bg-primray-gradient',
+                'bg-warning-500 bg-info-gradient',
+                'bg-warning-600 bg-success-gradient',
+            ],
+            resetButton: true,
+            resetButtonLabel: "Sıfırla",
+            onReset: function () {
+                aktifPanel = $(this).closest(".panel");
+                //alert("reset");
+                PanelYenile(aktifPanel)
+            }
+        });
+
+        var renkler = ["#EEA02B", "#70B063", "#C5B28E", "#F44336", "#A667BF", "#999999", "#37536F", "#69D2E7", "#FFCE54", "#E3BFAE", "#A0D468",
+            "#8CC152", "#48CFAD", "#37BC9B", "#4FC1E9", "#ED5565",
+            "#5D9CEC", "#FFA07A", "#E7858E", "#9B587E",
+            "#D770AD", "#4A89DC", "#CCD1D9", "#D2B48C",
+            "#A7DBD8", "#3FB8AF", "#F7BD80", "#AAB2BD",]
+
+        $(document).ready(function () {
+
+            sKoordinatorlukKod = "@ViewBag.KoordinatorlukKodu";
+            sBirimKod = "@ViewBag.BirimKodu";
+            var ilkBirimKod = sBirimKod;
+
+            $.ajax({
+                url: "/TanimKoordinatorluk/SelectListesiVer",
+                type: "POST",
+                success: function (result) {
+
+                    Select2Yap("ddlKoordinatorluk", true, result);
+
+                    $("#ddlKoordinatorluk").val("@ViewBag.KoordinatorlukKodu").trigger('change');
+                }
+            });
+
+            $('#ddlKoordinatorluk').bind('change', function () {
+                grafikleriYenile = false;
+                sKoordinatorlukKod = $(this).val();
+                if (sKoordinatorlukKod == null) sKoordinatorlukKod = "";
+
+                $.ajax({
+                    url: "/TanimBirim/SelectListesiVer",
+                    data: { koordinatorlukKod: sKoordinatorlukKod, yetki: true },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.length > 0) {
+
+                            Select2Yap("ddlBirim", true, result);
+
+                            if (ilkBirimKod != "")
+                                $("#ddlBirim").val(ilkBirimKod).trigger('change');
+                            //else
+                            //    $("#ddlBirim").val(sBirimKod).trigger('change');
+
+                        }
+                        else {
+                            Select2Yap("ddlBirim", true, null);
+                        }
+                    }
+                });
+
+            });
+
+            $('#ddlBirim').bind('change', function () {
+                sBirimKod = $(this).val();
+                if (sBirimKod == null) sBirimKod = "";
+
+                GrafikleriYukle();
+            });
+
+            TarihAlanlariAyarla();
+
+            google.charts.load('current', { 'packages': ['treemap', 'corechart', 'bar', 'scatter'] });
+
+            $(document).ajaxStop(function () {
+                grafikleriYenile = true;
+                GrafikleriYukle();
+            });
+        });
+
+
+        function GrafikleriYukle() {
+            if (!grafikleriYenile) return;
+
+            RiskPaneliYenile();
+            PerformansIzlemePaneliYenile();
+
+            //google.charts.setOnLoadCallback(EylemDurumu);
+            google.charts.setOnLoadCallback(BulguDurumu);
+            google.charts.setOnLoadCallback(BulguOnemDuzeyi);
+            google.charts.setOnLoadCallback(Surec);
+            google.charts.setOnLoadCallback(RiskKategorileri);
+            google.charts.setOnLoadCallback(YapisalRiskSeviyesi);
+            google.charts.setOnLoadCallback(ArtikRiskSeviyesi);
+            //google.charts.setOnLoadCallback(RiskIzlemeMatrisi);
+            google.charts.setOnLoadCallback(RiskPuani);
+            google.charts.setOnLoadCallback(AnahtarRiskGostergesi);
+            google.charts.setOnLoadCallback(RiskeVerilenYanit);
+            google.charts.setOnLoadCallback(KRITolerans);
+            google.charts.setOnLoadCallback(KRIToleransPie);
+        }
+
+        //Panel refresh yapıldığında bekleme gri ekranın grafik oluşturulduktan sonra yok edilmesi için
+        function YenilemeLoaderDurdur() {
+            if (aktifPanel)
+                aktifPanel.removeClass('panel-refresh').children('.panel-container').removeClass('enable-loader').dequeue();
+        }
+
+        //Panel yenileme işlmenin işlem yapılan panel idsine göre çalıştırılması
+        function PanelYenile(panel) {
+
+            var id = panel.attr('id');
+
+            if (id == "pnlBulguDurum") {
+                google.charts.setOnLoadCallback(BulguDurumu);
+            }
+            //else if (id == "pnlEylemDurumu") {
+            //    google.charts.setOnLoadCallback(EylemDurumu);
+            //}
+            else if (id == "pnlBulguOnemDuzeyi") {
+                google.charts.setOnLoadCallback(BulguOnemDuzeyi);
+            }
+            else if (id == "pnlSurec") {
+                google.charts.setOnLoadCallback(Surec);
+            }
+            else if (id == "pnlRiskKategori") {
+                google.charts.setOnLoadCallback(RiskKategorileri);
+            }
+            else if (id == "pnlYapisalRiskSeviyesi") {
+                google.charts.setOnLoadCallback(YapisalRiskSeviyesi);
+            }
+            else if (id == "pnlArtikRiskSeviyesi") {
+                google.charts.setOnLoadCallback(ArtikRiskSeviyesi);
+            }
+            //else if (id == "pnlRiskIzlemeMatrisi") {
+            //    google.charts.setOnLoadCallback(RiskIzlemeMatrisi);
+            //}
+            else if (id == "pnlRiskPanosu") {
+                YenilemeLoaderDurdur();
+                return false;
+            }
+            else if (id == "pnlRiskPuani") {
+                google.charts.setOnLoadCallback(RiskPuani);
+            }
+            else if (id == "pnlAnahtarRiskGostergesi") {
+                google.charts.setOnLoadCallback(AnahtarRiskGostergesi);
+            }
+            else if (id == "pnlRiskeVerilenYanit") {
+                google.charts.setOnLoadCallback(RiskeVerilenYanit);
+            }
+            else if (id == "pnlPerformansIzleme") {
+                PerformansIzlemePaneliYenile();
+            }
+            else if (id == "pnlKRITolerans") {
+                google.charts.setOnLoadCallback(KRITolerans);
+            }
+            else if (id == "pnlKRIToleransPie") {
+                google.charts.setOnLoadCallback(KRIToleransPie);
+            }
+        }
+
+        function BulguDurumu() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/BulguDurumu',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfBulguDurum").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer"]);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: true,
+                            colors: renkler,
+                            height: GrafikYukseklik("pnlBulguDurum"),
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfBulguDurum'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfBulguDurum").html(veriYok);
+                }
+            });
+
+        }
+
+        function YapisalRiskSeviyesi() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/YapisalRiskSeviyesi',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfYapisalRiskSeviyesi").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer"]);
+
+                        var riskRenk = [];
+                        $.each(result.Liste, function (index, value) {
+                            var aciklama = result.Liste[index].Aciklama;
+                            if (aciklama == "Çok Yüksek") riskRenk.push("#C00002");
+                            else if (aciklama == "Yüksek") riskRenk.push("#FD0003");
+                            else if (aciklama == "Orta") riskRenk.push("#FFC001");
+                            else if (aciklama == "Düşük") riskRenk.push("#00B24E");
+                            else if (aciklama == "Çok Düşük") riskRenk.push("#93D14C");
+
+                            degerler.push([aciklama, result.Liste[index].Deger1]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: true,
+                            colors: riskRenk,
+                            height: GrafikYukseklik("pnlYapisalRiskSeviyesi"),
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfYapisalRiskSeviyesi'));
+
+                        function selectHandler() {
+                            var selectedItem = chart.getSelection()[0];
+                            if (selectedItem) {
+                                var secilen = data.getValue(selectedItem.row, 0);
+                                YapisalRiskSeviyesiListeGoster(secilen);
+                            }
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectHandler);
+
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfYapisalRiskSeviyesi").html(veriYok);
+                }
+            });
+
+        }
+
+        function ArtikRiskSeviyesi() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/ArtikRiskSeviyesi',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfArtikRiskSeviyesi").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer"]);
+
+                        var riskRenk = [];
+                        $.each(result.Liste, function (index, value) {
+                            var aciklama = result.Liste[index].Aciklama;
+                            if (aciklama == "Çok Yüksek") riskRenk.push("#C00002");
+                            else if (aciklama == "Yüksek") riskRenk.push("#FD0003");
+                            else if (aciklama == "Orta") riskRenk.push("#FFC001");
+                            else if (aciklama == "Düşük") riskRenk.push("#00B24E");
+                            else if (aciklama == "Çok Düşük") riskRenk.push("#93D14C");
+
+                            degerler.push([aciklama, result.Liste[index].Deger1]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: true,
+                            colors: riskRenk,
+                            height: GrafikYukseklik("pnlArtikRiskSeviyesi"),
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfArtikRiskSeviyesi'));
+
+                        function selectHandler() {
+                            var selectedItem = chart.getSelection()[0];
+                            if (selectedItem) {
+                                var secilen = data.getValue(selectedItem.row, 0);
+                                ArtikRiskSeviyesiListeGoster(secilen);
+                            }
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectHandler);
+
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfArtikRiskSeviyesi").html(veriYok);
+                }
+            });
+
+        }
+
+        function RiskPuani() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/RiskPuani',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfRiskPuani").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Yapısal Risk Puanı", "Artık Risk Puanı"]);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1, result.Liste[index].Deger2]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var renklerRiskPuani = ["#253ae2", "#70B063", "#C5B28E", "#F44336", "#A667BF", "#999999", "#37536F", "#69D2E7", "#FFCE54", "#E3BFAE", "#A0D468",
+                            "#8CC152", "#48CFAD", "#37BC9B", "#4FC1E9", "#ED5565",
+                            "#5D9CEC", "#FFA07A", "#E7858E", "#9B587E",
+                            "#D770AD", "#4A89DC", "#CCD1D9", "#D2B48C",
+                            "#A7DBD8", "#3FB8AF", "#F7BD80", "#AAB2BD",]
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+
+                            colors: renklerRiskPuani,
+                            height: GrafikYukseklik("pnlRiskPuani"),
+                        };
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('grfRiskPuani'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfRiskPuani").html(veriYok);
+                }
+            });
+
+        }
+
+        function RiskKategorileri() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/RiskKategorileri',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfRiskKategori").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer"]);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: false,
+                            colors: renkler,
+                            height: GrafikYukseklik("pnlRiskKategori"),
+                            pieHole: 0.4,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfRiskKategori'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfRiskKategori").html(veriYok);
+                }
+            });
+
+        }
+
+        //function EylemDurumu() {
+
+        //var form = {
+        //    sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+        //    sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+        //    KoordinatorlukKod: sKoordinatorlukKod,
+        //    BirimKod: sBirimKod
+        //};
+
+        //    $.ajax({
+        //        url: '/Home/EylemDurumu',
+        //        type: "POST",
+        //        success: function (result) {
+
+        //            if (result.IslemSonuc) {
+
+        //                var degerler = [];
+        //                degerler.push(["Açıklama", "Değer"]);
+
+        //                $.each(result.Liste, function (index, value) {
+        //                    degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1]);
+        //                });
+
+        //                var data = google.visualization.arrayToDataTable(degerler);
+
+        //                var options = {
+        //                    legend: { position: 'bottom' },
+        //                    chartArea: { width: '90%', height: '80%', right: 0 },
+        //                    is3D: true,
+        //                    colors: renkler,
+        //                    height: GrafikYukseklik("pnlEylemDurumu"),
+        //                };
+
+        //                var chart = new google.visualization.PieChart(document.getElementById('grfEylemDurumu'));
+        //                chart.draw(data, options);
+
+        //                YenilemeLoaderDurdur();
+        //            }
+        //        }
+        //    });
+
+        //}
+
+        function BulguOnemDuzeyi() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/BulguOnemDuzeyi',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfBulguOnemDuzeyi").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer", { role: 'style' }]);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1, renkler[index]]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'none' },
+                            chartArea: { left: 120, height: '80%', right: 20 },
+                            height: GrafikYukseklik("pnlBulguOnemDuzeyi"),
+                        };
+
+                        var chart = new google.visualization.BarChart(document.getElementById('grfBulguOnemDuzeyi'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfBulguOnemDuzeyi").html(veriYok);
+                }
+            });
+
+        }
+
+        //function RiskIzlemeMatrisi() {
+
+        //    var form = {
+        //        sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+        //        sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+        //        KoordinatorlukKod: sKoordinatorlukKod,
+        //        BirimKod: sBirimKod
+        //    };
+
+        //    $.ajax({
+        //        url: '/Home/RiskIzlemeMatrisi',
+        //        data: { form: form },
+        //        type: "POST",
+        //        global: false,//Ajaxstop metoduna etki etmesin
+        //        success: function (result) {
+
+        //            if (result.IslemSonuc) {
+
+        //                if (result.Liste.length == 0) {
+        //                    $("#grfRiskIzlemeMatrisi").html(veriYok);
+        //                    return;
+        //                }
+
+        //                //var data = new google.visualization.DataTable();
+        //                //data.addColumn('string', 'id');
+        //                //data.addColumn('number', 'x');
+        //                //data.addColumn('number', 'Cats');
+        //                //data.addColumn('number', 'Blanket 1');
+        //                //// This dummy series is to extend the chart from 0-5 for padding
+        //                //data.addColumn('number', null);
+        //                //data.addRows([
+        //                //    ['',{ v: 1, f: 'A' }, 1, 10, null],
+        //                //    ['',{ v: 2, f: 'B' }, 2, 5, null],
+        //                //    ['',{ v: 3, f: 'C' }, 4, 12, null],
+        //                //    ['',{ v: 4, f: 'D' }, 8, 5, null],
+        //                //    ['',{ v: 5, f: '' }, null, null, { v: 0, f: '' }]
+        //                //]);
+
+        //                var datax = google.visualization.arrayToDataTable([
+        //                    ['Kod', 'Kontrol Değerlendirmesi', 'Yapısal Risk Seviyesi', 'Grup'],
+        //                    ['R0001', { v: 2, f: 'Düşük' }, { v: 1, f: 'Çok Düşük' }, 'İyileştir'],
+        //                    ['', { v: 3, f: 'Orta' }, { v: 5, f: 'Çok Yüksek' }, 'Kontrolleri İzle'],
+        //                    ['', { v: 4, f: 'Yüksek' }, { v: 1, f: 'Çok Düşük' }, 'Riskleri İzle'],
+        //                    ['', { v: 5, f: 'Çok Yüksek' }, { v: 3, f: 'Orta' }, 'Optimize et/Vazgeç'],
+        //                    ['', { v: 1, f: 'Çok Düşük' }, { v: 2, f: 'Düşük' }, 'İyileştir'],
+        //                    ['', { v: 1, f: 'Çok Düşük' }, { v: 2, f: 'Düşük' }, 'İyileştir'],
+        //                    ['', { v: 4, f: 'Yüksek' }, { v: 4, f: 'Yüksek' }, 'İyileştir'],
+        //                    ['', { v: 1, f: 'Çok Düşük' }, { v: 3, f: 'Orta' }, 'Optimize et/Vazgeç'],
+        //                    ['', { v: 3, f: 'Orta' }, { v: 2, f: 'Çok Düşük' }, 'Kontrolleri İzle'],
+        //                    ['', { v: 2, f: 'Düşük' }, { v: 2, f: 'Düşük' }, 'Kontrolleri İzle']
+        //                ]);
+
+        //                var degerler = [];
+        //                degerler.push(["Kod", "Kontrol Değerlendirmesi", "Yapısal Risk Seviyesi", "Grup", "Büyüklük"]);
+
+        //                $.each(result.Liste, function (index, value) {
+        //                    degerler.push([result.Liste[index].Kod, result.Liste[index].Kontrol, result.Liste[index].Yapisal, result.Liste[index].Grup, 1]);
+        //                });
+
+        //                var data = google.visualization.arrayToDataTable(degerler);
+
+        //                var options = {
+        //                    title: '',
+        //                    hAxis: { title: 'Kontrol Değerlendirmesi' },
+        //                    vAxis: { title: 'Yapısal Risk Seviyesi' },
+        //                    bubble: { textStyle: { fontSize: 10 } },
+        //                    height: GrafikYukseklik("pnlRiskIzlemeMatrisi")
+        //                };
+
+        //                var chart = new google.visualization.BubbleChart(document.getElementById('grfRiskIzlemeMatrisi'));
+        //                chart.draw(data, options);
+
+        //                YenilemeLoaderDurdur();
+        //            }
+        //        },
+        //        error: function (result) {
+        //            $("#grfRiskIzlemeMatrisi").html(veriYok);
+        //        }
+
+        //    });
+
+        //}
+
+        function Surec() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod,
+                Aciklama: "",
+                Deger1: 0,
+                Deger2: 0.0
+            };
+
+            $.ajax({
+                url: '/Home/Surec',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfSurec").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Grup", "Değer"]);
+                        degerler.push(["Süreçler", "", "0"]);
+
+                        $.each(result.Liste, function (index, value) {
+                            var adi = result.Liste[index].Aciklama + " (Risk Sayısı: " + result.Liste[index].Deger1 + ")";
+                            degerler.push([adi, "Süreçler", result.Liste[index].Deger1]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var chart = new google.visualization.TreeMap(document.getElementById('grfSurec'));
+
+                        chart.draw(data, {
+                            fontColor: "#fff",
+                            headerHighlightColor: "#fff",
+                            highlightOnMouseOver: false,
+                            maxDepth: 0,
+                            maxPostDepth: 0,
+                            minHighlightColor: "#14914C",
+                            midHighlightColor: "#9ebcda",
+                            maxHighlightColor: "#DC572B",
+                            minColor: "#1ABF64",
+                            midColor: "#DDAD00",
+                            maxColor: "#FF6633",
+                            headerHeight: 0,
+                            showScale: true,
+                            height: GrafikYukseklik("pnlSurec"),
+                            useWeightedAverageForAggregation: false,
+                            showTooltips: true
+                        });
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfSurec").html(veriYok);
+                }
+
+            });
+
+        }
+
+        function AnahtarRiskGostergesi() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/AnahtarRiskGostergesi',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfAnahtarRiskGostergesi").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(['Kategori', 'Yeşil', 'Sarı', 'Kırmızı']);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Yesil, result.Liste[index].Sari, result.Liste[index].Kirmizi]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var riskRenk = [];
+                        riskRenk.push("#70b063");//yeşil
+                        riskRenk.push("#ffc241");//sarı
+                        riskRenk.push("#f44336");//kırmızı
+
+                        var options = {
+                            legend: { position: 'none' },
+                            chartArea: { left: 120, height: '80%', right: 20 },
+                            height: GrafikYukseklik("pnlAnahtarRiskGostergesi"),
+                            isStacked: true,
+                            colors: riskRenk,
+                        };
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('grfAnahtarRiskGostergesi'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfAnahtarRiskGostergesi").html(veriYok);
+                }
+            });
+
+        }
+
+        function RiskeVerilenYanit() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/RiskeVerilenYanit',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfRiskeVerilenYanit").html(veriYok);
+                            return;
+                        }
+
+                        var degerler = [];
+                        degerler.push(["Açıklama", "Değer", { role: 'style' }]);
+
+                        $.each(result.Liste, function (index, value) {
+                            degerler.push([result.Liste[index].Aciklama, result.Liste[index].Deger1, renkler[index]]);
+                        });
+
+                        var data = google.visualization.arrayToDataTable(degerler);
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: true,
+                            colors: renkler,
+                            height: GrafikYukseklik("pnlBulguDurum"),
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfRiskeVerilenYanit'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfRiskeVerilenYanit").html(veriYok);
+                }
+            });
+
+        }
+
+        function colorFromValue(value, border) {
+            var alpha = (1 + Math.log(value)) / 5;
+            var color = "purple";
+            if (border) {
+                alpha += 0.01;
+            }
+            return Chart.helpers.color(color)
+                .alpha(alpha)
+                .rgbString();
+        }
+
+        function TarihAlanlariAyarla() {
+            var today = new Date();
+            var dd = "01";//String(today.getDate()).padStart(2, '0');
+            var mm = "01";//String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+            var todayStr = dd + '/' + mm + '/' + yyyy;
+
+            var oldday = new Date();
+            oldday.setDate(oldday.getDate() - 365);
+            var dd2 = "31";//String(oldday.getDate()).padStart(2, '0');
+            var mm2 = "12";//String(oldday.getMonth() + 1).padStart(2, '0');
+            var yyyy2 = yyyy;//oldday.getFullYear();
+            var olddayStr = dd2 + '/' + mm2 + '/' + yyyy2;
+
+
+            //$("#txtRiskPanoBaslamaTarih").datepicker("update", todayStr); //İlk tarih boş olsun
+            $("#txtRiskPanoBitisTarih").datepicker("update", olddayStr);
+        }
+
+        function RiskPaneliYenile() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/RiskPaneli',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        var toplam = 0;
+                        var cokYuksek = 0;
+                        var yuksek = 0;
+                        var orta = 0;
+                        var dusuk = 0;
+                        var cokDusuk = 0;
+
+                        var cokYuksekArtik = 0;
+                        var yuksekArtik = 0;
+                        var ortaArtik = 0;
+                        var dusukArtik = 0;
+                        var cokDusukArtik = 0;
+
+                        $.each(result.Liste[0], function (a, b) {
+                            if (b.Aciklama == "1") cokDusuk = b.Deger1;
+                            if (b.Aciklama == "2") dusuk = b.Deger1;
+                            if (b.Aciklama == "3") orta = b.Deger1;
+                            if (b.Aciklama == "4") yuksek = b.Deger1;
+                            if (b.Aciklama == "5") cokYuksek = b.Deger1;
+
+                            toplam += b.Deger1;
+                        });
+
+                        $.each(result.Liste[1], function (a, b) {
+                            if (b.Aciklama == "1") cokDusukArtik = b.Deger1;
+                            if (b.Aciklama == "2") dusukArtik = b.Deger1;
+                            if (b.Aciklama == "3") ortaArtik = b.Deger1;
+                            if (b.Aciklama == "4") yuksekArtik = b.Deger1;
+                            if (b.Aciklama == "5") cokYuksekArtik = b.Deger1;
+                        });
+
+
+                        var spanSablon = "<div style='line-height:28px;'><span class='fs-xxl text-white'>0</span></div>";
+
+                        toplam = toplam > 0 ? "<div style='line-height:59px;'><a href='#' onclick='RiskPaneliGoster(0,0);'><span class='fs-xxl text-white'>" + toplam + "</span></a></div>" : spanSablon;
+
+                        cokYuksek = cokYuksek > 0 ? "<div style='line-height:28px;'><a href='#' title='Yapısal Risk Seviyesi' onclick='RiskPaneliGoster(5,0);'><span class='fs-xxl text-white'>" + cokYuksek + "</span></a></div>" : spanSablon;
+                        yuksek = yuksek > 0 ? "<div style='line-height:28px;'><a href='#' title='Yapısal Risk Seviyesi' onclick='RiskPaneliGoster(4,0);'><span class='fs-xxl text-white'>" + yuksek + "</span></a></div>" : spanSablon;
+                        orta = orta > 0 ? "<div style='line-height:28px;'><a href='#' title='Yapısal Risk Seviyesi' onclick='RiskPaneliGoster(3,0);'><span class='fs-xxl text-white'>" + orta + "</span></a></div>" : spanSablon;
+                        dusuk = dusuk > 0 ? "<div style='line-height:28px;'><a href='#' title='Yapısal Risk Seviyesi' onclick='RiskPaneliGoster(2,0);'><span class='fs-xxl text-white'>" + dusuk + "</span></a></div>" : spanSablon;
+                        cokDusuk = cokDusuk > 0 ? "<div style='line-height:28px;'><a href='#' title='Yapısal Risk Seviyesi' onclick='RiskPaneliGoster(1,0);'><span class='fs-xxl text-white'>" + cokDusuk + "</span></a></div>" : spanSablon;
+
+                        var cokYuksek2 = cokYuksekArtik > 0 ? "<div style='line-height:28px;'><a href='#' title='Artık Risk Seviyesi' onclick='RiskPaneliGoster(0,5);'><span class='fs-xxl text-white'>" + cokYuksekArtik + "</span></a></div>" : spanSablon;
+                        var yuksek2 = yuksekArtik > 0 ? "<div style='line-height:28px;'><a href='#' title='Artık Risk Seviyesi' onclick='RiskPaneliGoster(0,4);'><span class='fs-xxl text-white'>" + yuksekArtik + "</span></a></div>" : spanSablon;
+                        var orta2 = ortaArtik > 0 ? "<div style='line-height:28px;'><a href='#' title='Artık Risk Seviyesi' onclick='RiskPaneliGoster(0,3);'><span class='fs-xxl text-white'>" + ortaArtik + "</span></a></div>" : spanSablon;
+                        var dusuk2 = dusukArtik > 0 ? "<div style='line-height:28px;'><a href='#' title='Artık Risk Seviyesi' onclick='RiskPaneliGoster(0,2);'><span class='fs-xxl text-white'>" + dusukArtik + "</span></a></div>" : spanSablon;
+                        var cokDusuk2 = cokDusukArtik > 0 ? "<div style='line-height:28px;'><a href='#' title='Artık Risk Seviyesi' onclick='RiskPaneliGoster(0,1);'><span class='fs-xxl text-white'>" + cokDusukArtik + "</span></a></div>" : spanSablon;
+
+
+                        $(".divRPCokYuksekRiskSayisi1").html(cokYuksek);
+                        $(".divRPCokYuksekRiskSayisi2").html(cokYuksek2);
+
+                        $(".divRPYuksekRiskSayisi1").html(yuksek);
+                        $(".divRPYuksekRiskSayisi2").html(yuksek2);
+
+                        $(".divRPOrtaRiskSayisi1").html(orta);
+                        $(".divRPOrtaRiskSayisi2").html(orta2);
+
+                        $(".divRPDusukRiskSayisi1").html(dusuk);
+                        $(".divRPDusukRiskSayisi2").html(dusuk2);
+
+                        $(".divRPCokDusukRiskSayisi1").html(cokDusuk);
+                        $(".divRPCokDusukRiskSayisi2").html(cokDusuk2);
+
+                        $(".divRPToplamRiskSayisi").html(toplam);
+                        $(".divRPCokYuksekRiskSayisi").html(cokYuksek);
+                        $(".divRPYuksekRiskSayisi").html(yuksek);
+                        $(".divRPOrtaRiskSayisi").html(orta);
+                        $(".divRPDusukRiskSayisi").html(dusuk);
+                        $(".divRPCokDusukRiskSayisi").html(cokDusuk);
+                        YenilemeLoaderDurdur();
+                    }
+                }
+            });
+
+        }
+
+        function GrafikYukseklik(kontrol) {
+            var classes = $("#" + kontrol).attr('class');
+            if (classes.indexOf("panel-fullscreen") > -1) {
+                var pnl = document.querySelector("#" + kontrol);
+                return pnl.offsetHeight * 80 / 100;
+            }
+            else
+                return 300;
+        }
+
+        function RiskPaneliGoster(seviye, artikRiskSeviyesi, baslik) {
+
+            var tablo = $("#tblRiskListesi tbody");
+            tablo.empty();
+
+            baslik = baslik ?? "Risk Paneli";
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod,
+                YapisalRiskSeviyesi: seviye,
+                ArtikRiskSeviyesi: artikRiskSeviyesi,
+            };
+
+            $.ajax({
+                url: '/Home/RiskYonetimPaneli',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+                    $.each(result.Liste, function (a, b) {
+                        var td = "<td>" + b.KoordinatorlukAdi + "</td>";
+                        td += "<td>" + b.BirimAdi + "</td>";
+                        td += "<td>" + b.RiskNo + "</td>";
+                        td += "<td>" + b.RiskAdi + "</td>";
+
+                        var satir = "<tr>" + td + "</tr>";
+
+                        tablo.append(satir);
+                    });
+
+                    jModalShow("mdlRiskListe", baslik);
+                }
+            });
+
+
+        }
+
+        function PerformansIzlemePaneliYenile() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/PerformansIzlemePaneli',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        var izleme1 = 0;
+                        var izleme2 = 0;
+                        var izleme3 = 0;
+                        var izleme4 = 0;
+                        var izleme5 = 0;
+                        var izleme6 = 0;
+
+                        var i = 0;
+                        $.each(result.Liste, function (a, b) {
+                            i++;
+                            if (i == 1) { izleme1 = b.Deger1; }
+                            else if (i == 2) { izleme2 = b.Deger1; }
+                            else if (i == 3) { izleme3 = b.Deger1; }
+                            else if (i == 4) { izleme4 = b.Deger1; }
+                            else if (i == 5) { izleme5 = b.Deger1; }
+                            else if (i == 6) { izleme6 = b.Deger1; }
+                        });
+
+                        var spanSablon = "<span class='fs-xxl text-white'>0</span>";
+
+                        izleme1 = izleme1 > 0 ? "<span class='fs-xxl text-white'>" + izleme1 + " gün</span>" : spanSablon;
+                        izleme2 = izleme2 > 0 ? "<span class='fs-xxl text-white'>" + izleme2 + "</span>" : spanSablon;
+                        izleme3 = izleme3 > 0 ? "<span class='fs-xxl text-white'>" + izleme3 + "</span>" : spanSablon;
+                        izleme4 = izleme4 > 0 ? "<span class='fs-xxl text-white'>" + izleme4 + "</span>" : spanSablon;
+                        izleme5 = izleme5 > 0 ? "<span class='fs-xxl text-white'>% " + izleme5 + "</span>" : spanSablon;
+                        izleme6 = izleme6 > 0 ? "<span class='fs-xxl text-white'>% " + izleme6 + "</span>" : spanSablon;
+
+                        $(".divPerformansIzleme1").html(izleme1);
+                        $(".divPerformansIzleme2").html(izleme2);
+                        $(".divPerformansIzleme3").html(izleme3);
+                        $(".divPerformansIzleme4").html(izleme4);
+                        $(".divPerformansIzleme5").html(izleme5);
+                        $(".divPerformansIzleme6").html(izleme6);
+                        YenilemeLoaderDurdur();
+                    }
+                }
+            });
+
+        }
+
+        function YapisalRiskSeviyesiListeGoster(secilen) {
+            if (secilen == undefined || secilen == "") return;
+
+            var seviye = 0;
+            if (secilen == "Çok Yüksek") { seviye = 5; }
+            else if (secilen == "Yüksek") { seviye = 4; }
+            else if (secilen == "Orta") { seviye = 3; }
+            else if (secilen == "Düşük") { seviye = 2; }
+            else if (secilen == "Çok Düşük") { seviye = 1; }
+
+            RiskPaneliGoster(seviye, 0, "Risk Listesi");
+        }
+
+        function ArtikRiskSeviyesiListeGoster(secilen) {
+            if (secilen == undefined || secilen == "") return;
+
+            var seviye = 0;
+            if (secilen == "Çok Yüksek") { seviye = 5; }
+            else if (secilen == "Yüksek") { seviye = 4; }
+            else if (secilen == "Orta") { seviye = 3; }
+            else if (secilen == "Düşük") { seviye = 2; }
+            else if (secilen == "Çok Düşük") { seviye = 1; }
+
+            RiskPaneliGoster(0, seviye, "Risk Listesi");
+        }
+
+        function KRITolerans() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/KRITolerans',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfKRITolerans").html(veriYok);
+                            return;
+                        }
+
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Anahtar Risk Göstergesi');
+                        data.addColumn('number', 'Sarı');
+                        data.addColumn({ type: 'string', role: 'annotation' });
+                        data.addColumn('number', 'Yeşil');
+                        data.addColumn({ type: 'string', role: 'annotation' });
+                        data.addColumn('number', 'Kırmızı');
+                        data.addColumn({ type: 'string', role: 'annotation' });
+
+                        var degerler = [];
+                        $.each(result.Liste, function (index, value) {
+                            var row = result.Liste[index];
+                            degerler.push([row.Aciklama, row.Sari, row.SariBilgi, row.Yesil, row.YesilBilgi, row.Kirmizi, row.KirmiziBilgi]);
+                        });
+                        data.addRows(degerler);
+
+                        var riskRenk = [];
+                        riskRenk.push("#ffc241");//sarı
+                        riskRenk.push("#70b063");//yeşil
+                        riskRenk.push("#f44336");//kırmızı
+
+                        var options = {
+                            legend: { position: "top", maxLines: 9, alignment: 'center' },
+                            chartArea: { left: 50, height: '80%', right: 20 },
+                            height: GrafikYukseklik("pnlKRITolerans"),
+                            colors: riskRenk,
+                            annotations: {
+                                alwaysOutside: true,
+                                textStyle: {
+                                    color: '#000',
+                                    auraColor: 'none'
+                                }
+                            },
+                            vAxis: {
+                              format: '',
+                              viewWindow: {
+                                min: [0],
+                              }
+                            },
+                        };
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('grfKRITolerans'));
+
+                        function selectHandler() {
+                            var selectedItem = chart.getSelection()[0];
+                            if (selectedItem) {
+                                var secilenKategori = data.getValue(selectedItem.row, 0);
+                                var secilenDurum = "";
+                                if (selectedItem.column == 1)
+                                    secilenDurum = "SARI";
+                                if (selectedItem.column == 3)
+                                    secilenDurum = "YESIL";
+                                if (selectedItem.column == 5)
+                                    secilenDurum = "KIRMIZI";
+
+                                KRIToleransPaneliGoster(secilenKategori, secilenDurum);
+                            }
+                        }
+
+                        google.visualization.events.addListener(chart, 'select', selectHandler);
+
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfKRITolerans").html(veriYok);
+                }
+            });
+
+        }
+
+        function KRIToleransPie() {
+
+            var form = {
+                sorguTarihi1: $("#txtRiskPanoBaslamaTarih").val(),
+                sorguTarihi2: $("#txtRiskPanoBitisTarih").val(),
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod
+            };
+
+            $.ajax({
+                url: '/Home/KRIToleransPie',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        if (result.Liste.length == 0) {
+                            $("#grfKRIToleransPie").html(veriYok);
+                            return;
+                        }
+
+                        var data = new google.visualization.DataTable();
+
+                        data.addColumn('string', 'Açıklama');
+                        data.addColumn('number', 'Değer');
+
+                        var degerler = [];
+                        $.each(result.Liste, function (index, value) {
+                            var row = result.Liste[index];
+                            degerler.push([row.Aciklama, row.Deger1]);
+                        });
+                        data.addRows(degerler);
+
+                        var riskRenk = [];
+                        $.each(result.Liste, function (index, value) {
+                            var row = result.Liste[index];
+                            if(row.Aciklama == "Henüz değerlendirilmemiş" && !riskRenk.includes("#808080"))
+                                riskRenk.push("#808080");//Henüz değerlendirilmemiş
+                            else if(row.Aciklama == "Kırmızı" && !riskRenk.includes("#f44336"))
+                                riskRenk.push("#f44336");//Kırmızı
+                            else if(row.Aciklama == "Sarı" && !riskRenk.includes("#ffc241"))
+                                riskRenk.push("#ffc241");//Sarı
+                            else if (row.Aciklama == "Yeşil" && !riskRenk.includes("#70b063"))
+                                riskRenk.push("#70b063");//Yeşil
+                        });
+                       
+
+                        var options = {
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '90%', height: '80%', right: 0 },
+                            is3D: false,
+                            colors: riskRenk,
+                            height: GrafikYukseklik("pnlKRIToleransPie"),
+                            pieHole: 0.4,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('grfKRIToleransPie'));
+                        chart.draw(data, options);
+
+                        YenilemeLoaderDurdur();
+                    }
+                },
+                error: function (result) {
+                    $("#grfKRIToleransPie").html(veriYok);
+                }
+            });
+
+        }
+
+        function KRIToleransPaneliGoster(secilenKategori, secilenDurum) {
+            if (secilenKategori == undefined || secilenKategori == "") return;
+
+            var tablo = $("#tblArgListesi tbody");
+            tablo.empty();
+
+            var form = {
+                KoordinatorlukKod: sKoordinatorlukKod,
+                BirimKod: sBirimKod,
+                Durum: secilenDurum,
+                Kategori: secilenKategori,
+            };
+
+            $.ajax({
+                url: '/Home/KRIToleransPaneli',
+                data: { form: form },
+                type: "POST",
+                global: false,//Ajaxstop metoduna etki etmesin
+                success: function (result) {
+                    $.each(result.Liste, function (a, b) {
+                        var td = "<td>" + b.RiskKategorisiAdi + "</td>";
+                        td += "<td>" + b.AnahtarRiskGostergesiAdi + "</td>";
+                        td += "<td>" + DurumVer(b.AnahtarRiskGostergesiDurum) + "</td>";
+                        td += "<td>" + TrendVer(b.AnahtarRiskGostergesiTrend) + "</td>";
+
+                        var satir = "<tr>" + td + "</tr>";
+
+                        tablo.append(satir);
+                    });
+
+                    jModalShow("mdlArgListe", "Anahtar Risk Göstergesi");
+                }
+            });
+
+
+        }
+
+     function TrendVer(data) {
+        if (data == undefined) return;
+
+        var renk = "#bbb";
+
+        var trend = "";
+        if (data == "AZALAN") trend = "fa-arrow-alt-down";
+        if (data == "ARTAN") trend = "fa-arrow-alt-up";
+        if (data == "SABİT") trend = "fa-arrow-alt-right";
+
+        if (trend != "")
+            return "<div class='text-center genelTooltip' data-toggle='tooltip' style='color:" + renk + "' title='" + data + "'><i class='fas " + trend + " fa-2x'></i></div> ";
+        else
+            return "";
+    }
+
+    function DurumVer(data) {
+
+        var renk = "";
+        if (data == "KIRMIZI") renk = "#dc3545";
+        if (data == "SARI") renk = "#ffc107";
+        if (data == "YEŞİL") renk = "#28a745";
+
+        if (renk != "")
+            return "<div class='text-center genelTooltip' data-toggle='tooltip' style='color:" + renk + "' title='" + data + "'><i class='fas fa-circle fa-2x'></i></div>";
+        else
+            return "";
+    }
+
+
+    </script>
+
+}
+

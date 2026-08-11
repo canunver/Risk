@@ -1,0 +1,466 @@
+<div class="row kelimedenArama" style="display:none">
+    <div class="col-md-12">
+        <div class="d-flex flex-row">
+            <div class="input-group">
+                <input type="text" id="txtTabloGenelArama" class="form-control" placeholder="@CustomResource["AramaAlani.Aciklama"]">
+                <div class="input-group-append">
+                    <button class="btn bg-primary text-white btn-xs waves-effect waves-themed" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Arama"]" onclick="TabloAramaYap();"><i class="fal fa-search"></i></button>
+                </div>
+                <div class="ml-2 " data-toggle="collapse" href="#divGelismisArama">
+                    <button class="btn bg-danger text-white waves-effect waves-themed toogleGozetle" type="button" data-toggle="tooltip" title="@CustomResource["Genel.Tablo.GelismisArama.Baslik"]"><i class="fal fa-search-plus"></i><i class="toogle ml-2 fal fa-angle-down"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row collapse" id="divGelismisArama">
+    <div class="col-md-12">
+        <!--Gelişmiş arama alanı-->
+        <div>
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @CustomResource["Genel.Tablo.GelismisArama.Baslik"]
+                        <a type="button" class="float-right toogleGozetle" data-toggle="collapse" href="#divGelismisArama"><i class="fal fa-times fa-lg text-gray"></i></a>
+                        <hr />
+                    </div>
+                </div>
+                <div class="row">
+                    @{
+                        foreach (var item in Model.alanlar)
+                        {
+                            if (!item.aramadaGoster) continue;
+
+                            var aramaAlanAdi = item.aramaAlanAdi;
+                            if (aramaAlanAdi == "")
+                                aramaAlanAdi = item.veriAlani;
+
+                            <div class="col-md-4 mt-2">
+                                <div class="form-group">
+                                    <label class="form-label" for="txtArama@(aramaAlanAdi)">@(string.IsNullOrWhiteSpace(@item.aramaAdi)? @item.adi: @item.aramaAdi)</label>
+                                    @{ if (item.aramaTipi == "text")
+                                        {
+                                            <input type="text" id="txtArama@(aramaAlanAdi)" class="form-control form-control-sm gAramaAlani">
+                                        }
+                                        else if (item.aramaTipi == "combo")
+                                        {
+                                            <select id="ddlArama@(aramaAlanAdi)" class="gAramaAlani" onchange="@item.aramaAlaniSecimTetikle">
+                                            </select>
+
+                                            <script>
+                                                $(document).ready(function () {
+                                                    if ("@Html.Raw(@item.aramaListeDoldurMetodu)" != "") {
+
+                                                        @Html.Raw(@item.aramaListeDoldurMetodu);
+
+                                                    }
+                                                    else if ("@item.aramaListeDoldurUrl" != "") {
+
+                                                        $.ajax({
+                                                            url: "@(item.aramaListeDoldurUrl)",
+                                                            type: "POST",
+                                                            @if (item.aramaListeDoldurKosul != "")
+                                                            {
+                                                                <text>
+                                                                data: @Html.Raw(item.aramaListeDoldurKosul),
+                                                                </text>
+                                                            }
+                                                            success: function (result) {
+                                                                $("#ddlArama@(aramaAlanAdi)").select2({
+                                                                    placeholder: "@Html.Raw(@CustomResource["Lutfen.Seciniz"])",
+                                                                    allowClear: true,
+                                                                    data: result
+                                                                });
+
+                                                                $("#ddlArama@(aramaAlanAdi)").val("").trigger('change');
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            </script>
+                                        }
+                                        else if (item.aramaTipi == "tarihAralik")
+                                        {
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <input class="form-control form-control-sm gAramaAlani tarihAlani" id="txtArama@(aramaAlanAdi)1" type="text" value="">
+                                                    <div class="input-group-append input-group-prepend">
+                                                        <span class="input-group-text"><i class="fal fa-minus"></i></span>
+                                                    </div>
+                                                    <input class="form-control form-control-sm gAramaAlani tarihAlani" id="txtArama@(aramaAlanAdi)2" type="text" value="">
+                                                </div>
+                                            </div>
+
+                                            <script>
+                                                $(document).ready(function () {
+
+                                                });
+                                            </script>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="height-8 d-flex flex-row align-items-center">
+                        <div class="">
+                            <button onclick="TabloGelismisAramaYap();" class="btn btn-info waves-effect waves-themed">@CustomResource["Dugme.Arama"]</button>
+                            <button onclick="TabloGelismisAramaTemizle();" class="btn btn-danger waves-effect waves-themed">@CustomResource["Dugme.AramaTemizle"]</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Gelişmiş arama alanı-->
+
+    </div>
+</div>
+<hr class="kelimedenArama" />
+<table id="@Model.adi" data-export-title="@Model.baslik" class="table table-bordered table-hover @if (@Model.satirOlustur == ""){ <text>table-striped</text> } w-100">
+    <thead>
+        <tr>
+            @*Tablo alanlarını oluştur*@
+            @{
+                if (Model.secim)
+                {
+                    <th data-priority="1" class="select-checkbox" id="@(Model.adi)_hsec">&nbsp;</th>
+                }
+
+                foreach (var item in Model.alanlar)
+                {
+                    if (!item.tablodaGoster) continue;
+
+                    <th data-priority="2">@item.adi</th>
+                }
+            }
+            @*İşlemler kolonu gösterilecekse oluştur*@
+            @if (Model.islemler.goster)
+            {
+                <th data-priority="1" class="NotExport">@CustomResource["Genel.Tablo.Islemler"]</th>
+            }
+        </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+    var gTabloKolonSayisi="@(Model.alanlar.Count)";
+    var gTablo_@(Model.adi);
+    @{int siralamaAlani = @Model.siralamaKolonNo; }
+    @{string siralamaYonu = @Model.siralamaYonu; }
+
+    $(document).ready(function () {
+
+        var aramaAlaniGoster =@(Model.aramaAlaniGoster.ToString().ToLower());
+        if (aramaAlaniGoster)
+            $(".kelimedenArama").show();
+        else
+            $(".kelimedenArama").hide();
+
+        $("#txtTabloGenelArama").keyup(function (e) {
+                if (event.keyCode == '13') {
+            e.preventDefault();
+            TabloAramaYap();
+        }
+        });
+
+        gTablo_@(Model.adi) = $("#@Model.adi").DataTable({
+            ajax: {
+                url: "@Model.listeUrl",
+                type: "POST",
+                dataType: "json",
+
+                @if (@Model.dataFunc != "")
+                {
+                <text>
+                data: function (d) {
+                    return @Model.dataFunc;
+                },
+                </text>
+                }
+            },
+
+            @if (@Model.secim)
+            {
+                <text>
+                select: { style: 'multi+shift' },
+                </text>
+            }
+            else
+            {
+                <text>
+                select: { style: 'os' },
+                </text>
+            }
+
+            @if (@Model.dom != "")
+            {
+                <text>
+            dom: "@Html.Raw(@Model.dom)",
+                </text>
+            }
+            drawCallback: function (settings) {
+                //Tablo datası yükleme işleminden sonra yapılacaklar
+                $('#@(Model.adi)_hsec').closest('tr').removeClass('selected');
+                gTablo_@(Model.adi).rows().deselect();
+                $('a[onclick="TabloVeriSil(undefined)"], a[onclick="OnayaGonder(undefined)"], a[onclick="TarihceGoster(undefined)"], a[onclick="Kopyala(undefined)"]').hide();
+
+                @if (@Model.initComplate != "")
+                {
+                    <text>
+                      return @Html.Raw(@Model.initComplate);
+                    </text>
+                }
+            },
+            @if (@Model.satirOlustur != "")
+            {
+                <text>
+                createdRow: function (row, data, dataIndex) {
+                    return @Html.Raw(@Model.satirOlustur);
+                },
+                </text>
+            }
+            columns: [
+                @{
+                    @*Tablo alanlarını oluştur*@
+                    if (Model.secim) {
+                        siralamaAlani++;
+                        <text>
+                        {
+                            data: "@Model.anahtarAlani",
+                            width: "30px",
+                            orderable: false,
+                            defaultContent: "",
+                            className: 'select-checkbox',
+                            render: function (data, type, row, meta) { return "";}
+                        },
+                        </text>
+                    }
+
+                    foreach (var item in Model.alanlar) {
+
+                        if (!item.tablodaGoster) continue;
+
+                        <text>
+                        {
+                        data: "@item.veriAlani",
+                            autowidth: @(item.otomatikGenislik ? "true" : "false") ,
+                            width: "@item.genislik",
+                            orderable:  @(item.siralama ? "true" : "false"),
+                            defaultContent: "",//Alan null olursa default olarak buradaki yazılır
+                            className:"@(item.tipi=="num"? "text-right" : "")",
+						    @{
+                            if (item.tipi != "")
+                            {
+                                <text>
+                                    type: '@item.tipi',
+                                </text>
+                                }
+                            }
+						    @{
+                                if (item.render != "")
+                                {
+                                <text>
+                                    render: function(data, type, row, meta) {
+                                        return @Html.Raw(@item.render);
+                                    }
+                                </text>
+                                }
+                            }
+                        },
+                        </text>
+                    }
+
+                    @*İşlemler kolonu gösterilecekse oluştur*@
+                    @if (Model.islemler.goster)
+                    {
+                        <text>
+                        {
+                            data: "@Model.anahtarAlani",
+                            orderable: false,
+                            className: "text-nowrap",
+                            render: function (data, type, row, meta){
+
+                                var duzenleme = @(Model.islemler.duzenleme ? "true" : "false") ;
+                                var silme = @(Model.islemler.silme ? "true" : "false") ;
+
+                                var dugmeler = "";
+                                if (duzenleme)
+                                {
+                                    if(row.KontrolDuzenlemeGosterme != 1)
+                                        dugmeler += "<a title='@Html.Raw(@CustomResource["Dugme.Guncelle"])' class='btn btn-primary btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TabloVeriDuzenle(" + JSON.stringify(data) + ")'><i class='fal fa-pencil'></i></a>";
+                                }
+                                if (silme)
+                                   dugmeler += "<a title='@CustomResource["Dugme.Pasif"]' class='btn btn-danger btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TabloVeriSil(" + JSON.stringify(data) + ")'><i class='fal fa-trash-alt'></i></a>";
+
+                                dugmeler +=  "@Html.Raw(@Model.islemler.digerIslemler)";
+
+                                if(row.KontrolOnayaGonderGosterme == 1)
+                                   dugmeler = dugmeler.replaceAll("cssOnayaGonder", "gizle");
+                                if(row.KontrolTarihceGosterme == 1)
+                                   dugmeler = dugmeler.replaceAll("cssTarihceGoster", "gizle");
+                                if(row.KontrolPasifYapGosterme == 1)
+                                   dugmeler = dugmeler.replaceAll("cssPasifYap", "gizle");
+
+                                if(row.Durum != 10)
+                                   dugmeler = dugmeler.replaceAll("Kopyala(!!DATA!!)", "Kopyala(undefined)");
+
+                                dugmeler = dugmeler.replaceAll("!!DATA!!", JSON.stringify(data));
+
+                                dugmeler = dugmeler.replace("!!DATA3!!", JSON.stringify(data).replaceAll('"', ''));
+
+
+                                var anahtarAlana2Degeri = "@(Model.anahtarAlani2)";
+                                if (anahtarAlana2Degeri!="")
+                                    dugmeler = dugmeler.replace(/!!DATA2!!/g, JSON.stringify(eval("row." + anahtarAlana2Degeri)));//row.Model.anahtarAlani2
+
+                                return dugmeler;
+                            },
+                            width: "@Model.islemler.genislik"
+                        }
+                        </text>
+                    }
+            }
+
+            ],
+            @if (siralamaAlani > -1)
+            {
+                <text>
+                'order': [[@siralamaAlani, "@siralamaYonu"]],
+                </text>
+            }
+            else
+            {
+                <text>
+                'order': []
+                </text>
+            }
+        });
+
+
+    })
+
+    //Hepsini seç işlemi
+    $('#@(Model.adi)_hsec').on('click', function () {
+        var secilenSay =gTablo_@(Model.adi).rows( { selected: true } ).count();
+        if (secilenSay == 0) {
+            $('#@(Model.adi)_hsec').closest('tr').addClass('selected');
+            gTablo_@(Model.adi).rows().select();
+        }
+        else {
+            $('#@(Model.adi)_hsec').closest('tr').removeClass('selected');
+            gTablo_@(Model.adi).rows().deselect();
+        }
+
+        //Seçilen row datasını almak için
+        //gTablo_@(Model.adi).rows( { selected: true } ).data()[0]["Kod"]
+    });
+
+
+
+    function TabloVeriDuzenle(kod) {
+
+        $.ajax({
+            url: "@Model.duzenleUrl",
+            data: { kod: kod },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+
+                    @(Model.islemler.duzenlemeSonucMetodu)(result);
+
+                }
+                else {
+
+                    HataPenceresiGoster(result.Mesaj);
+
+                }
+            }
+        });
+    }
+
+    function TabloVeriSil(kod) {
+        if (kod == null || kod == undefined) {
+            HataPenceresiGoster("Seçilen kayıt silmek için uygun değil!");
+        }
+        else {
+             Swal.fire({
+                title: "@CustomResource["Baslik.Onay"]",
+                html: "@CustomResource["Onay.Sil"]",
+                showCancelButton: true,
+                confirmButtonText: "@CustomResource["Dugme.Evet"]",
+                cancelButtonText: "@CustomResource["Dugme.Hayır"]"
+                }).then(function (result) {
+                    if (result.value) {
+
+                        $.ajax({
+                            url: "@Model.silUrl",
+                            data: { kod: kod },
+                            type: "POST",
+                            success: function (result) {
+
+                                if (result.IslemSonuc) {
+
+                                    ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                                    TabloVeriYenile();
+                                }
+                                else {
+
+                                    HataPenceresiGoster(result.Mesaj);
+
+                                }
+                            }
+                        });
+                    }
+                });
+        }
+    }
+
+    function TabloVeriYenile() {
+        gTablo_@(Model.adi).rows().deselect();
+        $("#@Model.adi").DataTable().clear();
+        $("#@Model.adi").DataTable().ajax.reload(null, false);
+    }
+
+    function TabloAramaYap() {
+        var aranan = $("#txtTabloGenelArama").val();
+        $("#@Model.adi").DataTable().search(aranan).draw();
+    }
+
+    function TabloGelismisAramaYap() {
+        var aramaBilgi = "";
+        document.querySelectorAll('.gAramaAlani').forEach((item, index) => {
+
+            if ($(item).val() != "" && $(item).val() != null) {
+                if (aramaBilgi != "") aramaBilgi += "|^|";
+
+                var aramaAlanAdi = $(item).attr('id');
+                aramaAlanAdi = aramaAlanAdi.split("txtArama").join("");
+                aramaAlanAdi = aramaAlanAdi.split("ddlArama").join("");
+
+                aramaBilgi += aramaAlanAdi + "|~|" + $(item).val();
+            }
+        });
+        aramaBilgi = "GELISMIS_ARAMA:" + aramaBilgi;
+
+        $("#@Model.adi").DataTable().search(aramaBilgi).draw();
+    }
+
+    function TabloGelismisAramaTemizle() {
+        document.querySelectorAll('.gAramaAlani').forEach((item, index) => {
+
+            if ($(item).val() != "" && $(item).val() != null) {
+                $(item).val("").trigger('change');
+            }
+        });
+    }
+
+    $('.toogleGozetle').click(function () {
+        $(".kelimedenArama").toggle()
+        $('.toogle.fal').toggleClass('fa-angle-down fa-angle-up');
+    });
+
+</script>

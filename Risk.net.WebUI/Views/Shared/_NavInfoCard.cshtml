@@ -1,0 +1,47 @@
+@using Microsoft.AspNetCore.Http
+@{
+    var adiSoyadi = User.FindFirst("AdiSoyadi").Value;
+    var unvan = User.FindFirst("Unvan").Value;
+    var aktifRolKod = User.FindFirst("AktifRolKod").Value;
+    var resimUrl = User.FindFirst("ResimUrl").Value;
+}
+
+<div class="info-card">
+    <table class="w-100">
+        <tr>
+            <td class="w-100 width-1">
+                <img src="@resimUrl" class="profile-image rounded-circle" alt="@adiSoyadi">
+                <div class="info-card-text">
+                    <a href="#" class="d-flex align-items-center text-white">
+                        <span class="text-truncate text-truncate-md d-inline-block">
+                            @adiSoyadi
+                        </span>
+                    </a>
+                    <span class="d-inline-block text-truncate text-truncate-md">@unvan</span>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="text-center w-100 badge badge-primary mt-3">
+
+                <div class="info-card-text" style="z-index:2; text-shadow:none; color:#fff">
+                    <span class="fs-md cursor-pointer text-truncate text-truncate-md" onclick="javascript: AktifRolSecGoster();">
+                        @CustomResource["YETKI_" + aktifRolKod]
+                    </span>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <img src="/img/card-backgrounds/cover-5-lg.png" class="cover" alt="cover">
+    <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
+        <i class="fal fa-angle-down"></i>
+    </a>
+</div>
+
+
+
+

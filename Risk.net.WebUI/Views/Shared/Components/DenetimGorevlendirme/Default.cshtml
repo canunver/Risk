@@ -1,0 +1,163 @@
+<div id="mdlDinamikDenetimGorevlendirmeModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+                    <input type="hidden" id="hdnDenetimKod" />
+                    <input type="hidden" id="hdnTip" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.YaziTarihi"]</label>
+                            <input type="text" autocomplete="off" id="txtYaziTarihi" class="form-control form-control-sm tarihAlani" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.YaziSayisi"]</label>
+                            <input type="text" autocomplete="off" id="txtYaziSayisi" class="form-control form-control-sm" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.RaporTarihi"]</label>
+                            <input type="text" autocomplete="off" id="txtRaporTarihi" class="form-control form-control-sm tarihAlani" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.RaporSayisi"]</label>
+                            <input type="text" autocomplete="off" id="txtRaporSayisi" class="form-control form-control-sm" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.OnayTarihi"]</label>
+                            <input type="text" autocomplete="off" id="txtOnayTarihi" class="form-control form-control-sm tarihAlani" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.OnaySayisi"]</label>
+                            <input type="text" autocomplete="off" id="txtOnaySayisi" class="form-control form-control-sm" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.GondermeTarihi"]</label>
+                            <input type="text" autocomplete="off" id="txtGondermeTarihi" class="form-control form-control-sm tarihAlani" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">@CustomResource["DenetimGorevlendirme.Alan.GondermeSayisi"]</label>
+                            <input type="text" autocomplete="off" id="txtGondermeSayisi" class="form-control form-control-sm" value="0" />
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <div class="ml-auto">
+
+                            <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.tarihAlani').datepicker({
+            format: "dd.mm.yyyy",
+            todayBtn: true,
+            language: "tr",
+            autoclose: true,
+            todayHighlight: true,
+            toggleActive: true
+        });
+
+        $(".tarihAlani").attr("placeholder", "gg.aa.yyyy");
+
+        VeriGetir();
+
+        $("#btnKaydet").click(function () {
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                DenetimKod: $("#hdnDenetimKod").val(),
+                Tip: $("#hdnTip").val(),
+                GorevYaziSayisi: $("#txtYaziSayisi").val(),
+                GorevYaziTarihi: $("#txtYaziTarihi").val(),
+                RaporSayisi: $("#txtRaporSayisi").val(),
+                RaporTarihi: $("#txtRaporTarihi").val(),
+                RaporOnaySayisi: $("#txtOnaySayisi").val(),
+                RaporOnayTarihi: $("#txtOnayTarihi").val(),
+                GondermeSayisi: $("#txtGondermeSayisi").val(),
+                GondermeTarihi: $("#txtGondermeTarihi").val(),
+            };
+
+            $.ajax({
+                url: "/ViewComponent/DenetimGorevlendirmeKaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        jModalHide("mdlDinamikDenetimGorevlendirmeModal");
+                    }
+                    else {
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+    });
+
+    function VeriGetir() {
+        var form = {
+            DenetimKod: "@Model.DenetimKod",
+            Tip: "@Model.Tip"
+        };
+
+        $("#hdnDenetimKod").val(form.DenetimKod);
+        $("#hdnTip").val(form.Tip);
+
+        $.ajax({
+            url: "/ViewComponent/DenetimGorevlendirmeGetir",
+            type: "POST",
+            data: { form: form },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    jModalHide("mdlDinamikDenetimGorevlendirmeModal");
+
+                    if (result.Nesne != null) {
+
+                        $("#txtYaziSayisi").val(result.Nesne.GorevYaziSayisi);
+                        $("#txtYaziTarihi").datepicker("update", TarihDegeriDDMMYYYY(result.Nesne.GorevYaziTarihi));
+                        $("#txtRaporSayisi").val(result.Nesne.RaporSayisi);
+                        $("#txtRaporTarihi").datepicker("update", TarihDegeriDDMMYYYY(result.Nesne.RaporTarihi));
+                        $("#txtOnaySayisi").val(result.Nesne.RaporOnaySayisi);
+                        $("#txtOnayTarihi").datepicker("update", TarihDegeriDDMMYYYY(result.Nesne.RaporOnayTarihi));
+                        $("#txtGondermeSayisi").val(result.Nesne.GondermeSayisi);
+                        $("#txtGondermeTarihi").datepicker("update", TarihDegeriDDMMYYYY(result.Nesne.GondermeTarihi));
+                    }
+                    return;
+                }
+
+            }
+        });
+    }
+
+</script>

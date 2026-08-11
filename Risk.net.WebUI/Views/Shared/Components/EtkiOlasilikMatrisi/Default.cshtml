@@ -1,0 +1,109 @@
+@model Sonuc
+
+<div id="mdlDinamikEtkiOlasilikMatrisiModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-10">
+                        <label class="form-label">@CustomResource["Genel.Alan.EtkiOlasilikMatrisi"]</label>
+
+                        <table class="table table-bordered table-sm w-100 text-center">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th></th>
+                                    <th style="width:15%">@CustomResource["Konfigurasyon.Alan.Olasilik1"]</th>
+                                    <th style="width:15%">@CustomResource["Konfigurasyon.Alan.Olasilik2"]</th>
+                                    <th style="width:15%">@CustomResource["Konfigurasyon.Alan.Olasilik3"]</th>
+                                    <th style="width:15%">@CustomResource["Konfigurasyon.Alan.Olasilik4"]</th>
+                                    <th style="width:15%">@CustomResource["Konfigurasyon.Alan.Olasilik5"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki5"]</td>
+                                    <td id="eo_5_1">5</td>
+                                    <td id="eo_5_2">10</td>
+                                    <td id="eo_5_3">15</td>
+                                    <td id="eo_5_4">20</td>
+                                    <td id="eo_5_5">25</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki4"]</td>
+                                    <td id="eo_4_1">4</td>
+                                    <td id="eo_4_2">8</td>
+                                    <td id="eo_4_3">12</td>
+                                    <td id="eo_4_4">16</td>
+                                    <td id="eo_4_5">20</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki3"]</td>
+                                    <td id="eo_3_1">3</td>
+                                    <td id="eo_3_2">6</td>
+                                    <td id="eo_3_3">9</td>
+                                    <td id="eo_3_4">12</td>
+                                    <td id="eo_3_5">15</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki2"]</td>
+                                    <td id="eo_2_1">2</td>
+                                    <td id="eo_2_2">4</td>
+                                    <td id="eo_2_3">6</td>
+                                    <td id="eo_2_4">8</td>
+                                    <td id="eo_2_5">10</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki1"]</td>
+                                    <td id="eo_1_1">1</td>
+                                    <td id="eo_1_2">2</td>
+                                    <td id="eo_1_3">3</td>
+                                    <td id="eo_1_4">4</td>
+                                    <td id="eo_1_5">5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-2">
+                        <br />
+                        <div><i style="color: #93D14C" class="fas fa-circle m-1 fa-2x"></i>Çok Düşük</div>
+                        <div><i style="color: #00B24E" class="fas fa-circle m-1 fa-2x"></i>Düşük</div>
+                        <div><i style="color: #FFC001" class="fas fa-circle m-1 fa-2x"></i>Orta</div>
+                        <div><i style="color: #FD0003" class="fas fa-circle m-1 fa-2x"></i>Yüksek</div>
+                        <div><i style="color: #C00002" class="fas fa-circle m-1 fa-2x"></i>Çok Yüksek</div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        //Matris doldur
+        var renkListe = @Html.Raw(((Konfigurasyon)Model.Nesne).EtkiOlasilikMatrisi);
+
+        if (renkListe) {
+
+            $.each(renkListe, function (index, data) {
+                var hucreId = "eo_" + data["etki"] + "_" + data["olasilik"];
+                $("#" + hucreId).css("backgroundColor", data["renk"]);
+                $("#" + hucreId).css("color", "#fff");
+            });
+        }
+    });
+
+</script>

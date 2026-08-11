@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup Label="Globals">
+	  <SccProjectName>SAK</SccProjectName>
+	  <SccProvider>SAK</SccProvider>
+	  <SccAuxPath>SAK</SccAuxPath>
+	  <SccLocalPath>SAK</SccLocalPath>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+		<AssemblyName>Risk.net.WebUI</AssemblyName>
+		<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+		<RootNamespace>Risk.net.WebUI</RootNamespace>
+		<EnableNETAnalyzers>false</EnableNETAnalyzers>
+		<RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+		<IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Log\**" />
+	  <Compile Remove="Views\IcDenetim\**" />
+	  <Compile Remove="Views\TanimAmac\**" />
+	  <Compile Remove="Views\TanimHedef\**" />
+	  <Compile Remove="Views\TanimSehir\**" />
+	  <Compile Remove="Views\TanimUlke\**" />
+	  <Compile Remove="VSdoc\**" />
+	  <Content Remove="Log\**" />
+	  <Content Remove="Views\IcDenetim\**" />
+	  <Content Remove="Views\TanimAmac\**" />
+	  <Content Remove="Views\TanimHedef\**" />
+	  <Content Remove="Views\TanimSehir\**" />
+	  <Content Remove="Views\TanimUlke\**" />
+	  <Content Remove="VSdoc\**" />
+	  <EmbeddedResource Remove="Log\**" />
+	  <EmbeddedResource Remove="Views\IcDenetim\**" />
+	  <EmbeddedResource Remove="Views\TanimAmac\**" />
+	  <EmbeddedResource Remove="Views\TanimHedef\**" />
+	  <EmbeddedResource Remove="Views\TanimSehir\**" />
+	  <EmbeddedResource Remove="Views\TanimUlke\**" />
+	  <EmbeddedResource Remove="VSdoc\**" />
+	  <None Remove="Log\**" />
+	  <None Remove="Views\IcDenetim\**" />
+	  <None Remove="Views\TanimAmac\**" />
+	  <None Remove="Views\TanimHedef\**" />
+	  <None Remove="Views\TanimSehir\**" />
+	  <None Remove="Views\TanimUlke\**" />
+	  <None Remove="VSdoc\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Controllers\TanimAmacController.cs" />
+	  <Compile Remove="Controllers\TanimHedefController.cs" />
+	  <Compile Remove="Controllers\TanimSehirController.cs" />
+	  <Compile Remove="Controllers\TanimUlkeController.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="Views\Denetim\Index.cshtml" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.10">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="System.Security.Cryptography.Pkcs" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Risk.net.Services\Risk.net.Services.csproj" />
+		<ProjectReference Include="..\Risk.net.Utilities\Risk.net.Utilities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\js\formplugins\ctxMenu\" />
+	</ItemGroup>
+
+</Project>

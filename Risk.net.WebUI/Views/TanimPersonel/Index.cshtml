@@ -1,0 +1,80 @@
+@{
+    ViewData["Title"] = CustomResource["TanimPersonel.SayfaBaslik"];
+    ViewData["PageName"] = "TanimPersonel";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["TanimPersonel.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/TanimPersonel/TabloDoldur";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.goster = false;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Adi",
+        adi = @CustomResource["TanimPersonel.Alan.Adi"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Soyadi",
+        adi = @CustomResource["TanimPersonel.Alan.Soyadi"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "UnvanAdi",
+        adi = @CustomResource["TanimPersonel.Alan.Unvan"],
+        aramaTipi = "combo",
+        aramaAlanAdi = "UnvanKod",
+        aramaListeDoldurUrl = "/TanimUnvan/SelectListesiVer"
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Koordinatorluk.Adi",
+        adi = @CustomResource["TanimPersonel.Alan.Koordinatorluk"],
+        aramaTipi = "combo",
+        aramaAlanAdi = "KoordinatorlukKod",
+        aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+        aramaAlaniSecimTetikle = "BirimDoldur('ddlAramaBirimKod','ddlAramaKoordinatorlukKod', false)",
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Birim.Adi",
+        adi = @CustomResource["TanimPersonel.Alan.Birim"],
+        aramaTipi = "combo",
+        aramaAlanAdi = "BirimKod",
+        aramaListeDoldurMetodu = "Select2Yap('ddlAramaBirimKod', false, null, true)"
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+</script>

@@ -1,0 +1,27 @@
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
+@inject Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Builder.RequestLocalizationOptions> locOptions
+
+@{
+    var culture = Context.Features.Get<Microsoft.AspNetCore.Localization.IRequestCultureFeature>();
+    var cultureList = locOptions.Value.SupportedUICultures.Select(x => new SelectListItem { Value = x.Name, Text = x.NativeName }).ToList();
+    var returnUrl = string.IsNullOrWhiteSpace(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+}
+
+<div class="dropdown-menu">
+    <form id="frmDilSecimi" asp-action="CultureManagement" asp-controller="Home" method="post">
+        <input type="hidden" name="culture" id="culture" />
+        <input type="hidden" name="returnUrl" id="returnUrl" value="@returnUrl" />
+
+        @foreach (var item in cultureList)
+        {
+            <a href="#" onclick="DilSec('@item.Value'); return false;" class="dropdown-item">@item.Text</a>
+        }
+    </form>
+</div>
+
+<script>
+    DilSec = (dil) => {
+        $('#culture').val(dil);
+        $("#frmDilSecimi").submit();
+    }
+</script>

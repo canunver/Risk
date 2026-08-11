@@ -1,0 +1,312 @@
+@{
+    ViewData["Title"] = CustomResource["BilgiMerkezi.SayfaBaslik"];
+    ViewData["PageName"] = "BilgiMerkezi";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["BilgiMerkezi.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/BilgiMerkezi/TabloDoldur";
+    tablo.silUrl = "/BilgiMerkezi/PasifYap";
+    tablo.duzenleUrl = "/BilgiMerkezi/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.genislik = "15%";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    bool durumGoster = true;
+    if (!ViewBag.IslemYetki)
+    {
+        tablo.islemler.duzenleme = false;
+        tablo.islemler.silme = false;
+        durumGoster = false;
+    }
+    else
+    {
+        tablo.islemler.digerIslemler = "<a title='" + CustomResource["Dugme.Sil"] + "' class='btn btn-secondary btn-sm btn-icon text-white spinnerButton genelTooltip' style='margin-right:5px;' onClick='PasifYap(!!DATA!!)'><i class='fal fa-trash-alt'></i></a>";
+    }
+
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DosyaIndir"] + "' class='btn btn-warning btn-sm btn-icon waves-effect waves-themed text-white spinnerButton genelTooltip' style='margin-right:5px;' onClick='DinamikDosyaBaglantiKoduylaIndir(!!DATA!!)'><i class='fal fa-download'></i></a>";
+
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Adi",
+                adi = @CustomResource["BilgiMerkezi.Alan.DosyaAdi"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "KayitTarihi",
+                adi = @CustomResource["BilgiMerkezi.Alan.KayitTarihi"],
+                tipi = "date",
+                render = "DataTablesTarihDonustur(data);",
+                aramadaGoster = false,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "SurumNo",
+                adi = @CustomResource["BilgiMerkezi.Alan.SurumNo"],
+                aramadaGoster = false,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Dosya.Adi",
+                adi = @CustomResource["BilgiMerkezi.Alan.DosyaFizikselAdi"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Dosya.KayitTarihi",
+                adi = @CustomResource["BilgiMerkezi.Alan.DosyaTarihi"],
+                render = "DataTablesTarihDonustur(data);",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'AKTIFPASIF')",
+                aramadaGoster = durumGoster,
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+@*https://www.youtube.com/watch?v=1y18VF4aMZU*@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" style="display:none;" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+                    <input type="hidden" id="hdnRevizeKod" />
+
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="txtAdi">@CustomResource["BilgiMerkezi.Alan.DosyaAdi"]<span class="text-danger ml-1">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtAdi" class="form-control form-control-sm autofocus" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="txtKayitTarihi">@CustomResource["BilgiMerkezi.Alan.KayitTarihi"]</label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtKayitTarihi" class="form-control form-control-sm tarihAlani" />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="txtSurumNo">@CustomResource["BilgiMerkezi.Alan.SurumNo"]</label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtSurumNo" class="form-control form-control-sm" />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="divDosyaListesi">@CustomResource["BilgiMerkezi.Alan.Dosya"]<span class="text-danger ml-1">*</span></label>
+                            <div class="divDosyaListesi"></div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <button type="button" id="btnRevize" class="btn btn-danger text-white mr-1 spinnerButton">@CustomResource["Dugme.Revize"]</button>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Revizyon işleminde, revizyon edilen kayıt pasif yapılarak yeni bilgiler gösterilmeye başlanır"></i>
+                        <div class="ml-auto">
+                            <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var kayitYetki = false;
+
+    $(document).ready(function () {
+
+        kayitYetki = @(ViewBag.IslemYetki.ToString().ToLower());
+
+        if (kayitYetki) {
+
+            $("#btnYeniKayit").show();
+        }
+
+        $("#btnKaydet").click(function () {
+
+
+            //Validation
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+            formKontrol = DinamikDosyaListesiZorunluKontrol();//Dosya eklenmedi ise uyar
+            if (!formKontrol) return;
+
+            Kaydet()
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+
+        $("#btnRevize").click(function () {
+            var kod = $("#hdnKod").val();
+            $("#hdnRevizeKod").val(kod);
+            $("#hdnKod").val("");
+            DinamikDosyaListesiBosalt(true);
+            $("#txtKayitTarihi").datepicker("update", "");
+            $("#txtSurumNo").val("");
+            $("#txtAdi").focus();
+        });
+
+    });
+
+    function Kaydet() {
+
+        //IslemYapiliyorBasla("btnKaydet");
+
+        var form = {
+            Kod: $("#hdnKod").val(),
+            Adi: $("#txtAdi").val(),
+            KayitTarihi: $("#txtKayitTarihi").val(),
+            SurumNo: $("#txtSurumNo").val(),
+            RevizeKod: $("#hdnRevizeKod").val()
+        };
+
+        $.ajax({
+            url: "/BilgiMerkezi/Kaydet",
+            data: { form: form },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                    var eskiBaglantiKod = $("#hdnTmpBagliKod").val();
+                    DinamikDosyaBaglantiKodGuncelle(eskiBaglantiKod, result.AnahtarAlan);
+
+                    Temizle();
+                    TabloVeriYenile();//Datatables viewcontrolünde
+                    jModalHide("mdlTanim");
+                    //IslemYapiliyorBitir("btnKaydet");
+                }
+                else {
+
+                    HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    //IslemYapiliyorBitir("btnKaydet");
+                }
+            }
+        });
+    }
+
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#hdnRevizeKod").val("");
+
+        DosyaKontrolGoster(".divDosyaListesi", deger?.Kod, true, 1, true, false);
+
+        $("#txtAdi").val(deger?.Adi);
+        $("#txtSurumNo").val(deger?.SurumNo);
+        $("#txtKayitTarihi").datepicker("update", TarihDegeriDDMMYYYY(deger?.KayitTarihi));
+
+        $("#mdlTanimUyari").html("");
+
+    }
+
+    function PasifYap(kod) {
+
+        Swal.fire({
+            title: "@CustomResource["Baslik.Onay"]",
+            html: "@CustomResource["Onay.SilGercek"]",
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/BilgiMerkezi/Sil",
+                    data: {
+                        kod: kod
+                    },
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                            TabloVeriYenile();//Datatables viewcontrolünde                        }
+                        }
+                        else
+                            ShowToastr("warning", "toast-top-right", result.Mesaj);
+                    }
+                });
+
+            }
+        });
+    }
+</script>

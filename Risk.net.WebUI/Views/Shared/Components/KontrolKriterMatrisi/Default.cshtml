@@ -1,0 +1,76 @@
+@model Sonuc
+
+<div id="mdlDinamikKontrolKriterMatrisiModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <center>
+                            <img src="/img/images/kontrol-kriter-matrisi.png" alt="" />
+                        </center>
+                        <table class="table table-bordered table-sm w-100 text-center">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th style="width:15%">Puan</th>
+                                    <th style="width:15%">Derece</th>
+                                    <th style="width:15%">Aksiyon</th>
+                                    <th style="width:15%">Kontrol Kriteri Ağırlığı</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Çok Yüksek</td>
+                                    <td>Etkili</td>
+                                    <td style="background-color: #FDE603 ">0,2</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Yüksek</td>
+                                    <td>Sınırlı iyileştirme fırsatı</td>
+                                    <td style="background-color: #FDE603 ">0,4</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Orta</td>
+                                    <td>Orta derecede iyileştirme fırsatı</td>
+                                    <td style="background-color: #FDE603 ">0,6</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Düşük</td>
+                                    <td>Yüksek iyileştirme fırsatı</td>
+                                    <td style="background-color: #FDE603">0,8</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Çok Düşük</td>
+                                    <td>Önemli iyileştirme fırsatı</td>
+                                    <td style="background-color: #FDE603">1</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+    
+    });
+
+</script>

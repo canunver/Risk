@@ -1,0 +1,1321 @@
+@{
+    ViewData["Title"] = CustomResource["StratejikPlan.SayfaBaslik"];
+    ViewData["PageName"] = "StratejikPlan";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["StratejikPlan.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/StratejikPlan/TabloDoldur";
+    tablo.silUrl = "/StratejikPlan/Sil";
+    tablo.duzenleUrl = "/StratejikPlan/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.TarihceGoster"] + "' class='btn btn-info btn-sm btn-icon text-white genelTooltip' style='margin-right:5px;' onClick='TarihceGoster(!!DATA!!)'><i class='fal fa-history'></i></a>";
+    tablo.siralamaKolonNo = 2;
+
+    if (!ViewBag.KayitYetki)
+    {
+        tablo.islemler.duzenleme = false;
+        tablo.islemler.goster = false;
+    }
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "StratejikPlanDonem.BaslamaYil",
+                adi = @CustomResource["StratejikPlan.Alan.Donem"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "StratejikPlanDonemKod",
+                aramaListeDoldurUrl = "/TanimStratejikPlanDonem/SelectListesiVer",
+                render = "row.StratejikPlanDonemAdi"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "KayitTarihi",
+                adi = @CustomResource["StratejikPlan.Alan.Yil"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KayitTarihi",
+                aramaListeDoldurMetodu = "YilDoldur()",
+                render = "row.Yil",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AmacNo",
+                adi = @CustomResource["StratejikPlan.Alan.AmacNo"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Amac",
+                adi = @CustomResource["StratejikPlan.Alan.Amac"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kod",
+                adi = @CustomResource["StratejikPlan.Alan.Hedefler"],
+                siralama = false,
+                aramadaGoster = false,
+                render = "HedeflerSatirRender(row)"
+            });
+    //tablo.alanlar.Add(new DataTablesAlanlar
+    //        {
+    //            veriAlani = "Koordinatorluk.Adi",
+    //            adi = @CustomResource["StratejikPlan.Alan.Koordinatorluk"],
+    //            aramaTipi = "combo",
+    //            aramaAlanAdi = "KoordinatorlukKod",
+    //            aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+    //        });
+    //tablo.alanlar.Add(new DataTablesAlanlar
+    //        {
+    //            veriAlani = "Birim.Adi",
+    //            adi = @CustomResource["StratejikPlan.Alan.Birim"],
+    //            aramadaGoster = false,
+    //        });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'AKTIFPASIF')",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" style="display:none;" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+                    <input type="hidden" id="hdnHedefKod" />
+                    <input type="hidden" id="hdnGostergeKod" />
+                    <input type="hidden" id="hdnHedefGostergeKod" />
+                    <input type="hidden" id="hdnBirimKod" />
+                    <input type="hidden" id="hdnBirimlerKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="veriGiris">
+
+                        <div class="form-group row">
+                            <div class="col-md-6 divAmacNoAlani">
+                                <label class="form-label">@CustomResource["StratejikPlan.Alan.AmacNo"]:</label>
+                                <span class="divAmacNo text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="ddlDonem">@CustomResource["StratejikPlan.Alan.Donem"]<span class="text-danger ml-1">*</span></label>
+                                <select id="ddlDonem" required></select>
+                                <div class="invalid-feedback">
+                                    @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="form-label" for="txtAmac">@CustomResource["StratejikPlan.Alan.Amac"]<span class="text-danger ml-1">*</span></label>
+                                <input type="text" autocomplete="off" id="txtAmac" class="form-control form-control-sm" required />
+                                <div class="invalid-feedback">
+                                    @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row divHedefler">
+                            <div class="col-md-12">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                    <label class="form-label">@CustomResource["StratejikPlan.Alan.Hedefler"]<span class="text-danger ml-1">*</span></label>
+                                    <div class="input-group input-group-sm mb-2 dtabloVeriGiris">
+                                        <input type="text" autocomplete="off" id="txtHedefAdi" class="form-control form-control-sm" placeholder="@CustomResource["StratejikPlan.Alan.HedefAdi"]" />
+                                        <div class="input-group-append">
+                                            <button class="btn btn-default waves-effect waves-themed" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Temizle"]" onclick="DTabloAlanTemizle();"><i class="fal fa-eraser"></i></button>
+                                            <button class="btn btn-success" type="button" onclick="HedefKaydet();" id="btnHedefKaydet">@CustomResource["Dugme.Ekle"]</button>
+                                        </div>
+                                    </div>
+                                    <div class="invalid-feedback invalid-hedef">
+                                        @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                    </div>
+                                    <div class="invalid-feedback invalid-gosterge">
+                                        @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                    </div>
+
+                                    <div id="divtblHedefVeriYok"></div>
+                                    <table id="tblHedef" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                        <thead></thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                            <span class="spanDurum">@CustomResource["Genel.Alan.Durum"]: <span class="badge badge-primary p-2 text-white spnDurumAciklama"></span></span>
+                            <div class="ml-auto">
+                                <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                                <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gostergeGiris" style="display:none">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="h5 hedefAdi"></span>
+                                <button type="button" class="btn btn-sm btn-info float-right waves-effect waves-themed" onclick="GostergeEkraniKapat(); return false;">@CustomResource["Dugme.GosterBolumKapat"]</button>
+                                <div class="hedefKoordinatörlükAdi"></div>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                    <label class="form-label">@CustomResource["StratejikPlan.Alan.Gostergeler"]<span class="text-danger ml-1">*</span></label>
+                                    <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Belirlenen hedeflere ne ölçüde ulaşıldığının ortaya konulması için kullanılan metriklerdir."></i>
+
+                                    <div class="input-group input-group-sm mb-2 dtabloVeriGirisGosterge">
+                                        <div class="input-group input-group-sm mb-2">
+                                            <input type="text" autocomplete="off" id="txtGostergeAdi" class="form-control form-control-sm" style="width:40%" placeholder="@CustomResource["StratejikPlan.Alan.GostergeAdi"] *" />
+                                            <input type="text" autocomplete="off" id="txtHedefeEtkisi" class="form-control form-control-sm" style="width:10%" placeholder="@CustomResource["StratejikPlan.Alan.HedefeEtkisi"] *" />
+                                        </div>
+                                        <div class="input-group input-group-sm mb-2">
+                                            <select id="ddlBirimGosterge" style="width:40%" data-placeholder="@CustomResource["StratejikPlan.Alan.GostergeBirim"]"></select>
+                                        </div>
+                                        <div class="input-group input-group-sm mb-2">
+                                            <input type="text" autocomplete="off" id="txtGostergeAciklama" class="form-control form-control-sm" style="width:25%" placeholder="@CustomResource["StratejikPlan.Alan.GostergeAciklama"]" />
+                                            <input type="text" autocomplete="off" id="txtRevizyonNedeni" class="form-control form-control-sm" style="width:20%" placeholder="@CustomResource["StratejikPlan.Alan.RevizyonNedeni"]" />
+                                            <input type="text" autocomplete="off" id="txtRevizyonTarihi" class="form-control form-control-sm tarihAlani" style="width:10%" placeholder="@CustomResource["StratejikPlan.Alan.RevizyonTarihi"]" />
+                                            <div class="input-group-append">
+                                                <button class="btn btn-default waves-effect waves-themed" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Temizle"]" onclick="DTabloAlanTemizleGosterge();"><i class="fal fa-eraser"></i></button>
+                                                <button class="btn btn-success waves-effect waves-themed" type="button" onclick="GostergeKaydet();" id="btnGostergeKaydet">@CustomResource["Dugme.Ekle"]</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="divtblGostergeVeriYok"></div>
+                                    <table id="tblGosterge" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                        <thead>
+                                        <td>Gösterge Adı</td>
+                                        <td>Etki</td>
+                                        <td>Birim/Ünite</td>
+                                        <td>Açıklama</td>
+                                        <td>Revizyon Nedeni</td>
+                                        <td>Revizyon Tarihi</td>
+                                        <td></td>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="birimGiris" style="display:none">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="h5 hedefAdi"></span>
+                                <button type="button" class="btn btn-sm btn-info float-right waves-effect waves-themed" onclick="BirimEkraniKapat(); return false;">@CustomResource["Dugme.BirimBolumKapat"]</button>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-success float-right" type="button" onclick="HedefBirimKaydet();" id="btnHedefBirimKaydet">@CustomResource["Dugme.Kaydet"]</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="ddlKoordinatorluk">@CustomResource["StratejikPlan.Alan.Koordinatorluk"]<span class="text-danger ml-1">*</span></label>
+                                            <div class="invalid-div-koordinatorluk">
+                                                <select id="ddlKoordinatorluk"></select>
+                                            </div>
+                                            <div class="invalid-feedback invalid-koordinatorluk">
+                                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="form-label" for="ddlBirim">@CustomResource["StratejikPlan.Alan.Birim"]</label>
+                                            <select id="ddlBirim"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="form-label">@CustomResource["StratejikPlan.Alan.BirimlerIsbirligi"]</label>
+                                            <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                                <div class="input-group input-group-sm mb-2 dtabloVeriGiris">
+                                                    <div class="w-75 d-flex" style="white-space:nowrap;">
+                                                        <select id="ddlDinamikKoordinatorluk"></select>
+                                                        <select id="ddlDinamikBirim"></select>
+                                                    </div>
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-default" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Temizle"]" onclick="DTabloAlanTemizleIsbirligi();"><i class="fal fa-eraser"></i></button>
+                                                        <button class="btn btn-success" type="button" onclick="DinamikKoorBirimKaydet();">@CustomResource["Dugme.Ekle"]</button>
+                                                    </div>
+                                                </div>
+
+                                                <div id="divtblDinamikKoorBirimVeriYok"></div>
+                                                <table id="tblDinamikKoorBirim" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                                    <thead></thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var DTabloSadeceOkuma = false;
+    var isBirligiKoordinatorlukler = [];
+    var gostergeler = [];
+    var kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+
+    $(document).ready(function () {
+
+        if (kayitYetki) {
+
+            $("#btnYeniKayit").show();
+        }
+
+        Select2Yap("ddlBirim", true, null);
+        Select2Yap("ddlDinamikBirim", true, null);
+        Select2Yap("ddlBirimGosterge", true, null);
+
+        //Dönem alanını doldurur
+        $.ajax({
+            url: "/TanimStratejikPlanDonem/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlDonem", true, result);
+            }
+        });
+
+        //Koordinatörlük alanını doldur
+        $.ajax({
+            url: "/TanimKoordinatorluk/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlKoordinatorluk", true, result);
+                result.push({ "id": "-101", "text": "Tüm Merkez Koordinatörlükleri" });
+                result.push({ "id": "-100", "text": "Tüm İl Koordinatörlükleri" });
+                Select2Yap("ddlDinamikKoordinatorluk", true, result);
+            }
+        });
+
+        $('#ddlKoordinatorluk').bind('change', function () {
+            var koordinatorlukKod = $(this).val();
+            Select2Yap("ddlBirim", true, null);
+            Select2Yap("ddlBirimler", true, null);
+            if (koordinatorlukKod == null) return;
+
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlBirim", true, result);
+                        Select2Yap("ddlBirimler", true, result);
+
+                        $("#ddlBirim").val($("#hdnBirimKod").val()).trigger('change');
+                        $('#ddlBirim').prop('required', true);
+                        $("#ddlBirim").attr("placeholder", "@Html.Raw(@CustomResource["Lutfen.Seciniz"])");
+
+                        var birimler = $("#hdnBirimlerKod").val();
+                        if (birimler != "") {
+                            $("#ddlBirimler").val(birimler.split(',')).trigger('change');
+                        }
+                    }
+                    else {
+
+                        $('#ddlBirim').prop('required', false);
+                        $("#ddlBirim").attr("placeholder", "Bu koordinatörlüğün birimi bulunmamaktadır");
+                    }
+                }
+            });
+        });
+
+        $('#ddlDinamikKoordinatorluk').bind('change', function () {
+            var koordinatorlukKod = $(this).val();
+
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlDinamikBirim", true, result);
+                    }
+                }
+            });
+        });
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            $("#mdlTanimUyari").html("");
+            $("#txtHedefAdi").css("border-color", "#E5E5E5");
+            $("#txtHedefAdi").css("background-image", "url()");
+
+            var formKontrol = ValidateForm();
+
+            var amacKod = $("#hdnKod").val();
+
+            if (amacKod) {
+                //Validationda boş iken uyarı vermesi için yukarı taşındı
+                //Hedeflerin tablodan alınması
+                var altForm = [];
+                var tabloDolu = false;
+                $.makeArray($('#tblHedef > tbody tr[id]').map(function () {
+                    //sadece kayıt edilmemiş olanlar gönderilecek. Bu işlem Yeni süreç kaydında dolacaktır
+                    var kod = this.id.replace("sttb_", "");
+                    if (kod.indexOf("dtabloYeni_") > -1) {
+                        var hedefKod = kod;
+                        var gostergelerJSON = gostergeler[TemizHedefKodBilgisi(hedefKod)];
+                        if (!gostergelerJSON) gostergelerJSON = "[]";
+                        var gostergeObject = JSON.parse(gostergelerJSON);
+                        if (!gostergeObject)
+                            gostergeObject = [];
+
+                        var hedefAdi = $(this).find("td:eq(0)").clone().children().remove().end().text();
+
+                        var aForm = { Kod: hedefKod, Adi: hedefAdi, Gostergeler: gostergeObject };
+                        altForm.push(aForm);
+                        tabloDolu = true;
+                    }
+                    else if (kod.length > 0)
+                        tabloDolu = true;
+                }));
+
+                var gostergeUyari = "";
+                var satir = 1;
+                $.makeArray($('#tblHedef > tbody tr[id]').map(function () {
+
+                    var kod = this.id.replace("sttb_", "");
+
+                    var gSayisi = $(".hedef" + TemizHedefKodBilgisi(kod)).html();
+                    if (Number(gSayisi) == 0) {
+                        gostergeUyari += satir + ". satırda bulunan hedef için Anahtar Performans Göstergesi tanımlanmamıştır<br>";
+                    }
+
+                    satir++;
+                }));
+
+                if (gostergeUyari != "") {
+                    $(".invalid-gosterge").html(gostergeUyari);
+                    $(".invalid-gosterge").show();
+                    return;
+                }
+                else
+                    $(".invalid-gosterge").hide();
+
+                if (!tabloDolu) {
+                    $("#txtHedefAdi").css("border-color", "#fd3995");
+                    $(".invalid-hedef").show();
+                    formKontrol = false;
+                }
+                else
+                    $(".invalid-hedef").hide();
+            }
+
+            if (!formKontrol) return;
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                Amac: $("#txtAmac").val(),
+                StratejikPlanDonemKod: $("#ddlDonem").val(),
+                Hedefler: altForm,
+            };
+
+            $.ajax({
+                url: "/StratejikPlan/Kaydet",
+                data: JSON.stringify(form),
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+
+                        $.ajax({
+                            url: "/StratejikPlan/KayitGetir",
+                            data: { kod: result.AnahtarAlan },
+                            type: "POST",
+                            success: function (result) {
+
+                                if (result.IslemSonuc) {
+
+                                    Duzenle(result);
+                                    $(".divHedefler").show();
+                                }
+                                else {
+
+                                    HataPenceresiGoster(result.Mesaj);
+
+                                }
+                            }
+                        });
+
+
+                        //jModalHide("mdlTanim");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+    });
+
+    function GostergeBirimYukle(koordinatorlukKod) {
+
+        Select2Yap("ddlBirimGosterge", true, null);
+
+        if (koordinatorlukKod) {
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlBirimGosterge", true, result);
+                    }
+                }
+            });
+        }
+    }
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+        $(".divHedefler").hide();
+
+        $(".invalid-hedef").hide();
+        $(".invalid-gosterge").hide();
+        $("#txtHedefAdi").css("border-color", "#E5E5E5");
+        GostergeEkraniKapat();
+
+        $("#tblDinamikKoorBirim > tbody").empty();
+        DinamikTabloVeriYok("tblDinamikKoorBirim")
+
+        $("#tblHedef > tbody").empty();
+        DinamikTabloVeriYok("tblHedef")
+
+        DTabloAlanTemizle();
+        $(".dtabloVeriGiris").show();
+
+        if (deger?.Durum == 10) {
+            //$("#btnKaydet").hide();
+            DTabloSadeceOkuma = true;
+        }
+        else {
+            //$("#btnKaydet").show();
+            DTabloSadeceOkuma = false;
+        }
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+
+        if (deger == undefined)
+            $(".divAmacNoAlani").hide();
+        else
+            $(".divAmacNoAlani").show();
+
+        $(".divAmacNo").html(deger?.AmacNo);
+
+        $("#ddlKoordinatorluk").val(deger?.KoordinatorlukKod).trigger('change');
+        $("#hdnBirimKod").val(deger?.BirimKod);
+        $("#txtAmac").val(deger?.Amac);
+        $("#ddlDonem").val(deger?.StratejikPlanDonemKod).trigger('change');
+
+        if (deger?.Hedefler.length) {
+            $(".divHedefler").show();
+        }
+
+        $.each(deger?.Hedefler, function (index) {
+            var bilgi = deger.Hedefler[index]
+
+            var hedefAdi = "<span class='fw-700 mr-2'>" + bilgi.HedefNo + "</span>" + bilgi.Adi
+            DTabloSatirEkle(bilgi.Kod, hedefAdi)
+            $(".hedef" + TemizHedefKodBilgisi(bilgi.Kod)).html(deger.Hedefler[index].Gostergeler.length);
+        });
+
+        $(".spnDurumAciklama").html(DurumAdiVer(deger?.Durum, 'AKTIFPASIF'));
+
+        if (deger?.Kod == null) {
+            $("#ddlKoordinatorluk").val("@ViewBag.KoordinatorlukKodu").trigger('change');
+            $("#hdnBirimKod").val(@ViewBag.BirimKodu);
+        }
+
+        $("#mdlTanimUyari").html("");
+    }
+
+    function Onayla(kod) {
+        Swal.fire({
+            title: '@CustomResource["Baslik.Onay"]',
+            html: '@CustomResource["Onay.Onay"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/StratejikPlan/Onayla",
+                    data: { kod: kod },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                            TabloVeriYenile();
+                        }
+                        else {
+
+                            HataPenceresiGoster(result.Mesaj);
+
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function TemizHedefKodBilgisi(kod) {
+        return kod.replace("sttb_", "").replace("dtabloYeni_", "");
+    }
+
+    //ddlAramaYil
+    function YilDoldur() {
+
+        var aktifYil = new Date().getFullYear();;
+        var yillar = [];
+        for (var i = aktifYil; i >= 2020; i--) {
+            var tarih = "01.01." + i;
+            var nesne = { id: tarih, text: i.toString() };
+            yillar.push(nesne);
+        }
+
+        Select2Yap("ddlAramaKayitTarihi", true, yillar);
+    }
+
+    function HedeflerSatirRender(row) {
+        var hedefler = "";
+
+        row.Hedefler.sort(function (a, b) { return (a.HedefNo > b.HedefNo) ? 1 : ((b.HedefNo > a.HedefNo) ? -1 : 0); });
+
+        $.each(row.Hedefler, function (index) {
+            var bilgi = row.Hedefler[index];
+            if (bilgi.Durum != 99) {
+                if (hedefler != "") hedefler += ",<br>";
+                hedefler += "<b>" + bilgi.HedefNo + "</b> " + bilgi.Adi;
+            }
+        });
+
+        return hedefler;
+    }
+
+    //Hedef Ekleme[Başla]
+    //Dinamik tablodan edit düğmesine basıldığında
+    function HedefDuzenle(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var adi = $(kontrol).closest('tr').find("td:eq(0)").clone().children().remove().end().text();
+
+        kod = kod.replace("sttb_", "");
+
+        DTabloAlanTemizle();
+
+        $("#hdnHedefKod").val(kod);
+        $("#txtHedefAdi").val(adi);
+        $("#btnHedefKaydet").html("@CustomResource["Dugme.Guncelle"]");
+
+    }
+
+    //Dinamik tablodan sil düğmesine basıldığında
+    function HedefSil(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var kontrolId = kod;
+
+        var gSayisi = $(".hedef" + TemizHedefKodBilgisi(kod)).html();
+        if (Number(gSayisi) > 0) {
+            HataPenceresiGoster("Silmek istediğiniz Hedefe bağlı Anahtar Performans Göstergeleri bulunmaktadır. İlk önce Göstergeleri silin");
+            return;
+        }
+
+        //Henüz kayıt edilmemiş olduğu için sunucuya gitme. Sadece yeni kayıtta gerçekleşir
+        if (kod.indexOf("dtabloYeni_") > -1) {
+            $("#" + kontrolId).remove();
+            return;
+        }
+
+        kod = kod.replace("sttb_", "");
+
+        Swal.fire({
+            title: "@CustomResource["Baslik.Onay"]",
+            html: "@CustomResource["Onay.Sil"]",
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/StratejikPlan/StratejikPlanHedefSil",
+                    data: {
+                        kod: kod,
+                    },
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                            $("#" + kontrolId).remove();
+
+                        }
+                        else {
+
+                            HataPenceresiGoster(result.Mesaj);
+
+                        }
+
+                    }
+                });
+
+            }
+        });
+    }
+
+    //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+    function HedefKaydet() {
+
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $("#hdnHedefKod").val();
+        var adi = $("#txtHedefAdi").val();
+        var StratejikPlanKod = $("#hdnKod").val();
+
+        if ($.trim(adi) == "") return;
+        var gSayisi = $(".hedef" + TemizHedefKodBilgisi(kod)).html();
+
+        //Yeni kayıt sırasında alt süreç ajax ile kayıt edilmez
+        if (StratejikPlanKod == "") {
+            if (kod == "") kod = "dtabloYeni_" + GuidUret();
+            DTabloSatirEkle(kod, adi);
+            DTabloAlanTemizle();
+
+            $(".hedef" + TemizHedefKodBilgisi(kod)).html(gSayisi);
+
+            return;
+        }
+
+        var form = {
+            Kod: kod,
+            Adi: adi,
+            //KoordinatorlukKod: $("#ddlKoordinatorluk").val(),
+            //BirimKod: $("#ddlBirim").val(),
+            //IsbirligiBirimler: IsbirligiBirimlerForm,
+            StratejikPlanKod: $("#hdnKod").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/StratejikPlan/StratejikPlanHedefKaydet",
+            data: { form: form },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                    var hedefAdi = "<span class='fw-700 mr-2'>" + result.Nesne.HedefNo + "</span>" + result.Nesne.Adi
+                    DTabloSatirEkle(result.Nesne.Kod, hedefAdi);
+                    DTabloAlanTemizle();
+
+                    $(".hedef" + TemizHedefKodBilgisi(result.Nesne.Kod)).html(gSayisi);
+
+                }
+            }
+        });
+    }
+
+    function HedefBirimKaydet() {
+        var koordinatorlukKod = $("#ddlKoordinatorluk").val();
+        if (!koordinatorlukKod) {
+            $(".invalid-koordinatorluk").show();
+            $(".invalid-div-koordinatorluk").css("border", "1px solid #fd3995");
+            return;
+        }
+
+        var hedefKod = $("#hdnHedefGostergeKod").val();
+
+        var IsbirligiBirimlerForm = [];
+        $.makeArray($('#tblDinamikKoorBirim > tbody tr[id]').map(function () {
+
+            var kod = this.id.replace("sttb_", "");
+            var c = kod.split('_');
+
+            IsbirligiBirimlerForm.push({
+                KoordinatorlukKod: c[0],
+                BirimKod: c[1]
+            });
+        }));
+
+        var form = {
+            Kod: hedefKod,
+            KoordinatorlukKod: $("#ddlKoordinatorluk").val(),
+            BirimKod: $("#ddlBirim").val(),
+            IsbirligiBirimler: IsbirligiBirimlerForm,
+        };
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/StratejikPlan/StratejikPlanHedefBirimKaydet",
+            data: { form: form },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                    BirimEkraniKapat();
+                }
+            }
+        });
+    }
+
+    //Dinamik tabloya satır eklemek için
+    function DTabloSatirEkle(kod, adi) {
+
+        var satirBilgi = "<td width='80%'>" + adi + "<span title='Anahtar Gösterge Sayısı' class='hedef" + TemizHedefKodBilgisi(kod) + " badge bg-primary-300 ml-2 genelTooltip'>0</span></td>";
+        $(".invalid-hedef").hide();
+        $(".invalid-gosterge").hide();
+        $("#txtHedefAdi").css("border-color", "#E5E5E5");
+
+        var duzenle = "HedefDuzenle"
+        var sil = "HedefSil";
+        var gostergeDugme = "<button type='button' class='btn btn-info btn-sm btn-icon text-white ml-1 genelTooltip' title='@CustomResource["Dugme.BirimEkle"]' onClick='BirimEkraniAc(this)'><i class='fal fa-building'></i></button>";
+        gostergeDugme += "<button type='button' class='btn btn-warning btn-sm btn-icon text-white ml-1 genelTooltip' title='@CustomResource["Dugme.GostergeEkle"]' onClick='GostergeEkraniAc(this)'><i class='fal fa-analytics'></i></button>";
+
+        if (DTabloSadeceOkuma) {
+            duzenle = "";
+            sil = "";
+            gostergeDugme = "";
+            $(".dtabloVeriGiris").hide();
+        }
+
+        DinamikTabloSatirEkle("tblHedef", kod, satirBilgi, duzenle, sil, gostergeDugme)
+    }
+
+    //Dinamik tablo alanlarını temizlemek için
+    function DTabloAlanTemizle() {
+        $("#hdnHedefKod").val("");
+        $("#txtHedefAdi").val("");
+        $("#btnHedefKaydet").html("@CustomResource["Dugme.Ekle"]");
+    }
+
+    function GostergeEkraniAc(kontrol) {
+        var hedefKod = $(kontrol).closest('tr')[0].id;
+        var hedefAdi = $(kontrol).closest('tr').find("td:eq(0)").html();
+
+        hedefKod = hedefKod.replace("sttb_", "");
+
+        $("#tblGosterge > tbody").empty();
+        DinamikTabloVeriYok("tblGosterge")
+        DTabloAlanTemizleGosterge();
+        $(".dtabloVeriGirisGosterge").show();
+
+        $(".hedefKoordinatörlükAdi").html("")
+
+        //Henüz kayıt edilmemiş (İlk süreç kayıt ediliken) hedefe Aanhatr Gösterge kayıt edilecek
+        //if (hedefKod.indexOf("dtabloYeni_") > -1) {
+
+        //    var gostergelerJSON = gostergeler[TemizHedefKodBilgisi(hedefKod)];
+        //    if (gostergelerJSON) {
+        //        var yeniGostergeler = JSON.parse(gostergelerJSON);
+
+        //        $.each(yeniGostergeler, function (index) {
+        //            var bilgi = yeniGostergeler[index]
+        //            var gostergeAdi = "<span class='fw-700 mr-2'>" + bilgi.GostergeNo + "</span>" + bilgi.Adi;
+        //            DTabloSatirEkleGosterge(bilgi.Kod, gostergeAdi, bilgi.Etki, bilgi.Aciklama, bilgi.RevizyonNedeni, bilgi.RevizyonTarihi, bilgi.BirimKod)
+        //        });
+        //    }
+
+        //    $("#hdnHedefGostergeKod").val(hedefKod);
+        //    $(".hedefAdi").html(hedefAdi);
+        //    $(".veriGiris").hide();
+        //    $(".gostergeGiris").show();
+
+
+        //    return;
+        //}
+
+        GostergeBirimYukle("");
+
+        $.ajax({
+            url: "/StratejikPlan/StratejikPlanHedefKayitGetir",
+            data: { kod: hedefKod },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    $("#hdnHedefGostergeKod").val(hedefKod);
+                    $(".hedefAdi").html(hedefAdi);
+                    $(".veriGiris").hide();
+                    $(".gostergeGiris").show();
+
+
+                    if (!result.Nesne.KoordinatorlukKod)
+                        HataPenceresiGoster("İlk önce hedefin Koordinatörlük/Birim-Ünite bilgilerini girin");
+                    else
+                        $(".hedefKoordinatörlükAdi").html(result.Nesne.Koordinatorluk.Adi);
+                    3
+                    GostergeBirimYukle(result.Nesne.KoordinatorlukKod);
+
+                    $.each(result.Nesne?.Gostergeler, function (index) {
+                        var bilgi = result.Nesne?.Gostergeler[index]
+                        var gostergeAdi = "<span class='fw-700 mr-2'>" + bilgi.GostergeNo + "</span>" + bilgi.Adi;
+                        DTabloSatirEkleGosterge(bilgi.Kod, gostergeAdi, bilgi.Etki, bilgi.Aciklama, bilgi.RevizyonNedeni, bilgi.RevizyonTarihi, bilgi.Birim?.Adi + "|" + bilgi.Birim?.Kod)
+                    });
+
+                }
+            }
+        });
+    }
+
+    function GostergeEkraniKapat() {
+        var gSayisi = $('#tblGosterge tr').length;
+        var hedefKod = $("#hdnHedefGostergeKod").val();
+        $(".hedef" + TemizHedefKodBilgisi(hedefKod)).html(gSayisi);
+
+        $("#hdnHedefGostergeKod").val("");
+        $(".hedefAdi").html("");
+        $(".veriGiris").show();
+        $(".gostergeGiris").hide();
+
+    }
+
+    function BirimEkraniAc(kontrol) {
+
+        var hedefKod = $(kontrol).closest('tr')[0].id;
+        var hedefAdi = $(kontrol).closest('tr').find("td:eq(0)").html();
+
+        hedefKod = hedefKod.replace("sttb_", "");
+
+        $("#hdnHedefGostergeKod").val(hedefKod);
+        $(".hedefAdi").html(hedefAdi);
+
+        DTabloAlanTemizleIsbirligi();
+        $("#hdnBirimKod").val();
+        $("#ddlKoordinatorluk").val("").trigger('change');
+
+        $(".invalid-koordinatorluk").hide();
+        $(".invalid-div-koordinatorluk").css("border", "0px solid #E5E5E5");
+
+        $("#tblDinamikKoorBirim > tbody").empty();
+        DinamikTabloVeriYok("tblDinamikKoorBirim")
+
+        $.ajax({
+            url: "/StratejikPlan/StratejikPlanHedefKayitGetir",
+            data: { kod: hedefKod },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    $("#hdnBirimKod").val(result.Nesne?.BirimKod);
+                    $("#ddlKoordinatorluk").val(result.Nesne?.KoordinatorlukKod).trigger('change');
+
+                    $.each(result.Nesne?.IsbirligiBirimler, function (a, b) {
+                        var koordinatorluk = b.Koordinatorluk.Adi;
+                        var birim = b.Birim?.Adi;
+                        var kod = b.Koordinatorluk.Kod + "_" + b.Birim?.Kod;
+                        if (kod.indexOf("undefined") > -1) kod = kod.replaceAll("undefined", "");
+                        DTabloSatirEkleIsbirligi(kod, koordinatorluk, birim);
+                    });
+
+                    $(".veriGiris").hide();
+                    $(".birimGiris").show();
+                }
+            }
+        });
+    }
+
+    function BirimEkraniKapat() {
+        //var gSayisi = $('#tblGosterge tr').length;
+        var hedefKod = $("#hdnHedefGostergeKod").val();
+
+        $("#hdnHedefGostergeKod").val("");
+        $(".hedefAdi").html("");
+        $(".veriGiris").show();
+        $(".birimGiris").hide();
+
+        $("#hdnBirim").val("");
+        $("#ddlKoordinatorluk").val("").trigger('change');
+        $("#ddlBirim").val("").trigger('change');
+        DTabloAlanTemizleIsbirligi();
+
+    }
+
+    //--Hedef Ekleme[Bitiş]
+
+    //--Gösterge Ekleme[Başla]
+    //Dinamik tablodan edit düğmesine basıldığında
+    function GostergeDuzenle(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var adi = $(kontrol).closest('tr').find("td:eq(0)").clone().children().remove().end().text();
+        var etki = $(kontrol).closest('tr').find("td:eq(1)").html();
+        var birim = $(kontrol).closest('tr').find("td:eq(2)").html();
+        var aciklama = $(kontrol).closest('tr').find("td:eq(3)").html();
+        var revizyonNedeni = $(kontrol).closest('tr').find("td:eq(4)").html();
+        var revizyonTarihi = $(kontrol).closest('tr').find("td:eq(5)").html();
+
+        var birimKod = $(kontrol).closest('tr').find("td:eq(2)").data("birim");
+
+        kod = kod.replace("sttb_", "");
+
+        DTabloAlanTemizleGosterge();
+
+        $("#hdnGostergeKod").val(kod);
+        $("#txtGostergeAdi").val(adi);
+        $("#txtHedefeEtkisi").val(etki);
+        $("#ddlBirimGosterge").val(birimKod).trigger('change');
+        $("#txtGostergeAciklama").val(aciklama);
+        $("#txtRevizyonNedeni").val(revizyonNedeni);
+        $("#txtRevizyonTarihi").datepicker("update", TarihDegeriDDMMYYYY(revizyonTarihi));
+        $("#btnGostergeKaydet").html("@CustomResource["Dugme.Guncelle"]");
+
+    }
+
+    //Dinamik tablodan sil düğmesine basıldığında
+    function GostergeSil(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var kontrolId = kod;
+
+        //Henüz kayıt edilmemiş olduğu için sunucuya gitme. Sadece yeni kayıtta gerçekleşir
+        //if (kod.indexOf("dtabloYeni_") > -1) {
+        //    $("#" + kontrolId).remove();
+        //    GostergeJSONUret();
+        //    return;
+        //}
+
+        kod = kod.replace("sttb_", "");
+
+        Swal.fire({
+            title: "@CustomResource["Baslik.Onay"]",
+            html: "@CustomResource["Onay.Sil"]",
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/StratejikPlan/StratejikPlanHedefGostergeSil",
+                    data: {
+                        kod: kod,
+                    },
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                            $("#" + kontrolId).remove();
+
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
+    //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+    function GostergeKaydet() {
+
+        if (DTabloSadeceOkuma) return;
+
+        $("#mdlTanimUyari").html("");
+
+        var kod = $("#hdnGostergeKod").val();
+        var adi = $("#txtGostergeAdi").val();
+        var etki = $("#txtHedefeEtkisi").val();
+        var aciklama = $("#txtGostergeAciklama").val();
+        var revizyonNedeni = $("#txtRevizyonNedeni").val();
+        var revizyonTarihi = $("#txtRevizyonTarihi").val();
+        var hedefKod = $("#hdnHedefGostergeKod").val();
+        var birimKod = $("#ddlBirimGosterge").val();
+        var birimAdi = $("#ddlBirimGosterge option:selected").text();
+        if (adi.trim() == "") {
+            return;
+        }
+        if (Number(etki) <= 0 || !Number(etki)) {
+            ShowToastr("error", "toast-top-right", "Etki değeri 0 dan büyük olmalıdır");
+            return;
+        }
+        if ($.trim(adi) == "") return;
+
+        hedefKod = hedefKod.replace("sttb_", "");
+
+        //Yeni kayıt sırasında alt süreç ajax ile kayıt edilmez
+        //if (hedefKod.indexOf("dtabloYeni_") > -1) {
+        //    if (kod == "") kod = "dtabloYeni_" + GuidUret();
+
+        //    var gostergeAdi = adi;
+        //    DTabloSatirEkleGosterge(kod, gostergeAdi, etki, aciklama, revizyonNedeni, revizyonTarihi, birimAdi + "|" + birimKod);
+        //    DTabloAlanTemizleGosterge();
+        //    GostergeJSONUret();
+        //    return;
+        //}
+
+        var form = {
+            Kod: kod,
+            Adi: adi,
+            Etki: etki,
+            BirimKod: birimKod,
+            Aciklama: aciklama,
+            RevizyonNedeni: revizyonNedeni,
+            RevizyonTarihi: revizyonTarihi,
+            StratejikPlanHedefKod: hedefKod
+        };
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/StratejikPlan/StratejikPlanHedefGostergeKaydet",
+            data: { form: form },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+                    var gostergeAdi = "<span class='fw-700 mr-2'>" + result.Nesne.GostergeNo + "</span>" + result.Nesne.Adi;
+                    DTabloSatirEkleGosterge(result.Nesne.Kod, gostergeAdi, result.Nesne.Etki, result.Nesne.Aciklama, result.Nesne.RevizyonNedeni, result.Nesne.RevizyonTarihi, birimAdi + "|" + birimKod);
+                    DTabloAlanTemizleGosterge();
+                }
+                else {
+                    HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                }
+            }
+        });
+    }
+
+    //Dinamik tabloya satır eklemek için
+    function DTabloSatirEkleGosterge(kod, adi, etki, aciklama, revizyonNedeni, revizyonTarihi, birim) {
+
+        if (aciklama == null) aciklama = "";
+
+        var birimBilgi = birim.split("|");
+
+
+        if (revizyonNedeni == null) revizyonNedeni = "";
+        if (revizyonTarihi == null)
+            revizyonTarihi = "";
+        else
+            revizyonTarihi = TarihDegeriDDMMYYYY(revizyonTarihi);
+
+        var satirBilgi = "<td width='20%'>" + adi + "</td><td width='10%'>" + etki + "</td><td width='20%' data-birim='" + birimBilgi[1] + "'>" + birimBilgi[0] + "</td><td width='20%'>" + aciklama + "</td><td width='20%'>" + revizyonNedeni + "</td><td width='10%'>" + revizyonTarihi + "</td>";
+
+        var duzenle = "GostergeDuzenle"
+        var sil = "GostergeSil";
+
+        if (DTabloSadeceOkuma) {
+            duzenle = "";
+            sil = "";
+            $(".dtabloVeriGirisGosterge").hide();
+        }
+
+        DinamikTabloSatirEkle("tblGosterge", kod, satirBilgi, duzenle, sil, "")
+    }
+
+    //Dinamik tablo alanlarını temizlemek için
+    function DTabloAlanTemizleGosterge() {
+        $("#hdnGostergeKod").val("");
+        $("#txtGostergeAdi").val("");
+        $("#txtHedefeEtkisi").val("");
+        $("#txtGostergeAciklama").val("");
+        $("#txtRevizyonNedeni").val("");
+        $("#txtRevizyonTarihi").datepicker("update", "");
+        $("#btnGostergeKaydet").html("@CustomResource["Dugme.Ekle"]");
+        $("#ddlBirimGosterge").val("").trigger('change');
+    }
+
+    //function GostergeJSONUret() {
+
+    //    var hedefKod = $("#hdnHedefGostergeKod").val();
+    //    hedefKod = TemizHedefKodBilgisi(hedefKod);
+
+    //    var altForm = [];
+    //    $.makeArray($('#tblGosterge > tbody tr[id]').map(function () {
+    //        //sadece kayıt edilmemiş olanlar gönderilecek. Bu işlem Yeni süreç kaydında dolacaktır
+    //        var kod = this.id.replace("sttb_", "");
+    //        if (kod.indexOf("dtabloYeni_") > -1) {
+    //            var gostergeKod = kod;
+    //            var aForm = {
+    //                Kod: gostergeKod,
+    //                HedefKod: hedefKod,
+    //                Adi: $(this).find("td:eq(0)").html(),
+    //                Etki: $(this).find("td:eq(1)").html(),
+    //                Birim: $(this).find("td:eq(2)").html(),
+    //                Aciklama: $(this).find("td:eq(3)").html(),
+    //                Revizyon: $(this).find("td:eq(4)").html(),
+    //                RevizyonTarihi: $(this).find("td:eq(5)").html()
+    //            };
+    //            altForm.push(aForm);
+    //        }
+    //    }));
+
+    //    var json = JSON.stringify(altForm);
+
+    //    gostergeler[hedefKod] = json;
+    //}
+
+    //--Gösterge Ekleme[Bitiş]
+
+
+    //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+    function DinamikKoorBirimKaydet() {
+
+        var koordinatorluk = $("#ddlDinamikKoordinatorluk option:selected").text()
+        var birim = $("#ddlDinamikBirim option:selected").text()
+        var kod = $("#ddlDinamikKoordinatorluk").val() + "_" + $("#ddlDinamikBirim").val();
+
+        if (kod.indexOf("null") > -1) kod = kod.replaceAll("null", "");
+        var sakliKod = kod;
+        if (sakliKod == "-100_" || sakliKod == "-101_") {
+            $("#ddlDinamikKoordinatorluk option").each(function () {
+                kod = $(this).val();
+                if (kod == "-100" || kod == "-101") return;
+
+                kod = $(this).val() + "_";
+                var adi = $(this).text();
+
+                if ((adi.indexOf(" İl ") > -1 && sakliKod == "-100_") || ((adi.indexOf(" İl ") == -1 && sakliKod == "-101_"))) {
+                    if (adi.indexOf(" Genel ") == -1 && adi.indexOf(" Makamı") == -1 && adi.indexOf(" Evrak") == -1)
+                        DTabloSatirEkleIsbirligi(kod, adi, "");
+                }
+            });
+            DTabloAlanTemizleIsbirligi();
+        }
+        else {
+            DTabloSatirEkleIsbirligi(kod, koordinatorluk, birim);
+            DTabloAlanTemizleIsbirligi();
+        }
+    }
+
+    function DinamikKoorBirimSil(kontrol) {
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var kontrolId = kod;
+
+        kod = kod.replace("sttb_", "");
+
+        $("#" + kontrolId).remove();
+    }
+
+    //Dinamik tabloya satır eklemek için
+    function DTabloSatirEkleIsbirligi(kod, kAdi, bAdi) {
+
+        var satirBilgi = "<td width='80%'>" + kAdi + " - " + bAdi + "</td>";
+
+        var duzenle = ""
+        var sil = "DinamikKoorBirimSil";
+
+        DinamikTabloSatirEkle("tblDinamikKoorBirim", kod, satirBilgi, duzenle, sil, "")
+    }
+
+    //Dinamik tablo alanlarını temizlemek için
+    function DTabloAlanTemizleIsbirligi() {
+        $("#ddlDinamikKoordinatorluk").val("").trigger('change');
+        $("#ddlDinamikBirim").val("").trigger('change');
+        Select2Yap("ddlDinamikBirim", true, "");
+    }
+
+</script>

@@ -1,0 +1,118 @@
+@{
+    ViewData["Title"] = CustomResource["BildirimSistemi.SayfaBaslik"];
+    ViewData["PageName"] = "BildirimSistemi";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["BildirimSistemi.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/BildirimSistemi/TabloDoldur";
+    tablo.anahtarAlani = "GoruntuleUrl";
+    tablo.islemler.genislik = "7%";
+    tablo.islemler.digerIslemler = "<a title='" + CustomResource["Dugme.Goruntule"] + "' class='btn btn-primary btn-sm btn-icon waves-effect waves-themed text-white' style='margin-right:5px;' onClick='Goruntule(!!DATA!!)'><i class='fal fa-eye'></i></a>";
+    tablo.islemler.silme = false;
+    tablo.islemler.duzenleme = false;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Koordinatorluk.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "BelgeTipi",
+                adi = @CustomResource["BildirimSistemi.Alan.BelgeTipi"],
+                render = "BelgeTipiVer(data)",
+                aramadaGoster = false
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "IslemYapan.AdiSoyadi",
+                adi = @CustomResource["BildirimSistemi.Alan.IslemYapan"],
+                aramadaGoster = false
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "IslemTarihi",
+                adi = @CustomResource["BildirimSistemi.Alan.IslemTarihi"],
+                tipi = "date",
+                render = "TarihDegeriDDMMYYYY(data)",
+                aramaTipi = "tarihAralik",
+                aramadaGoster = true,
+                tablodaGoster = true
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Aciklama",
+                adi = @CustomResource["BildirimSistemi.Alan.Aciklama"],
+                aramadaGoster = false,
+                tablodaGoster = true
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var belgeTipiListe = @Html.Raw(ViewBag.BelgeTipiListesi);
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/TanimKoordinatorluk/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlKoordinatorluk", true, result);
+            }
+        });
+
+    });
+
+    function BelgeTipiVer(data) {
+        var deger = "";
+        $.each(belgeTipiListe, function (a, b) {
+            if (b.id == data)
+                deger = b.text;
+        });
+        return deger;
+    }
+
+    function Goruntule(url) {
+        if (url != "")
+            window.open(url);
+    }
+
+</script>

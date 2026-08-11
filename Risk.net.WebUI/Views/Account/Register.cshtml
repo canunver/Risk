@@ -1,0 +1,57 @@
+@{
+}
+<!-- Brand logo-->
+<a class="brand-logo" href="#">
+    <img class="img-fluid" style="position:relative;top:-10px;width:32px" src="~/img/logo.png" alt="logo" />
+    <h2 class="brand-text text-primary ml-2">Risk Uygulaması</h2>
+</a>
+<!-- /Brand logo-->
+<!-- Left Text-->
+<div class="d-none d-lg-flex col-lg-8 align-items-center p-5 bg-gray-100">
+    <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+        <img class="img-fluid" src="~/img/account/register-v2.svg" alt="risk" />
+    </div>
+</div>
+<!-- /Left Text-->
+<div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+
+        <!-- Kurum logo-->
+        <div class="d-lg-flex col-lg-12 align-items-center p-5">
+            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+                <img class="img-fluid" src="~/img/kurumlogo.png" alt="logo" />
+            </div>
+        </div>
+        <!-- /Kurum logo-->
+
+        <h2 class="card-title fw-bold mb-1">Kayıt</h2>
+        <p class="card-text mb-2">e-posta adresiniz ile parola bilgilerini girip Kayıt Ol düğmesine basıldığında size it bir kullanıcı tanımlaması yapılacaktır</p>
+        <br />
+        <br />
+
+        <form method="post" action="">
+            <div class="form-group text-left">
+                <label class="form-label" for="txtEPosta">e-posta Adresi</label>
+                <input type="text" id="txtEPosta" class="form-control" autofocus placeholder="e-posta adresinizi girin" value="" />
+                <span validation-for="txtEPosta" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-left">
+                <label class="form-label" for="txtParola">Parola</label>
+                <input type="text" id="txtParola" class="form-control" autofocus placeholder="Parolanızı girin" value="" />
+                <span validation-for="txtParola" class="text-danger"></span>
+            </div>
+
+            <div class="form-group text-left">
+                <label class="form-label" for="txtParolaKontrol">Parola Kontrolü</label>
+                <input type="text" id="txtParolaKontrol" class="form-control" autofocus placeholder="Parolanızı girin" value="" />
+                <span validation-for="txtParolaKontrol" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary text-white w-100">Kayıt Ol</button>
+            </div>
+        </form>
+
+        <p class="text-center mt-2"><a href="/account/login"><i data-feather="chevron-left"></i> Giriş sayfasına dön</a></p>
+    </div>
+</div>

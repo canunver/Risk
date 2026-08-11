@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Risk.net.WebUI", "Risk.net.WebUI\Risk.net.WebUI.csproj", "{AFE143D9-ABB5-4149-8F57-18FCF62B1BB3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Risk.net.Data", "Risk.net.Data\Risk.net.Data.csproj", "{630DFD87-509F-451B-A26C-9FB063357D30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Risk.net.Services", "Risk.net.Services\Risk.net.Services.csproj", "{198133B8-6AF3-4859-B507-96B01E8520EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Risk.net.Utilities", "Risk.net.Utilities\Risk.net.Utilities.csproj", "{C1174632-FA21-4F78-86B1-51224F9D4E41}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFE143D9-ABB5-4149-8F57-18FCF62B1BB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE143D9-ABB5-4149-8F57-18FCF62B1BB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE143D9-ABB5-4149-8F57-18FCF62B1BB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE143D9-ABB5-4149-8F57-18FCF62B1BB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{630DFD87-509F-451B-A26C-9FB063357D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{630DFD87-509F-451B-A26C-9FB063357D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{630DFD87-509F-451B-A26C-9FB063357D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{630DFD87-509F-451B-A26C-9FB063357D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198133B8-6AF3-4859-B507-96B01E8520EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198133B8-6AF3-4859-B507-96B01E8520EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198133B8-6AF3-4859-B507-96B01E8520EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198133B8-6AF3-4859-B507-96B01E8520EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1174632-FA21-4F78-86B1-51224F9D4E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1174632-FA21-4F78-86B1-51224F9D4E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1174632-FA21-4F78-86B1-51224F9D4E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1174632-FA21-4F78-86B1-51224F9D4E41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30EC2481-E27C-42B2-B4FA-9AD1DE698F1A}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://www.stratek.com.tr:8080/tfs/projeler
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Risk.net.Data\\Risk.net.Data.csproj
+		SccProjectName1 = Risk.net.Data
+		SccLocalPath1 = Risk.net.Data
+		SccProjectUniqueName2 = Risk.net.Services\\Risk.net.Services.csproj
+		SccProjectName2 = Risk.net.Services
+		SccLocalPath2 = Risk.net.Services
+		SccProjectUniqueName3 = Risk.net.Utilities\\Risk.net.Utilities.csproj
+		SccProjectName3 = Risk.net.Utilities
+		SccLocalPath3 = Risk.net.Utilities
+		SccProjectUniqueName4 = Risk.net.WebUI\\Risk.net.WebUI.csproj
+		SccProjectName4 = Risk.net.WebUI
+		SccLocalPath4 = Risk.net.WebUI
+	EndGlobalSection
+EndGlobal

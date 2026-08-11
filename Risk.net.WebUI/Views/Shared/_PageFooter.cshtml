@@ -1,0 +1,36 @@
+@if (Settings.Features.AppFooter)
+{
+<footer class="page-footer" role="contentinfo">
+    <div class="d-flex align-items-center flex-1 text-muted">
+        <span class="hidden-md-down fw-700">
+            <img class="img-fluid" style="width:52px" src="~/img/footer_tr_eu.png" alt="logo" /><small>
+                @CustomResource["Footer.Baslik"]
+            </small>
+
+        </span>
+    </div>
+    <div>
+        <ul class="list-table m-0">
+            <li>
+                <a href="https://www.cfcu.gov.tr/" target="_blank" style="border-bottom:0px" data-toggle="tooltip" data-placement="top" title="CFCU">
+                    <img class="img-fluid" style="width:32px" src="~/img/footer_cfcu.png" alt="logo" />
+                </a>
+            </li>
+            <li class="pl-3">
+                <a href="https://www.tarimorman.gov.tr/" target="_blank" style="border-bottom:0px" data-toggle="tooltip" data-placement="top" title="Tarım ve Orman Bakanlığı">
+                    <img class="img-fluid" style="width:32px" src="~/img/footer_tarim.png" alt="logo" />
+                </a>
+            </li>
+            <li class="pl-3 fs-xl">
+                <a href="https://www.tkdk.gov.tr/" target="_blank" style="border-bottom:0px" data-toggle="tooltip" data-placement="top" title="TKDK">
+                    <img class="img-fluid" style="width:32px" src="~/img/footer_kurum.png" alt="logo" />
+                </a>
+            </li>
+            <li class="pl-3 fs-xl">
+                <a href="#" target="_blank" data-toggle="tooltip" style="border-bottom:0px" data-placement="top" title="Yardım">
+                    <i class="fal fa-question-circle" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</footer>}

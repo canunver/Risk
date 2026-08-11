@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = CustomResource["TanimBirim.SayfaBaslik"];
+    ViewData["PageName"] = "TanimBirim";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["TanimBirim.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/TanimBirim/TabloDoldur";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.goster = false;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Koordinatorluk.Adi",
+        adi = @CustomResource["TanimKoordinatorluk.Alan.Adi"],
+        genislik = "30%",
+        aramaAlanAdi = "KoordinatorlukKod",
+        aramaTipi = "combo",
+        aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer"
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Adi",
+        adi = @CustomResource["Genel.Alan.Adi"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Durum",
+        adi = @CustomResource["Genel.Alan.Durum"],
+        tipi = "int",
+        genislik = "10%",
+        render = "DurumAdiVer(data,'AKTIFPASIF')",
+        aramaTipi = "combo",
+        aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+    });
+
+</script>

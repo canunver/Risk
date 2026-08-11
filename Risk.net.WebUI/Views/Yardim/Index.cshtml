@@ -1,0 +1,232 @@
+@{
+    ViewData["Title"] = CustomResource["Yardim.SayfaBaslik"];
+    ViewData["PageName"] = "Yardim";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["Yardim.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/Yardim/TabloDoldur";
+    tablo.silUrl = "/Yardim/Sil";
+    tablo.duzenleUrl = "/Yardim/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "SayfaAdi",
+        adi = @CustomResource["Genel.Alan.SayfaAdi"],
+        render = "SayfaAdiVer(data)",
+        aramaTipi = "combo",
+        aramaListeDoldurMetodu = "SayfaDoldur()",
+        genislik = "20%"
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Baslik",
+        adi = @CustomResource["Genel.Alan.Adi"],
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="txtBaslik">@CustomResource["Genel.Alan.Baslik"]<span class="text-danger ml-1">*</span></label>
+                            <input type="text" autocomplete="off" id="txtBaslik" class="form-control form-control-sm autofocus" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="ddlSayfaAdi">@CustomResource["Genel.Alan.SayfaAdi"]<span class="text-danger ml-1">*</span></label>
+                            <select id="ddlSayfaAdi" required></select>
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="divGosterAlani bg-white">
+                        <textarea id="txtIcerik"></textarea>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <div class="ml-auto">
+                            <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplugins/tinymce/tinymce.min.js"></script>
+<style>
+    .tox.tox-tinymce-aux,
+    .tox-fullscreen .tox.tox-tinymce-aux {
+        z-index: 4000;
+    }
+</style>
+
+<script type="text/javascript">
+    var sayfaData = [];
+
+    $(document).ready(function () {
+
+        sayfaData = SayfaDatasi();
+
+        Select2Yap("ddlSayfaAdi", true, sayfaData);
+
+        tinymce.init({
+            selector: '#txtIcerik',
+            language: 'tr',
+            plugins: 'print preview importcss searchreplace autolink directionality visualblocks visualchars fullscreen image link media code codesample table charmap hr pagebreak nonbreaking anchor insertdatetime advlist lists imagetools textpattern noneditable charmap quickbars paste',
+            paste_data_images: true,
+            menubar: 'edit view insert format tools table tc help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen | insertfile image media link',
+            image_advtab: true,
+            content_css: '//www.tiny.cloud/css/codepen.min.css',
+            link_list: [
+            ],
+            image_list: [
+            ],
+            image_class_list: [
+                { title: 'Yok', value: '' },
+                { title: 'Çerçeve', value: 'tinymceCerceve' },
+                { title: 'Image Responsive', value: 'img-responsive' },
+                { title: 'Image Circle', value: 'img-circle' },
+                { title: 'Image Rounded', value: 'img-rounded' },
+                { title: 'Image Thumbnail', value: 'img-thumbnail' }
+            ],
+            importcss_append: true,
+            height: 600,
+            image_caption: true,
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            noneditable_noneditable_class: "mceNonEditable",
+            toolbar_mode: 'sliding',
+            contextmenu: "link image imagetools table configure",
+        });
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                Baslik: $("#txtBaslik").val(),
+                SayfaAdi: $("#ddlSayfaAdi").val(),
+                Icerik: tinymce.activeEditor.getContent(),
+            };
+
+            $.ajax({
+                url: "/Yardim/Kaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                        jModalHide("mdlTanim");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+    });
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#txtBaslik").val(deger?.Baslik);
+        $("#ddlSayfaAdi").val(deger?.SayfaAdi).trigger('change');
+        var icerik = deger?.Icerik;
+        if (!icerik) icerik = "";
+        tinyMCE.activeEditor.setContent(icerik);
+
+        $("#mdlTanimUyari").html("");
+
+    }
+
+    function SayfaDoldur() {
+
+        Select2Yap("ddlAramaSayfaAdi", true, SayfaDatasi());
+    }
+
+    
+
+</script>

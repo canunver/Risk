@@ -1,0 +1,616 @@
+@{
+    ViewData["Title"] = CustomResource["Surec.SayfaBaslik"];
+    ViewData["PageName"] = "Surec";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["Surec.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/Surec/TabloDoldur";
+    tablo.silUrl = "/Surec/Sil";
+    tablo.duzenleUrl = "/Surec/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+
+    if (!ViewBag.KayitYetki)
+        tablo.islemler.silme = false;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Koordinatorluk.Adi",
+                adi = @CustomResource["Surec.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+                aramaAlaniSecimTetikle = "BirimDoldur('ddlAramaBirimKod','ddlAramaKoordinatorlukKod', false)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Birim.Adi",
+                adi = @CustomResource["Surec.Alan.Birim"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "BirimKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaBirimKod', false, null, true)"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Numara",
+                adi = @CustomResource["Surec.Alan.Numara"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Adi",
+                adi = @CustomResource["Surec.Alan.Adi"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kod",
+                adi = @CustomResource["Surec.Alan.AltSurecler"],
+                siralama = false,
+                aramadaGoster = false,
+                render = "AltSureclerSatirRender(row)"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'AKTIFPASIF')",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" style="display:none;" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+                <div>
+                    <button id="btnSurecIlKaydet" style="display:none;" class="btn btn-success text-white">İl Bazında Süreçleri Kaydet</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+                    <input type="hidden" id="hdnBirimKod" />
+                    <input type="hidden" id="hdnAltSurecKod" />
+                    <input type="hidden" id="hdnSurecSahibiPersonelKod" />
+                    <input type="hidden" id="hdnSurecSahibiUnvanKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label class="form-label" for="ddlKoordinatorluk">@CustomResource["Surec.Alan.Koordinatorluk"]<span class="text-danger ml-1">*</span></label>
+                            <select id="ddlKoordinatorluk" required></select>
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="ddlBirim">@CustomResource["Surec.Alan.Birim"]<span class="text-danger ml-1">*</span></label>
+                            <select id="ddlBirim" required></select>
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-3">
+                            <label class="form-label" for="txtNumara">@CustomResource["Surec.Alan.Numara"]<span class="text-danger ml-1">*</span></label>
+                            <input type="text" autocomplete="off" id="txtNumara" class="form-control form-control-sm" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-label" for="txtAdi">@CustomResource["Surec.Alan.Adi"]<span class="text-danger ml-1">*</span></label>
+                            <input type="text" autocomplete="off" id="txtAdi" class="form-control form-control-sm" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="ddlSurecSahibiPersonel">@CustomResource["Surec.Alan.SurecSahibiKisi"]</label>
+                            <select id="ddlSurecSahibiPersonel"></select>
+                        </div>
+
+                        <div class="col-md-6" style="display:none">
+                            <label class="form-label">@CustomResource["Surec.Alan.SurecSahibiUnvan"]</label>
+                            <div id="spnSurecSahibiUnvan"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                <label class="form-label">@CustomResource["Surec.Alan.AltSurecler"]</label>
+                                <div class="input-group input-group-sm mb-2 dtabloVeriGiris">
+                                    <input type="text" autocomplete="off" id="txtAltSurecNumara" class="form-control form-control-sm" style="width:10px" placeholder="@CustomResource["Surec.Alan.AltSurecNumara"]" />
+                                    <input type="text" autocomplete="off" id="txtAltSurecAdi" class="form-control form-control-sm" placeholder="@CustomResource["Surec.Alan.AltSurecAdi"]" />
+                                    <div class="input-group-append">
+                                        <button class="btn btn-default waves-effect waves-themed" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Temizle"]" onclick="DTabloAlanTemizle();"><i class="fal fa-eraser"></i></button>
+                                        <button class="btn btn-success" type="button" onclick="AltSurecKaydet();" id="btnAltSurecKaydet">@CustomResource["Dugme.Ekle"]</button>
+                                    </div>
+                                </div>
+
+                                <div id="divtblAltSurecVeriYok"></div>
+                                <table id="tblAltSurec" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                    <thead></thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <span class="spanDurum">@CustomResource["Genel.Alan.Durum"]: <span class="badge badge-primary p-2 text-white spnDurumAciklama"></span></span>
+                        <div class="ml-auto">
+                            <button type="button" style="display:none;" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var DTabloSadeceOkuma = false;
+    var formDolduruluyor = false;
+    var kayitYetki = false;
+
+    $(document).ready(function () {
+
+        kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+        if (kayitYetki) {
+
+            $("#btnYeniKayit").show();
+            $("#btnKaydet").show();
+        }
+        else {
+            DTabloSadeceOkuma = true;
+        }
+
+        Select2Yap("ddlSurecSahibiPersonel", true, null);
+        $('#ddlSurecSahibiPersonel').bind('change', function () {
+
+            var personelKod = $(this).val();
+            $("#spnSurecSahibiUnvan").html("");
+
+            if (!personelKod || formDolduruluyor) return;
+
+            $.ajax({
+                url: "/TanimPersonel/PersonelUnvaniVer",
+                data: { personelKod: personelKod },
+                type: "POST",
+                success: function (result) {
+                    if (result.IslemSonuc) {
+                        $("#spnSurecSahibiUnvan").html(result.Nesne.Adi);
+                        $("#hdnSurecSahibiUnvanKod").val(result.Nesne.Kod);
+                    }
+                }
+            });
+
+        });
+
+        //Koordinatörlük alanını doldur
+        $.ajax({
+            url: "/TanimKoordinatorluk/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlKoordinatorluk", true, result);
+            }
+        });
+
+        //Koordinatörlük seçilince ona bağlı birimlerin alınması
+        $('#ddlKoordinatorluk').bind('change', function () {
+            var koordinatorlukKod = $(this).val();
+            Select2Yap("ddlBirim", true, null);
+            Select2Yap("ddlSurecSahibiPersonel", true, null);
+
+            if (koordinatorlukKod == null) return;
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlBirim", true, result);
+
+                        //Bazı kkrodinatörlüklerin birimleri yok. Birim zorunluluğunu yönetmek için
+                        $("#ddlBirim").val($("#hdnBirimKod").val()).trigger('change');
+                        $('#ddlBirim').prop('required', true);
+                        $("#ddlBirim").attr("placeholder", "@Html.Raw(@CustomResource["Lutfen.Seciniz"])");
+                    }
+                    else {
+                        //Seçilen korrdinatörlüğe ait birim yoksa birim alanı zorunlu olmasın
+                        $('#ddlBirim').prop('required', false);
+                        $("#ddlBirim").attr("placeholder", "Bu koordinatörlüğün birimi bulunmamaktadır");
+                    }
+                }
+            });
+
+            $.ajax({
+                url: "/TanimYetki/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod, birimKod: "" },
+                type: "POST",
+                success: function (result) {
+
+                    Select2Yap("ddlSurecSahibiPersonel", true, result);
+
+                    $("#ddlSurecSahibiPersonel").val($("#hdnSurecSahibiPersonelKod").val()).trigger('change');
+
+                }
+            });
+
+        });
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            $("#mdlTanimUyari").html("");
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+            //Altsüreçlerin tablodan alınması
+            var altForm = [];
+            $.makeArray($('#tblAltSurec > tbody tr[id]').map(function () {
+                //sadece kayıt edilmemiş olanlar gönderilecek. Bu işlem Yeni süreç kaydında dolacaktır
+                var kod = this.id.replace("sttb_", "");
+                if (kod.indexOf("dtabloYeni_") > -1) {
+                    var aForm = { Kod: "", Numara: $(this).find("td:eq(0)").html(), Adi: $(this).find("td:eq(1)").html() };
+                    altForm.push(aForm);
+                }
+            }));
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                Numara: $("#txtNumara").val(),
+                Adi: $("#txtAdi").val(),
+                AltSurecler: altForm,
+                KoordinatorlukKod: $("#ddlKoordinatorluk").val(),
+                SurecSahibiUnvanKod: $("#hdnSurecSahibiUnvanKod").val(),
+                SurecSahibiPersonelKod: $("#ddlSurecSahibiPersonel").val(),
+                BirimKod: $("#ddlBirim").val(),
+            };
+
+            $.ajax({
+                url: "/Surec/Kaydet",
+                data: JSON.stringify(form),
+                contentType: "application/json; charset=utf-8",
+                type: "POST",
+                dataType: "json",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                        jModalHide("mdlTanim");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+
+
+        $("#btnSurecIlKaydet").click(function () {
+            $.ajax({
+                url: "/Surec/SurecAltSurecIlBazindaKaydet",
+                type: "GET",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", "İl Süreçleri kayıt edildi");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+    });
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        formDolduruluyor = true;
+        ClearValidation();
+
+        $("#tblAltSurec > tbody").empty();
+        DinamikTabloVeriYok("tblAltSurec")
+        DTabloAlanTemizle();
+        $(".dtabloVeriGiris").show();
+
+        if (deger?.Durum == 10) {
+            //$("#btnKaydet").hide();
+            DTabloSadeceOkuma = true;
+        }
+        else {
+            if (kayitYetki) {
+                $("#btnKaydet").show();
+                DTabloSadeceOkuma = false;
+            }
+        }
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#hdnBirimKod").val(deger?.BirimKod);
+        $("#hdnSurecSahibiPersonelKod").val(deger?.SurecSahibiPersonelKod);
+
+        $("#ddlKoordinatorluk").val(deger?.KoordinatorlukKod).trigger('change');
+        $("#ddlBirim").val(deger?.BirimKod).trigger('change');
+        $("#txtNumara").val(deger?.Numara);
+        $("#txtAdi").val(deger?.Adi);
+
+        $("#spnSurecSahibiUnvan").html("");
+        $("#spnSurecSahibiUnvan").html(deger?.SurecSahibiPersonel?.UnvanAdi);
+        $("#hdnSurecSahibiUnvanKod").val(deger?.SurecSahibiPersonel?.UnvanKod);
+
+
+        $.each(deger?.AltSurecler, function (index) {
+            var bilgi = deger.AltSurecler[index]
+            DTabloSatirEkle(bilgi.Kod, bilgi.Numara, bilgi.Adi)
+        });
+
+        $(".spnDurumAciklama").html(DurumAdiVer(deger?.Durum, 'AKTIFPASIF'));
+
+        if (deger?.Kod == null) {
+            $("#hdnBirimKod").val("@ViewBag.BirimKodu");
+            $("#ddlKoordinatorluk").val("@ViewBag.KoordinatorlukKodu").trigger('change');
+        }
+
+        $("#mdlTanimUyari").html("");
+        formDolduruluyor = false;
+    }
+
+    function Onayla(kod) {
+        Swal.fire({
+            title: '@CustomResource["Baslik.Onay"]',
+            html: '@CustomResource["Onay.Onay"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/Surec/Onayla",
+                    data: { kod: kod },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                            TabloVeriYenile();
+                        }
+                        else {
+
+                            HataPenceresiGoster(result.Mesaj);
+
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    //Dinamik tablodan edit düğmesine basıldığında
+    function AltSurecDuzenle(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var numara = $(kontrol).closest('tr').find("td:eq(0)").html();
+        var adi = $(kontrol).closest('tr').find("td:eq(1)").html();
+
+        kod = kod.replace("sttb_", "");
+
+        DTabloAlanTemizle();
+
+        $("#hdnAltSurecKod").val(kod);
+        $("#txtAltSurecNumara").val(numara);
+        $("#txtAltSurecAdi").val(adi);
+        $("#btnAltSurecKaydet").html("@CustomResource["Dugme.Guncelle"]");
+
+    }
+
+    //Dinamik tablodan sil düğmesine basıldığında
+    function AltSurecSil(kontrol) {
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $(kontrol).closest('tr')[0].id;
+        var kontrolId = kod;
+
+        //Henüz kayıt edilmemiş olduğu için sunucuya gitme. Sadece yeni kayıtta gerçekleşir
+        if (kod.indexOf("dtabloYeni_") > -1) {
+            $("#" + kontrolId).remove();
+            return;
+        }
+
+        kod = kod.replace("sttb_", "");
+
+        Swal.fire({
+            title: "@CustomResource["Baslik.Onay"]",
+            html: "@CustomResource["Onay.Sil"]",
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/Surec/AltSurecSil",
+                    data: {
+                        kod: kod,
+                    },
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                            $("#" + kontrolId).remove();
+
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
+    //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+    function AltSurecKaydet() {
+
+        if (DTabloSadeceOkuma) return;
+
+        var kod = $("#hdnAltSurecKod").val();
+        var numara = $("#txtAltSurecNumara").val();
+        var adi = $("#txtAltSurecAdi").val();
+        var surecKod = $("#hdnKod").val();
+
+        if ($.trim(adi) == "") return;
+
+        //Yeni kayıt sırasında alt süreç ajax ile kayıt edilmez
+        if (surecKod == "") {
+            if (kod == "") kod = "dtabloYeni_" + jQuery.guid++;
+            DTabloSatirEkle(kod, numara, adi);
+            DTabloAlanTemizle();
+            return;
+        }
+
+        var form = {
+            Kod: kod,
+            Numara: numara,
+            Adi: adi,
+            SurecKod: $("#hdnKod").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/Surec/AltSurecKaydet",
+            data: { form: form },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+                    ShowToastr("success", "toast-top-right", result.Mesaj);
+                    DTabloSatirEkle(result.Nesne.Kod, result.Nesne.Numara, result.Nesne.Adi);
+                    DTabloAlanTemizle();
+                }
+            }
+        });
+    }
+
+    //Dinamik tabloya satır eklemek için
+    function DTabloSatirEkle(kod, numara, adi) {
+
+        var satirBilgi = "<td width='20%'>" + numara + "</td><td width='60%'>" + adi + "</td>";
+
+        var duzenle = "AltSurecDuzenle"
+        var sil = "AltSurecSil";
+
+        if (DTabloSadeceOkuma) {
+            duzenle = "";
+            sil = "";
+            $(".dtabloVeriGiris").hide();
+        }
+
+        DinamikTabloSatirEkle("tblAltSurec", kod, satirBilgi, duzenle, sil, "")
+    }
+
+    //Dinamik tablo alanlarını temizlemek için
+    function DTabloAlanTemizle() {
+        $("#hdnAltSurecKod").val("");
+        $("#txtAltSurecNumara").val("");
+        $("#txtAltSurecAdi").val("");
+        $("#btnAltSurecKaydet").html("@CustomResource["Dugme.Ekle"]");
+    }
+
+    function AltSureclerSatirRender(row) {
+        var altSurecler = "";
+
+        row.AltSurecler.sort(function (a, b) { return (a.Numara > b.Numara) ? 1 : ((b.Numara > a.Numara) ? -1 : 0); });
+
+        $.each(row.AltSurecler, function (index) {
+            var bilgi = row.AltSurecler[index];
+            if (bilgi.Durum != 99) {
+                if (altSurecler != "") altSurecler += ",<br>";
+                altSurecler += "<b>" + bilgi.Numara + "</b> " + bilgi.Adi;
+            }
+        });
+
+        return altSurecler;
+    }
+
+
+</script>

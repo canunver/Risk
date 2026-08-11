@@ -1,0 +1,162 @@
+@{
+    ViewData["Title"] = CustomResource["TanimUlke.SayfaBaslik"];
+    ViewData["PageName"] = "/TanimUlke"; ;//Açılan sayfanın menüde gösterilmesi için
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["TanimUlke.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblSozluk";
+    tablo.listeUrl = "/TanimUlke/TabloDoldur";
+    tablo.silUrl = "/TanimUlke/Sil";
+    tablo.duzenleUrl = "/TanimUlke/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "Adi",
+        adi = @CustomResource["TanimUlke.Alan.Adi"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "KisaAdi",
+        adi = @CustomResource["TanimUlke.Alan.KisaAdi"],
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+@*https://www.youtube.com/watch?v=1y18VF4aMZU*@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlSozluk" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+
+                    <div id="mdlSozlukUyari"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["TanimUlke.Alan.Adi"]</label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtAdi" class="form-control form-control-sm autofocus" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["TanimUlke.Alan.KisaAdi"]</label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtKisaAdi" class="form-control form-control-sm" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                        <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                Adi: $("#txtAdi").val(),
+                KisaAdi: $("#txtKisaAdi").val(),
+            };
+
+            $.ajax({
+                url: "/TanimUlke/Kaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                        jModalHide("mdlSozluk");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlSozlukUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlSozluk", "@CustomResource["Baslik.YeniKayit"]");
+        });
+    });
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+
+        jModalShow("mdlSozluk", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#txtAdi").val(deger?.Adi);
+        $("#txtKisaAdi").val(deger?.KisaAdi);
+
+        $("#mdlSozlukUyari").html("");
+
+    }
+
+</script>

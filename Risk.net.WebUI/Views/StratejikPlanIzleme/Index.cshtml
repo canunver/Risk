@@ -1,0 +1,623 @@
+@{
+    ViewData["Title"] = CustomResource["StratejikPlanIzleme.SayfaBaslik"];
+    ViewData["PageName"] = "StratejikPlanIzleme";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["StratejikPlanIzleme.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/StratejikPlanIzleme/TabloDoldur";
+    tablo.duzenleUrl = "/StratejikPlanIzleme/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "100px";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.TarihceGoster"] + "' class='btn btn-info btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TarihceGoster(!!DATA!!)'><i class='fal fa-history'></i></a>";
+    tablo.islemler.silme = false;
+    tablo.siralamaKolonNo = 2;
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+        {
+                veriAlani = "StratejikPlan.StratejikPlanDonemAdi",
+                adi = @CustomResource["StratejikPlanIzleme.Alan.Donem"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguStratejikPlanDonemKod",
+                aramaListeDoldurUrl = "/TanimStratejikPlanDonem/SelectListesiVer",
+        });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "KayitTarihi",
+                adi = @CustomResource["StratejikPlanIzleme.Alan.Yil"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KayitTarihi",
+                aramaListeDoldurMetodu = "YilDoldur()",
+                render = "row.Yil",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Hedef.Koordinatorluk.Adi",
+                adi = @CustomResource["StratejikPlan.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguKoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+                tablodaGoster = false
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "StratejikPlan.AmacNo",
+                adi = @CustomResource["StratejikPlanIzleme.Alan.Amac"],
+                aramadaGoster = false,
+                render = "AmacKolonYaz(row)"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Hedef.HedefNo",
+                adi = @CustomResource["StratejikPlanIzleme.Alan.Hedef"],
+                aramadaGoster = false,
+                render = "HedefKolonYaz(row)"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Hedef.Koordinatorluk.Adi",
+                adi = @CustomResource["StratejikPlanIzleme.Alan.Koordinatorluk"],
+                aramadaGoster = false
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    @*<button id="btnYeniKayit" style="display:none;" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayitStratejikPlanIzleme"]</button>*@
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnAmacKod" />
+                    <input type="hidden" id="hdnHedefKod" />
+                    <input type="hidden" id="hdnGostergeKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="card p-3 mb-3">
+                        <div class="form-group row divAmacHedefBilgi">
+                            <div class="col-md-6">
+                                <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.Amac"]</label>
+                                <div class="divAmac"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.Hedef"]</label>
+                                <div class="divHedef"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <table id="tblGosterge" class="table table-bordered table-hover table-striped table-sm w-100">
+                                    <thead>
+                                        <tr>
+                                            <th>@CustomResource["StratejikPlanIzleme.Alan.AnahtarPerformansGostergesi"]</th>
+                                            <th>@CustomResource["StratejikPlanIzleme.Alan.HedefeEtkisi"] (%)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.Koordinatorluk"]</label>
+                                <div class="divKoordinatorluk"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.Birim"]</label>
+                                <div class="divBirim"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <label class="form-label">@CustomResource["StratejikPlan.Alan.BirimlerIsbirligi"]</label>
+                                <div class="divIsbirligiBirimler"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card p-3 mb-3">
+
+                        <div id="divGostergeVeriYok"></div>
+                        <div id="pnlGosterge" class="form-group border-faded p-2" style="display:none;">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.AnahtarPerformansGostergesi"]</label>
+                                    <div class="divAnahtarPerformansGostergesi text-danger"></div>
+                                    <div class="divAnahtarPerformansGostergesiAciklama text-muted fs-nano"></div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-8">
+                                    <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.DonemTarihAraligi"]</label>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <input type="text" autocomplete="off" id="txtBaslangicTarihi" class="form-control form-control-sm tarihAlani yetkisizseKoru" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" autocomplete="off" id="txtBitisTarihi" class="form-control form-control-sm tarihAlani yetkisizseKoru" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label" for="txtBaslangicDegeri">@CustomResource["StratejikPlanIzleme.Alan.PlanDonemiBaslangicDegeri"]</label>
+                                    <input type="text" autocomplete="off" id="txtBaslangicDegeri" class="form-control form-control-sm yetkisizseKoru" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <div class="p-3 rounded shadow-sm mb-g border border-faded">
+                                        <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.DegerlendirmeDonemleri"]</label>
+                                        <div style="float:right;">
+                                            <a id="btnDonemTanimiEkle" class='btn btn-warning btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='DonemTanimiEkle()'><i class='fal fa-plus-circle'></i></a>
+                                        </div>
+                                        <div id="divtblDonemTanimiVeriYok"></div>
+                                        <table id="tblDonemTanimi" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
+                                            <thead></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <div class="ml-auto">
+                            <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section ScriptsBlock{
+    <script type="text/javascript">
+        var DTabloSadeceOkuma = false;
+        var kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+        var degerGirisYetki = @(ViewBag.DegerGirisYetki.ToString().ToLower());
+
+        $(document).ready(function () {
+
+            $("#btnKaydet").click(function () {
+
+                //Validation
+                $("#mdlTanimUyari").html("");
+                var formKontrol = ValidateForm();
+                if (!formKontrol) return;
+
+                var form = {
+                    Kod: $("#hdnGostergeKod").val(),
+                    StratejikPlanHedefKod: $("#hdnHedefKod").val(),
+                    BaslangicTarihi: $("#txtBaslangicTarihi").val(),
+                    BitisTarihi: $("#txtBitisTarihi").val(),
+                    BaslangicDegeri: $("#txtBaslangicDegeri").val(),
+                    Donemler: Donemler()
+                };
+
+                $.ajax({
+                    url: "/StratejikPlanIzleme/Kaydet",
+                    data: { form: form },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+
+                            TabloVeriYenile();//Datatables viewcontrolünde
+
+                            ClearValidation();
+                        }
+                        else {
+                            HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                        }
+                    }
+                });
+
+            });
+
+            $('body').on('change', '.sapmaOraniHesapla', function () {
+                SapmaOraniHesapla(this);
+            });
+
+        });
+
+        function AmacKolonYaz(row) {
+            return "<span class='fw-700 mr-2'>" + row.StratejikPlan.AmacNo + "</span>" + row.StratejikPlan.Amac;
+        }
+
+        function HedefKolonYaz(row) {
+            return "<span class='fw-700 mr-2'>" + row.Hedef.HedefNo + "</span>" + row.Hedef.Adi;
+        }
+
+        //ddlAramaYil combosunun doldurulmasını sağlar
+        function YilDoldur() {
+
+            var aktifYil = new Date().getFullYear();;
+            var yillar = [];
+            for (var i = aktifYil; i >= 2020; i--) {
+                var tarih = "01.01." + i;
+                var nesne = { id: tarih, text: i.toString() };
+                yillar.push(nesne);
+            }
+
+            Select2Yap("ddlAramaKayitTarihi", true, yillar);
+        }
+
+        //Modal ekran açıldığında Stratejik plan bilgilerinin doldurulmasını sağlar
+        function StratejikPlanListele(amacKod) {
+
+            if (amacKod == null) {
+                return;
+            }
+
+            //$.ajax({
+            //    url: "/StratejikPlan/KayitGetir",
+            //    type: "POST",
+            //    data: { kod: amacKod },
+            //    success: function (result) {
+
+            //        $(".divKoordinatorluk").html(result?.Nesne?.Hedef?.Koordinatorluk?.Adi);
+            //        $(".divBirim").html(result?.Nesne?.Hedef?.Birim?.Adi);
+            //        $(".divIsbirligiBirimler").html(result?.Nesne?.Hedef?.IsbirligiBirimAdlari);
+
+            //    }
+            //});
+        }
+
+        //Modal ekran açıldığında hedefe bağlı gösterge tablosunun doldurulmasını sağlar
+        function GostergeListele(hedefKod) {
+
+            $("#pnlGosterge").hide();
+            $("#tblGosterge > tbody").empty();
+
+            if (hedefKod == null) {
+                return;
+            }
+
+            $.ajax({
+                url: "/StratejikPlan/SelectListesiVerHedefGosterge",
+                type: "POST",
+                data: { stratejikPlanHedefKod: hedefKod },
+                success: function (result) {
+                    $.each(result, function (a, b) { GostergeTabloSatirEkle(b); });
+                }
+            });
+        }
+
+        //Listedeki edit düğmesine basıldığında Modal ekranın açılmasını sağlar
+        function Duzenle(result) {
+            Temizle(result.Nesne);
+            jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+        }
+
+        //Modal ekran açıldığında bilgilerin forma doldurulmasını sağlar. Amaç, hedef, gösterge tablosu
+        function Temizle(deger) {
+            ClearValidation();
+            YetkisizAlanlariKoru();
+            $("#btnKaydet").hide();
+
+            DinamikTabloVeriYokIc("Gosterge");
+            $("#divGostergeVeriYok").show();
+
+            $("#pnlGosterge").hide();
+            $("#tblGosterge > tbody").empty();
+
+            $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+            if (deger?.Durum == 10) {
+                DTabloSadeceOkuma = true;
+            }
+            else {
+                DTabloSadeceOkuma = false;
+            }
+
+            $("#hdnAmacKod").val(deger?.AmacKod);
+            $("#hdnHedefKod").val(deger?.HedefKod);
+
+            $(".divAmac").html(deger?.StratejikPlan?.Amac);
+            $(".divHedef").html(deger?.Hedef?.Adi);
+
+            $(".divKoordinatorluk").html("");
+            $(".divBirim").html("");
+            $(".divIsbirligiBirimler").html("");
+
+            $(".divKoordinatorluk").html(deger?.Hedef?.Koordinatorluk?.Adi);
+            $(".divBirim").html(deger?.Hedef?.Birim?.Adi);
+            $(".divIsbirligiBirimler").html(deger?.Hedef?.IsbirligiBirimAdlari);
+
+
+            if (deger && deger?.kod != "")
+                $(".divAmacHedefBilgi").show();
+
+            StratejikPlanListele(deger?.AmacKod);
+            GostergeListele(deger?.HedefKod);
+
+            $("#mdlTanimUyari").html("");
+        }
+
+        //Seçili göstergeye ait dönemsel verilerin arraye alınması işlemini yapar
+        function Donemler() {
+            //Donemlerin tablodan alınması
+            var donemler = [];
+            var donemNo = 1;
+            $.makeArray($('#tblDonemTanimi > tbody tr[id]').map(function () {
+                if ($(this).find("td:eq(0)").val() != null) {
+                    var kod = this.id.replace("sttb_", "");
+
+                    var gerceklesenAlanlar = $(this).find("td:eq(3) input");
+                    var gerceklesenDeger = $(gerceklesenAlanlar[0]).val();
+                    var gerceklesenDegerYilSonu = $(gerceklesenAlanlar[1]).val();
+
+                    var aForm = {
+                        Kod: "",
+                        StratejikPlanHedefGostergeKod: $("#hdnGostergeKod").val(),
+                        Donem: donemNo++,
+                        DonemAdi: $(this).find("td:eq(1) input").val(),
+                        PlanlananDeger: $(this).find("td:eq(2) input").val(),
+                        GerceklesenDeger: gerceklesenDeger.replace(".", ","),
+                        GerceklesenDegerYilSonu: gerceklesenDegerYilSonu.replace(".", ","),
+                        SapmaOrani: $(this).find("td:eq(4) span").html().replace(".", ","),
+                        SapmaNedeni: $(this).find("td:eq(5) input").val(),
+                    };
+                    donemler.push(aForm);
+
+                }
+            }));
+            return donemler;
+        }
+
+        //Modal ekran açıldığında henüz işlem yapılacak gösterge seçilmediği için veri yok alanını oluşturur
+        function DinamikTabloVeriYokIc(tabloAdi) {
+            $("#div" + tabloAdi + "VeriYok").html("<div class='text-center'><img src='/img/images/no-data-found.png' alt='' /><br />İşlem yapılacak anahtar performans göstegesini seçiniz.</div>");
+        }
+
+        //Modal açıldığında gösterge tablosunun satırlarını oluşturur
+        function GostergeTabloSatirEkle(form) {
+            var satirBilgi = "<td width='70%'><b>" + form.GostergeNo + "</b> " + form.Adi + "<div class='text-muted fw-700 fs-nano'>" + form.Birim?.Adi + "</div><div class='text-muted fs-nano'>" + form.Aciklama + "</div></td>";
+            satirBilgi += "<td width='20%'>" + form.Etki + "</td>";
+
+            DinamikTabloSatirEkle("tblGosterge", form.Kod, satirBilgi, "GostergeDuzenle", "", "");
+        }
+
+        //Gösterge satırındaki düğmeye basıldığında gösterge başlangıç değeri ve dönem bilgilrini getirir
+        function GostergeDuzenle(kontrol) {
+            //if (DTabloSadeceOkuma) return;
+            var kontrol = $(kontrol).closest('tr')[0];
+            $("#pnlGosterge").show();
+            $("#divGostergeVeriYok").hide();
+
+            var kod = kontrol.id.replace("sttb_", "");
+
+            $("#hdnGostergeKod").val(kod);
+
+            $.ajax({
+                url: "/StratejikPlan/StratejikPlanGostergeKayitGetir",
+                type: "POST",
+                data: { kod: kod },
+                success: function (result) {
+                    $(".divAnahtarPerformansGostergesi").html("<b>" + result?.Nesne.GostergeNo + "</b> " + result?.Nesne.Adi);
+                    $(".divAnahtarPerformansGostergesiAciklama").html(result?.Nesne.Aciklama);
+                    $("#txtBaslangicTarihi").datepicker("update", TarihDegeriDDMMYYYY(result?.Nesne.BaslangicTarihi));
+                    $("#txtBitisTarihi").datepicker("update", TarihDegeriDDMMYYYY(result?.Nesne.BitisTarihi));
+                    $("#txtBaslangicDegeri").val(result?.Nesne.BaslangicDegeri);
+
+                    $("#tblDonemTanimi > tbody").empty();
+                    DinamikTabloVeriYok("tblDonemTanimi")
+
+                    var satirBilgi = DonemTanimiBaslikOlustur();
+
+                    DinamikTabloSatirEkle("tblDonemTanimi", result?.Nesne?.Kod, satirBilgi, "", "", "")
+
+                    $.each(result?.Nesne?.Donemler, function (a, b) { DTabloSatirEkle(b); });
+
+                    if (kayitYetki || degerGirisYetki)
+                        $("#btnKaydet").show();
+                }
+            });
+        }
+
+        //Dinamik tablodan sil düğmesine basıldığında
+        function DonemTanimiSil(kontrol) {
+            if (DTabloSadeceOkuma) return;
+
+            var kod = $(kontrol).closest('tr')[0].id;
+            var kontrolId = kod;
+
+            //Henüz kayıt edilmemiş olduğu için sunucuya gitme. Sadece yeni kayıtta gerçekleşir
+            if (kod.indexOf("dtabloYeni_") > -1) {
+                $("#" + kontrolId).remove();
+                return;
+            }
+
+            kod = kod.replace("sttb_", "");
+
+            Swal.fire({
+                title: "@CustomResource["Baslik.Onay"]",
+                html: "@CustomResource["Onay.Sil"]",
+                showCancelButton: true,
+                confirmButtonText: '@CustomResource["Dugme.Evet"]',
+                cancelButtonText: '@CustomResource["Dugme.Hayır"]',
+            }).then(function (result) {
+                if (result.value) {
+
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "/StratejikPlanIzleme/DonemSil",
+                        data: {
+                            kod: kod,
+                        },
+                        success: function (result) {
+
+                            if (result.IslemSonuc) {
+                                ShowToastr("success", "toast-top-right", result.Mesaj);
+                                $("#" + kontrolId).remove();
+                            }
+                        }
+                    });
+
+                }
+            });
+        }
+
+        //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+        function DonemTanimiEkle() {
+
+            if (DTabloSadeceOkuma) return;
+
+            var knt = Donemler();
+
+            var donem = knt.length + 1;
+            var form = {
+                Kod: "dtabloYeni_" + jQuery.guid++,
+                Donem: donem,
+                DonemAdi: "Dönem " + donem,
+                PlanlananDeger: 0,
+                GerceklesenDeger: 0,
+                GerceklesenDegerYilSonu: 0,
+                SapmaNedeni: "",
+                SapmaOrani: 0
+            };
+
+            var satirSayisi = $("#tblDonemTanimi tbody tr").length;
+            if (satirSayisi == 0) {
+
+                var satirBilgi = DonemTanimiBaslikOlustur();
+                DinamikTabloSatirEkle("tblDonemTanimi", "tblDonemTanimi_Baslik", satirBilgi, "", "", "");
+            }
+
+            DTabloSatirEkle(form);
+        }
+
+        //Dinamik tabloya satır eklemek için
+        function DTabloSatirEkle(form) {
+
+            var satirBilgi = "<td width='10%' style='text-align: center;vertical-align: middle;'>" + form.Donem + "</td>";
+            satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric' required value='" + form.DonemAdi + "' /></td>";
+            satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.PlanlananDeger + "' /></td>";
+            satirBilgi += "<td width='20%'><div class='input-group'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDeger + "' /><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDegerYilSonu + "' /></div></td>";
+            satirBilgi += "<td width='10%'><span class='p-2'>" + form.SapmaOrani + "</span></td>";
+            satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric' value='" + form.SapmaNedeni + "' /></td>";
+
+            var duzenle = ""
+            var sil = "DonemTanimiSil";
+
+            if (DTabloSadeceOkuma) {
+                duzenle = "";
+                sil = "";
+                $(".dtabloVeriGiris").hide();
+            }
+
+            kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+            if (!kayitYetki) sil = "";
+
+            DinamikTabloSatirEkle("tblDonemTanimi", form.Kod, satirBilgi, duzenle, sil, "");
+
+            if (!kayitYetki) {
+                $.makeArray($('#tblDonemTanimi > tbody tr[id]').map(function () {
+
+                    $(this).find("td:eq(1) input").prop("disabled", true);
+                    $(this).find("td:eq(2) input").prop("disabled", true);
+
+                }));
+            }
+        }
+
+        //Kayıt yetkisi olmayan kullanıcı (okuma yetkisi olan) giriş yaptığında kayıt edilecek kontrolleri düzenler
+        function YetkisizAlanlariKoru() {
+            kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
+
+            if (kayitYetki) return;
+
+            $("#btnDonemTanimiEkle").hide();
+            $(".yetkisizseKoru").prop("disabled", true);
+        }
+
+        //Sapma oranının hesaplanmasını sağlar
+        function SapmaOraniHesapla(kontrol) {
+
+            var satir = $(kontrol).closest("tr");
+
+            var planlananDeger = $(satir).find("td:eq(2) input").val();
+            var gerceklesenAlanlar = $(satir).find("td:eq(3) input");
+            var gerceklesenDeger = $(gerceklesenAlanlar[0]).val().replace(",", ".");
+            var gerceklesenDegerYilSonu = $(gerceklesenAlanlar[1]).val().replace(",", ".");
+
+            if (Number(gerceklesenDegerYilSonu) > 0)
+                gerceklesen = gerceklesenDegerYilSonu;
+            else
+                gerceklesen = gerceklesenDeger;
+
+            //var sapmaOrani = (planlananDeger - gerceklesen) * 100 / planlananDeger;
+
+            var gerceklesmeOrani = 0;
+            if (planlananDeger > 0) {
+                gerceklesmeOrani = (gerceklesen / planlananDeger) * 100;
+                gerceklesmeOrani = gerceklesmeOrani.toFixed(2);
+            }
+
+            $(satir).find("td:eq(4) span").html(gerceklesmeOrani);
+        }
+
+        //İzleme tablosunun başlık bilgilerini oluşturur
+        function DonemTanimiBaslikOlustur() {
+            var satirBilgi = "<th width='10%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.Donem"])</th>";
+            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.DonemAdi"])<span class='text-danger ml-1'>*</span></th>";
+            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.PlanlananDeger"])<span class='text-danger ml-1'>*</span></th>";
+            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.GerceklesenDeger"])<br><span style='margin-left:20px'>1.</span><span style='margin-left:60px'>2.</span></th>";
+            satirBilgi += "<th width='10%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.SapmaOrani"]) %</th>";
+            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.SapmaNedeni"])</th>";
+            satirBilgi += "<th width='10%'></th>";
+
+            return satirBilgi;
+        }
+    </script>
+}
+
+

@@ -1,0 +1,1090 @@
+26.06.2026 12:59:03 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:0
+------------------------------------------------------
+26.06.2026 12:59:26 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:0
+------------------------------------------------------
+26.06.2026 12:59:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:0
+------------------------------------------------------
+26.06.2026 13:09:42 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:09:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:28 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:34 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:34 >>> resim null
+------------------------------------------------------
+26.06.2026 13:10:34 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 13:10:37 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:42 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:44 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:45 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:45 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:47 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:47 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:47 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:47 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:48 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:49 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:49 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:52 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:52 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:53 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:53 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:54 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:54 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:10:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:10:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 13:58:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:11 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:11 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:13 >>> resim null
+------------------------------------------------------
+26.06.2026 14:16:13 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:16:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:16:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:16:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:03 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:03 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:04 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:04 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:04 >>> resim null
+------------------------------------------------------
+26.06.2026 14:17:04 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:15 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:15 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:16 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:16 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:16 >>> resim null
+------------------------------------------------------
+26.06.2026 14:17:16 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:17:17 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:17 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:17 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:17 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:17 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:17 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:17 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:17 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:34 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:34 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:35 >>> resim null
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:36 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:36 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:53 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:54 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:54 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:54 >>> resim null
+------------------------------------------------------
+26.06.2026 14:17:54 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:17:55 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:31 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:31 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:32 >>> resim null
+------------------------------------------------------
+26.06.2026 14:18:32 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:18:32 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:32 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:32 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:32 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:33 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:33 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:33 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:33 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:18:33 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:18:33 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:04 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:04 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:19:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:19:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:05 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:05 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:06 >>> resim null
+------------------------------------------------------
+26.06.2026 14:21:06 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:21:16 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:21:16 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:23:53 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:23:53 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:18 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:18 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:24 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:24 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:25 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:25 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:42 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:42 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:42 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:42 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:42 >>> resim null
+------------------------------------------------------
+26.06.2026 14:24:42 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:24:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:51 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:51 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:24:51 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:24:51 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:04 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:04 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:21 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:21 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:21 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:21 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:22 >>> resim null
+------------------------------------------------------
+26.06.2026 14:25:22 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:25:22 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:22 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:22 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:22 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:22 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:22 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:23 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:23 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:30 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:30 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:30 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:30 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:30 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:30 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:57 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:57 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:57 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:57 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:57 >>> resim null
+------------------------------------------------------
+26.06.2026 14:25:58 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:25:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:25:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:25:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:06 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:06 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:06 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:06 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:07 >>> resim null
+------------------------------------------------------
+26.06.2026 14:26:07 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:26:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:26:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:26:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:27:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:27:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:27:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:27:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:28:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:28:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:28:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:28:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:13 >>> resim null
+------------------------------------------------------
+26.06.2026 14:29:13 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:29:14 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:14 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:14 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:14 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:14 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:14 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:29:14 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:29:14 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> resim null
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:35 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:35 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:43 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:43 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:44 >>> resim null
+------------------------------------------------------
+26.06.2026 14:30:44 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:30:44 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:44 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:44 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:44 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:44 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:58 >>> resim null
+------------------------------------------------------
+26.06.2026 14:30:58 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:30:59 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:59 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:30:59 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:30:59 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> resim null
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:07 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:07 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:12 >>> resim null
+------------------------------------------------------
+26.06.2026 14:31:12 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:31:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:12 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:12 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:13 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:13 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:20 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:20 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:20 >>> resim null
+------------------------------------------------------
+26.06.2026 14:31:20 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:31:20 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:20 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:27 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:27 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:27 >>> resim null
+------------------------------------------------------
+26.06.2026 14:31:28 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:31:28 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:28 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:28 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:28 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:51 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:51 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:51 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:51 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:58 >>> Yetki alaný:
+------------------------------------------------------
+26.06.2026 14:31:58 >>> kullanan.KoordinatorlukKod: , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> resim null
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:31:59 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:32:00 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:25 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:25 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:26 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:26 >>> resim null
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Could not find a part of the path 'C:\sources\asp.net\Risk.net\Risk.net.WebUI\Resim\bos.jpg'.    at System.IO.FileStream.ValidateFileHandle(SafeFileHandle fileHandle)
+   at System.IO.FileStream.CreateFileOpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.File.ReadAllBytes(String path)
+   at Risk.net.WebUI.Controllers.DosyaController.ResimGoster(String kod) in C:\sources\asp.net\Risk.net\Risk.net.WebUI\Controllers\DosyaController.cs:line 143
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:26 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:26 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:26 >>> Yetki alaný:13
+------------------------------------------------------
+26.06.2026 14:44:26 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------
+26.06.2026 14:44:26 >>> kullanan.KoordinatorlukKod:13 , Rolsayýsý:1
+------------------------------------------------------

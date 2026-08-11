@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <partial name="_Head" />
+    @RenderSection("HeadBlock", required: false)
+</head>
+<!-- BEGIN: Body-->
+<body>
+    <partial name="_ScriptsLoadingSaving" />
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-wrapper">
+            <div class="content-body">
+                <div class="auth-wrapper auth-v2">
+                    <div class="auth-inner row m-0">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+</body>
+<!-- END: Body-->
+</html>

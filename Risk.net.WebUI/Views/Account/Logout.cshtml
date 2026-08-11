@@ -1,0 +1,42 @@
+@{
+    var returnUrl = ViewData["ReturnUrl"] as string;
+    var error = TempData["error"] as string;
+    var beniHatirla = ViewData["BeniHatirla"] as string;
+    var kullaniciAdi = ViewData["KullaniciAdi"] as string;
+}
+<!-- Brand logo-->
+<a class="brand-logo" href="#">
+    <img class="img-fluid" style="position:relative;top:-10px;width:32px" src="~/img/logo.png" alt="logo" />
+    <h2 class="brand-text text-primary ml-2">@Arac.ConfigOku("Genel:YazilimAdi")</h2>
+</a>
+<!-- /Brand logo-->
+<!-- Left Text-->
+<div class="d-none d-lg-flex col-lg-8 align-items-center p-5 bg-gray-100">
+    <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+        <img class="img-fluid" src="~/img/account/login-v2.svg" alt="risk" />
+    </div>
+</div>
+<!-- /Left Text-->
+<div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+
+        <!-- Kurum logo-->
+        <div class="d-lg-flex col-lg-12 align-items-center p-5">
+            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5">
+                <img class="img-fluid" src="~/img/kurumlogo.png" alt="logo" />
+            </div>
+        </div>
+        <!-- /Kurum logo-->
+        @*<h1 class="mb-4 text-danger text-center">@CustomResource["Logout.Baslik"]</h1>*@
+
+
+        @*<h2 class="card-title fw-bold mb-1">@CustomResource["Login.Baslik"]</h2>*@
+        <p class="card-text mb-2">@CustomResource["Login.BaslikAciklama"]</p>
+        <br />
+        <br />
+
+        <div class="form-group text-left">
+            <a href="/" class="btn btn-primary text-white w-100" tabindex="3">@CustomResource["Login.GirisYap"]</a>
+        </div>
+    </div>
+</div>

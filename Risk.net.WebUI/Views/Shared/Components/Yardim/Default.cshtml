@@ -1,0 +1,116 @@
+@model Sonuc
+
+<input type="hidden" id="hdnYardimSayfaAdi" value="@(Model.AnahtarAlan)" />
+
+<div id="mdlDinamikYardimModal" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="d-flex flex-row">
+                            <div class="input-group input-group-lg mb-g">
+                                <input type="text" id="txtYardimArama" class="form-control shadow-inset-2" placeholder="@CustomResource["AramaAlani.Aciklama"]">
+                                <div class="input-group-append">
+                                    <button class="btn bg-warning text-white btn-xs waves-effect waves-themed" type="button" data-toggle="tooltip" title="@CustomResource["Dugme.Arama"]" onclick="ListeDoldur();"><i class="fal fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class='col-md-12'>
+                        <div class="yardimListesi"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var sayfaData = [];
+
+    $(function () {
+
+        sayfaData = SayfaDatasi();
+
+        $("#txtYardimArama").keyup(function (e) {
+            if (event.keyCode == '13') {
+                e.preventDefault();
+                ListeDoldur();
+            }
+        });
+
+        ListeDoldur();
+
+    });
+
+    var sablon = "<div class='row'>";
+    sablon += "	<div class='col-md-12'>";
+    sablon += "		<div id='c_{satir}' class='card border shadow-0 shadow-sm-hover mb-1'>";
+    sablon += "			<div class='card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top'>";
+    sablon += "				<div class='d-flex flex-row align-items-center'>";
+    sablon += "					<button class='js-expand-btn btn btn-sm btn-default mr-2' style='width:40px;' data-toggle='collapse' data-target='#c_{satir} > .card-body + .card-body' aria-expanded='false'>";
+    sablon += "						<span class='collapsed-hidden'>+</span>";
+    sablon += "						<span class='collapsed-reveal'>-</span>";
+    sablon += "					</button>";
+    sablon += "					<div class=''>";
+    sablon += "						<div class='text-info h5'>{Baslik}<div class='text-muted fs-sm fw-50'>{SayfaAdi}</div></div>";
+    sablon += "					</div>";
+    sablon += "				</div>";
+    sablon += "			</div>";
+    sablon += "			<div class='card-body p-0 collapse'>";
+    sablon += "				<div class='p-3'>";
+    sablon += "					{Icerik}";
+    sablon += "				</div>";
+    sablon += "			</div>";
+    sablon += "		</div>";
+    sablon += "	</div>";
+    sablon += "</div>";
+
+    function ListeDoldur() {
+
+        var form = {
+            Baslik: $("#txtYardimArama").val(),
+            SayfaAdi: $("#hdnYardimSayfaAdi").val(),
+        };
+
+        $(".yardimListesi").html("");
+
+        $.ajax({
+            url: "/Yardim/Listele",
+            data: { form: form },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+
+                    var liste = "";
+
+                    for (var i = 0; i < result.Liste.length; i++) {
+
+                        var bilgi = result.Liste[i];
+
+                        var tmpListe = sablon;
+                        tmpListe = tmpListe.replaceAll("{satir}", i);
+                        tmpListe = tmpListe.replace("{Baslik}", bilgi.Baslik);
+                        tmpListe = tmpListe.replace("{SayfaAdi}", SayfaAdiVer(bilgi.SayfaAdi));
+                        tmpListe = tmpListe.replace("{Icerik}", bilgi.Icerik);
+
+                        liste += tmpListe;
+                    }
+
+                    $(".yardimListesi").html(liste);
+                }
+            }
+        });
+    }
+</script>

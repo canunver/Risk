@@ -1,0 +1,11 @@
+@if (ViewBag.Heading?.Length > 0)
+{
+<h1 class="subheader-title">
+    @Html.Raw(ViewBag.Heading)
+    @if (!string.IsNullOrWhiteSpace(ViewBag.PageDescription))
+    {
+<small>
+    @Html.Raw(ViewBag.PageDescription)
+</small>
+    }
+</h1>}

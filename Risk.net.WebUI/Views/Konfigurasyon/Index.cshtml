@@ -1,0 +1,535 @@
+@model Konfigurasyon
+@{
+    ViewData["Title"] = CustomResource["Konfigurasyon.SayfaBaslik"];
+    ViewData["PageName"] = "Konfigurasyon";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["Konfigurasyon.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+    ViewData["Yardim"] = ViewData["PageName"];
+}
+<style>
+    .etkiOlasilikHucre {
+        color: #fff;
+        width: 15%;
+        cursor: pointer
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <input type="hidden" id="hdnKod" />
+
+                        <div id="mdlTanimUyari"></div>
+
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <div class="d-flex align-items-center">
+                                <div class="alert-icon width-6">
+                                    <span class="icon-stack icon-stack-lg">
+                                        <i class="base-2 icon-stack-3x color-warning-400"></i>
+                                        <i class="base-10 text-white icon-stack-1x"></i>
+                                        <i class="ni md-profile color-warning-800 icon-stack-2x"></i>
+                                    </span>
+                                </div>
+                                <div class="flex-1">
+                                    <span id="spnKayitSecimYazisi"></span>
+                                </div>
+                                <button type="button" id="btnOnayla" style="display:none;" class="btn btn-warning text-white waves-effect waves-themed">@CustomResource["Dugme.Onayla"]</button>
+                                <button type="button" id="btnYeni" style="display:none;" class="btn btn-success text-white waves-effect waves-themed">@CustomResource["Dugme.YeniKayit"]</button>
+                                <button type="button" id="btnTarihce" style="display:none;" class="btn btn-info text-white waves-effect waves-themed ml-2"><i class='fal fa-history'></i> @CustomResource["Dugme.TarihceGoster"]</button>
+                            </div>
+                        </div>
+
+
+
+                        <label class="form-label">@CustomResource["Konfigurasyon.Alan.EtkiOlasilikMatrisi"]</label>&nbsp;<span class='text-danger fs-nano'>@CustomResource["Konfigurasyon.Alan.MatrisDuzenle"]</span>
+
+                        <table class="table table-bordered table-sm w-100 text-center">
+                            <thead>
+                                <tr class="bg-gray-50">
+                                    <th>@CustomResource["Konfigurasyon.Alan.EtkiOlasilik"]</th>
+                                    <th>@CustomResource["Konfigurasyon.Alan.Olasilik1"]</th>
+                                    <th>@CustomResource["Konfigurasyon.Alan.Olasilik2"]</th>
+                                    <th>@CustomResource["Konfigurasyon.Alan.Olasilik3"]</th>
+                                    <th>@CustomResource["Konfigurasyon.Alan.Olasilik4"]</th>
+                                    <th>@CustomResource["Konfigurasyon.Alan.Olasilik5"]</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki5"]</td>
+                                    <td class="etkiOlasilikHucre" id="eo_5_1">5</td>
+                                    <td class="etkiOlasilikHucre" id="eo_5_2">10</td>
+                                    <td class="etkiOlasilikHucre" id="eo_5_3">15</td>
+                                    <td class="etkiOlasilikHucre" id="eo_5_4">20</td>
+                                    <td class="etkiOlasilikHucre" id="eo_5_5">25</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki4"]</td>
+                                    <td class="etkiOlasilikHucre" id="eo_4_1">4</td>
+                                    <td class="etkiOlasilikHucre" id="eo_4_2">8</td>
+                                    <td class="etkiOlasilikHucre" id="eo_4_3">12</td>
+                                    <td class="etkiOlasilikHucre" id="eo_4_4">16</td>
+                                    <td class="etkiOlasilikHucre" id="eo_4_5">20</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki3"]</td>
+                                    <td class="etkiOlasilikHucre" id="eo_3_1">3</td>
+                                    <td class="etkiOlasilikHucre" id="eo_3_2">6</td>
+                                    <td class="etkiOlasilikHucre" id="eo_3_3">9</td>
+                                    <td class="etkiOlasilikHucre" id="eo_3_4">12</td>
+                                    <td class="etkiOlasilikHucre" id="eo_3_5">15</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki2"]</td>
+                                    <td class="etkiOlasilikHucre" id="eo_2_1">2</td>
+                                    <td class="etkiOlasilikHucre" id="eo_2_2">4</td>
+                                    <td class="etkiOlasilikHucre" id="eo_2_3">6</td>
+                                    <td class="etkiOlasilikHucre" id="eo_2_4">8</td>
+                                    <td class="etkiOlasilikHucre" id="eo_2_5">10</td>
+                                </tr>
+                                <tr>
+                                    <td class="bg-gray-50 text-left">@CustomResource["Konfigurasyon.Alan.Etki1"]</td>
+                                    <td class="etkiOlasilikHucre" id="eo_1_1">1</td>
+                                    <td class="etkiOlasilikHucre" id="eo_1_2">2</td>
+                                    <td class="etkiOlasilikHucre" id="eo_1_3">3</td>
+                                    <td class="etkiOlasilikHucre" id="eo_1_4">4</td>
+                                    <td class="etkiOlasilikHucre" id="eo_1_5">5</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <hr />
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" for="txtOnayBekleyenRiskler">@CustomResource["Konfigurasyon.Alan.OnayBekleyenRiskler"]</label>
+                                            <input type="text" autocomplete="off" id="txtOnayBekleyenRiskler" placeholder="@CustomResource["Konfigurasyon.Alan.OnayBekleyenRisklerPlc"]" class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+                                     <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" for="txtAzaltmaPlaniYapilmadi">@CustomResource["Konfigurasyon.Alan.AzaltmaPlaniYapilmadi"]</label>
+                                            <input type="text" autocomplete="off" id="txtAzaltmaPlaniYapilmadi" placeholder="@CustomResource["Konfigurasyon.Alan.AzaltmaPlaniYapilmadiPlc"]" class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" for="txtOnayBekleyenAzaltmaPlani">@CustomResource["Konfigurasyon.Alan.OnayBekleyenAzaltmaPlani"]</label>
+                                            <input type="text" autocomplete="off" id="txtOnayBekleyenAzaltmaPlani" placeholder="@CustomResource["Konfigurasyon.Alan.OnayBekleyenAzaltmaPlaniPlc"]" class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="form-label" for="txtAzaltmaPlaniBitisTarihi">@CustomResource["Konfigurasyon.Alan.AzaltmaPlaniBitisTarihi"]</label>
+                                            <input type="text" autocomplete="off" id="txtAzaltmaPlaniBitisTarihi" placeholder="@CustomResource["Konfigurasyon.Alan.AzaltmaPlaniBitisTarihiPlc"]" class="form-control form-control-sm" />
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="p-3 rounded shadow-sm mb-g border border-faded">
+
+                                    <label class="form-label">@CustomResource["Konfigurasyon.Alan.RiskKategorisiFinansal"]</label>
+
+                                    <table class="table table-bordered table-sm w-100 text-center">
+                                        <thead>
+                                            <tr class="bg-gray-50">
+                                                <th>@CustomResource["Konfigurasyon.Alan.Puan"]</th>
+                                                <th>@CustomResource["Konfigurasyon.Alan.Aciklama"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-gray-50">
+                                            <tr>
+                                                <td>5</td>
+                                                <td><input type="text" autocomplete="off" id="txtRiskKategoriAciklama5" class="form-control form-control-sm" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td><input type="text" autocomplete="off" id="txtRiskKategoriAciklama4" class="form-control form-control-sm" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td><input type="text" autocomplete="off" id="txtRiskKategoriAciklama3" class="form-control form-control-sm" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td><input type="text" autocomplete="off" id="txtRiskKategoriAciklama2" class="form-control form-control-sm" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td><input type="text" autocomplete="off" id="txtRiskKategoriAciklama1" class="form-control form-control-sm" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                            <div class="ml-auto">
+
+                                <button type="button" id="btnOnayaGonder" style="display:none;" class="btn btn-warning text-white mr-1">@CustomResource["Dugme.OnayaGonder"]</button>
+                                <button type="button" id="btnKaydet" style="display:none;" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/formplugins/ctxMenu/ctxMenu.js"></script>
+<link rel="stylesheet" media="screen, print" href="~/js/formplugins/ctxMenu/ctxMenu.css">
+
+<script type="text/javascript">
+    var etkiOlasilikRenk = ["#fff", "#93D14C", "#00B24E", "#FFC001", "#FD0003", "#C00002"];
+
+    $(document).ready(function () {
+
+        Getir(10);
+
+        ContextMenuOlustur();
+
+        $("#btnKaydet").click(function () {
+            var form = {
+                Kod: $("#hdnKod").val(),
+                OnayBekleyenRiskler: $("#txtOnayBekleyenRiskler").val(),
+                OnayBekleyenAzaltma: $("#txtOnayBekleyenAzaltmaPlani").val(),
+                AzaltmaPlaniBitis: $("#txtAzaltmaPlaniBitisTarihi").val(),
+                AzaltmaPlaniOlusturulmadi: $("#txtAzaltmaPlaniYapilmadi").val(),
+                EtkiOlasilikMatrisi: EtkiOlasilikMatrisiDegerAl(),
+                RiskKategoriFinansal: RiskKategoriFinansalDegerAl(),
+            };
+
+            $.ajax({
+                url: "/Konfigurasyon/Kaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+
+                        $("#hdnKod").val(result.AnahtarAlan);
+
+                        KayitSecimYazisi(1, 10);
+
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+        });
+
+        $("#btnYeni").click(function () {
+            $("#hdnKod").val("");
+
+            KayitSecimYazisi(1, 10);
+        });
+
+        $("#btnOnayaGonder").click(function () {
+            OnayaGonder();
+        });
+
+        $("#btnOnayla").click(function () {
+            Onayla();
+        });
+
+        $("#btnTarihce").click(function () {
+            TarihceGoster($("#hdnKod").val());
+        });
+
+    });
+
+    function EtkiOlasilikMatrisiDegerAl() {
+
+        var data = "";
+
+        for (var etki = 1; etki <= 5; etki++) {
+            for (var olasilik = 1; olasilik <= 5; olasilik++) {
+                var hucreId = "eo_" + etki + "_" + olasilik;
+                var renk = $("#" + hucreId).css("backgroundColor");
+                var seviye = $("#" + hucreId).attr("data-seviye")
+
+                if (data != "") data += ",";
+                data += '{"etki":' + etki + ', "olasilik":' + olasilik + ', "renk":"' + renk + '", "seviye":"' + seviye + '"}';
+            }
+        }
+
+        data = "[" + data + "]"
+        return data;
+    }
+
+    function RiskKategoriFinansalDegerAl() {
+
+        var data = "";
+
+        for (var i = 1; i <= 5; i++) {
+
+            var aciklama = $("#txtRiskKategoriAciklama" + i).val();
+            aciklama = aciklama.replace("'", " ");
+            aciklama = aciklama.replace('"', " ");
+
+            if (data != "") data += ",";
+            data += '{"puan":' + i + ', "aciklama":"' + aciklama + '"}';
+        }
+
+        data = "[" + data + "]"
+        return data;
+    }
+
+    function Getir(durum) {
+        $.ajax({
+            url: "/Konfigurasyon/KayitGetir",
+            data: { durum: durum },
+            type: "POST",
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+
+                    VeriGoster(result.Nesne);
+                }
+                else {
+
+                    HataPenceresiGoster(result.Mesaj);
+                }
+            }
+        });
+    }
+
+    function VeriGoster(result) {
+
+        $("#hdnKod").val(result.Kod);
+
+        $("#txtOnayBekleyenRiskler").val(result.OnayBekleyenRiskler);
+        $("#txtOnayBekleyenAzaltmaPlani").val(result.OnayBekleyenAzaltma);
+        $("#txtAzaltmaPlaniBitisTarihi").val(result.AzaltmaPlaniBitis);
+        $("#txtAzaltmaPlaniYapilmadi").val(result.AzaltmaPlaniOlusturulmadi);
+
+
+        //Matris doldur
+        var renkler =result.EtkiOlasilikMatrisi;
+
+        if (renkler != "") {
+            var renkListe = JSON.parse(renkler);
+
+            $.each(renkListe, function (index, data) {
+                var hucreId = "eo_" + data["etki"] + "_" + data["olasilik"];
+                $("#" + hucreId).css("backgroundColor", data["renk"]);
+                $("#" + hucreId).attr("data-seviye", data["seviye"]);
+            });
+        }
+        else {
+            for (var etki = 1; etki <= 5; etki++) {
+                for (var olasilik = 1; olasilik <= 5; olasilik++) {
+                    var hucreId = "eo_" + etki + "_" + olasilik;
+                    $("#" + hucreId).css("backgroundColor", etkiOlasilikRenk[1]);
+                    $("#" + hucreId).attr("data-seviye", "1");
+                }
+            }
+        }
+
+        //Risk Kategorisi Doldur
+        var kategoriler =result.RiskKategoriFinansal;
+        if (kategoriler != "") {
+            var kategoriListe = JSON.parse(kategoriler);
+
+            $.each(kategoriListe, function (index, data) {
+                var hucreId = "txtRiskKategoriAciklama" + data["puan"];
+                $("#" + hucreId).val(data["aciklama"]);
+
+            });
+        }
+
+        KayitSecimYazisi(result.Durum, result.DigerKaydinDurumu);
+    }
+
+    function KayitSecimYazisi(durum, digerKaydinDurumu) {
+        $("#btnTarihce").hide();
+        $("#btnYeni").hide();
+        $("#btnOnayla").hide();
+        $("#btnOnayaGonder").hide();
+        $("#btnKaydet").hide();
+        var onayYetki =@(ViewBag.OnayYetki.ToString().ToLower());
+        var kayitYetki =@(ViewBag.KayitYetki.ToString().ToLower());
+
+        var kod = $("#hdnKod").val();
+        var kayitSecim = "";
+        if (durum == 10) {
+
+            kayitSecim = "<strong>Onaylı kaydı görmektesiniz.</strong> ";
+
+            if (digerKaydinDurumu == 1)
+                kayitSecim += "Revize kaydı görmek için <a href='.' onclick='javascript:Getir(1);return false;' class='text-danger'>buraya</a> tıklayın";
+            else if (digerKaydinDurumu == 3)
+                kayitSecim += "Onaya gönderilmiş kaydı görmek için <a  href='.' onclick='javascript:Getir(3);return false;' class='text-danger'>buraya</a> tıklayın";
+            else {
+                if (kayitYetki)
+                    $("#btnYeni").show();
+            }
+
+
+            if (kayitYetki) {
+                $("#btnTarihce").show();
+            }
+
+        }
+        else if (durum == 1) {
+            $("#btnKaydet").show();
+
+            kayitSecim = "<strong>Revize kaydı görmektesiniz.</strong> ";
+            if (digerKaydinDurumu > 0)
+                kayitSecim += "Onaylı kaydı görmek için <a href='.' onclick='javascript:Getir(10);return false;' class='text-danger'>buraya</a> tıklayın";
+
+            if (kod != "") {
+                $("#btnOnayaGonder").show();
+            }
+        }
+        else if (durum == 3) {
+
+            $("#btnKaydet").show();
+
+            kayitSecim = "<strong>Onaya Gönderilen kaydı görmektesiniz.</strong> ";
+            if (digerKaydinDurumu > 0)
+                kayitSecim += "Onaylı kaydı görmek için <a href='.' onclick='javascript:Getir(10);return false;' class='text-danger'>buraya</a> tıklayın";
+
+            if (onayYetki) {
+                $("#btnOnayla").show();
+                $("#btnKaydet").hide();
+            }
+        }
+        else  {
+            $("#btnYeni").show();
+
+            kayitSecim = "<strong>Konfigrasyon kaydı bulunamadı.</strong> ";
+        }
+
+        $("#spnKayitSecimYazisi").html(kayitSecim);
+
+    }
+
+    function OnayaGonder() {
+
+        var kod = $("#hdnKod").val();
+
+        Swal.fire({
+            title: '@CustomResource["Baslik.Onay"]',
+            html: '@CustomResource["Onay.OnayaGonder"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                $.ajax({
+                    url: "/Konfigurasyon/OnayaGonder",
+                    data: { kod: kod },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            KayitSecimYazisi(3, 10);
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                        }
+                        else {
+
+                            HataPenceresiGoster(result.Mesaj);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function Onayla() {
+
+        Swal.fire({
+            title: '@CustomResource["Baslik.Onay"]',
+            html: '@CustomResource["Onay.Onay"]',
+            showCancelButton: true,
+            confirmButtonText: '@CustomResource["Dugme.Evet"]',
+            cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+        }).then(function (result) {
+            if (result.value) {
+
+                var form = {
+                    Kod: $("#hdnKod").val(),
+                    OnayBekleyenRiskler: $("#txtOnayBekleyenRiskler").val(),
+                    OnayBekleyenAzaltma: $("#txtOnayBekleyenAzaltmaPlani").val(),
+                    AzaltmaPlaniBitis: $("#txtAzaltmaPlaniBitisTarihi").val(),
+                    AzaltmaPlaniOlusturulmadi: $("#txtAzaltmaPlaniYapilmadi").val(),
+                    EtkiOlasilikMatrisi: EtkiOlasilikMatrisiDegerAl(),
+                    RiskKategoriFinansal: RiskKategoriFinansalDegerAl(),
+                };
+
+                $.ajax({
+                    url: "/Konfigurasyon/Onayla",
+                    data: { form: form },
+                    type: "POST",
+                    success: function (result) {
+
+                        if (result.IslemSonuc) {
+
+                            KayitSecimYazisi(10, 0);
+
+                            ShowToastr("success", "toast-top-right", result.Mesaj);
+                        }
+                        else {
+
+                            HataPenceresiGoster(result.Mesaj);
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function ContextMenuOlustur() {
+        //Context menuyu oluştur
+        //*********
+        var contextMenuColor = CtxMenu(".etkiOlasilikHucre");
+        contextMenuColor.addItem("<i style='color:" + etkiOlasilikRenk[1] + "' class='fas fa-circle mr-1'></i>Çok Düşük", function (element) {
+            element.style.background = etkiOlasilikRenk[1];
+            $(element).attr("data-seviye", "1")
+        });
+        contextMenuColor.addItem("<i style='color:" + etkiOlasilikRenk[2] + "' class='fas fa-circle mr-1'></i>Düşük", function (element) {
+            element.style.background = etkiOlasilikRenk[2];
+            $(element).attr("data-seviye", "2")
+        });
+        contextMenuColor.addItem("<i style='color:" + etkiOlasilikRenk[3] + "' class='fas fa-circle mr-1'></i>Orta", function (element) {
+            element.style.background = etkiOlasilikRenk[3];
+            $(element).attr("data-seviye", "3")
+        });
+        contextMenuColor.addItem("<i style='color:" + etkiOlasilikRenk[4] + "' class='fas fa-circle mr-1'></i>Yüksek", function (element) {
+            element.style.background = etkiOlasilikRenk[4];
+            $(element).attr("data-seviye", "4")
+        });
+        contextMenuColor.addItem("<i style='color:" + etkiOlasilikRenk[5] + "' class='fas fa-circle mr-1'></i>Çok Yüksek", function (element) {
+            element.style.background = etkiOlasilikRenk[5];
+            $(element).attr("data-seviye", "5")
+        });
+        //*********
+    }
+
+
+</script>

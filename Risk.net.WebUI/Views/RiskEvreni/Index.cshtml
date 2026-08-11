@@ -1,0 +1,1395 @@
+@{
+    ViewData["Title"] = CustomResource["RiskIzleme.SayfaBaslik"];
+    ViewData["PageName"] = "RiskEvreni";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["RiskIzleme.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/RiskEvreni/TabloDoldur";
+    tablo.duzenleUrl = "/RiskEvreni/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "5%";
+    tablo.islemler.silme = false;
+    tablo.islemler.duzenleme = false;
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.RiskIzleme"] + "' class='btn btn-success btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TabloVeriDuzenle(!!DATA!!)'><i class='fal fa-eye'></i></a>";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.TarihceGoster"] + "' class='btn btn-info btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TarihceGosterIc(!!DATA!!)'><i class='fal fa-history'></i></a>";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.Kopyala"] + "' class='btn btn-secondary btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='Kopyala(!!DATA!!)'><i class='fal fa-copy'></i></a>";
+
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Koordinatorluk.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KoordinatorlukKod",
+                //aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+                aramaListeDoldurMetodu = "KoordinatorlukDoldur('ddlAramaKoordinatorlukKod')",
+                aramaAlaniSecimTetikle = "BirimDoldur('ddlAramaBirimKod','ddlAramaKoordinatorlukKod', false)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Birim.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Birim"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "BirimKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaBirimKod', false, null, true)",
+                aramaAlaniSecimTetikle = "SurecDoldur('ddlAramaSurecKod','ddlAramaKoordinatorlukKod','ddlAramaBirimKod', false);"
+                + "AmacDoldur('ddlAramaAmacKod','ddlAramaKoordinatorlukKod', false);",
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Amac.StratejikPlanDonem.BaslamaYil",
+                adi = @CustomResource["StratejikPlan.Alan.Donem"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "Amac.StratejikPlanDonemKod",
+                aramaListeDoldurUrl = "/TanimStratejikPlanDonem/SelectListesiVer",
+                render = "row?.Amac?.StratejikPlanDonemAdi",
+                aramadaGoster = false,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Amac.Amac",
+                adi = @CustomResource["RiskEvreni.Alan.Amac"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "AmacKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaAmacKod', false, null, true)",
+                aramaAlaniSecimTetikle = "HedefDoldur('ddlAramaHedefKod','ddlAramaAmacKod', false);",
+                tablodaGoster = true,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Hedef.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Hedef"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "HedefKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaHedefKod', false, null, true)",
+                tablodaGoster = true,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Surec.Adi",
+                adi = @CustomResource["Surec.Alan.Adi"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SurecKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaSurecKod', false, null, true)"
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskNo",
+                adi = @CustomResource["RiskEvreni.Alan.RiskNo"],
+                render = "RiskNoRender(row.JenerikRisk,row.KontrolEdildi,data)",
+                aramadaGoster = true,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskAdi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskAdi"],
+                aramadaGoster = false,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskTanimi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskTanimi"],
+                aramadaGoster = true,
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskKategoriAdlari",
+                adi = @CustomResource["RiskEvreni.Alan.RiskKategorisiAdi"],
+                siralama = false,
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "IlIrtibatOfisleriAdlari",
+                adi = @CustomResource["RiskEvreni.Alan.IlIrtibatOfisi"],
+                siralama = false,
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskSahibi.AdiSoyadi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskSahibi"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguRiskSahibiKod",
+                aramaListeDoldurUrl = "/TanimPersonel/SelectListesiVer",
+                siralama = true,
+                aramadaGoster = ViewBag.RiskSahibiAra
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniSorumlusu.AdiSoyadi",
+                adi = @CustomResource["RiskEvreni.Alan.AzaltmaPlaniSorumlusu"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguAzaltmaPlaniSorumlusuKod",
+                aramaListeDoldurUrl = "/TanimPersonel/SelectListesiVer",
+                siralama = true,
+                aramadaGoster = ViewBag.RiskSahibiAra
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Adi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskKategorileri"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguRiskKategoriKod",
+                aramaListeDoldurUrl = "/TanimRiskKategori/SelectListesiVer",
+                siralama = false,
+                tablodaGoster = false,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "SorguGecerlilikTarihi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskGecerlilikTarihi"],
+                tipi = "date",
+                render = "TarihDegeriDDMMYYYY(data)",
+                aramaTipi = "tarihAralik",
+                siralama = false,
+                tablodaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskGecerlilikTarihi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskGecerlilikTarihi"],
+                siralama = false,
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "",
+                adi = @CustomResource["RiskEvreni.Alan.BaskasiAdinaRiskDurumu"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguBaskasiAdinaRiskDurumu",
+                aramaListeDoldurUrl = "/RiskEvreni/BaskasiAdinaRiskSelectListesiVer",
+                tablodaGoster = false,
+                aramadaGoster = true
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "",
+                adi = @CustomResource["RiskEvreni.Alan.KontrolEdildi"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KontrolEdildi",
+                aramaListeDoldurUrl = "/RiskEvreni/KontrolEdildiSelectListesiVer",
+                tablodaGoster = false,
+                aramadaGoster = true
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,1)",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaDurum', true, null)",
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button type="button" id="btnRaporUret" class="btn btn-primary btn-sm text-white spinnerButton" data-bekle-text="Rapor Hazırlanıyor...">
+                        <span class="fal fa-download mr-2"></span>@CustomResource["Dugme.RaporUret"]
+                    </button>
+                    <div class="btn-group ml-2">
+                        <button type="button" id="btnCiktiTur" class="btn btn-outline-secondary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown">
+                            PDF
+                        </button>
+                        <div class="dropdown-menu" style="">
+                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('PDF');">PDF</a>
+                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('XLSX');">XLSX</a>
+                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('ODS');">ODS</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-risk" role="tab">Risk Kaydı</a></li>
+                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#tab-degerlendirmesi" role="tab">Risklerin Değerlendirilmesi</a></li>
+                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#tab-yonetilmesi" role="tab">Risklerin Yönetilmesi</a></li>
+                </ul>
+
+                <form class="needs-validation" novalidate>
+
+                    <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="tab-risk" role="tabpanel">
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskYonetimi.Alan.RiskNo"]</label>
+                                    <div class="divRiskNo text-danger"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Durum"]</label>
+                                    <div class="divDurum text-primary"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Koordinatorluk"]</label>
+                                    <div class="divKoordinatorluk"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Birim"]</label>
+                                    <div class="divBirim"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Amac"]</label>
+                                    <div class="divAmac"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Hedef"]</label>
+                                    <div class="divHedef"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="ddlSurec">@CustomResource["RiskEvreni.Alan.Surec"]</label>
+                                    <div class="divSurec"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label" for="ddlAltSurec">@CustomResource["RiskEvreni.Alan.AltSurec"]</label>
+                                    <div class="divAltSurec"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskKategorileri"]</label>
+                                    <div class="divRiskKategorisi"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.AnahtarRiskGostergesi"]</label>
+                                    <div class="divAnahtarRiskGostergesi"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskAdi"]</label>
+                                    <div class="divRiskAdi"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskTanimi"]</label>
+                                    <div class="divRiskTanimi"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Olay"]</label>
+                                    <div class="divOlaylar"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskGecerlilikTarihi"]</label>
+                                    <div class="divRiskGecerlilikTarihi"></div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskTuru"]</label>
+                                    <div class="divRiskTuru"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-degerlendirmesi" role="tabpanel">
+                            <div id="tab-degerlendirmesi-ic">
+                                <div class="form-group row">
+                                    <div class="col-md-3">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.RiskNo"]</label>
+                                        <div class="divRiskNo text-danger"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">@CustomResource["RiskEvreni.Alan.Durum"]</label>
+                                        <div class="divDurumRiskYonetimi text-primary"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.RiskKategorisiAdi"]</label>
+                                        <div class="divRiskKategorisi"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.AnahtarRiskGostergesiAdi"]</label>
+                                        <a class='btn btn-primary btn-sm btn-icon text-white genelTooltip' title='@CustomResource["Baslik.AnahtarRiskGostergesi"]' onclick='AnahtarRiskGostergesiGoster();'><i class='fal fa-search'></i></a>
+                                        <div class="divAnahtarRiskGostergesi"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.AnahtarRiskGostergesiSonDeger"]</label>
+                                        <div>
+                                            <span class="divAnahtarRiskGostergesiSonDeger"></span>
+                                            <span class="divAnahtarRiskGostergesiUyari"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.Olasilik"]</label>
+                                        <div class="divOlasilikKriter"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.Etki"]</label>
+                                        <div class="divEtkiKriter"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.YapisalRiskPuani"]</label>
+                                        <div class="divYapisalRiskPuani"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.YapisalRiskSeviyesi"]</label>
+                                        <div class="divYapisalRiskSeviyesi" style="height: 25px; padding: 3px 0 0 5px; width: 120px;"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.KontrolTanimi"]</label>
+                                        <table id="tblKontrolTanimi" class="table table-bordered table-hover table-striped table-sm w-100">
+                                            <thead></thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.ArtikRiskPuani"]</label>
+                                        <div class="divArtikRiskPuani"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.ArtikRiskSeviyesi"]</label>
+                                        <div class="divArtikRiskSeviyesi" style="height: 25px; padding: 3px 0 0 5px; width: 120px;"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.RiskeVerilecekCevap"]</label>
+                                        <div class="divRiskeVerilecekCevap"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">@CustomResource["RiskYonetimi.Alan.Aciklama"]</label>
+                                        <div class="divAciklamaRiskYonetimi"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-degerlendirmesi-kayitYok" style="display:none;" class="text-center text-primary"><img src="img/images/no-data-found.png" alt=""><br><h6>Gösterilecek kayıt yok</h6></div>
+                        </div>
+                        <div class="tab-pane fade" id="tab-yonetilmesi" role="tabpanel">
+                            <div id="tab-yonetilmesi-ic">
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskNo"]</label>
+                                    <div class="divRiskNo text-danger"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Durum"]</label>
+                                    <div class="divDurumRiskAzaltmaPlani text-primary"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.RiskKategorisiAdi"]</label>
+                                    <div class="divRiskKategorisi"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.RiskTanimi"]</label>
+                                    <div class="divRiskTanimiAzaltmaPlani"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.AzaltmaPlaniNo"]</label>
+                                    <div class="divAzaltmaPlaniNo"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.ArtikRiskSeviyesi"]</label>
+                                    <div class="divArtikRiskSeviyesi" style="height: 25px; padding: 3px 0 0 5px; width: 120px;"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.AzaltmaPlani"]</label>
+                                    <div class="divAzaltmaPlani"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.BaslangicTarihi"]</label>
+                                    <div class="divBaslangicTarihi"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.BitisTarihi"]</label>
+                                    <div class="divBitisTarihi"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.MevcutDurum"]</label>
+                                    <div class="divMevcutDurum"></div>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.TamamlanmaYuzdesi"]</label>
+                                    <div class="divTamamlanmaYuzdesi"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.AnahtarRiskGostergesiAdi"]</label>
+                                    <div class="divAnahtarRiskGostergesi"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label" for="ddlBirim">@CustomResource["RiskAzaltmaPlani.Alan.Sorumlu"]</label>
+                                    <div class="divSorumluAzaltma"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskEvreni.Alan.Koordinatorluk"]</label>
+                                    <div class="divKoordinatorluk"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.SorumluBirim"]</label>
+                                    <div class="divSorumluBirim"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.BirimlerIsbirligi"]</label>
+                                    <table id="tblDinamikKoorBirim" class="table table-bordered table-hover table-striped table-sm w-100">
+                                        <thead></thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label" for="ddlIliskiliAzaltmaPlani">@CustomResource["RiskAzaltmaPlani.Alan.IlsikiliAzaltmaPlani"]</label>
+                                    <div class="divIliskiliAzaltmaPlani"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.ErtelenmisDegistirilmisZamanPlani"]</label>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">
+                                            <div class="divErtelemeBaslangicTarihi"></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="divErtelemeBitisTarihi"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.ErtelemeNot"]</label>
+                                    <div class="divErtelemeNot"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">@CustomResource["RiskAzaltmaPlani.Alan.AzaltmaPlaniNotlar"]</label>
+                                    <div class="divAzaltmaPlaniNotlar"></div>
+                                </div>
+                            </div>
+                            </div>
+                            <div id="tab-yonetilmesi-kayitYok" style="display:none;" class="text-center text-primary"><img src="img/images/no-data-found.png" alt=""><br><h6>Gösterilecek kayıt yok</h6></div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <div class="ml-auto">
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdlAnahtarRiskGostergesi" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document" style="top: 10%;">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.SurecAdi"]</label>
+                        <div class="divSurec"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.AltSurecAdi"]</label>
+                        <div class="divAltSurec"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.RiskKategorisiAdi"]</label>
+                        <div class="divRiskKategorisi"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.RiskTanimi"]</label>
+                        <div class="divRiskTanimi"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiAdi"]</label>
+                        <div class="divAnahtarRiskGostergesiAdiSon"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.VeriDayanagi"]</label>
+                        <div class="divAnahtarRiskGostergesiVeriDayanagi"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.YesilDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi bu değerden küçük ve eşit olanlar YEŞİL değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiYesil"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.SariDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi Yeşil ve Kırmızı aralığı dışında kalanlar SARI değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiSari"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.KirmiziDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi bu değerden büyük ve eşit olanlar KIRIMIZI değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiKirmizi"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.HedefDeger"]</label>
+                        <div class="divAnahtarRiskGostergesiHedef"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.DegerlendirmeDonemleri"]</label>
+                        <table id="tblAnahtarRiskGostergesiDonem" class="table table-bordered table-hover table-striped table-sm w-100">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdlTarihce" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document" style="top: 10%;">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <ul class="nav nav-tabs nav-fill" role="tablist">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#tab-risk-tarihce" role="tab">Risk Kaydı</a></li>
+                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#tab-degerlendirmesi-tarihce" role="tab">Risklerin Değerlendirilmesi</a></li>
+                    <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#tab-yonetilmesi-tarihce" role="tab">Risklerin Yönetilmesi</a></li>
+                </ul>
+
+                <form class="needs-validation-tarihce" novalidate>
+                    <input type="hidden" id="hdnRiskEvreniKod" />
+                    <input type="hidden" id="hdnRiskYonetimiKod" />
+                    <input type="hidden" id="hdnRiskAzaltmaPlaniKod" />
+
+                    <div class="tab-content p-3">
+                        <div class="tab-pane fade show active" id="tab-risk-tarihce" role="tabpanel">
+                            <table id="tbl-risk-tarihce" class="table table-bordered table-hover table-striped table-sm w-100">
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab-degerlendirmesi-tarihce" role="tabpanel">
+                            <table id="tbl-degerlendirmesi-tarihce" class="table table-bordered table-hover table-striped table-sm w-100">
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="tab-yonetilmesi-tarihce" role="tabpanel">
+                            <table id="tbl-yonetilmesi-tarihce" class="table table-bordered table-hover table-striped table-sm w-100">
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                        <div class="ml-auto">
+                            <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="mdlDinamikTarihceModalDegisenDeger" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <pre id="divDegisenDeger"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var kod = '';
+    var olayRaporlamaForm = [];
+    var riskTuruListe = @Html.Raw(ViewBag.RiskTuruListesi);
+    durumlarListe = @Html.Raw(ViewBag.DurumListesi);
+    var etkiOlasilikMatrisi = @Html.Raw(ViewBag.EtkiOlasilikMatrisi);
+    var riskeVerilecekCevapListe = @Html.Raw(ViewBag.RiskeVerilecekCevapListesi);
+    var riskAzaltmaPlaniMevcutDurumListe = @Html.Raw(ViewBag.RiskAzaltmaPlaniMevcutDurumListesi);
+    var argPeriyotListe = @Html.Raw(ViewBag.ArgPeriyotListesi);
+    var ciktiTur = '';
+
+
+    $(document).ready(function () {
+
+        Select2Yap("ddlKontrolEdildi", true, null);
+        Select2Yap("ddlAramaDurum", true, durumlarListe);
+
+        Select2Yap("ddlAmac", true, null);
+        Select2Yap("ddlHedef", true, null);
+        Select2Yap("ddlSurec", true, null);
+        Select2Yap("ddlAltSurec", true, null);
+        Select2Yap("ddlBirim", true, null);
+        Select2Yap("ddlRiskKategori", true, null, false);
+        Select2Yap("ddlOlayRaporlama", true, null, false);
+        Select2Yap("ddlRiskSahibi", true, null);
+        Select2Yap("ddlRiskTuru", true, null);
+
+        AmacComboDoldur();
+
+        $.ajax({
+            url: "/TanimRiskKategori/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlRiskKategori", true, result);
+            }
+        });
+
+        $.ajax({
+            url: "/TanimKoordinatorluk/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlKoordinatorluk", true, result);
+            }
+        });
+
+        $.ajax({
+            url: "/RiskEvreni/SelectListesiVerRiskTuru",
+            type: "POST",
+            success: function (result) {
+
+                Select2Yap("ddlRiskTuru", true, result);
+            }
+        });
+
+        $('#ddlKoordinatorluk').bind('change', function () {
+            var koordinatorlukKod = $(this).val();
+            Select2Yap("ddlSurec", true, null);
+            Select2Yap("ddlAltSurec", true, null);
+            Select2Yap("ddlBirim", true, null);
+            Select2Yap("ddlRiskSahibi", true, null);
+            Select2Yap("ddlOlayRaporlama", true, null);
+
+            if (koordinatorlukKod == null) return;
+
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlBirim", true, result);
+
+                        $("#ddlBirim").val($("#hdnBirimKod").val()).trigger('change');
+                        $('#ddlBirim').prop('required', true);
+                        $("#ddlBirim").attr("placeholder", "@Html.Raw(@CustomResource["Lutfen.Seciniz"])");
+                    }
+                    else {
+
+                        SurecComboDoldur();
+                        RiskSahibiComboDoldur();
+
+                        $('#ddlBirim').prop('required', false);
+                        $("#ddlBirim").attr("placeholder", "Bu koordinatörlüğün birimi bulunmamaktadır");
+                    }
+                }
+            });
+        });
+
+        $('#ddlBirim').bind('change', function () {
+
+            var birimKod = $("#ddlBirim").val();
+            if (birimKod == null) return;
+            SurecComboDoldur();
+            RiskSahibiComboDoldur();
+            OlayComboDoldur();
+        });
+
+
+        $('#ddlAmac').bind('change', function () {
+            var amacKod = $(this).val();
+            HedefComboDoldur(amacKod);
+        });
+
+
+        $('#ddlSurec').bind('change', function () {
+            var surecKod = $(this).val();
+            AltSurecComboDoldur(surecKod);
+        });
+
+        $("#ddlCiktiTuru").select2({
+            allowClear: false,
+            data: ["PDF", "XLSX", "ODS"]
+        });
+
+        $("#btnRaporUret").click(function () {
+            RaporHazirla();
+        });
+
+        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+            TabDegisti($(this).attr('href'));
+        });
+
+    });
+
+    function AmacComboDoldur() {
+        //var koordinatorlukKod = $("#ddlKoordinatorluk").val();
+        //if (koordinatorlukKod == null) return;
+
+        $.ajax({
+            url: "/StratejikPlan/SelectListesiVer",
+            type: "POST",
+            data: { koordinatorlukKod: '' },//koordinatorlukKod
+            success: function (result) {
+
+                Select2Yap("ddlAmac", true, result);
+                Select2Yap("ddlAramaAmacKod", true, result);
+                $("#ddlAmac").val($("#hdnAmacKod").val()).trigger('change');
+            }
+        });
+    }
+
+    function HedefComboDoldur(amacKod) {
+
+        if (amacKod == null) {
+            Select2Yap("ddlHedef", true, []);
+            return;
+        }
+
+        $.ajax({
+            url: "/StratejikPlan/SelectListesiVerHedef",
+            type: "POST",
+            data: { stratejikPlanKod: amacKod },
+            success: function (result) {
+
+                Select2Yap("ddlHedef", true, result);
+                $("#ddlHedef").val($("#hdnHedefKod").val()).trigger('change');
+            }
+        });
+    }
+
+
+
+    function SurecComboDoldur() {
+        var koordinatorlukKod = $("#ddlKoordinatorluk").val();
+        var birimKod = $("#ddlBirim").val();
+        if (koordinatorlukKod == null) return;
+
+        //Birim combosu dolu ise ve seçim yapılmamış ise süreç doldurmasın, birimin seçilmesi gerekli
+        //Bazı koordinatörlüklerin birimi olmadığı için
+        var birimSayisi = $('#ddlBirim option').length;
+        if (birimSayisi > 0 && birimKod == null) return;
+
+        $.ajax({
+            url: "/Surec/SelectListesiVer",
+            type: "POST",
+            data: { koordinatorlukKod: koordinatorlukKod, birimKod: birimKod },
+            success: function (result) {
+
+                Select2Yap("ddlSurec", true, result);
+                $("#ddlSurec").val($("#hdnSurecKod").val()).trigger('change');
+            }
+        });
+    }
+
+    function AltSurecComboDoldur(surecKod) {
+
+        if (surecKod == null) {
+            Select2Yap("ddlAltSurec", true, []);
+            return;
+        }
+
+        $.ajax({
+            url: "/Surec/SelectListesiVerAltSurec",
+            type: "POST",
+            data: { surecKod: surecKod },
+            success: function (result) {
+
+                Select2Yap("ddlAltSurec", true, result);
+                $("#ddlAltSurec").val($("#hdnAltSurecKod").val()).trigger('change');
+            }
+        });
+    }
+
+    function RiskSahibiComboDoldur() {
+        var koordinatorlukKod = $("#ddlKoordinatorluk").val();
+        var birimKod = $("#ddlBirim").val();
+        if (koordinatorlukKod == null) return;
+
+        //Birim combosu dolu ise ve seçim yapılmamış ise amaç doldurmasın, birimin seçilmesi gerekli
+        //Bazı koordinatörlüklerin birimi olmadığı için
+        var birimSayisi = $('#ddlBirim option').length;
+        if (birimSayisi > 0 && birimKod == null) return;
+
+        $.ajax({
+            url: "/TanimYetki/RiskSahibiListesiVer",
+            type: "POST",
+            data: { koordinatorlukKod: koordinatorlukKod, birimKod: birimKod },
+            success: function (result) {
+
+                Select2Yap("ddlRiskSahibi", true, result);
+                $("#ddlRiskSahibi").val($("#hdnRiskSahibiKod").val()).trigger('change');
+
+                $("#ddlRiskSahibi").hide();
+            }
+        });
+    }
+
+    function OlayComboDoldur() {
+        var koordinatorlukKod = $("#ddlKoordinatorluk").val();
+        var birimKod = $("#ddlBirim").val();
+        if (koordinatorlukKod == null) return;
+
+        //Birim combosu dolu ise ve seçim yapılmamış ise amaç doldurmasın, birimin seçilmesi gerekli
+        //Bazı koordinatörlüklerin birimi olmadığı için
+        var birimSayisi = $('#ddlBirim option').length;
+        if (birimSayisi > 0 && birimKod == null) return;
+
+        $.ajax({
+            url: "/OlayRaporlama/SelectListesiVer",
+            type: "POST",
+            data: { form: { koordinatorlukKod: koordinatorlukKod, birimKod: birimKod } },
+            success: function (result) {
+                Select2Yap("ddlOlayRaporlama", true, result);
+                $("#ddlOlayRaporlama").val(olayRaporlamaForm).trigger('change');
+            }
+        });
+    }
+
+    function RiskTuruAdiVer(tur) {
+        var ad = "";
+        if (riskTuruListe != undefined && riskTuruListe != null) {
+            $.each(riskTuruListe, function (a, b) {
+                if (b.id == tur)
+                    ad = b.text;
+            });
+        }
+        return ad;
+    }
+
+    function AnahtarRiskGostergesiDurumVer(data) {
+        var renk = "";
+        if (data == "KIRMIZI") renk = "#dc3545";
+        if (data == "SARI") renk = "#ffc107";
+        if (data == "YEŞİL") renk = "#28a745";
+
+        if (renk != "")
+            return "<span class='text-center genelTooltip' data-toggle='tooltip' style='color:" + renk + "' title='" + data + "'><i class='fas fa-circle'></i></span>";
+        else
+            return "";
+    }
+
+    var olasilikKriter = ["@Html.Raw(@CustomResource["Konfigurasyon.Alan.Olasilik1"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Olasilik2"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Olasilik3"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Olasilik4"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Olasilik5"])"];
+
+    var etkiKriter = ["@Html.Raw(@CustomResource["Konfigurasyon.Alan.Etki1"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Etki2"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Etki3"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Etki4"])"
+        , "@Html.Raw(@CustomResource["Konfigurasyon.Alan.Etki5"])"];
+
+    //function YapisalRiskPuaniRenkVer(data) {
+    //    var ad = "";
+    //    if (etkiOlasilikMatrisi != null) {
+    //            $.each(etkiOlasilikMatrisi, function (a, b) {
+    //                if (b.etki == data?.Etki && b.olasilik == data?.Olasilik)
+    //                    ad = "<div class='text-center' style='color:#ffffff;line-height: 2em;background-color: " + b.renk + " !important;'>" + b.etki * b.olasilik + "</div>";
+    //        });
+    //        return ad;
+    //    }
+    //}
+
+    function YapisalRiskSeviyesiGetir(etki, olasilik) {
+        if (etki > 0 && olasilik > 0) {
+            $.ajax({
+                url: "/Konfigurasyon/YapisalRiskSeviyesiVer",
+                data: { etki: etki, olasilik: olasilik },
+                type: "POST",
+                success: function (result) {
+                    $(".divYapisalRiskSeviyesi").html(result?.seviyeAdi);
+                    $(".divYapisalRiskSeviyesi").css('background-color', result?.renk);
+                    $(".divYapisalRiskSeviyesi").css('color', '#ffffff');
+                    $(".divYapisalRiskSeviyesi").css('border', 'solid 1px #000000');
+                }
+            });
+        }
+        else {
+            $(".divYapisalRiskSeviyesi").html('');
+            $(".divYapisalRiskSeviyesi").css('background-color', '#ffffff');
+            $(".divYapisalRiskSeviyesi").css('color', '#000000');
+            $(".divYapisalRiskSeviyesi").css('border', 'none');
+        }
+    }
+
+    function ArtikRiskSeviyesiGetir(artikRiskPuani) {
+        if (artikRiskPuani > 0) {
+            $.ajax({
+                url: "/Konfigurasyon/ArtikRiskSeviyesiVer",
+                data: { artikRiskPuani: artikRiskPuani },
+                type: "POST",
+                success: function (result) {
+                    $(".divArtikRiskSeviyesi").html(result?.seviyeAdi);
+                    $(".divArtikRiskSeviyesi").css('background-color', result?.renk);
+                    $(".divArtikRiskSeviyesi").css('color', '#ffffff');
+                    $(".divArtikRiskSeviyesi").css('border', 'solid 1px #000000');
+                }
+            });
+        }
+        else {
+            $(".divArtikRiskSeviyesi").html('');
+            $(".divArtikRiskSeviyesi").css('background-color', '#ffffff');
+            $(".divArtikRiskSeviyesi").css('color', '#000000');
+            $(".divArtikRiskSeviyesi").css('border', 'none');
+        }
+    }
+
+
+    function KontrollerSatirEkle(form) {
+        var satirBilgi = "<td width='40%'>" + form.Tanim + "</td>";
+        satirBilgi += "<td width='35%'>" + form.Etkinlik + "</td>";
+        satirBilgi += "<td width='15%'>" + form.OnemDuzeyi + "</td>";
+
+        $("#tblKontrolTanimi tbody").append("<tr>" + satirBilgi + "</tr>");
+    }
+
+
+    function RiskeVerilecekCevapAdiVer(data) {
+        var ad = "";
+        if (riskeVerilecekCevapListe != undefined && riskeVerilecekCevapListe != null) {
+            $.each(riskeVerilecekCevapListe, function (a, b) {
+                if (b.id == data)
+                    ad = b.text;
+            });
+        }
+        return ad;
+    }
+
+    function RiskAzaltmaPlaniMevcutDurumListeAdiVer(data) {
+        var ad = "";
+        if (riskAzaltmaPlaniMevcutDurumListe != undefined && riskAzaltmaPlaniMevcutDurumListe != null) {
+            $.each(riskAzaltmaPlaniMevcutDurumListe, function (a, b) {
+                if (b.id == data)
+                    ad = b.text;
+            });
+        }
+        return ad;
+    }
+
+
+    function DTabloSatirEkleIsbirligi(kAdi, bAdi) {
+        var satirBilgi = "<td width='80%'>" + kAdi + " - " + bAdi + "</td>";
+
+        $("#tblDinamikKoorBirim tbody").append("<tr>" + satirBilgi + "</tr>");
+    }
+
+
+    function AnahtarRiskGostergesiGoster() {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/AnahtarRiskGostergesi/KayitGetir",
+            data: {
+                kod: kod,
+            },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+
+                    $(".divAnahtarRiskGostergesiAdiSon").html(result?.Nesne?.AnahtarRiskGostergesiAdiSon);
+                    $(".divAnahtarRiskGostergesiVeriDayanagi").html(result?.Nesne?.AnahtarRiskGostergesi?.VeriDayanagi);
+
+                    $(".divAnahtarRiskGostergesiYesil").html(result?.Nesne?.AnahtarRiskGostergesi?.YesilDeger);
+                    $(".divAnahtarRiskGostergesiKirmizi").html(result?.Nesne?.AnahtarRiskGostergesi?.KirmiziDeger);
+                    $(".divAnahtarRiskGostergesiHedef").html(result?.Nesne?.AnahtarRiskGostergesi?.HedefDeger);
+
+                    var satirBilgi = "<th width='20%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.Donem"])</th><th width='40%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.GerceklesenDeger"])</th><th width='40%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.Periyot"])</th>";
+                    var tabloSatirAlan = $("#tblAnahtarRiskGostergesiDonem tbody");
+                    tabloSatirAlan.empty();
+                    tabloSatirAlan.append(satirBilgi);
+
+                    var sirali = [];
+                    $.each(result?.Nesne?.AnahtarRiskGostergesi?.Donemler, function (a, b) { sirali[b.Donem] = b; });
+                    $.each(sirali, function (a, b) { if (b != undefined) { AnahtarRiskGostergesiDonemSatirEkle(b); } });
+
+                    jModalShow("mdlAnahtarRiskGostergesi", "@CustomResource["Baslik.AnahtarRiskGostergesi"]");
+                }
+            }
+        });
+    }
+
+    function AnahtarRiskGostergesiDonemSatirEkle(form) {
+        var satirBilgi = "<td width='20%'>" + form.Donem + "</td>";
+        satirBilgi += "<td width='40'>" + form.GerceklesenDeger + "</td>";
+        satirBilgi += "<td width='40%'>" + ArgPeriyotAdiVer(form.Periyot) + "</td>";
+
+        $("#tblAnahtarRiskGostergesiDonem tbody").append("<tr>" + satirBilgi + "</tr>");
+    }
+
+    function ArgPeriyotAdiVer(periyot) {
+        var ad = "";
+        if (argPeriyotListe != undefined && argPeriyotListe != null) {
+            $.each(argPeriyotListe, function (a, b) {
+                if (b.id == periyot)
+                    ad = b.text;
+            });
+        }
+        return ad;
+    }
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        jModalShow("mdlTanim", "@CustomResource["Baslik.RiskIzleme"]");
+    }
+
+    function Temizle(deger) {
+        $('[href="#tab-risk"]').tab('show');
+
+        kod = deger?.Kod;
+        $(".divRiskNo").html(deger?.RiskNo);
+        $(".divDurum").html(DurumAdiVer(deger?.Durum));
+        $(".divKoordinatorluk").html(deger?.Koordinatorluk?.Adi);
+        $(".divBirim").html(deger?.Birim?.Adi);
+        $(".divAmac").html(deger?.Amac?.Amac);
+        $(".divHedef").html(deger?.Hedef?.Adi);
+        $(".divSurec").html(deger?.Surec?.Adi);
+        $(".divAltSurec").html(deger?.AltSurec?.Adi);
+        $(".divRiskKategorisi").html(deger?.RiskKategoriAdlari);
+        $(".divAnahtarRiskGostergesi").html(deger?.AnahtarRiskGostergesiAdi);
+        $(".divRiskAdi").html(deger?.RiskAdi);
+        $(".divRiskTanimi").html(deger?.RiskTanimi);
+        $(".divOlaylar").html(deger?.OlayRaporlarAdlari);
+        $(".divRiskGecerlilikTarihi").html(TarihDegeriDDMMYYYY(deger?.RiskBitisTarihi) == '31.12.9999' ? "Belirsiz" : TarihDegeriDDMMYYYY(deger?.RiskBaslangicTarihi) + " - " + TarihDegeriDDMMYYYY(deger?.RiskBitisTarihi));
+        $(".divRiskTuru").html(RiskTuruAdiVer(deger?.RiskTuru));
+
+
+        //Risk Yönetimi
+        if (deger?.RiskYonetimi == null) {
+            $("#tab-degerlendirmesi-ic").hide();
+            $("#tab-degerlendirmesi-kayitYok").show();
+        }
+        else {
+            $("#tab-degerlendirmesi-ic").show();
+            $("#tab-degerlendirmesi-kayitYok").hide();
+        }
+
+        $(".divDurumRiskYonetimi").html(DurumAdiVer(deger?.RiskYonetimi?.Durum));
+
+        var anahtarRiskGostergesiDurum = AnahtarRiskGostergesiDurumVer(deger?.AnahtarRiskGostergesi?.Durum);
+        var sonDonemDeger = deger?.AnahtarRiskGostergesi ? deger?.AnahtarRiskGostergesi?.SonDonemDeger : "";
+        $(".divAnahtarRiskGostergesiSonDeger").html(anahtarRiskGostergesiDurum + " " + sonDonemDeger);
+
+        $(".divOlasilikKriter").html(olasilikKriter[deger?.RiskYonetimi?.Olasilik - 1]);
+        $(".divEtkiKriter").html(olasilikKriter[deger?.RiskYonetimi?.Etki - 1]);
+        $(".divYapisalRiskPuani").html(deger?.RiskYonetimi?.YapisalRiskPuani);
+        //$(".divYapisalRiskSeviyesi").html(YapisalRiskPuaniRenkVer(deger?.RiskYonetimi?.YapisalRiskPuaniRenk));
+        YapisalRiskSeviyesiGetir(deger?.RiskYonetimi?.Etki, deger?.RiskYonetimi?.Olasilik);
+
+        var satirBilgi = "<th width='40%'>@Html.Raw(@CustomResource["RiskYonetimi.Alan.KontrolTanimi"])</th><th width='35%'>@Html.Raw(@CustomResource["RiskYonetimi.Alan.KontrolEtkinligi"])</th><th width='15%'>@Html.Raw(@CustomResource["RiskYonetimi.Alan.KontrolOnemDuzeyi"]) (%) </th>";
+        var tabloSatirAlan = $("#tblKontrolTanimi tbody");
+        tabloSatirAlan.empty();
+        tabloSatirAlan.append(satirBilgi);
+        $.each(deger?.RiskYonetimi?.Kontroller, function (a, b) { KontrollerSatirEkle(b); });
+
+        $(".divArtikRiskPuani").html(deger?.RiskYonetimi?.ArtikRiskPuani);
+        ArtikRiskSeviyesiGetir(deger?.RiskYonetimi?.ArtikRiskPuani);
+        $(".divRiskeVerilecekCevap").html(RiskeVerilecekCevapAdiVer(deger?.RiskYonetimi?.RiskeVerilecekCevap));
+        $(".divAciklamaRiskYonetimi").html(deger?.RiskYonetimi?.Aciklama);
+
+        //Risk Azaltma
+        if (deger?.RiskYonetimi?.RiskAzaltmaPlani == null) {
+            $("#tab-yonetilmesi-ic").hide();
+            $("#tab-yonetilmesi-kayitYok").show();
+        }
+        else {
+            $("#tab-yonetilmesi-ic").show();
+            $("#tab-yonetilmesi-kayitYok").hide();
+        }
+
+        $(".divDurumRiskAzaltmaPlani").html(DurumAdiVer(deger?.RiskYonetimi?.RiskAzaltmaPlani?.Durum));
+
+        var risklerForm = [];
+        $.each(deger?.RiskYonetimi?.RiskAzaltmaPlani?.Riskler, function (a, b) { risklerForm.push(b?.RiskEvreniKod); });
+        $(".divRiskTanimiAzaltmaPlani").html(risklerForm.join(', '));
+
+        $(".divAzaltmaPlaniNo").html(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniNo);
+        $(".divAzaltmaPlani").html(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlani);
+
+        $(".divBaslangicTarihi").html(TarihDegeriDDMMYYYY(deger?.RiskYonetimi?.RiskAzaltmaPlani?.BaslangicTarihi));
+        $(".divBitisTarihi").html(TarihDegeriDDMMYYYY(deger?.RiskYonetimi?.RiskAzaltmaPlani?.BitisTarihi));
+        $(".divMevcutDurum").html(RiskAzaltmaPlaniMevcutDurumListeAdiVer(deger?.RiskYonetimi?.RiskAzaltmaPlani?.MevcutDurum));
+        $(".divTamamlanmaYuzdesi").html(deger?.RiskYonetimi?.RiskAzaltmaPlani?.TamamlamaYuzdesi);
+
+        var sorumluBirimAdi = deger?.RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Adi ? deger?.RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Adi : deger?.Birim?.Adi;
+        $(".divSorumluBirim").html(sorumluBirimAdi);
+
+        $("#tblDinamikKoorBirim tbody").empty();
+        $.each(deger?.RiskYonetimi?.RiskAzaltmaPlani?.IsbirligiBirimler, function (a, b) { DTabloSatirEkleIsbirligi(b?.Koordinatorluk?.Adi, b?.Birim?.Adi ?? ''); });
+
+        $(".divSorumluAzaltma").html((deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniSorumlusuKod != null ? deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniSorumlusu?.AdiSoyadiUnvan : deger?.RiskSahibi?.AdiSoyadiUnvan) ?? '');
+
+
+        var IliskiliPlanlarForm = [];
+        $.each(deger?.RiskYonetimi?.RiskAzaltmaPlani?.IliskiliPlanlar, function (a, b) { IliskiliPlanlarForm.push(b.IliskiKod); });
+        $(".divIliskiliAzaltmaPlani").html(IliskiliPlanlarForm.join(', '));
+
+
+        $(".divErtelemeBaslangicTarihi").html(TarihDegeriDDMMYYYY(deger?.RiskYonetimi?.RiskAzaltmaPlani?.ErtelemeBaslangicTarihi));
+        $(".divErtelemeBitisTarihi").html(TarihDegeriDDMMYYYY(deger?.RiskYonetimi?.RiskAzaltmaPlani?.ErtelemeBitisTarihi));
+        $(".divErtelemeNot").html(deger?.RiskYonetimi?.RiskAzaltmaPlani?.ErtelemeNot);
+        $(".divAzaltmaPlaniNotlar").html(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniNotlar);
+               
+
+    }
+
+
+    function TabDegisti(tabAdi) {
+
+        var ilgiKod = "";
+        var ilgiTalbo = "";
+
+        if (tabAdi == "#tab-risk-tarihce") {
+            ilgiKod = $("#hdnRiskEvreniKod").val();
+            ilgiTablo = $("#tbl-risk-tarihce");
+        }
+        else if (tabAdi == "#tab-degerlendirmesi-tarihce") {
+            ilgiKod = $("#hdnRiskYonetimiKod").val();
+            ilgiTablo = $("#tbl-degerlendirmesi-tarihce");
+        }
+        else if (tabAdi == "#tab-yonetilmesi-tarihce") {
+            ilgiKod = $("#hdnRiskAzaltmaPlaniKod").val();
+            ilgiTablo = $("#tbl-yonetilmesi-tarihce");
+        }
+
+        if (ilgiKod != "") {
+
+            eval(ilgiTablo).html('');
+
+            $.ajax({
+                type: "GET",
+                url: "/ViewComponent/TarihceGoster",
+                data: { ilgiKod: ilgiKod },
+                success: function (result) {
+                    eval(ilgiTablo).html($(result).find('table').html());
+
+                    jModalShow("mdlTarihce", "@CustomResource["Baslik.Tarihce"]");
+                }
+            });
+        }
+    }
+
+
+    function TarihceGosterIc(kod) {
+        $.ajax({
+            url: "/RiskEvreni/KayitGetir",
+            type: "POST",
+            data: { kod: kod },
+            success: function (result) {
+                $("#hdnRiskEvreniKod").val(result?.Nesne?.Kod);
+                $("#hdnRiskYonetimiKod").val(result?.Nesne?.RiskYonetimi?.Kod);
+                $("#hdnRiskAzaltmaPlaniKod").val(result?.Nesne?.RiskYonetimi?.RiskAzaltmaPlani?.Kod);
+
+                $('[href="#tab-risk-tarihce"]').tab('show');
+                TabDegisti("#tab-risk-tarihce");
+            }
+        });
+    }
+
+
+
+    function CiktiTurAyarla(tur) {
+        ciktiTur = tur;
+        $("#btnCiktiTur").text(tur);
+        $("#btnCiktiTur").dropdown("toggle");
+    }
+
+    function RaporHazirla() {
+
+        IslemYapiliyorBasla("btnRaporUret");
+
+        var form = {
+            Kod: 'RPT012',
+            CiktiTur: ciktiTur,
+            KoordinatorlukKod: $("#ddlAramaKoordinatorlukKod").val(),
+            BirimKod: $("#ddlAramaBirimKod").val(),
+            DurumSorgu: $("#ddlAramaDurum").val(),
+        };
+
+        $.ajax({
+            url: "/Raporlar/RaporHazirla",
+            type: "POST",
+            data: { form: JSON.stringify(form) },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob, status, xhr) {
+
+                DosyaIndirJS(blob, status, xhr);
+
+                IslemYapiliyorBitir("btnRaporUret");
+            },
+            error: function (jqXHR, exception) {
+
+                IslemYapiliyorBitir("btnRaporUret");
+
+                alert(exception);
+            },
+        });
+
+    }
+
+    function Kopyala(kod) {
+        window.open("/RiskKaydi?kopyalaKod=" + kod, '_blank');
+    }
+
+    function TarihceDegisenDegerGoster(e, baslik) {
+        var jsonObj = JSON.parse($(e).prev().html());
+        //var jsonPretty = JSON.stringify(jsonObj, null, '\t');
+
+        var satirlar = "";
+        var tabloSablon = "<table class='table table-bordered table-hover table-striped table-sm w-100'>";
+        tabloSablon += "<tr>";
+        tabloSablon += "<th>Alan</th><th>Yeni</th><th>Eski</th>";
+        tabloSablon += "</tr>";
+
+        tabloSablon += "{SATIRLAR}";
+
+        tabloSablon += "</table>";
+
+        var satirSablon = "<tr>";
+        satirSablon += "<td>{ADI}</td><td>{YENI}</td><td>{ESKI}</td>";
+        satirSablon += "</tr>";
+
+        Object.keys(jsonObj).forEach(key => {
+
+            satirlar += TarihceSatiriIsle(key, jsonObj[key], satirSablon)
+        })
+
+        tabloSablon = tabloSablon.replace("{SATIRLAR}", satirlar);
+        $("#divDegisenDeger").html(tabloSablon);
+
+        jModalShow("mdlDinamikTarihceModalDegisenDeger", "Değişen Değer / " + baslik);
+    }
+
+    function TarihceSatiriIsle(alan, obj, satirSablon) {
+
+        var yeni = obj.yeni != undefined ? obj.yeni : ""
+        var eski = obj.eski != undefined ? obj.eski : "";
+
+        if (yeni instanceof Object) yeni = JSON.stringify(yeni, null, '\t');
+        if (eski instanceof Object) eski = JSON.stringify(eski, null, '\t');
+
+        var satir = satirSablon.replace("{ADI}", alan).replace("{YENI}", yeni).replace("{ESKI}", eski)
+
+        return satir;
+    }
+
+</script>

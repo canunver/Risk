@@ -1,0 +1,437 @@
+@{
+    ViewData["Title"] = CustomResource["AnahtarRiskGostergesi.SayfaBaslik"];
+    ViewData["PageName"] = "AnahtarRiskGostergesi";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["AnahtarRiskGostergesi.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/AnahtarRiskGostergesi/TabloDoldur";
+    tablo.silUrl = "/AnahtarRiskGostergesi/Sil";
+    tablo.duzenleUrl = "/AnahtarRiskGostergesi/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.anahtarAlani2 = "AnahtarRiskGostergesi?.Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "50px";
+    tablo.islemler.silme = false;
+    tablo.islemler.duzenleme = false;
+    tablo.aramaAlaniGoster = true;
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DetayGoster"] + "' class='btn btn-success btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TabloVeriGosterIc(!!DATA!!)'><i class='fal fa-eye'></i></a>";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.Pasif"] + "' class='btn btn-danger btn-sm btn-icon waves-effect waves-themed text-white genelTooltip cssPasifYap' style='margin-right:5px;' onClick='TabloVeriSil(!!DATA2!!)'><i class='fal fa-trash-alt'></i></a>";
+    tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.TarihceGoster"] + "' class='btn btn-info btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='TarihceGoster(!!DATA2!!)'><i class='fal fa-history'></i></a>";
+    tablo.satirOlustur = "SatirOlustur(row, data, dataIndex)";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Koordinatorluk.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Koordinatorluk"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "KoordinatorlukKod",
+                aramaListeDoldurUrl = "/TanimKoordinatorluk/SelectListesiVer",
+                aramaAlaniSecimTetikle = "BirimDoldur('ddlAramaBirimKod','ddlAramaKoordinatorlukKod', false)",
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Birim.Adi",
+                adi = @CustomResource["RiskEvreni.Alan.Birim"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "BirimKod",
+                aramaListeDoldurMetodu = "Select2Yap('ddlAramaBirimKod', false, null, true)",
+                aramaAlaniSecimTetikle = "SurecDoldur('ddlAramaSurecKod','ddlAramaKoordinatorlukKod','ddlAramaBirimKod', false);",
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Surec.Adi",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.SurecAdi"],
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AltSurec.Adi",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.AltSurecAdi"],
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskNo",
+                adi = @CustomResource["RiskEvreni.Alan.RiskNo"],
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskKategoriAdlari",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.RiskKategorisiAdi"],
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "RiskAdi",
+                adi = @CustomResource["RiskEvreni.Alan.RiskAdi"],
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesiAdiSon",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiAdi"],
+                aramadaGoster = true
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesi.VeriDayanagi",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.VeriDayanagi"],
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesi.YesilDeger",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.Degerler"],
+                aramadaGoster = false,
+                render = "KontrolDegerlerSatirRender(row)"
+
+            });
+    //tablo.alanlar.Add(new DataTablesAlanlar
+    //{
+    //    veriAlani = "AnahtarRiskGostergesi.SariDeger",
+    //    adi = @CustomResource["AnahtarRiskGostergesi.Alan.SariDeger"],
+    //    aramadaGoster = false
+    //});
+    //tablo.alanlar.Add(new DataTablesAlanlar
+    //{
+    //    veriAlani = "AnahtarRiskGostergesi.KirmiziDeger",
+    //    adi = @CustomResource["AnahtarRiskGostergesi.Alan.KirmiziDeger"],
+    //    aramadaGoster = false
+    //});
+    //tablo.alanlar.Add(new DataTablesAlanlar
+    //{
+    //    veriAlani = "AnahtarRiskGostergesi.HedefDeger",
+    //    adi = @CustomResource["AnahtarRiskGostergesi.Alan.HedefDeger"],
+    //    aramadaGoster = false
+    //});
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Kod",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.Degerlendirme"],
+                aramadaGoster = false,
+                render = "DegerlendirmeSatirRender(row)"
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesi.DurumDeger",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.DurumDeger"],
+                render = "DurumVer(data)",
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesi.Trend",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.Trend"],
+                render = "TrendVer(data)",
+                aramadaGoster = false
+            });
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "AnahtarRiskGostergesiAdiSon",
+                adi = @CustomResource["AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiKayitBilgisi"],
+                aramaTipi = "combo",
+                aramaAlanAdi = "SorguAnahtarRiskGostergesi",
+                aramaListeDoldurUrl = "/AnahtarRiskGostergesi/BosDoluSelectListesiVer",
+                tablodaGoster = false,
+            });
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+            {
+                veriAlani = "Durum",
+                adi = @CustomResource["Genel.Alan.Durum"],
+                tipi = "int",
+                genislik = "10%",
+                render = "DurumAdiVer(data,'AKTIFPASIF')",
+                aramaTipi = "combo",
+                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIF',false)",
+                tablodaGoster = false,
+                aramadaGoster = true
+            });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<div id="mdlAnahtarRiskGostergesi" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["RiskEvreni.Alan.Koordinatorluk"]</label>
+                        <div class="divKoordinatorluk"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["RiskEvreni.Alan.Birim"]</label>
+                        <div class="divBirim"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.SurecAdi"]</label>
+                        <div class="divSurec"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.AltSurecAdi"]</label>
+                        <div class="divAltSurec"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.RiskKategorisiAdi"]</label>
+                        <div class="divRiskKategorisi"></div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">@CustomResource["RiskEvreni.Alan.RiskAdi"]</label>
+                        <div class="divRiskAdi"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiAdi"]</label>
+                        <div class="divAnahtarRiskGostergesiAdiSon"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.VeriDayanagi"]</label>
+                        <div class="divAnahtarRiskGostergesiVeriDayanagi"></div>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.YesilDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi bu değerden küçük ve eşit olanlar YEŞİL değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiYesil"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.SariDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi Yeşil ve Kırmızı aralığı dışında kalanlar SARI değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiSari"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.KirmiziDeger"]</label>
+                        <i class="fas fa-question-circle cursor-pointer ml-1 genelTooltip" title="Son değerlendirme bilgisi bu değerden büyük ve eşit olanlar KIRIMIZI değerini alacaktır"></i>
+                        <div class="divAnahtarRiskGostergesiKirmizi"></div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">@CustomResource["AnahtarRiskGostergesi.Alan.HedefDeger"]</label>
+                        <div class="divAnahtarRiskGostergesiHedef"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.DegerlendirmeDonemleri"]</label>
+                        <table id="tblAnahtarRiskGostergesiDonem" class="table table-bordered table-hover table-striped table-sm w-100">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var periyotListesi = @Html.Raw(ViewBag.PeriyotListesi);
+    var riskKod = "@Html.Raw(ViewBag.RiskKod)";
+
+    $(document).ready(function () {
+
+        if (riskKod != "") {
+            var pathname = window.location.pathname;
+            window.history.pushState({ path: '' }, '', pathname);
+            TabloVeriGosterIc(riskKod);
+        }
+    });
+
+    function TrendVer(data) {
+        if (data == undefined) return;
+
+        var renk = "#bbb";
+
+        var trend = "";
+        if (data == "AZALAN") trend = "fa-arrow-alt-down";
+        if (data == "ARTAN") trend = "fa-arrow-alt-up";
+        if (data == "SABİT") trend = "fa-arrow-alt-right";
+
+        if (trend != "")
+            return "<div class='text-center genelTooltip' data-toggle='tooltip' style='color:" + renk + "' title='" + data + "'><i class='fas " + trend + " fa-2x'></i></div> ";
+        else
+            return "";
+    }
+
+    function DurumVer(data) {
+
+        var renk = "";
+        if (data == "KIRMIZI") renk = "#dc3545";
+        if (data == "SARI") renk = "#ffc107";
+        if (data == "YEŞİL") renk = "#28a745";
+
+        if (renk != "")
+            return "<div class='text-center genelTooltip' data-toggle='tooltip' style='color:" + renk + "' title='" + data + "'><i class='fas fa-circle fa-2x'></i></div>";
+        else
+            return "";
+    }
+
+    function DegerlendirmeSatirRender(data) {
+
+        var deger = "";
+
+        var sirali = [];
+
+        if (data.AnahtarRiskGostergesi?.Donemler) {
+
+            $.each(data.AnahtarRiskGostergesi?.Donemler, function (a, b) { sirali[b.Donem] = b });
+
+            $.each(sirali, function (a, b) {
+                if (b != null && Number(b.GerceklesenDeger) > 0) {
+                    deger += "<div><b>" + a + ".Dönem:</b> " + b.GerceklesenDeger;
+                    if (Number(b.Periyot) > 0) {
+                        $.each(periyotListesi, function (a1, b1) {
+                            if (b1.id == b.Periyot)
+                                deger += " / " + b1.text;
+                        });
+                    }
+                    deger += "</div>";
+                }
+            });
+        }
+
+        return deger;
+    }
+
+    function KontrolDegerlerSatirRender(row) {
+        var deger = "";
+        if (row.AnahtarRiskGostergesi) {
+
+            deger += "<span style='color:#28a745;white-space: nowrap;'> <= " + row.AnahtarRiskGostergesi.YesilDeger + "</span>";
+            deger += "<span style='color:#ffc107;white-space: nowrap;'> - Sarı - </span>";
+            deger += "<span style='color:#dc3545;white-space: nowrap;'> >= " + row.AnahtarRiskGostergesi.KirmiziDeger + "</span><br>";
+            deger += "<span style='color:#007bff;white-space: nowrap;'>Hedef: " + row.AnahtarRiskGostergesi.HedefDeger + "</span>";
+        }
+
+        return deger;
+    }
+
+    function TabloVeriGosterIc(kod) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: "/AnahtarRiskGostergesi/KayitGetir",
+            data: {
+                kod: kod,
+            },
+            success: function (result) {
+
+                if (result.IslemSonuc) {
+
+                    $(".divKoordinatorluk").html(result?.Nesne?.Koordinatorluk?.Adi);
+                    $(".divBirim").html(result?.Nesne?.Birim?.Adi);
+                    $(".divSurec").html(result?.Nesne?.Surec?.Adi);
+                    $(".divAltSurec").html(result?.Nesne?.AltSurec?.Adi);
+                    $(".divRiskKategorisi").html(result?.Nesne?.RiskKategoriAdlari);
+                    $(".divRiskAdi").html(result?.Nesne?.RiskAdi);
+
+                    $(".divAnahtarRiskGostergesiAdiSon").html(result?.Nesne?.AnahtarRiskGostergesiAdiSon);
+                    $(".divAnahtarRiskGostergesiVeriDayanagi").html(result?.Nesne?.AnahtarRiskGostergesi?.VeriDayanagi);
+
+                    $(".divAnahtarRiskGostergesiYesil").html(result?.Nesne?.AnahtarRiskGostergesi?.YesilDeger);
+                    $(".divAnahtarRiskGostergesiKirmizi").html(result?.Nesne?.AnahtarRiskGostergesi?.KirmiziDeger);
+                    $(".divAnahtarRiskGostergesiHedef").html(result?.Nesne?.AnahtarRiskGostergesi?.HedefDeger);
+
+                    var satirBilgi = "<th width='20%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.Donem"])</th><th width='40%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.GerceklesenDeger"])</th><th width='40%'>@Html.Raw(@CustomResource["AnahtarRiskGostergesi.Alan.Periyot"])</th>";
+                    var tabloSatirAlan = $("#tblAnahtarRiskGostergesiDonem tbody");
+                    tabloSatirAlan.empty();
+                    tabloSatirAlan.append(satirBilgi);
+
+                    var sirali = [];
+                    $.each(result?.Nesne?.AnahtarRiskGostergesi?.Donemler, function (a, b) { sirali[b.Donem] = b; });
+                    $.each(sirali, function (a, b) { if (b != undefined) { AnahtarRiskGostergesiDonemSatirEkle(b); } });
+
+                    jModalShow("mdlAnahtarRiskGostergesi", "@CustomResource["Baslik.AnahtarRiskGostergesi"]");
+                }
+            }
+        });
+    }
+
+    function AnahtarRiskGostergesiDonemSatirEkle(form) {
+        var satirBilgi = "<td width='20%'>" + form.Donem + "</td>";
+        satirBilgi += "<td width='40%'>" + form.GerceklesenDeger + "</td>";
+        satirBilgi += "<td width='40%'>" + ArgPeriyotAdiVer(form.Periyot) + "</td>";
+
+        $("#tblAnahtarRiskGostergesiDonem tbody").append("<tr>" + satirBilgi + "</tr>");
+    }
+
+    function ArgPeriyotAdiVer(periyot) {
+        var ad = "";
+        if (periyotListesi != undefined && periyotListesi != null) {
+            $.each(periyotListesi, function (a, b) {
+                if (b.id == periyot)
+                    ad = b.text;
+            });
+        }
+        return ad;
+    }
+
+    function SatirOlustur(row, data) {
+        if (data?.AnahtarRiskGostergesi?.Durum == 99) {
+            $(row).find('td:eq(4)').css('background-color', '#cb0000');
+        }
+    }
+
+</script>

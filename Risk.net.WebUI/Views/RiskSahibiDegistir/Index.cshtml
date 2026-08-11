@@ -1,0 +1,124 @@
+@{
+    ViewData["Title"] = CustomResource["RiskSahibiDegistir.SayfaBaslik"];
+    ViewData["PageName"] = "RiskSahibiDegistir";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["RiskSahibiDegistir.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="form-group row">
+                        <div class="col-md-12 mevcutRiskSahibiAlani" style="display:none">
+                            <label class="form-label" for="ddlRiskSahibiEski">@CustomResource["RiskSahibiDegistir.Alan.RiskSahibiEski"]</label>
+                            <select id="ddlRiskSahibiEski"></select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="form-label" for="ddlRiskSahibiYeni">@CustomResource["RiskSahibiDegistir.Alan.RiskSahibiYeni"]</label>
+                            <select id="ddlRiskSahibiYeni"></select>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                                <div class="ml-auto">
+                                    <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var riskSahibiYetki = @Html.Raw(ViewBag.RiskSahibiYetki.ToString().ToLower());
+
+    $(document).ready(function () {
+
+        if (riskSahibiYetki)
+            $('.mevcutRiskSahibiAlani').show();
+
+        Select2Yap("ddlRiskSahibiEski", true, null);
+        Select2Yap("ddlRiskSahibiYeni", true, null);
+
+        $.ajax({
+            url: "/TanimYetki/SelectListesiVer",
+            type: "POST",
+            data: { koordinatorlukKod: '_', birimKod: '' },
+            success: function (result) {
+
+                if (riskSahibiYetki)
+                    Select2Yap("ddlRiskSahibiEski", true, result);
+
+                Select2Yap("ddlRiskSahibiYeni", true, result);
+            }
+        });
+
+        $("#btnKaydet").click(function () {
+            Kaydet();
+        });
+
+    });
+
+
+    function Kaydet() {
+
+        var eski = $('#ddlRiskSahibiEski').select2('data');
+        var yeni = $('#ddlRiskSahibiYeni').select2('data');
+
+        if ((riskSahibiYetki && eski.length > 0 || !riskSahibiYetki) && yeni.length > 0) {
+
+            var html = riskSahibiYetki ? eski[0].text + " üzerindeki riskler <br>" : "Üzerinizdeki riskler <br>";
+            html+= yeni[0].text + " üzerine aktarılacaktır. Devam edilsin mi?";
+
+            Swal.fire({
+                title: '@CustomResource["Baslik.Onay"]',
+                html: html,
+                showCancelButton: true,
+                confirmButtonText: '@CustomResource["Dugme.Evet"]',
+                cancelButtonText: '@CustomResource["Dugme.Hayır"]'
+                }).then(function (result) {
+                    if (result.value) {
+
+                        $.ajax({
+                            url: "/RiskSahibiDegistir/Kaydet",
+                            data: {
+                                eskiKod: $('#ddlRiskSahibiEski').val(),
+                                yeniKod: $('#ddlRiskSahibiYeni').val(),
+                            },
+                            type: "POST",
+                            success: function (result) {
+
+                                if (result.IslemSonuc) {
+                                    ShowToastr("success", "toast-top-right", result.Mesaj);
+                                    Temizle();
+                                }
+                                else {
+                                    HataPenceresiGoster(result.Mesaj);
+                                }
+
+                            }
+                        });
+                    }
+            });
+        }
+
+    }
+
+    function Temizle() {
+        $('#ddlRiskSahibiEski').val('').trigger('change');
+        $('#ddlRiskSahibiYeni').val('').trigger('change');
+    }
+
+</script>

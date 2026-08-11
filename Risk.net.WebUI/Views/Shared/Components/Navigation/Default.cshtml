@@ -1,0 +1,127 @@
+@model SmartNavigation
+@{
+    var pageName = ViewData["PageName"]?.ToString().ToLower();
+}
+<ul id="js-nav-menu" class="nav-menu">
+    @foreach (var group in Model.Lists)
+    {
+        @if (group.Items.Any())
+        {
+            var groups = group.Items.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+
+            group.Items.ForEach(item =>
+            {
+                var result = item.Items?.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+                if (result?.Any() == true)
+                {
+                    groups = groups.Concat(result).ToList();
+                }
+            });
+            <li class="@(groups.Contains(pageName) ? "active open" : "")">
+                <a href="#" title="@CustomResource[group.Title]">
+                    <i class="@group.Icon"></i>
+                    <span class="nav-link-text" data-i18n="@group.I18n">@CustomResource[group.Text]</span>
+                    @if (group.Span.HasValue())
+                    {
+                        <span class="@group.Span.Class">@group.Span.Text.AsRaw()</span>
+                    }
+                </a>
+                <ul>
+                    @{
+                        foreach (var item in group.Items)
+                        {
+                            var items = item.Items?.Select(x => x.Href.ToPage()).Where(x => !x.IsVoid()).ToList();
+
+                            if (item.Disabled)
+                            {
+                                <text>
+                                    <li class="disabled">
+                                </text>
+                            }
+                            else
+                            {
+                                if (items?.Any() == true)
+                                {
+                                    <text>
+                                    <li class="@(items.Contains(pageName) || item.IsRelatedTo(pageName) ? "active open" : "")">
+                                    </text>
+                                }
+                                else
+                                {
+                                    <text>
+                                    <li class="@(pageName == item.Href.ToPage() ? "active" : "")">
+                                    </text>
+                                }
+                            }
+                            <text>
+                                <a href="@item.Route" title="@CustomResource[item.Title]" data-filter-tags="@(CustomResource[group.Title]+" "+CustomResource[item.Title])">
+                                    <span class="nav-link-text" data-i18n="@item.I18n">@CustomResource[item.Text]</span>
+                                    @if (item.Span.HasValue())
+                                    {
+                                        <span class="@item.Span.Class">@item.Span.Text.AsRaw()</span>
+                                    }
+                                </a>
+                            </text>
+                            if (item.Items?.Any() == true)
+                            {
+                                <text>
+                                    <ul>
+                                        @foreach (var subItem in item.Items)
+                                        {
+                                            if (subItem.Disabled)
+                                            {
+                                                <text>
+                                                <li class="disabled">
+                                </text>
+                            }
+                            else
+                            {
+                                <text>
+                                <li class="@(pageName == subItem.Href.ToPage() ? "active" : "")">
+                                </text>
+                            }
+                            <a href="@subItem.Route" title="@CustomResource[subItem.Title]" data-filter-tags="@(CustomResource[group.Title]+" "+CustomResource[subItem.Title])">
+                                <span class="nav-link-text" data-i18n="@subItem.I18n">@CustomResource[subItem.Text]</span>
+                            </a>
+                        @:</li>
+                    }
+                                    </ul>
+                                    </text>
+                                }
+                            @:</li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            if (group.Type == ItemType.Category)
+            {
+                <li class="nav-title">@CustomResource[group.Title]</li>
+            }
+            else
+            {
+                <li class="@(pageName == group.Href.ToPage() ? "active" : "")">
+                    <a href="@group.Route" target="@(group.Route.StartsWith("http") ? "_blank" : "")" style="text-decoration:none !important" title="@CustomResource[group.Title]" data-filter-tags="@CustomResource[group.Title]">
+                        <i class="@group.Icon"></i>
+                        <span class="nav-link-text" data-i18n="@group.I18n">@CustomResource[group.Title]</span>
+                    </a>
+                </li>
+            }
+        }
+    }
+</ul>
+
+<script>
+
+    $(document).ready(function () {
+
+        $.each($('a[data-filter-tags]'), function (index, item) {
+            var str = $(item).attr('data-filter-tags').toLowerCase();
+
+            $(item).attr('data-filter-tags', str);
+        });
+    });
+
+</script>

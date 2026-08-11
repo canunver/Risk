@@ -1,0 +1,271 @@
+@{
+    ViewData["Title"] = CustomResource["Raporlar.SayfaBaslik"];
+    ViewData["PageName"] = "Raporlar";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["Raporlar.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+
+}
+
+<input type="hidden" id="hdnKod" />
+<input type="hidden" id="hdnCiktiTur" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="tblRapor" class="table table-bordered table-hover table-sm w-100 text-center">
+                                        <thead>
+                                            <tr class="bg-gray-50">
+                                                <th style="width:60px">@CustomResource["Raporlar.SiraNo"]</th>
+                                                <th>@CustomResource["Raporlar.Adi"]</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="cursor-pointer">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row kriterAlani" style="display:none">
+                                <div class="col-md-12">
+                                    <div class=" p-3 rounded shadow-sm mb-g border border-faded">
+                                        <div class="form-group row dugmeAlan">
+                                            <div class="col-md-12">
+                                                <div class="d-flex">
+                                                    <button type="button" id="btnRaporUret" class="btn btn-primary btn-sm text-white spinnerButton" data-bekle-text="Rapor Hazırlanıyor...">
+                                                        <span class="fal fa-download mr-2"></span>@CustomResource["Dugme.RaporUret"]
+                                                    </button>
+
+                                                    <div class="btn-group ml-auto">
+                                                        <button type="button" id="btnCiktiTur" class="btn btn-outline-secondary btn-sm dropdown-toggle waves-effect waves-themed" data-toggle="dropdown">
+                                                            PDF
+                                                        </button>
+                                                        <div class="dropdown-menu" style="">
+                                                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('PDF');">PDF</a>
+                                                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('XLSX');">XLSX</a>
+                                                            <a class="dropdown-item" href="javascript:CiktiTurAyarla('ODS');">ODS</a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-6 yilAlani">
+                                                <label class="form-label" for="txtYil">@CustomResource["Raporlar.Alan.Yil"]</label>
+                                                <input type="number" id="txtYil" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 donemAlani">
+                                                <label class="form-label" for="ddlDonem">@CustomResource["Raporlar.Alan.Donem"]</label>
+                                                <select id="ddlDonem"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row koordinatorlukAlani">
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="ddlKoordinatorluk">@CustomResource["Raporlar.Alan.Koordinatorluk"]</label>
+                                                <select id="ddlKoordinatorluk" multiple></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row birimAlani">
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="ddlBirim">@CustomResource["Raporlar.Alan.Birim"]</label>
+                                                <select id="ddlBirim"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row ilIrtibatOfisiAlani">
+                                            <div class="col-md-12">
+                                                <label class="form-label" for="ddlBirim">@CustomResource["Raporlar.Alan.IlIrtibatOfisi"]</label>
+                                                <select id="ddlIlIrtibatOfisi" multiple></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#txtYil").val(@Html.Raw(ViewBag.Yil));
+
+        RaporListesiOlustur();
+
+        $("#ddlCiktiTuru").select2({
+            allowClear: false,
+            data: ["PDF", "XLSX", "ODS"]
+        });
+
+
+        $.ajax({
+            url: "/Raporlar/SelectListesiVerDonem",
+            type: "POST",
+            success: function (result) {
+                Select2Yap("ddlDonem", true, result);
+            }
+        });
+
+        $.ajax({
+            url: "/TanimKoordinatorluk/SelectListesiVer",
+            type: "POST",
+            success: function (result) {
+                result.unshift({ id: '-42', text: '42 İl Koordinatörlüğü', ekBilgi: '' });
+                result.unshift({ id: '-1', text: 'Tüm Kurum', ekBilgi: '' });
+                Select2Yap("ddlKoordinatorluk", true, result);
+            }
+        });
+
+         $.ajax({
+            url: "/Raporlar/SelectListesiVerIlIrtibatOfisi",
+            type: "POST",
+            success: function (result) {
+                Select2Yap("ddlIlIrtibatOfisi", true, result);
+            }
+        });
+
+        $('#ddlKoordinatorluk').bind('change', function () {
+            var koordinatorlukKod = $(this).val();
+            Select2Yap("ddlBirim", true, null);
+            if (koordinatorlukKod == null) return;
+
+            $.ajax({
+                url: "/TanimBirim/SelectListesiVer",
+                data: { koordinatorlukKod: koordinatorlukKod },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.length > 0) {
+
+                        Select2Yap("ddlBirim", true, result);
+                    }
+                }
+            });
+        });
+
+        $("#btnRaporUret").click(function () {
+            RaporHazirla();
+        });
+
+        //Rapor tablosundaki ilk raporu seç
+        $("#tblRapor>tbody>tr:first").trigger('click');
+    });
+
+    function Temizle() {
+        $(".koordinatorlukAlani").hide();
+        $(".birimAlani").hide();
+        $(".yilAlani").hide();
+        $(".donemAlani").hide();
+        $(".ilIrtibatOfisiAlani").hide();
+    }
+
+    function RaporListesiOlustur() {
+        var raporListe = @Html.Raw(ViewBag.RaporListe);
+
+        var siraNo = 0;
+        $.each(raporListe, function (index, value) {
+
+            siraNo++;
+            var satirBilgisi = "<tr data-id='" + value.kod + "'><td>" + siraNo + "</td><td class='text-left'>" + value.adi + "</td></tr>";
+
+            $("#tblRapor tbody").append(satirBilgisi);
+        });
+
+
+        $("#tblRapor").on("click", "tr", function () {
+
+            var kod = $(this).data("id");
+            if (kod == undefined) return;
+
+            $("#hdnKod").val(kod);
+
+            $("#tblRapor tr").removeClass("bg-primary text-white");
+            $(this).addClass("bg-primary text-white");
+
+            KriterAlanlariniGoster();
+        });
+    }
+
+    function KriterAlanlariniGoster() {
+        var kod = $("#hdnKod").val();
+
+        Temizle();
+        $(".kriterAlani").show();
+        $(".yilAlani").show();
+
+        if (kod == "RPT001" || kod == "RPT002" || kod == "RPT003" || kod == "RPT004" || kod == "RPT006" || kod == "RPT007" || kod == "RPT008" || kod == "RPT010" || kod == "RPT011" || kod == "RPT014") {
+            $(".koordinatorlukAlani").show();
+            $(".birimAlani").show();
+        }
+        if (kod == "RPT001" || kod == "RPT007") {
+            $(".yilAlani").show();
+        }
+        if (kod == "RPT001") {
+            $(".yilAlani").show();
+            $(".donemAlani").show();
+        }
+        if (kod == "RPT001" || kod == "RPT002" || kod == "RPT003" || kod == "RPT004" || kod == "RPT006" || kod == "RPT007" || kod == "RPT008" || kod == "RPT010") {
+            $(".ilIrtibatOfisiAlani").show();
+        }
+    }
+
+    function CiktiTurAyarla(tur) {
+        $("#btnCiktiTur").text(tur);
+
+        $("#hdnCiktiTur").val(tur);
+
+        $("#btnCiktiTur").dropdown("toggle");
+    }
+
+    function RaporHazirla() {
+
+        IslemYapiliyorBasla("btnRaporUret");
+
+        var form = {
+            Kod: $("#hdnKod").val(),
+            Yil: $("#txtYil").val(),
+            Donem: $("#ddlDonem").val(),
+            KoordinatorlukKod: $("#ddlKoordinatorluk").val().join(","),
+            lIlIrtibatOfisiKod: $("#ddlIlIrtibatOfisi").val().join(","),
+            BirimKod: $("#ddlBirim").val(),
+            CiktiTur: $("#hdnCiktiTur").val(),
+        };
+
+        $.ajax({
+            url: "/Raporlar/RaporHazirla",
+            type: "POST",
+            data: { form: JSON.stringify(form) },
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (blob, status, xhr) {
+
+                DosyaIndirJS(blob, status, xhr);
+
+                IslemYapiliyorBitir("btnRaporUret");
+            },
+            error: function (jqXHR, exception) {
+
+                IslemYapiliyorBitir("btnRaporUret");
+
+                alert(exception);
+            },
+        });
+
+    }
+
+</script>

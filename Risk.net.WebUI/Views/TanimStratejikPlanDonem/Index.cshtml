@@ -1,0 +1,170 @@
+@{
+    ViewData["Title"] = CustomResource["TanimStratejikPlanDonem.SayfaBaslik"];
+    ViewData["PageName"] = "TanimStratejikPlanDonem";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["TanimStratejikPlanDonem.SayfaAciklama"];
+    ViewData["Category1"] = CustomResource["TanimMenu.SayfaBaslik"];
+    ViewData["Category1Url"] = "/TanimMenu";
+    ViewData["Yardim"] = ViewData["PageName"];
+
+    #region DataTables yapılandırılması
+    DataTablesYapi tablo = new DataTablesYapi();
+    tablo.adi = "tblTanim";
+    tablo.baslik = ViewData["Title"].ToString();
+    tablo.listeUrl = "/TanimStratejikPlanDonem/TabloDoldur";
+    tablo.silUrl = "/TanimStratejikPlanDonem/Sil";
+    tablo.duzenleUrl = "/TanimStratejikPlanDonem/KayitGetir";
+    tablo.anahtarAlani = "Kod";
+    tablo.islemler.duzenlemeSonucMetodu = "Duzenle";
+    tablo.islemler.genislik = "15%";
+
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "BaslamaYil",
+        adi = @CustomResource["TanimStratejikPlanDonem.Alan.BaslamaYil"],
+    });
+    tablo.alanlar.Add(new DataTablesAlanlar
+    {
+        veriAlani = "BitisYil",
+        adi = @CustomResource["TanimStratejikPlanDonem.Alan.BitisYil"],
+    });
+
+    var JSONTabloAyarlar = Newtonsoft.Json.JsonConvert.SerializeObject(tablo);
+    #endregion
+
+}
+
+@*https://www.youtube.com/watch?v=1y18VF4aMZU*@
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                    <button id="btnYeniKayit" class="btn btn-success text-white"><i class="fal fa-plus mr-1"></i>@CustomResource["Dugme.YeniKayit"]</button>
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+                        <vc:data-table tablo-ayar="@JSONTabloAyarlar"></vc:data-table>
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+<!--Veri giriş Modal formu-->
+<div id="mdlTanim" class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h5 class="modal-title text-white"></h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true"><i class="fal fa-times text-white"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" novalidate>
+                    <input type="hidden" id="hdnKod" />
+
+                    <div id="mdlTanimUyari"></div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["TanimStratejikPlanDonem.Alan.BaslamaYil"]<span class="text-danger ml-1">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtBaslamaYil" class="form-control form-control-sm autofocus" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label">@CustomResource["TanimStratejikPlanDonem.Alan.BitisYil"]<span class="text-danger ml-1">*</span></label>
+                        <div class="col-md-9">
+                            <input type="text" autocomplete="off" id="txtBitisYil" class="form-control form-control-sm" required />
+                            <div class="invalid-feedback">
+                                @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="button" id="btnKaydet" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.Kaydet"]</button>
+                        <button type="button" class="btn btn-secondary close-button" data-dismiss="modal">@CustomResource["Dugme.Kapat"]</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        DurumDoldur("ddlDurum", 'AKTIFPASIF', true);
+
+        $("#btnKaydet").click(function () {
+
+            //Validation
+            var formKontrol = ValidateForm();
+            if (!formKontrol) return;
+
+
+            var form = {
+                Kod: $("#hdnKod").val(),
+                BaslamaYil: $("#txtBaslamaYil").val(),
+                BitisYil: $("#txtBitisYil").val(),
+            };
+
+            $.ajax({
+                url: "/TanimStratejikPlanDonem/Kaydet",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                        Temizle();
+                        TabloVeriYenile();//Datatables viewcontrolünde
+                        jModalHide("mdlTanim");
+                    }
+                    else {
+
+                        HataYazisiGoster("mdlTanimUyari", result.Mesaj);
+                    }
+                }
+            });
+
+        });
+
+        $("#btnYeniKayit").click(function () {
+            Temizle();
+
+            jModalShow("mdlTanim", "@CustomResource["Baslik.YeniKayit"]");
+        });
+    });
+
+    function Duzenle(result) {
+        Temizle(result.Nesne);
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Guncelle"])');
+        jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
+    }
+
+    function Temizle(deger) {
+        ClearValidation();
+
+        $('#btnKaydet').text('@Html.Raw(@CustomResource["Dugme.Kaydet"])');
+
+        $("#hdnKod").val(deger?.Kod);
+        $("#txtBaslamaYil").val(deger?.BaslamaYil);
+        $("#txtBitisYil").val(deger?.BitisYil);
+
+        $("#mdlTanimUyari").html("");
+
+    }
+
+</script>

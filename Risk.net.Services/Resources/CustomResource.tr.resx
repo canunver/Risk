@@ -1,0 +1,2877 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessDenied.Baslik" xml:space="preserve">
+    <value>İşlem yapmaya yetkiniz yok! 🔐</value>
+  </data>
+  <data name="AramaAlani.Aciklama" xml:space="preserve">
+    <value>Bulmak istediğiniz bilgiyi yazın</value>
+  </data>
+  <data name="Baslik.Guncelle" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="Baslik.Onay" xml:space="preserve">
+    <value>Onay</value>
+  </data>
+  <data name="Baslik.YeniKayit" xml:space="preserve">
+    <value>Yeni Kayıt</value>
+  </data>
+  <data name="Bildirim.KayitBasarili" xml:space="preserve">
+    <value>Kayıt işlemi başarıyla tamamlandı</value>
+  </data>
+  <data name="Bildirim.KayitBulunamadi" xml:space="preserve">
+    <value>Verilen kritere göre kayıt bulunamadı</value>
+  </data>
+  <data name="Bildirim.SilmeBasarili" xml:space="preserve">
+    <value>Kayıt başarıyla silindi</value>
+  </data>
+  <data name="Cookie.Baslik" xml:space="preserve">
+    <value>Bu web sitesi çerez kullanıyor.</value>
+  </data>
+  <data name="Cookie.Baslik.Aciklama" xml:space="preserve">
+    <value>Bunları size en iyi deneyimi sunmak için kullanıyoruz. Web sitemizi kullanmaya devam ederseniz, bu web sitesindeki tüm çerezleri almaktan memnun olduğunuzu varsayacağız.</value>
+  </data>
+  <data name="drpdwn.fullscreen" xml:space="preserve">
+    <value>Tam Ekran</value>
+  </data>
+  <data name="drpdwn.lang" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="drpdwn.lang.english" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="drpdwn.lang.turkce" xml:space="preserve">
+    <value>Türkçe</value>
+  </data>
+  <data name="drpdwn.pagelogout" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="drpdwn.scrollTop" xml:space="preserve">
+    <value>Yukarı Kaydır</value>
+  </data>
+  <data name="drpdwn.settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="Dugme.Anasayfa" xml:space="preserve">
+    <value>Ana Sayfaya Git</value>
+  </data>
+  <data name="Dugme.Evet" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="Dugme.GirisSayfasinaDon" xml:space="preserve">
+    <value>Giriş sayfasına dön</value>
+  </data>
+  <data name="Dugme.Hayır" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="Dugme.KabulEt" xml:space="preserve">
+    <value>Kabul</value>
+  </data>
+  <data name="Dugme.Kapat" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="Dugme.Kaydet" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Dugme.Kopyala" xml:space="preserve">
+    <value>Kopyala</value>
+  </data>
+  <data name="Dugme.Sil" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="Dugme.Ogren" xml:space="preserve">
+    <value>Daha fazla bilgi edin</value>
+  </data>
+  <data name="Dugme.Yazdir" xml:space="preserve">
+    <value>Yazdır</value>
+  </data>
+  <data name="Dugme.YeniKayit" xml:space="preserve">
+    <value>Yeni Kayıt</value>
+  </data>
+  <data name="Footer.Baslik" xml:space="preserve">
+    <value>Bu proje Avrupa Birliği tarafından finanse edilmektedir.</value>
+  </data>
+  <data name="ForgotPassword.Baslik" xml:space="preserve">
+    <value>Parolamı Unuttum</value>
+  </data>
+  <data name="ForgotPassword.BaslikAciklama" xml:space="preserve">
+    <value>e-posta adresinizi girin ve size parolanızı nasıl sıfırlayacağınızı anlatan e-posta gönderelim</value>
+  </data>
+  <data name="ForgotPassword.EPosta" xml:space="preserve">
+    <value>e-posta Adresi</value>
+  </data>
+  <data name="ForgotPassword.EPosta.Aciklama" xml:space="preserve">
+    <value>e-posta adresinizi girin</value>
+  </data>
+  <data name="ForgotPassword.Gonder" xml:space="preserve">
+    <value>Sıfırlama e-postası gönder</value>
+  </data>
+  <data name="Genel.Tablo.Islemler" xml:space="preserve">
+    <value>İşlemler</value>
+  </data>
+  <data name="Kontrol.Duzenle.AdiAlaniBos" xml:space="preserve">
+    <value>Adı alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.NumaraAlaniBos" xml:space="preserve">
+    <value>Numara alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.DurumAlaniHatali" xml:space="preserve">
+    <value>Durum alanındaki bilgi hatalı kontrol edip tekrar deneyiniz</value>
+  </data>
+  <data name="Kontrol.Duzenle.EPostaBilgisiHatali" xml:space="preserve">
+    <value>E-posta bilgisi hatalı girilmiş</value>
+  </data>
+  <data name="Kontrol.Duzenle.EPostaBilgisiTekilOlmali" xml:space="preserve">
+    <value>Yazılan e-posta adresiyle kayıtlı başka bir kullanıcı bulunmaktadır</value>
+  </data>
+  <data name="Kontrol.Duzenle.KimlikBilgisiHatali" xml:space="preserve">
+    <value>Kimlik bilgisi hatalı girilmiş</value>
+  </data>
+  <data name="Kontrol.Duzenle.KimlikBilgisiTekilOlmali" xml:space="preserve">
+    <value>Yazılan Kimlik bilgisi ile kayıtlı başka bir kullanıcı bulunmaktadır</value>
+  </data>
+  <data name="Kontrol.Duzenle.KodAlaniBos" xml:space="preserve">
+    <value>Görmek istenilen kaydı seçiniz</value>
+  </data>
+  <data name="Kontrol.Duzenle.KullaniciAdiBilgisiTekilOlmali" xml:space="preserve">
+    <value>Yazılan Kullanıcı Adı bilgisi ile kayıtlı başka bir kullanıcı bulunmaktadır</value>
+  </data>
+  <data name="Kontrol.Duzenle.KullaniciAlaniBos" xml:space="preserve">
+    <value>Kullanıcı Adı alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.SoyadiAlaniBos" xml:space="preserve">
+    <value>Soyadı alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Kaydet.AlanBosOlamaz" xml:space="preserve">
+    <value>Bu alana değer giriniz</value>
+  </data>
+  <data name="Kontrol.Silme.KodAlaniBos" xml:space="preserve">
+    <value>Silmek istediğiniz kaydı seçiniz</value>
+  </data>
+  <data name="Kullanici.Alan.Adi" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="Kullanici.Alan.AdiSoyadi" xml:space="preserve">
+    <value>Adı Soyadı</value>
+  </data>
+  <data name="Genel.Alan.Durum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="Kullanici.Alan.EPosta" xml:space="preserve">
+    <value>E-posta adresi</value>
+  </data>
+  <data name="Kullanici.Alan.KimlikNo" xml:space="preserve">
+    <value>TCKN</value>
+  </data>
+  <data name="Kullanici.Alan.KullaniciAdi" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
+  <data name="Kullanici.Alan.Soyadi" xml:space="preserve">
+    <value>Soyadı</value>
+  </data>
+  <data name="Kullanici.RolTanimla" xml:space="preserve">
+    <value>Rol Tanımla</value>
+  </data>
+  <data name="Kullanici.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Kullanici.SayfaBaslik" xml:space="preserve">
+    <value>Kullanıcı Tanımlama</value>
+  </data>
+  <data name="Durum.Aktif" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="Durum.Pasif" xml:space="preserve">
+    <value>Pasif</value>
+  </data>
+  <data name="Durum.Onayli" xml:space="preserve">
+    <value>Onaylı</value>
+  </data>
+  <data name="Login.Baslik" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="Login.BaslikAciklama" xml:space="preserve">
+    <value>Lütfen Giriş Yap düğmesine basarak uygulamayı kullanmaya başlayın</value>
+  </data>
+  <data name="Login.BeniHatirla" xml:space="preserve">
+    <value>Beni Hatırla</value>
+  </data>
+  <data name="Login.EPosta" xml:space="preserve">
+    <value>e-posta Adresi</value>
+  </data>
+  <data name="Login.EPosta.Aciklama" xml:space="preserve">
+    <value>e-posta adresinizi girin</value>
+  </data>
+  <data name="Login.GirisYap" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="Login.Hata" xml:space="preserve">
+    <value>Kullanıcı adı veya parola boş bırakılamaz. Lütfen kontrol edip tekrar deneyin</value>
+  </data>
+  <data name="Login.Parola" xml:space="preserve">
+    <value>Parola</value>
+  </data>
+  <data name="Login.Parola.Aciklama" xml:space="preserve">
+    <value>Parolanızı girin</value>
+  </data>
+  <data name="Login.ParolamiUnuttum" xml:space="preserve">
+    <value>Parolamı Unuttum</value>
+  </data>
+  <data name="Menu.Tanimlar" xml:space="preserve">
+    <value>Tanımlamalar</value>
+  </data>
+  <data name="MenuTanim.GenelTanimlar" xml:space="preserve">
+    <value>Genel Tanımlar</value>
+  </data>
+  <data name="MenuTanim.SurecTanimlar" xml:space="preserve">
+    <value>Süreç/Alt Süreç Tanımları</value>
+  </data>
+  <data name="Onay.Sil" xml:space="preserve">
+    <value>Kayıt pasif duruma çekilecektir. Onaylıyor musunuz?</value>
+  </data>
+  <data name="Onay.SilGercek" xml:space="preserve">
+    <value>Kayıt silinecek çekilecektir. Onaylıyor musunuz?</value>
+  </data>
+  <data name="Settings.Accessibility" xml:space="preserve">
+    <value>Ulaşılabilirlik</value>
+  </data>
+  <data name="Settings.AltBaslik" xml:space="preserve">
+    <value>Kullanıcı Arayüzü Ayarları</value>
+  </data>
+  <data name="Settings.AppLayout" xml:space="preserve">
+    <value>Uygulama Düzeni</value>
+  </data>
+  <data name="Settings.Baslik" xml:space="preserve">
+    <value>Düzen Ayarları</value>
+  </data>
+  <data name="Settings.BiggerContentFont" xml:space="preserve">
+    <value>Daha Büyük İçerik Yazı Tipi</value>
+  </data>
+  <data name="Settings.BiggerContentFont.Alt" xml:space="preserve">
+    <value>İçerik yazı tipleri okunabilirlik için daha büyüktür</value>
+  </data>
+  <data name="Settings.BoxedLayout" xml:space="preserve">
+    <value>Kutulu Düzen</value>
+  </data>
+  <data name="Settings.BoxedLayout.Alt" xml:space="preserve">
+    <value>Bir kapsayıcıya kapsüller</value>
+  </data>
+  <data name="Settings.CleanPage" xml:space="preserve">
+    <value>Sayfa Arka Planını Temizle</value>
+  </data>
+  <data name="Settings.CleanPage.Alt" xml:space="preserve">
+    <value>Daha fazla boşluk ekler</value>
+  </data>
+  <data name="Settings.Daltonism" xml:space="preserve">
+    <value>Daltonizm</value>
+  </data>
+  <data name="Settings.Daltonism.Alt" xml:space="preserve">
+    <value>Renk görme eksikliği</value>
+  </data>
+  <data name="Settings.DarkNavigation" xml:space="preserve">
+    <value>Karanlık Gezinti Alanı</value>
+  </data>
+  <data name="Settings.DarkNavigation.Alt" xml:space="preserve">
+    <value>Gezinti alanı arka planı karanlık</value>
+  </data>
+  <data name="Settings.DisableCSS" xml:space="preserve">
+    <value>CSS Animasyonunu Devre Dışı Bırak</value>
+  </data>
+  <data name="Settings.DisableCSS.Alt" xml:space="preserve">
+    <value>CSS tabanlı animasyonları devre dışı bırakır</value>
+  </data>
+  <data name="Settings.FactoryReset" xml:space="preserve">
+    <value>Fabrika ayarlarına dön</value>
+  </data>
+  <data name="Settings.FixedBackground" xml:space="preserve">
+    <value>Sabit arkaplan</value>
+  </data>
+  <data name="Settings.FixedFooter" xml:space="preserve">
+    <value>Sabit Altbilgi</value>
+  </data>
+  <data name="Settings.FixedFooter.Alt" xml:space="preserve">
+    <value>Sabit sayfa altbilgisi</value>
+  </data>
+  <data name="Settings.FixedHeader" xml:space="preserve">
+    <value>Sabit Başlık</value>
+  </data>
+  <data name="Settings.FixedHeader.Alt" xml:space="preserve">
+    <value>Başlık her zaman sabittir</value>
+  </data>
+  <data name="Settings.FixedNavigation" xml:space="preserve">
+    <value>Sabit Gezinti Alanı</value>
+  </data>
+  <data name="Settings.FixedNavigation.Alt" xml:space="preserve">
+    <value>Sol panel sabittir</value>
+  </data>
+  <data name="Settings.GlobalFontSize" xml:space="preserve">
+    <value>Genel Yazı Tipi Boyutu</value>
+  </data>
+  <data name="Settings.GlobalModifications" xml:space="preserve">
+    <value>Genel Değişiklikler</value>
+  </data>
+  <data name="Settings.HideInfo" xml:space="preserve">
+    <value>Bilgi Kartını Gizle</value>
+  </data>
+  <data name="Settings.HideInfo.Alt" xml:space="preserve">
+    <value>Bilgi kartını sol panelden gizler</value>
+  </data>
+  <data name="Settings.HideNavigation" xml:space="preserve">
+    <value>Gezinti Alanını Gizle</value>
+  </data>
+  <data name="Settings.HideNavigation.Alt" xml:space="preserve">
+    <value>Ortaya çıkarmak için fareyi kenarda döndürün</value>
+  </data>
+  <data name="Settings.HideNavigationIcon" xml:space="preserve">
+    <value>Gezinti Simgelerini Gizle</value>
+  </data>
+  <data name="Settings.HideNavigationIcon.Alt" xml:space="preserve">
+    <value>Görünmez gezinme simgeleri</value>
+  </data>
+  <data name="Settings.HierarchicalNavigation" xml:space="preserve">
+    <value>Hiyerarşik Gezinme</value>
+  </data>
+  <data name="Settings.HierarchicalNavigation.Alt" xml:space="preserve">
+    <value>Gezinme bağlantılarının net dökümü</value>
+  </data>
+  <data name="Settings.HighContrast" xml:space="preserve">
+    <value>Yüksek Kontrastlı Metin (WCAG 2 AA)</value>
+  </data>
+  <data name="Settings.HighContrast.Alt" xml:space="preserve">
+    <value>4.5:1 metin kontrast oranı</value>
+  </data>
+  <data name="Settings.LeanSubheader" xml:space="preserve">
+    <value>Yalın Alt Başlık</value>
+  </data>
+  <data name="Settings.LeanSubheader.Alt" xml:space="preserve">
+    <value>Seçkin sayfa başlığı</value>
+  </data>
+  <data name="Settings.MinifyNavigation" xml:space="preserve">
+    <value>Gezinti Alanını Küçült</value>
+  </data>
+  <data name="Settings.MinifyNavigation.Alt" xml:space="preserve">
+    <value>Alanı en üst düzeye çıkarmak için gezinmeyi küçült</value>
+  </data>
+  <data name="Settings.MobileMenu" xml:space="preserve">
+    <value>Mobil Menü</value>
+  </data>
+  <data name="Settings.NoOverlay" xml:space="preserve">
+    <value>Yer Paylaşımı Yok</value>
+  </data>
+  <data name="Settings.NoOverlay.Alt" xml:space="preserve">
+    <value>Menü gösterimindeki ağı kaldırır</value>
+  </data>
+  <data name="Settings.OffCanvas" xml:space="preserve">
+    <value>Tuval Dışı</value>
+  </data>
+  <data name="Settings.OffCanvas.Alt" xml:space="preserve">
+    <value>İçerik çakışıyor menüsü</value>
+  </data>
+  <data name="Settings.Preloader" xml:space="preserve">
+    <value>Ön Yükleyici İçinde</value>
+  </data>
+  <data name="Settings.Preloader.Alt" xml:space="preserve">
+    <value>Ön yükleyici içeriğin içinde olacak</value>
+  </data>
+  <data name="Settings.PushContent" xml:space="preserve">
+    <value>İçeriği Gönder</value>
+  </data>
+  <data name="Settings.PushContent.Alt" xml:space="preserve">
+    <value>Menüye itilen içerik ortaya çıkıyor</value>
+  </data>
+  <data name="Settings.ResetSettings" xml:space="preserve">
+    <value>Ayarları Sıfırla</value>
+  </data>
+  <data name="Settings.SmartPanelIcons" xml:space="preserve">
+    <value>SmartPanel Simgeleri (Paneller değil)</value>
+  </data>
+  <data name="Settings.SmartPanelIcons.Alt" xml:space="preserve">
+    <value>Smartpanel düğmeleri simge olarak görünecek</value>
+  </data>
+  <data name="Settings.ThemeColors" xml:space="preserve">
+    <value>Tema Renkleri</value>
+  </data>
+  <data name="Settings.ThemeModes" xml:space="preserve">
+    <value>Tema Modları</value>
+  </data>
+  <data name="Settings.ThemeModes.Dark" xml:space="preserve">
+    <value>Karanlık</value>
+  </data>
+  <data name="Settings.ThemeModes.Default" xml:space="preserve">
+    <value>Varsayılan</value>
+  </data>
+  <data name="Settings.ThemeModes.Light" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="Settings.TopNavigation" xml:space="preserve">
+    <value>Gezinti Alanını Yukarıda Göster</value>
+  </data>
+  <data name="Settings.TopNavigation.Alt" xml:space="preserve">
+    <value>Sol bölmeyi üste taşı</value>
+  </data>
+  <data name="TanimMenu.GenelTanimlar" xml:space="preserve">
+    <value>Genel Tanımlar</value>
+  </data>
+  <data name="TanimMenu.SayfaAciklama" xml:space="preserve">
+    <value>Yazılımda kullanılan tanım bilgilerini ilgili sayfalardan tanımlayabilirsiniz</value>
+  </data>
+  <data name="TanimMenu.SayfaBaslik" xml:space="preserve">
+    <value>Tanımlar</value>
+  </data>
+  <data name="_404.AltBaslik" xml:space="preserve">
+    <value>Talep edilen sayfa sunucuda bulunamadı.</value>
+  </data>
+  <data name="_404.Baslik" xml:space="preserve">
+    <value>Sayfa bulunamadı! 🕵🏻‍</value>
+  </data>
+  <data name="Dugme.Ekle" xml:space="preserve">
+    <value>Ekle</value>
+  </data>
+  <data name="Kontrol.Duzenle.HataliRolKod" xml:space="preserve">
+    <value>Rol kodu alanı boş olamaz</value>
+  </data>
+  <data name="Kullanici.Rol.Adi" xml:space="preserve">
+    <value>Rolü</value>
+  </data>
+  <data name="Dugme.Kaldir" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="Kullanici.Rol.Tanimlama" xml:space="preserve">
+    <value>Kullanıcı Rol Tanımlama</value>
+  </data>
+  <data name="Lutfen.Seciniz" xml:space="preserve">
+    <value>Lütfen Seçiniz</value>
+  </data>
+  <data name="Kontrol.Duzenle.KullaniciKodAlaniBos" xml:space="preserve">
+    <value>Kullanıcı kodu alanı boş olamaz</value>
+  </data>
+  <data name="MenuTanim.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük Listesi</value>
+  </data>
+  <data name="TanimKoordinatorluk.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimKoordinatorluk.SayfaBaslik" xml:space="preserve">
+    <value>Koordinatörlük Listesi</value>
+  </data>
+  <data name="TanimKoordinatorluk.Alan.Adi" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="TanimBirim.Alan.Adi" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Menu.BilgiMerkezi" xml:space="preserve">
+    <value>Bilgi Merkezi</value>
+  </data>
+  <data name="Menu.Menu1.AltMenu1" xml:space="preserve">
+    <value>Örnek Menü Alt Menü1</value>
+  </data>
+  <data name="Menu.Menu1.AltMenu2" xml:space="preserve">
+    <value>Örnek Menü Alt Menü2</value>
+  </data>
+  <data name="MenuTanim.Diger" xml:space="preserve">
+    <value>Diğer Tanımlar</value>
+  </data>
+  <data name="MenuTanim.Surec" xml:space="preserve">
+    <value>Süreç/Alt Süreç Tanımları</value>
+  </data>
+  <data name="TanimBirim.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimBirim.SayfaBaslik" xml:space="preserve">
+    <value>Birim/Ünite Listesi</value>
+  </data>
+  <data name="MenuTanim.Birim" xml:space="preserve">
+    <value>Birim/Ünite Listesi</value>
+  </data>
+  <data name="MenuTanim.Amac" xml:space="preserve">
+    <value>Amaç Tanımlama</value>
+  </data>
+  <data name="MenuTanim.Hedef" xml:space="preserve">
+    <value>Hedef Tanımlama</value>
+  </data>
+  <data name="MenuTanim.RiskKategori" xml:space="preserve">
+    <value>Risk Kategorisi Tanımları</value>
+  </data>
+  <data name="TanimAmac.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimAmac.SayfaBaslik" xml:space="preserve">
+    <value>Amaç Tanımlama</value>
+  </data>
+  <data name="TanimHedef.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimHedef.SayfaBaslik" xml:space="preserve">
+    <value>Hedef Tanımlama</value>
+  </data>
+  <data name="TanimRiskKategori.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimRiskKategori.SayfaBaslik" xml:space="preserve">
+    <value>Risk Kategorisi Tanımları</value>
+  </data>
+  <data name="Dugme.Arama" xml:space="preserve">
+    <value>Arama Yap</value>
+  </data>
+  <data name="Dugme.AramaTemizle" xml:space="preserve">
+    <value>Alanları Temizle</value>
+  </data>
+  <data name="Genel.Alan.Adi" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="Genel.Tablo.GelismisArama.Baslik" xml:space="preserve">
+    <value>Gelişmiş Arama</value>
+  </data>
+  <data name="TanimHedef.Alan.AmacAdi" xml:space="preserve">
+    <value>Amaç Adı</value>
+  </data>
+  <data name="TanimHedef.Kontrol.AmacAlaniBos" xml:space="preserve">
+    <value>Amaç alanı boş bırakılamaz</value>
+  </data>
+  <data name="TanimBirim.KoordinatorlukEkle" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="KullaniciRol.10" xml:space="preserve">
+    <value>Sistem Yöneticisi</value>
+  </data>
+  <data name="KullaniciRol.11" xml:space="preserve">
+    <value>RISKSEKRETARYASI</value>
+  </data>
+  <data name="KullaniciRol.12" xml:space="preserve">
+    <value>PLANLAMAUNITESI</value>
+  </data>
+  <data name="TanimKoordinatorluk.BirimEkle" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Dugme.Guncelle" xml:space="preserve">
+    <value>Güncelle</value>
+  </data>
+  <data name="Surec.Alan.Adi" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="Surec.Alan.Numara" xml:space="preserve">
+    <value>Süreç Kodu</value>
+  </data>
+  <data name="Surec.Alan.AltSurecAdi" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="Surec.Alan.AltSurecler" xml:space="preserve">
+    <value>Alt Süreçler</value>
+  </data>
+  <data name="Surec.Alan.AmacAdi" xml:space="preserve">
+    <value>Amaç Adı</value>
+  </data>
+  <data name="Surec.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Surec.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="Surec.Kontrol.AmacAlaniBos" xml:space="preserve">
+    <value>Amaç alanı boş bırakılamaz</value>
+  </data>
+  <data name="Surec.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Surec.SayfaBaslik" xml:space="preserve">
+    <value>Süreç/Alt Süreç Tanımları</value>
+  </data>
+  <data name="Dugme.Onayla" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+  <data name="Bildirim.DurumBasarili" xml:space="preserve">
+    <value>Durum başarıyla değiştirildi</value>
+  </data>
+  <data name="Onay.Onay" xml:space="preserve">
+    <value>Kayıt onaylanacaktır. Devam edilsin mi?</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.PasifKayitOnaylanamaz" xml:space="preserve">
+    <value>Onaylanmak istenen kayıt Pasif durumda olduğu için onaylanamaz</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.ZatenOnayli" xml:space="preserve">
+    <value>Onaylanmak istenen kayıt zaten Onaylı durumda olduğu için onaylanamaz</value>
+  </data>
+  <data name="Dugme.KoordinatorGonder" xml:space="preserve">
+    <value>Koordinatöre Gönder</value>
+  </data>
+  <data name="Menu.BulguYonetimi" xml:space="preserve">
+    <value>Bulgu Yönetimi</value>
+  </data>
+  <data name="Menu.OlayRaporlama" xml:space="preserve">
+    <value>Olay Raporlaması</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Aciklama" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="OlayRaporlama.Alan.KokNedeni" xml:space="preserve">
+    <value>Kök Nedeni</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="OlayRaporlama.Alan.OlayKategori" xml:space="preserve">
+    <value>Olayın Kategorisi</value>
+  </data>
+  <data name="OlayRaporlama.Alan.OlayTanimi" xml:space="preserve">
+    <value>Olay Tanımı</value>
+  </data>
+  <data name="OlayRaporlama.Alan.OlayTarihi" xml:space="preserve">
+    <value>Olay Tarihi</value>
+  </data>
+  <data name="OlayRaporlama.Alan.OlayYeri" xml:space="preserve">
+    <value>Olay Yeri</value>
+  </data>
+  <data name="OlayRaporlama.Alan.RiskKategori" xml:space="preserve">
+    <value>Risk Kategori</value>
+  </data>
+  <data name="OlayRaporlama.Alan.SorguTarihi" xml:space="preserve">
+    <value>Olay Tarih Aralığı</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Tutari" xml:space="preserve">
+    <value>Tutarı</value>
+  </data>
+  <data name="OlayRaporlama.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OlayRaporlama.SayfaBaslik" xml:space="preserve">
+    <value>Olay Raporlaması</value>
+  </data>
+  <data name="BulguYonetimi.Alan.AltSurec" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Bulgu" xml:space="preserve">
+    <value>Bulgu Adı</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BulguDurum" xml:space="preserve">
+    <value>Bulgu Durumu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BulguNo" xml:space="preserve">
+    <value>Bulgu No</value>
+  </data>
+  <data name="BulguYonetimi.Alan.DenetimKodu" xml:space="preserve">
+    <value>Denetim Kodu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.DenetimTarihi" xml:space="preserve">
+    <value>Takip Denetim Tarihi</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Durum" xml:space="preserve">
+    <value>Kaydın Durumu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Eylem" xml:space="preserve">
+    <value>Eylem</value>
+  </data>
+  <data name="BulguYonetimi.Alan.EylemSonTarih" xml:space="preserve">
+    <value>Eylemin Son Uygulama Tarihi</value>
+  </data>
+  <data name="BulguYonetimi.Alan.EylemSorumlusu" xml:space="preserve">
+    <value>Eylem Sorumlusu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.KanitBelgesi" xml:space="preserve">
+    <value>Kanıt Belgesi</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Karsilama" xml:space="preserve">
+    <value>Eylem Nihai Rapordaki Gerekliliği Karşılıyor mu?</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="BulguYonetimi.Alan.OnemDuzeyi" xml:space="preserve">
+    <value>Önem Düzeyi</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Surec" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="BulguYonetimi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BulguYonetimi.SayfaBaslik" xml:space="preserve">
+    <value>Bulgu Yönetimi</value>
+  </data>
+  <data name="Genel.Alan.SiraNo" xml:space="preserve">
+    <value>Sıra No</value>
+  </data>
+  <data name="Genel.Alan.Tur" xml:space="preserve">
+    <value>Tür</value>
+  </data>
+  <data name="TanimGenel.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimGenel.SayfaBaslik" xml:space="preserve">
+    <value>Genel Tanımlar</value>
+  </data>
+  <data name="Menu.RiskEvreni" xml:space="preserve">
+    <value>Risk Kaydı</value>
+  </data>
+  <data name="MenuTanim.GenelTanim" xml:space="preserve">
+    <value>Genel Tanımlar</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.Dosya" xml:space="preserve">
+    <value>Dosya</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.KayitTarihi" xml:space="preserve">
+    <value>Onay Tarihi</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.SurumNo" xml:space="preserve">
+    <value>Versiyon No</value>
+  </data>
+  <data name="Dugme.DosyaIndir" xml:space="preserve">
+    <value>Dosya indir</value>
+  </data>
+  <data name="BilgiMerkezi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BilgiMerkezi.SayfaBaslik" xml:space="preserve">
+    <value>Bilgi Merkezi</value>
+  </data>
+  <data name="Surec.Alan.SurecSahibiKisi" xml:space="preserve">
+    <value>Süreç Sahibi</value>
+  </data>
+  <data name="Surec.Alan.SurecSahibiUnvan" xml:space="preserve">
+    <value>Süreç Sahibi Unvanı</value>
+  </data>
+  <data name="Bildirim.IslemBasarili" xml:space="preserve">
+    <value>İşlem başarıyla tamamlandı</value>
+  </data>
+  <data name="Kontrol.Duzenle.KoordinatorlukAlaniBos" xml:space="preserve">
+    <value>Koordinatorluk alanı boş bırakılamaz</value>
+  </data>
+  <data name="Dugme.Temizle" xml:space="preserve">
+    <value>Temizle</value>
+  </data>
+  <data name="Kontrol.Duzenle.SurecKodAlaniBos" xml:space="preserve">
+    <value>Süreç kod alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Kaydet.OnayliKaydedilemez" xml:space="preserve">
+    <value>Güncellenmek istenen kayıt onaylı olduğu için işlem yapılamadı</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Aciklama" xml:space="preserve">
+    <value>Eylemin Açıklaması</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BulguTanimi" xml:space="preserve">
+    <value>Bulgu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BulguAciklama" xml:space="preserve">
+    <value>Bulgu Açıklaması</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BulguSahibi" xml:space="preserve">
+    <value>Bulgu Sahibi</value>
+  </data>
+  <data name="BulguYonetimi.Alan.EylemDurum" xml:space="preserve">
+    <value>Eylemin Durumu</value>
+  </data>
+  <data name="BulguYonetimi.Alan.EylemTamamlama" xml:space="preserve">
+    <value>Eylemin Tamamlanma Yüzdesi %</value>
+  </data>
+  <data name="BulguYonetimi.Alan.KokNedeni" xml:space="preserve">
+    <value>Kök Nedeni</value>
+  </data>
+  <data name="Menu.AnahtarRiskGostergesi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi Listesi</value>
+  </data>
+  <data name="Menu.Raporlar" xml:space="preserve">
+    <value>Raporlar</value>
+  </data>
+  <data name="Menu.RiskAzaltmaPlani" xml:space="preserve">
+    <value>Risklerin Yönetilmesi</value>
+  </data>
+  <data name="Menu.RiskYonetilmesi" xml:space="preserve">
+    <value>Risklerin Değerlendirilmesi</value>
+  </data>
+  <data name="Menu.StratejikPlan" xml:space="preserve">
+    <value>Stratejik Planlama</value>
+  </data>
+  <data name="Menu.StratejikPlanIzleme" xml:space="preserve">
+    <value>İzleme</value>
+  </data>
+  <data name="Menu.StratejikPlanKayit" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="MenuTanim.OlayKategori" xml:space="preserve">
+    <value>Olay Kategorisi Tanımları</value>
+  </data>
+  <data name="TanimOlayKategori.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimOlayKategori.SayfaBaslik" xml:space="preserve">
+    <value>Olay Kategorisi Tanımları</value>
+  </data>
+  <data name="StratejikPlan.Alan.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="StratejikPlan.Alan.Birim" xml:space="preserve">
+    <value>Sorumlu Birim/Ünite</value>
+  </data>
+  <data name="StratejikPlan.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="StratejikPlan.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StratejikPlan.SayfaBaslik" xml:space="preserve">
+    <value>Stratejik Planlama - Kayıt</value>
+  </data>
+  <data name="StratejikPlan.Alan.Koordinatorlukler" xml:space="preserve">
+    <value>İş Birliği Yapacak Koordinatörlükler</value>
+  </data>
+  <data name="StratejikPlan.Alan.Hedefler" xml:space="preserve">
+    <value>Hedefler</value>
+  </data>
+  <data name="Dugme.GostergeEkle" xml:space="preserve">
+    <value>Anahtar Performans Göstergesi Ekle</value>
+  </data>
+  <data name="Dugme.BirimEkle" xml:space="preserve">
+    <value>Koordinatörlük/Birim Ekle</value>
+  </data>
+  <data name="StratejikPlan.Alan.GostergeAdi" xml:space="preserve">
+    <value>Gösterge Adı</value>
+  </data>
+  <data name="StratejikPlan.Alan.GostergeAciklama" xml:space="preserve">
+    <value>Gösterge Açıklama</value>
+  </data>
+  <data name="StratejikPlan.Alan.Gostergeler" xml:space="preserve">
+    <value>Anahtar Performans Göstergeleri</value>
+  </data>
+  <data name="StratejikPlan.Alan.HedefeEtkisi" xml:space="preserve">
+    <value>Hedefe Etkisi (%)</value>
+  </data>
+  <data name="StratejikPlan.Alan.GostergeBirim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Dugme.GosterBolumKapat" xml:space="preserve">
+    <value>Gösterge Bölümünü Kapat</value>
+  </data>
+  <data name="Dugme.BirimBolumKapat" xml:space="preserve">
+    <value>Birim Bölümünü Kapat</value>
+  </data>
+  <data name="StratejikPlan.Alan.AmacNo" xml:space="preserve">
+    <value>Amaç Numarası</value>
+  </data>
+  <data name="StratejikPlan.Alan.HedefAdi" xml:space="preserve">
+    <value>Hedef Adı</value>
+  </data>
+  <data name="StratejikPlan.Gosterge.KayitSonrasi" xml:space="preserve">
+    <value>Gösterge bilgisini kayıt işleminden sonra girebilirsiniz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskEvreniKodAlaniBos" xml:space="preserve">
+    <value>RiskEvreni kod alanı boş olamaz</value>
+  </data>
+  <data name="RiskEvreni.Alan.AltSurec" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="RiskEvreni.Alan.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="RiskEvreni.Alan.AnahtarRiskGostergesi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="RiskEvreni.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="RiskEvreni.Alan.Hedef" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="RiskEvreni.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="RiskEvreni.Alan.OlayKategorileri" xml:space="preserve">
+    <value>İlişkili Olaylar</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskAdi" xml:space="preserve">
+    <value>Risk Adı</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskBaslangicTarihi" xml:space="preserve">
+    <value>Risk Başlangıç Tarihi</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskBitisTarihi" xml:space="preserve">
+    <value>Risk Bitiş Tarihi</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskKategorileri" xml:space="preserve">
+    <value>Risk Kategorileri</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskNo" xml:space="preserve">
+    <value>Risk No</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskSahibi" xml:space="preserve">
+    <value>Risk Sahibi</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskTanimi" xml:space="preserve">
+    <value>Riskin Kök Nedeni</value>
+  </data>
+  <data name="RiskEvreni.Alan.Surec" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="RiskEvreni.Alan.Durum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="Menu.RiskEvreniKayit" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="Menu.RiskEvreniOnay" xml:space="preserve">
+    <value>Onay İşlemleri</value>
+  </data>
+  <data name="RiskEvreni.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskEvreni.SayfaBaslik" xml:space="preserve">
+    <value>Risk Kayıt</value>
+  </data>
+  <data name="MenuTanim.Personel" xml:space="preserve">
+    <value>Personel Listesi</value>
+  </data>
+  <data name="MenuTanim.Unvan" xml:space="preserve">
+    <value>Unvan Listesi</value>
+  </data>
+  <data name="MenuTanim.Yetki" xml:space="preserve">
+    <value>Yetki Listesi</value>
+  </data>
+  <data name="TanimPersonel.Alan.Adi" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="TanimPersonel.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="TanimPersonel.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatorluk</value>
+  </data>
+  <data name="TanimPersonel.Alan.Soyadi" xml:space="preserve">
+    <value>Soyadı</value>
+  </data>
+  <data name="TanimPersonel.Alan.Unvan" xml:space="preserve">
+    <value>Unvanı</value>
+  </data>
+  <data name="TanimPersonel.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimPersonel.SayfaBaslik" xml:space="preserve">
+    <value>Personel Listesi</value>
+  </data>
+  <data name="TanimUnvan.Alan.Adi" xml:space="preserve">
+    <value>Unvan</value>
+  </data>
+  <data name="TanimUnvan.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimUnvan.SayfaBaslik" xml:space="preserve">
+    <value>Unvan Listesi</value>
+  </data>
+  <data name="TanimYetki.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="TanimYetki.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatorluk</value>
+  </data>
+  <data name="TanimYetki.Alan.KullaniciKod" xml:space="preserve">
+    <value>Kullanıcı Kodu</value>
+  </data>
+  <data name="TanimYetki.Alan.Personel" xml:space="preserve">
+    <value>Adı Soyadı</value>
+  </data>
+  <data name="TanimYetki.Alan.Rol" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="TanimYetki.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimYetki.SayfaBaslik" xml:space="preserve">
+    <value>Yetki Listesi</value>
+  </data>
+  <data name="Durum.99" xml:space="preserve">
+    <value>Pasif</value>
+  </data>
+  <data name="Durum.10" xml:space="preserve">
+    <value>Onaylı</value>
+  </data>
+  <data name="Durum.1" xml:space="preserve">
+    <value>Aktif</value>
+  </data>
+  <data name="KullaniciRol.13" xml:space="preserve">
+    <value>YETKILIRISKGOREVLISI</value>
+  </data>
+  <data name="KullaniciRol.14" xml:space="preserve">
+    <value>UZMAN</value>
+  </data>
+  <data name="KullaniciRol.15" xml:space="preserve">
+    <value>BIRIMAMIRI</value>
+  </data>
+  <data name="KullaniciRol.16" xml:space="preserve">
+    <value>ILKOORDINATOR</value>
+  </data>
+  <data name="KullaniciRol.40" xml:space="preserve">
+    <value>Risk Sahibi</value>
+  </data>
+  <data name="Logout.Baslik" xml:space="preserve">
+    <value>Başarıyla çıkış yapıldı</value>
+  </data>
+  <data name="Baslik.OnayaGonder" xml:space="preserve">
+    <value>Onaya Gönder</value>
+  </data>
+  <data name="Dugme.OnayaGonder" xml:space="preserve">
+    <value>Onaya Gönder</value>
+  </data>
+  <data name="Onay.OnayaGonder" xml:space="preserve">
+    <value>Kayıt onaya gönderilecektir. Devam edilsin mi?</value>
+  </data>
+  <data name="Baslik.GeriGonder" xml:space="preserve">
+    <value>Geri Gönder</value>
+  </data>
+  <data name="Baslik.Reddet" xml:space="preserve">
+    <value>Reddet</value>
+  </data>
+  <data name="Dugme.GeriGonder" xml:space="preserve">
+    <value>Geri Gönder</value>
+  </data>
+  <data name="Dugme.Reddet" xml:space="preserve">
+    <value>Reddet</value>
+  </data>
+  <data name="RiskEvreni.Alan.Aciklama" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="RiskEvreni.Alan.ReddetmeNedeni" xml:space="preserve">
+    <value>Reddetme Nedeni</value>
+  </data>
+  <data name="RiskEvreni.AlanindaGuncellemeYapildi" xml:space="preserve">
+    <value>alanında güncelleme yapıldı</value>
+  </data>
+  <data name="RiskEvreniOnay.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskEvreniOnay.SayfaBaslik" xml:space="preserve">
+    <value>Risk Kayıt - Onay</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.ZatenGeriGonderilmis" xml:space="preserve">
+    <value>Geri gönderilmek istenen kayıt zaten Geri Gönderilmiş durumda olduğu için geri gönderillemez</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.ZatenOnayaGonderilmis" xml:space="preserve">
+    <value>Onaya gönderilmek istenen kayıt zaten Onaya gönderildiği için onaya gönderillemez</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.IptalEdilmis" xml:space="preserve">
+    <value>İptal edilen kaydın durumu değiştirilemez</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.Onaylanmis" xml:space="preserve">
+    <value>Onaylanan kayıt üzerinde değişiklik yapılamaz</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.UygunDegil" xml:space="preserve">
+    <value>İşlem durumu uygun değil</value>
+  </data>
+  <data name="Kontrol.Duzenle.TarihceIlgiAlaniBos" xml:space="preserve">
+    <value>İllgi alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.TarihceIlgiTurAlaniBos" xml:space="preserve">
+    <value>İllgi tür alanı boş bırakılamaz</value>
+  </data>
+  <data name="KullaniciRol.17" xml:space="preserve">
+    <value>MERKEZKOORDINATOR</value>
+  </data>
+  <data name="KullaniciRol.18" xml:space="preserve">
+    <value>GENELKOORDINATOR</value>
+  </data>
+  <data name="KullaniciRol.19" xml:space="preserve">
+    <value>BASKAN</value>
+  </data>
+  <data name="KullaniciRol.20" xml:space="preserve">
+    <value>ICDENETIMUZMANI</value>
+  </data>
+  <data name="KullaniciRol.21" xml:space="preserve">
+    <value>ICDENETIMKOORDINATORU</value>
+  </data>
+  <data name="Kontrol.YetkiYok" xml:space="preserve">
+    <value>İşlem yapmaya yetkiniz yok</value>
+  </data>
+  <data name="Surec.Alan.Riskler" xml:space="preserve">
+    <value>Riskler</value>
+  </data>
+  <data name="Baslik.Tarihce" xml:space="preserve">
+    <value>Tarihçe</value>
+  </data>
+  <data name="Dugme.TarihceGoster" xml:space="preserve">
+    <value>Tarihçe Göster</value>
+  </data>
+  <data name="OlayRaporlama.Alan.KayitEden" xml:space="preserve">
+    <value>Kayıt Eden Personel</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Onaylayan" xml:space="preserve">
+    <value>Onaylayan Personel</value>
+  </data>
+  <data name="BulguYonetimi.Alan.KontrolZayifligi" xml:space="preserve">
+    <value>İç Kontrol Zayıflığı</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.SayfaBaslik" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi Listesi</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.SurecAdi" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.AltSurecAdi" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.RiskKategorisiAdi" xml:space="preserve">
+    <value>Risk Kategorisi</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.RiskTanimi" xml:space="preserve">
+    <value>Riskin Kök Nedeni</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiAdi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.YesilDeger" xml:space="preserve">
+    <value>Yeşil Değer</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.VeriDayanagi" xml:space="preserve">
+    <value>Veri Kaynağı</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Trend" xml:space="preserve">
+    <value>Trend</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.SariDeger" xml:space="preserve">
+    <value>Sarı Değer</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.KirmiziDeger" xml:space="preserve">
+    <value>Kırmızı Değer</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.HedefDeger" xml:space="preserve">
+    <value>Hedef Değer</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Durum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem4" xml:space="preserve">
+    <value>4. Dönem Değerlendirme</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem3" xml:space="preserve">
+    <value>3. Dönem Değerlendirme</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem2" xml:space="preserve">
+    <value>2. Dönem Değerlendirme</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem1" xml:space="preserve">
+    <value>1. Dönem Değerlendirme</value>
+  </data>
+  <data name="Kontrol.Duzenle.YesilDegerAlaniBos" xml:space="preserve">
+    <value>Yeşil değer alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.SariDegerAlaniBos" xml:space="preserve">
+    <value>Sarı değer alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.KirmiziDegerAlaniBos" xml:space="preserve">
+    <value>Kırmızı değer alanı boş bırakılamaz</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Degerlendirme" xml:space="preserve">
+    <value>Değerlendirme</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Degerler" xml:space="preserve">
+    <value>Değerler</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Etki5" xml:space="preserve">
+    <value>Kritik (5)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Etki4" xml:space="preserve">
+    <value>Yüksek (4)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Etki3" xml:space="preserve">
+    <value>Orta (3)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Etki2" xml:space="preserve">
+    <value>Düşük (2)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Etki1" xml:space="preserve">
+    <value>Çok Düşük (1)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Olasilik1" xml:space="preserve">
+    <value>Çok Nadir (1)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Olasilik2" xml:space="preserve">
+    <value>Nadir (2)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Olasilik3" xml:space="preserve">
+    <value>Olası (3)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Olasilik4" xml:space="preserve">
+    <value>Beklenen (4)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Olasilik5" xml:space="preserve">
+    <value>Neredeyse Kesin (5)</value>
+  </data>
+  <data name="Konfigurasyon.Alan.EtkiOlasilik" xml:space="preserve">
+    <value>Etki / Olasılık</value>
+  </data>
+  <data name="Konfigurasyon.Alan.OnayBekleyenRiskler" xml:space="preserve">
+    <value>Onay Bekleyen Riskler Hatırlatma E-posta Süresi</value>
+  </data>
+  <data name="Konfigurasyon.Alan.OnayBekleyenAzaltmaPlani" xml:space="preserve">
+    <value>Onay Bekleyen Azaltma Planları Hatırlatma E-posta Süresi</value>
+  </data>
+  <data name="Konfigurasyon.Alan.AzaltmaPlaniYapilmadi" xml:space="preserve">
+    <value>Azaltma Planı Oluşturulmadığına Dair Hatırlatma E-posta</value>
+  </data>
+  <data name="Konfigurasyon.Alan.AzaltmaPlaniBitisTarihi" xml:space="preserve">
+    <value>Azaltma Planı Bitiş Tarihi Hatırlatma E-posta Süresi</value>
+  </data>
+  <data name="Konfigurasyon.Alan.RiskKategorisiFinansal" xml:space="preserve">
+    <value>Risk Kategorisi: Finansal</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Puan" xml:space="preserve">
+    <value>Puan</value>
+  </data>
+  <data name="Konfigurasyon.Alan.Aciklama" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="Konfigurasyon.Alan.EtkiOlasilikMatrisi" xml:space="preserve">
+    <value>Etki / Olasılık Matrisi</value>
+  </data>
+  <data name="Konfigurasyon.Alan.OnayBekleyenRisklerPlc" xml:space="preserve">
+    <value>Onay tarihi kaç iş günü geçince e-posta gönderilsin?</value>
+  </data>
+  <data name="Konfigurasyon.Alan.OnayBekleyenAzaltmaPlaniPlc" xml:space="preserve">
+    <value>Onay tarihi kaç iş günü geçince e-posta gönderilsin?</value>
+  </data>
+  <data name="Konfigurasyon.Alan.AzaltmaPlaniBitisTarihiPlc" xml:space="preserve">
+    <value>Bitiş tarihine kaç iş günü kalınca e-posta gönderilsin?</value>
+  </data>
+  <data name="Konfigurasyon.Alan.AzaltmaPlaniYapilmadiPlc" xml:space="preserve">
+    <value>Azaltma planı kaç iş günü oluşturulmayınca e-posta gönderilsin?</value>
+  </data>
+  <data name="Konfigurasyon.SayfaBaslik" xml:space="preserve">
+    <value>Konfigürasyon</value>
+  </data>
+  <data name="Konfigurasyon.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Durum.GeriGonderildi" xml:space="preserve">
+    <value>Geri Gönderildi</value>
+  </data>
+  <data name="Durum.OnayaGonderildi" xml:space="preserve">
+    <value>Onaya Gönderildi</value>
+  </data>
+  <data name="Durum.Reddedildi" xml:space="preserve">
+    <value>Reddedildi</value>
+  </data>
+  <data name="RiskEvreni.Alan.ReddetAciklama" xml:space="preserve">
+    <value>Reddetme Nedeni</value>
+  </data>
+  <data name="RiskEvreni.Alan.RevizyonAciklama" xml:space="preserve">
+    <value>Revizyon Açıklaması</value>
+  </data>
+  <data name="RiskEvreni.RiskTuru.Firsat" xml:space="preserve">
+    <value>Fırsat</value>
+  </data>
+  <data name="RiskEvreni.RiskTuru.Tehdit" xml:space="preserve">
+    <value>Tehdit</value>
+  </data>
+  <data name="Kontrol.OnaylanacakKayitlariSeciniz" xml:space="preserve">
+    <value>Onaylanacak kayıtları seçiniz</value>
+  </data>
+  <data name="RiskEvreni.Alan.KayitTarihi" xml:space="preserve">
+    <value>Kayıt Tarihi</value>
+  </data>
+  <data name="Dugme.YeniOlayEkle" xml:space="preserve">
+    <value>Yeni Olay Ekle</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskSahibiBaskasiAdinaKaydet" xml:space="preserve">
+    <value>Başkası adına kaydetmek istiyorum</value>
+  </data>
+  <data name="MenuTanim.Konfigurasyon" xml:space="preserve">
+    <value>Konfigürasyon</value>
+  </data>
+  <data name="Menu.BildirimSistemi" xml:space="preserve">
+    <value>Bildirim Sistemi</value>
+  </data>
+  <data name="Menu.RiskYonetilmesiKayit" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="Menu.RiskYonetilmesiOnay" xml:space="preserve">
+    <value>Onay İşlemleri</value>
+  </data>
+  <data name="Raporlar.SayfaBaslik" xml:space="preserve">
+    <value>Raporlar</value>
+  </data>
+  <data name="Raporlar.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Dugme.RaporUret" xml:space="preserve">
+    <value>Rapor Üret</value>
+  </data>
+  <data name="YoneticiEkrani.SayfaBaslik" xml:space="preserve">
+    <value>Özet Bilgi Panosu</value>
+  </data>
+  <data name="YoneticiEkrani.SayfaAciklama" xml:space="preserve">
+    <value>Uygulamaya ilişkin verilerin görüntülendiği ekrandır</value>
+  </data>
+  <data name="Konfigurasyon.YapisalRiskSeviyeAdi.1" xml:space="preserve">
+    <value>Çok Düşük</value>
+  </data>
+  <data name="Konfigurasyon.YapisalRiskSeviyeAdi.2" xml:space="preserve">
+    <value>Düşük</value>
+  </data>
+  <data name="Konfigurasyon.YapisalRiskSeviyeAdi.3" xml:space="preserve">
+    <value>Orta</value>
+  </data>
+  <data name="Konfigurasyon.YapisalRiskSeviyeAdi.4" xml:space="preserve">
+    <value>Yüksek</value>
+  </data>
+  <data name="Konfigurasyon.YapisalRiskSeviyeAdi.5" xml:space="preserve">
+    <value>Çok Yüksek</value>
+  </data>
+  <data name="RiskYonetimi.Alan.ArtikRiskPuani" xml:space="preserve">
+    <value>Artık Risk Puanı</value>
+  </data>
+  <data name="RiskYonetimi.Alan.RiskAdi" xml:space="preserve">
+    <value>Risk Adı</value>
+  </data>
+  <data name="RiskYonetimi.Alan.RiskeVerilecekCevap" xml:space="preserve">
+    <value>Riske Verilecek Cevap</value>
+  </data>
+  <data name="RiskYonetimi.Alan.RiskKategorisiAdi" xml:space="preserve">
+    <value>Risk Kategorisi</value>
+  </data>
+  <data name="RiskYonetimi.Alan.RiskNo" xml:space="preserve">
+    <value>Risk No</value>
+  </data>
+  <data name="RiskYonetimi.Alan.YapisalRiskPuani" xml:space="preserve">
+    <value>Yapısal Risk Puanı</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="RiskYonetimi.Alan.AnahtarRiskGostergesiAdi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="RiskYonetimi.Alan.AnahtarRiskGostergesiSonDeger" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi Son Değer</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Etki" xml:space="preserve">
+    <value>Etki</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Hedef" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Olasilik" xml:space="preserve">
+    <value>Olasılık</value>
+  </data>
+  <data name="RiskYonetimi.Alan.RiskTanimi" xml:space="preserve">
+    <value>Riskin Kök Nedeni</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Surec" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="RiskYonetimi.Alan.YapisalRiskSeviyesi" xml:space="preserve">
+    <value>Yapısal Risk Seviyesi</value>
+  </data>
+  <data name="Dugme.EtkiOlasilikMatrisiAc" xml:space="preserve">
+    <value>Etki Olasılık Matrisi Aç</value>
+  </data>
+  <data name="Dugme.KontrolKriterMatrisiAc" xml:space="preserve">
+    <value>Kontrol Kriter Matrisi Aç</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Aciklama" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="RiskYonetimi.Alan.ArtikRiskSeviyesi" xml:space="preserve">
+    <value>Artık Risk Seviyesi</value>
+  </data>
+  <data name="RiskYonetimi.Alan.ArtikRiskSeviyesi1" xml:space="preserve">
+    <value>Artık Risk Seviyesi</value>
+  </data>
+  <data name="RiskYonetimi.Alan.Bilgilendirme" xml:space="preserve">
+    <value>Bilgilendirme</value>
+  </data>
+  <data name="RiskYonetimi.Alan.KontrolEtkinligi" xml:space="preserve">
+    <value>Kontrol Etkinliği</value>
+  </data>
+  <data name="RiskYonetimi.Alan.KontrolOnemDuzeyi" xml:space="preserve">
+    <value>Önem Düzeyi</value>
+  </data>
+  <data name="RiskYonetimi.Alan.KontrolTanimi" xml:space="preserve">
+    <value>Kontrol Tanımı</value>
+  </data>
+  <data name="RiskYonetimi.Bilgilendirme.KabulEt" xml:space="preserve">
+    <value>Tüm sonuçlarıyla riskin kabul edilmesi</value>
+  </data>
+  <data name="RiskYonetimi.Bilgilendirme.Reddet" xml:space="preserve">
+    <value>Belirli bir sürecin durdurulması veya belirli bir faaliyet alanından tamamen vazgeçilmesi</value>
+  </data>
+  <data name="RiskYonetimi.Bilgilendirme.TransferEt" xml:space="preserve">
+    <value>Riskin üçüncü bir tarafa aktarılması</value>
+  </data>
+  <data name="RiskYonetimi.RiskeVerilecekCevap.Azalt" xml:space="preserve">
+    <value>Azalt</value>
+  </data>
+  <data name="RiskYonetimi.RiskeVerilecekCevap.KabulEt" xml:space="preserve">
+    <value>Kabul Et</value>
+  </data>
+  <data name="RiskYonetimi.RiskeVerilecekCevap.Reddet" xml:space="preserve">
+    <value>Reddet</value>
+  </data>
+  <data name="RiskYonetimi.RiskeVerilecekCevap.TransferEt" xml:space="preserve">
+    <value>Transfer Et</value>
+  </data>
+  <data name="RiskYonetimi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskYonetimi.SayfaBaslik" xml:space="preserve">
+    <value>Risklerin Değerlendirilmesi - Kayıt</value>
+  </data>
+  <data name="Kontrol.Duzenle.OlasilikAlaniBos" xml:space="preserve">
+    <value>Olasılık alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.OlasilikAlaniBos1" xml:space="preserve">
+    <value>Etki alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiKodAlaniBos" xml:space="preserve">
+    <value>RiskYönetimi kod alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiEtkiAlaniBos" xml:space="preserve">
+    <value>Etki Alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiOlasilikAlaniBos" xml:space="preserve">
+    <value>Olasılık alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiOnemDuzeyiHatali" xml:space="preserve">
+    <value>Önem düzeyi toplamda 100 olmalıdır.</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiOnemDuzeyiSifir" xml:space="preserve">
+    <value>Önem düzeyi sıfır olamaz</value>
+  </data>
+  <data name="RiskYonetimiOnay.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskYonetimiOnay.SayfaBaslik" xml:space="preserve">
+    <value>Risklerin Değerlendirilmesi - Onay</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskTuru" xml:space="preserve">
+    <value>Riskin Niteliği</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.Reddedilmis" xml:space="preserve">
+    <value>Reddedilen kaydın durumu değiştirilemez</value>
+  </data>
+  <data name="RiskYonetimi.Alan.KayitTarihi" xml:space="preserve">
+    <value>Kayıt Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.MevcutDurum.DevamEdiyor" xml:space="preserve">
+    <value>Devam Ediyor</value>
+  </data>
+  <data name="RiskAzaltmaPlani.MevcutDurum.Durduruldu" xml:space="preserve">
+    <value>Durduruldu</value>
+  </data>
+  <data name="RiskAzaltmaPlani.MevcutDurum.Ertelendi" xml:space="preserve">
+    <value>Ertelendi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.MevcutDurum.IptalEdildi" xml:space="preserve">
+    <value>İptal Edildi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.MevcutDurum.Tamamlandi" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AzaltmaPlani" xml:space="preserve">
+    <value>Azaltma Planı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AzaltmaPlaniNo" xml:space="preserve">
+    <value>Azaltma Planı No</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.BitisTarihi" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AnahtarRiskGostergesiAdi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.ArtikRiskSeviyesi" xml:space="preserve">
+    <value>Artık Risk Seviyesi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AzaltmaPlani1" xml:space="preserve">
+    <value>Azaltma Planı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AzaltmaPlaniNo1" xml:space="preserve">
+    <value>Azaltma Planı No</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.BaslangicTarihi" xml:space="preserve">
+    <value>Başlangıç Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.BirimlerIsbirligi" xml:space="preserve">
+    <value>İş Birliği Yapacak Koordinatörlük - Birim/Ünite</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.BitisTarihi1" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.IlsikiliAzaltmaPlani" xml:space="preserve">
+    <value>İlişkili Olduğu Azaltma Planı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.MevcutDurum" xml:space="preserve">
+    <value>Azaltma Planı Güncel Durum</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.RiskKategorisiAdi" xml:space="preserve">
+    <value>Risk Kategorisi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.RiskNo" xml:space="preserve">
+    <value>Risk No</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.RiskTanimi" xml:space="preserve">
+    <value>Riskin Kök Nedeni</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.SorumluBirim" xml:space="preserve">
+    <value>Sorumlu Birim/Ünite</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.TamamlanmaYuzdesi" xml:space="preserve">
+    <value>Tamamlanma Yüzdesi</value>
+  </data>
+  <data name="Menu.RiskAzaltmaPlaniKayit" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="Menu.RiskAzaltmaPlaniOnay" xml:space="preserve">
+    <value>Onay İşlemleri</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.AzaltmaPlaniNotlar" xml:space="preserve">
+    <value>Azaltma Plani Detayları/Notlar</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.ErtelemeNot" xml:space="preserve">
+    <value>Zaman Planındaki Erteleme/Değişiklik Nedeni</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.ErtelenmisDegistirilmisZamanPlani" xml:space="preserve">
+    <value>Ertelenmiş/Değiştirilmiş Zaman Planı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskAzaltmaPlani.SayfaBaslik" xml:space="preserve">
+    <value>Risklerin Yönetilmesi - Kayıt</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.Sorumlu" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.SorumluBaskasiAdinaKaydet" xml:space="preserve">
+    <value>Başkası adına kaydetmek istiyorum</value>
+  </data>
+  <data name="RiskAzaltmaPlaniOnay.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskAzaltmaPlaniOnay.SayfaBaslik" xml:space="preserve">
+    <value>Risklerin Yönetilmesi - Onay</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskKategorisiAdi" xml:space="preserve">
+    <value>Risk Kategorisi</value>
+  </data>
+  <data name="RiskEvreni.Alan.Olay" xml:space="preserve">
+    <value>İlişkili Olaylar</value>
+  </data>
+  <data name="Dugme.TumunuSec" xml:space="preserve">
+    <value>Tümünü Seç</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskGecerlilikTarihi" xml:space="preserve">
+    <value>Risk Geçerlilik Tarihi</value>
+  </data>
+  <data name="Dugme.Degerlendir" xml:space="preserve">
+    <value>Değerlendir</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.AnahtarPerformansGostergesi" xml:space="preserve">
+    <value>Anahtar Performans Göstergesi</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.DonemTarihAraligi" xml:space="preserve">
+    <value>Dönem Tarih Aralığı</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.GerceklesenDeger" xml:space="preserve">
+    <value>Gerçekleşen Değer</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Hedef" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.HedefeEtkisi" xml:space="preserve">
+    <value>Hedefe Etkisi</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.IsbirligiKoordinatorluk" xml:space="preserve">
+    <value>İş Birliği Yapacak Koordinatörlük(ler)</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.PlanDonemiBaslangicDegeri" xml:space="preserve">
+    <value>Plan Dönemi Başlangıç Değeri</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.PlanlananDeger" xml:space="preserve">
+    <value>Planlanan Değer</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.SapmaNedeni" xml:space="preserve">
+    <value>Hedefin Gerçekleştirilmesine İlişkin Alınacak Önlemler / Sapma Nedeni</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.SapmaOrani" xml:space="preserve">
+    <value>Gerçekleşme Oranı</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Hedef1" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Yil" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="StratejikPlanIzleme.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StratejikPlanIzleme.SayfaBaslik" xml:space="preserve">
+    <value>Stratejik Planlama - İzleme</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.DegerlendirmeDonemleri" xml:space="preserve">
+    <value>İzleme Dönemleri</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.GerceklesenDeger1" xml:space="preserve">
+    <value>Gerçekleşen Değer</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.PlanlananDeger1" xml:space="preserve">
+    <value>Planlanan Değer</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Donem" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.DosyaAdi" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="Genel.Alan.EtkiOlasilikMatrisi" xml:space="preserve">
+    <value>Etki Olasılık Matrisi</value>
+  </data>
+  <data name="Konfigurasyon.Alan.MatrisDuzenle" xml:space="preserve">
+    <value>(İstediğiniz hücreye sağ tıklayarak Renk değişikliği yapabilirsiniz)</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanIzlemePlanlananDegerBos" xml:space="preserve">
+    <value>Planlanan değer boş olamaz</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.ZatenPasifYapilmis" xml:space="preserve">
+    <value>Pasif yapılmak istenen kayıt zaten Pasif durumda</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BildirimSistemi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BildirimSistemi.SayfaBaslik" xml:space="preserve">
+    <value>Bildirim Sistemi</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem5" xml:space="preserve">
+    <value>5. Dönem Değerlendirme</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem6" xml:space="preserve">
+    <value>6. Dönem Değerlendirme</value>
+  </data>
+  <data name="StratejikPlan.Alan.Yil" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanIzlemeGostergeDonemBos" xml:space="preserve">
+    <value>Anahtar performans göstergesi dönemleri boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.HedefAlaniBos" xml:space="preserve">
+    <value>Hedef bilgisi boş bırakılamaz</value>
+  </data>
+  <data name="Raporlar.Alan.Donem" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="Raporlar.Alan.Yil" xml:space="preserve">
+    <value>Risk Kayıt Yılı</value>
+  </data>
+  <data name="Konfigurasyon.ArtikRiskSeviyeAdi.1" xml:space="preserve">
+    <value>Çok Düşük</value>
+  </data>
+  <data name="Konfigurasyon.ArtikRiskSeviyeAdi.2" xml:space="preserve">
+    <value>Düşük</value>
+  </data>
+  <data name="Konfigurasyon.ArtikRiskSeviyeAdi.3" xml:space="preserve">
+    <value>Orta</value>
+  </data>
+  <data name="Konfigurasyon.ArtikRiskSeviyeAdi.4" xml:space="preserve">
+    <value>Yüksek</value>
+  </data>
+  <data name="Konfigurasyon.ArtikRiskSeviyeAdi.5" xml:space="preserve">
+    <value>Çok Yüksek</value>
+  </data>
+  <data name="BildirimSistemi.Alan.BelgeTipi" xml:space="preserve">
+    <value>Belge Tipi</value>
+  </data>
+  <data name="BildirimSistemi.Alan.IslemTarihi" xml:space="preserve">
+    <value>İşlem Tarihi</value>
+  </data>
+  <data name="BildirimSistemi.Alan.IslemYapan" xml:space="preserve">
+    <value>İşlem Yapan</value>
+  </data>
+  <data name="EnumTarihceIslemTur.OlayRaporlama" xml:space="preserve">
+    <value>Olay Raporlaması</value>
+  </data>
+  <data name="EnumTarihceIslemTur.RiskAzaltmaPlani" xml:space="preserve">
+    <value>Risklerin Yönetilmesi</value>
+  </data>
+  <data name="EnumTarihceIslemTur.RiskEvreni" xml:space="preserve">
+    <value>Risk Kaydı</value>
+  </data>
+  <data name="EnumTarihceIslemTur.RiskYonetimi" xml:space="preserve">
+    <value>Risklerin Değerlendirilmesi</value>
+  </data>
+  <data name="YETKI_BASKAN" xml:space="preserve">
+    <value>Başkan</value>
+  </data>
+  <data name="YETKI_BIRIMAMIRI" xml:space="preserve">
+    <value>Ünite Sorumlusu/Birim Amiri</value>
+  </data>
+  <data name="YETKI_BIRIMAMIRIDESTEKHIZMETLERI" xml:space="preserve">
+    <value>Destek Hiz. Birim Amiri</value>
+  </data>
+  <data name="YETKI_GENELKOORDINATOR" xml:space="preserve">
+    <value>Genel Koordinatör</value>
+  </data>
+  <data name="YETKI_ICDENETIMKOORDINATOR" xml:space="preserve">
+    <value>İç Denetim Koordinatörü</value>
+  </data>
+  <data name="YETKI_ICDENETIMUZMANI" xml:space="preserve">
+    <value>İç Denetçi</value>
+  </data>
+  <data name="YETKI_ILKOORDINATOR" xml:space="preserve">
+    <value>İl Koordinatörü</value>
+  </data>
+  <data name="YETKI_MERKEZKOORDINATOR" xml:space="preserve">
+    <value>Merkez Koordinatörü</value>
+  </data>
+  <data name="YETKI_PLANLAMAUNITESI" xml:space="preserve">
+    <value>Planlama Ünitesi</value>
+  </data>
+  <data name="YETKI_RISKSEKRETARYASI" xml:space="preserve">
+    <value>Risk Sekretaryası</value>
+  </data>
+  <data name="YETKI_SISTEMYONETICISI" xml:space="preserve">
+    <value>Sistem Yöneticisi</value>
+  </data>
+  <data name="YETKI_UZMAN" xml:space="preserve">
+    <value>Uzman</value>
+  </data>
+  <data name="YETKI_YETKILIRISKGOREVLISI" xml:space="preserve">
+    <value>Yetkili Risk Görevlisi</value>
+  </data>
+  <data name="Menu.OlayRaporlamaKayit" xml:space="preserve">
+    <value>Kayıt</value>
+  </data>
+  <data name="Menu.OlayRaporlamaOnay" xml:space="preserve">
+    <value>Onay İşlemleri</value>
+  </data>
+  <data name="OlayRaporlamaOnay.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OlayRaporlamaOnay.SayfaBaslik" xml:space="preserve">
+    <value>Olay Raporlaması - Onay</value>
+  </data>
+  <data name="Kontrol.Duzenle.AyniSurecKayitli" xml:space="preserve">
+    <value>Kayıt edilmek istenen Süreç daha önce tanımlandığı için kayıt işlemi yapılamadı</value>
+  </data>
+  <data name="OlayRaporlama.Alan.ReddetmeNedeni" xml:space="preserve">
+    <value>Reddetme Nedeni</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.ReddetmeNedeni" xml:space="preserve">
+    <value>Reddetme Nedeni</value>
+  </data>
+  <data name="Dugme.YeniKayitStratejikPlanIzleme" xml:space="preserve">
+    <value>Stratejik Hedef İzle</value>
+  </data>
+  <data name="Dugme.AzaltmaPlaniOlustur" xml:space="preserve">
+    <value>Azaltma Planı Oluştur</value>
+  </data>
+  <data name="StratejikPlan.Alan.Birimler" xml:space="preserve">
+    <value>İş Birliği Yapacak Birimler/Üniteler</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.Birim" xml:space="preserve">
+    <value>Sorumlu Birim/Ünite</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.IsbirligiBirim" xml:space="preserve">
+    <value>İş Birliği Yapacak Birimler/Üniteler</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskEvreni.YetkinizYok" xml:space="preserve">
+    <value>Her kullanıcı kendi riskini düzenleyebilir</value>
+  </data>
+  <data name="DenetimEylemPlani.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DenetimEylemPlani.SayfaBaslik" xml:space="preserve">
+    <value>Eylem Planı</value>
+  </data>
+  <data name="DenetimIzlemeTakip.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DenetimIzlemeTakip.SayfaBaslik" xml:space="preserve">
+    <value>İzleme - Takip Denetimi</value>
+  </data>
+  <data name="DisDenetim.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DisDenetim.SayfaBaslik" xml:space="preserve">
+    <value>Dış Denetim</value>
+  </data>
+  <data name="Dugme.BulguGoster" xml:space="preserve">
+    <value>Bulguları Göster</value>
+  </data>
+  <data name="Denetim.Alan.AltSurec" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="Denetim.Alan.BaslamaTarihi" xml:space="preserve">
+    <value>Denetim Başlama Tarihi</value>
+  </data>
+  <data name="Denetim.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Denetim.Alan.BitisTarihi" xml:space="preserve">
+    <value>Denetim Bitiş Tarihi</value>
+  </data>
+  <data name="Denetim.Alan.BulguOzetDurumu" xml:space="preserve">
+    <value>Bulgu Özet Durumu</value>
+  </data>
+  <data name="Denetim.Alan.Denetci" xml:space="preserve">
+    <value>Denetçi</value>
+  </data>
+  <data name="Denetim.Alan.DenetimAdi" xml:space="preserve">
+    <value>Denetim Adı</value>
+  </data>
+  <data name="Denetim.Alan.DenetimNo" xml:space="preserve">
+    <value>Denetim No</value>
+  </data>
+  <data name="Denetim.Alan.DenetimSorumlusu" xml:space="preserve">
+    <value>Denetim Gözetim Sorumlusu</value>
+  </data>
+  <data name="Denetim.Alan.DenetimTarihleri" xml:space="preserve">
+    <value>Denetim Tarihleri (Başlama-Bitiş)</value>
+  </data>
+  <data name="Denetim.Alan.Durum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="Denetim.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="Denetim.Alan.RaporDokumani" xml:space="preserve">
+    <value>Rapor Dokümanı</value>
+  </data>
+  <data name="Denetim.Alan.Surec" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="IcDenetim.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IcDenetim.SayfaBaslik" xml:space="preserve">
+    <value>İç Denetim</value>
+  </data>
+  <data name="Menu.BulguYonetimiDenetimDis" xml:space="preserve">
+    <value>Dış Denetim</value>
+  </data>
+  <data name="Menu.BulguYonetimiDenetimIc" xml:space="preserve">
+    <value>İç Denetim</value>
+  </data>
+  <data name="Menu.BulguYonetimiEylemPlani" xml:space="preserve">
+    <value>Eylem Planı</value>
+  </data>
+  <data name="Menu.BulguYonetimiIzlemeTakip" xml:space="preserve">
+    <value>İzleme - Takip Denetimi</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.SonCevapTarihi" xml:space="preserve">
+    <value>Cevap İçin Son Tarih</value>
+  </data>
+  <data name="BulguYonetimi.Alan.DenetimAdi" xml:space="preserve">
+    <value>Denetim Adı</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Kriterler" xml:space="preserve">
+    <value>Kriterler</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Nedenler" xml:space="preserve">
+    <value>Nedenler</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Oneriler" xml:space="preserve">
+    <value>Öneriler</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Riskler" xml:space="preserve">
+    <value>Riskler ve Etkileri</value>
+  </data>
+  <data name="BulguYonetimi.Alan.BirimDis" xml:space="preserve">
+    <value>Bulgunun İlgili Olduğu Birim/Ünite</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Bulgular" xml:space="preserve">
+    <value>Bulgular</value>
+  </data>
+  <data name="BulguYonetimi.Alan.KoordinatorlukDis" xml:space="preserve">
+    <value>Bulgunun İlgili Olduğu Koordinatörlük</value>
+  </data>
+  <data name="Denetim.Alan.DenetimYapanKurum" xml:space="preserve">
+    <value>Denetimi Yapan Kurum</value>
+  </data>
+  <data name="Denetim.Alan.DenetimYil" xml:space="preserve">
+    <value>Denetim Yılı</value>
+  </data>
+  <data name="Dugme.KisiyeGonder" xml:space="preserve">
+    <value>İlgili Kişiye İlet</value>
+  </data>
+  <data name="OlayRaporlama.Alan.Notlar" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="Baslik.Bilgilendirme" xml:space="preserve">
+    <value>Bilgilendirme</value>
+  </data>
+  <data name="Dugme.BilgilendirmeMailiGonder" xml:space="preserve">
+    <value>Bilgilendirme Maili Gönder</value>
+  </data>
+  <data name="Baslik.KisiyeGonder" xml:space="preserve">
+    <value>İlgili Kişiye İlet</value>
+  </data>
+  <data name="BulguYonetimiCevap.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BulguYonetimiCevap.SayfaBaslik" xml:space="preserve">
+    <value>Bulguya Cevap</value>
+  </data>
+  <data name="Kontrol.Duzenle.BulguYonetimiIlgıliKisiyeGonderilmis" xml:space="preserve">
+    <value>Bu bulgu ilgili kişiye daha önce gönderilmiş</value>
+  </data>
+  <data name="Menu.BulguYonetimiCevap" xml:space="preserve">
+    <value>Bulguya Cevap</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.CevapTarihi" xml:space="preserve">
+    <value>Cevap Tarihi</value>
+  </data>
+  <data name="Denetim.Alan.Kaynak" xml:space="preserve">
+    <value>Denetimin Kaynağı</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.Aciklama" xml:space="preserve">
+    <value>Denetlenen Birimin Açıklamaları</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.BulguGorusu" xml:space="preserve">
+    <value>Bulgu İle İlgili Görüşü</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.Eylem" xml:space="preserve">
+    <value>Gerçekleştirilecek Eylem</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.OnemDuzeyiGorusu" xml:space="preserve">
+    <value>Önem Düzeyi İle İlgili Görüşü</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.OneriGorusu" xml:space="preserve">
+    <value>Öneri İle İlgili Görüşü</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.SorumluKisi" xml:space="preserve">
+    <value>Sorumlu Birim/Kişi</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.TamamlamaTarihi" xml:space="preserve">
+    <value>Eylem İçin Öngörülen Tamamlanma Tarihi</value>
+  </data>
+  <data name="StratejikPlan.Alan.BirimlerIsbirligi" xml:space="preserve">
+    <value>İş Birliği Yapacak Koordinatörlük - Birim/Ünite</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.DenetimEkipGorusu" xml:space="preserve">
+    <value>Denetim Ekibinin Nihai Görüşü</value>
+  </data>
+  <data name="RiskYonetimi.AlanindaGuncellemeYapildi" xml:space="preserve">
+    <value>alanında güncelleme yapıldı</value>
+  </data>
+  <data name="RiskAzaltmaPlani.AlanindaGuncellemeYapildi" xml:space="preserve">
+    <value>alanında güncelleme yapıldı</value>
+  </data>
+  <data name="RiskSahibiDegistir.Alan.RiskSahibiEski" xml:space="preserve">
+    <value>Mevcut Risk Sahibi</value>
+  </data>
+  <data name="RiskSahibiDegistir.Alan.RiskSahibiYeni" xml:space="preserve">
+    <value>Aktarılacak Risk Sahibi</value>
+  </data>
+  <data name="RiskSahibiDegistir.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskSahibiDegistir.SayfaBaslik" xml:space="preserve">
+    <value>Risk Sahibi Değiştir</value>
+  </data>
+  <data name="Kontrol.RiskSahibiDegistir.EsitOlamaz" xml:space="preserve">
+    <value>Mevcut risk sahibi ile aktarılacak risk sahibini aynı olamaz</value>
+  </data>
+  <data name="Kontrol.RiskSahibiDegistir.EskiKodBos" xml:space="preserve">
+    <value>Mevcut risk sahibi boş olamaz</value>
+  </data>
+  <data name="Kontrol.RiskSahibiDegistir.YeniKodBos" xml:space="preserve">
+    <value>Aktarılacak risk sahibini boş olamaz </value>
+  </data>
+  <data name="MenuTanim.RiskSahibiDegistir" xml:space="preserve">
+    <value>Risk Sahibini Değiştir</value>
+  </data>
+  <data name="Bildirim.RiskSahibiDegistir.KayitBasarili" xml:space="preserve">
+    <value>Risk başarıyla aktarıldı</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.BulguBilgisi" xml:space="preserve">
+    <value>Bulgu</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.Onerilen" xml:space="preserve">
+    <value>Önerilen Eylem</value>
+  </data>
+  <data name="Denetim.Alan.BirimlerIsbirligi" xml:space="preserve">
+    <value>Koordinatörlük - Birim/Ünite - Süreç - Alt Süreç</value>
+  </data>
+  <data name="IzlemeTakip.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="IzlemeTakip.SayfaBaslik" xml:space="preserve">
+    <value>İzleme - Takip Denetimi</value>
+  </data>
+  <data name="Denetim.Alan.KoordinatorlukBirim" xml:space="preserve">
+    <value>Koordinatörlük-Birim/Ünite</value>
+  </data>
+  <data name="Denetim.Alan.RaporDokumanlari" xml:space="preserve">
+    <value>Rapor Dokümanları</value>
+  </data>
+  <data name="Dugme.BulguEkle" xml:space="preserve">
+    <value>Yeni Bulgu Ekle</value>
+  </data>
+  <data name="BulguYonetimi.Alan.KisiyeGonder" xml:space="preserve">
+    <value>Bulguya Cevap Girişi Yapabilecek İlgili Kişi/Kişiler</value>
+  </data>
+  <data name="Denetim.Alan.IlgiliYazi" xml:space="preserve">
+    <value>İlgili Rapor/Yazı</value>
+  </data>
+  <data name="BulguYonetimiCevap.IlgiliDokumanlar" xml:space="preserve">
+    <value>İlgili Dokümanlar</value>
+  </data>
+  <data name="Onay.DosyaSil" xml:space="preserve">
+    <value>Dosya silinecektir. Onaylıyor musunuz?</value>
+  </data>
+  <data name="Dugme.Revize" xml:space="preserve">
+    <value>Revize Et</value>
+  </data>
+  <data name="Denetim.Alan.DenetimPlaniYil" xml:space="preserve">
+    <value>Denetim Planı Yılı</value>
+  </data>
+  <data name="Genel.Alan.Baslik" xml:space="preserve">
+    <value>Konu</value>
+  </data>
+  <data name="Genel.Alan.SayfaAdi" xml:space="preserve">
+    <value>Sayfa Adı</value>
+  </data>
+  <data name="Yardim.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Yardim.SayfaBaslik" xml:space="preserve">
+    <value>Yardım</value>
+  </data>
+  <data name="MenuTanim.Yardim" xml:space="preserve">
+    <value>Yardım Tanımlama</value>
+  </data>
+  <data name="Dugme.Dosya" xml:space="preserve">
+    <value>Ekli Dosyalar</value>
+  </data>
+  <data name="BulguYonetimi.Alan.SonCevapTarihi" xml:space="preserve">
+    <value>Son Cevap Tarihi</value>
+  </data>
+  <data name="Denetim.Alan.ReferansNo" xml:space="preserve">
+    <value>Referans Numarası</value>
+  </data>
+  <data name="RiskEvreni.Alan.RiskBaslamaBitisTarihi" xml:space="preserve">
+    <value>Risk Başlama ve Bitiş Tarihleri</value>
+  </data>
+  <data name="Bildirim.BildirimMesaj" xml:space="preserve">
+    <value>Bildiriminiz bulunmaktadır</value>
+  </data>
+  <data name="Bildirim.ButunBildirimleriGor" xml:space="preserve">
+    <value>Bütün Bildirimleri Gör</value>
+  </data>
+  <data name="Dugme.Goruntule" xml:space="preserve">
+    <value>Kaydı Gör</value>
+  </data>
+  <data name="Bildirim.BildirimYokMesaj" xml:space="preserve">
+    <value>Bildirim yok</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Aciklama" xml:space="preserve">
+    <value>Anahtar Performans Göstergesi Açıklama</value>
+  </data>
+  <data name="MenuTanim.StratejikPlanDonem" xml:space="preserve">
+    <value>Stratejik Plan Dönem Tanımları</value>
+  </data>
+  <data name="StratejikPlan.Alan.Donem" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="TanimStratejikPlanDonem.Alan.BaslamaYil" xml:space="preserve">
+    <value>Başlama Yılı</value>
+  </data>
+  <data name="TanimStratejikPlanDonem.Alan.BitisYil" xml:space="preserve">
+    <value>Bitiş Yılı</value>
+  </data>
+  <data name="TanimStratejikPlanDonem.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimStratejikPlanDonem.SayfaBaslik" xml:space="preserve">
+    <value>Stratejik Plan Dönem Tanımları</value>
+  </data>
+  <data name="RiskYonetimi.Bilgilendirme.Azalt" xml:space="preserve">
+    <value>Risklerin kontrol edilebilir bir seviyeye düşürülmesi veya tamamen yok edilmesi amacıyla çeşitli kontrol tedbirleri ile riskin azaltılması</value>
+  </data>
+  <data name="StratejikPlanIzleme.Alan.DonemAdi" xml:space="preserve">
+    <value>Dönem Adı</value>
+  </data>
+  <data name="Kontrol.Duzenle.BelgeKodAlaniBos" xml:space="preserve">
+    <value>Kod alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.BelgeTipiAlaniBos" xml:space="preserve">
+    <value>Tip alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanIzlemeOncedenKaydedilmisBos" xml:space="preserve">
+    <value>Kayıt edilmek istenilen Amaç / Hedef ile daha önce izleme kaydı yapılmış. Yeni izleme kaydı yapamazsınız.</value>
+  </data>
+  <data name="Kontrol.Duzenle.AnahtarRiskGostergesiYetkinizYok" xml:space="preserve">
+    <value>Değişiklik için yetkiniz yok. Sadece Risk sahibi değişiklik yapabilir.</value>
+  </data>
+  <data name="Kontrol.Duzenle.SorumluDegisiklikYapabilir" xml:space="preserve">
+    <value>Değişiklik için yetkiniz yok. Sadece sorumlu değişiklik yapabilir</value>
+  </data>
+  <data name="BulguYonetimi.Durum.1" xml:space="preserve">
+    <value>Açık</value>
+  </data>
+  <data name="BulguYonetimi.Durum.2" xml:space="preserve">
+    <value>Kısmen Kapalı</value>
+  </data>
+  <data name="BulguYonetimi.Durum.11" xml:space="preserve">
+    <value>Risk üstlenildi</value>
+  </data>
+  <data name="BulguYonetimi.Durum.12" xml:space="preserve">
+    <value>Kapalı</value>
+  </data>
+  <data name="BulguYonetimi.Durum.99" xml:space="preserve">
+    <value>Pasif</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.NedenKatilmiyor" xml:space="preserve">
+    <value>Neden Katılmıyorsunuz?</value>
+  </data>
+  <data name="DenetimEylemPlani.Alan.YilDenetimNo" xml:space="preserve">
+    <value>Yıl / Denetim No</value>
+  </data>
+  <data name="BulguYonetimi.Alan.Cevaplar" xml:space="preserve">
+    <value>Verilen Cevaplar</value>
+  </data>
+  <data name="Dugme.CevapDetay" xml:space="preserve">
+    <value>Cevap Detayı</value>
+  </data>
+  <data name="Denetim.Alan.RaporNo" xml:space="preserve">
+    <value>Rapor No</value>
+  </data>
+  <data name="DenetimIzlemeTakip.Alan.DenetimTarihi" xml:space="preserve">
+    <value>Takip Denetim Tarihi</value>
+  </data>
+  <data name="DenetimIzlemeTakip.Alan.EylemKarsilama" xml:space="preserve">
+    <value>Eylem Gerekliliği Karşılıyor mu?</value>
+  </data>
+  <data name="DenetimIzlemeTakip.Alan.EylemKarsilamaUzun" xml:space="preserve">
+    <value>Eylem Nihai Rapordaki Gerekliliği Karşılıyor mu?</value>
+  </data>
+  <data name="DenetimIzlemeTakip.Alan.EylemSonDurum" xml:space="preserve">
+    <value>Eyleme İlişkin Son Durum</value>
+  </data>
+  <data name="Kontrol.Sil.Cevaplandi" xml:space="preserve">
+    <value>Bulguya cevap verildiği için silinemez</value>
+  </data>
+  <data name="Dugme.DosyaAciklama" xml:space="preserve">
+    <value>Açıklama Yazın</value>
+  </data>
+  <data name="DenetimListe.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Kontrol.Duzenle.DuzenlemeYetkinizYok" xml:space="preserve">
+    <value>Düzenleme yetkiniz bulunmamaktadır</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanHedefGostergeEtkiHatali" xml:space="preserve">
+    <value>Hedefe Etki değeri toplamda 100 olmalıdır</value>
+  </data>
+  <data name="BulguYonetimiCevapOnay.SayfaBaslik" xml:space="preserve">
+    <value>Bulguya Cevap - Onay</value>
+  </data>
+  <data name="EnumTarihceIslemTur.BulguYonetimiCevap" xml:space="preserve">
+    <value>Bulgu Yönetimi Cevap</value>
+  </data>
+  <data name="Menu.StratejikPlanEylemPlani" xml:space="preserve">
+    <value>Eylem Planı</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Sira" xml:space="preserve">
+    <value>Sıra No</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.AlinacakAksiyonlar" xml:space="preserve">
+    <value>Alınacak Aksiyonlar</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.AksiyonListesi" xml:space="preserve">
+    <value>Aksiyon Listesi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.AnahtarPerformansGostergesi" xml:space="preserve">
+    <value>Anahtar Performans Göstergesi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.BaslangicTarihi" xml:space="preserve">
+    <value>Başlangıç Tarihi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Birim" xml:space="preserve">
+    <value>Sorumlu Birim/Ünite</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.BitisTarihi" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Hedef" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.HedefeEtkisi" xml:space="preserve">
+    <value>Hedefe Etkisi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Sorumlu Koordinatörlük</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Notlar" xml:space="preserve">
+    <value>Notlar</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.TahminiButce" xml:space="preserve">
+    <value>Tahmini Bütçe</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.TamamlanmaDurumu" xml:space="preserve">
+    <value>Tamamlanma Durumu</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.Yil" xml:space="preserve">
+    <value>Yil</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StratejikPlanEylemPlani.SayfaBaslik" xml:space="preserve">
+    <value>Stratejik Plan - Eylem Planı</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.BaslangicDegeri" xml:space="preserve">
+    <value>Başlangıç Değeri</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.Alan.YilDegeri" xml:space="preserve">
+    <value>Yıl Değeri</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.TamamlanmaDurumu.DevamEdiyor" xml:space="preserve">
+    <value>Devam Ediyor</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.TamamlanmaDurumu.Ertelendi" xml:space="preserve">
+    <value>Ertelendi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.TamamlanmaDurumu.IptalEdildi" xml:space="preserve">
+    <value>İptal Edildi</value>
+  </data>
+  <data name="StratejikPlanEylemPlani.TamamlanmaDurumu.Tamamlandi" xml:space="preserve">
+    <value>Tamamlandı</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanIzlemeGostergeAksiyonBos" xml:space="preserve">
+    <value>İşlem yapılacak anahtar performans göstegesi bulunamadı</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanIzlemeGostergeKodAlaniBos" xml:space="preserve">
+    <value>İşlem yapılacak göstege bulunamadı</value>
+  </data>
+  <data name="Kontrol.Duzenle.BirimAlaniBos" xml:space="preserve">
+    <value>Birim/Ünite bilgisi boş bırakılamaz</value>
+  </data>
+  <data name="BulguYonetimiCevap.Alan.SonDurum" xml:space="preserve">
+    <value>Eyleme İlişkin Son Durum</value>
+  </data>
+  <data name="RiskYonetimi.Alan.AciklamaReddet" xml:space="preserve">
+    <value>Reddetme Nedeni</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.OnaylayacakYetkiBulunamadi" xml:space="preserve">
+    <value>Onaylayacak Yetki Tipi bulunamadı</value>
+  </data>
+  <data name="Bildirim.RiskYonetimiOnaylandi" xml:space="preserve">
+    <value>Risk yönetimi kaydı başarıyla tamamlandı. Risk evreni ekranından ilgili riskinizi görebilirsiniz.</value>
+  </data>
+  <data name="Menu.RiskIzleme" xml:space="preserve">
+    <value>Risk Evreni</value>
+  </data>
+  <data name="RiskIzleme.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskIzleme.SayfaBaslik" xml:space="preserve">
+    <value>Risk Evreni</value>
+  </data>
+  <data name="Baslik.RiskIzleme" xml:space="preserve">
+    <value>Risk Evreni</value>
+  </data>
+  <data name="Dugme.RiskIzleme" xml:space="preserve">
+    <value>Göster</value>
+  </data>
+  <data name="Bildirim.RiskKayitBasarili" xml:space="preserve">
+    <value>Kayıt işlemi başarıyla tamamlandı</value>
+  </data>
+  <data name="Baslik.AnahtarRiskGostergesi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Donem" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.GerceklesenDeger" xml:space="preserve">
+    <value>Gerçekleşen Değer</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.SorumluKoordinatorluk" xml:space="preserve">
+    <value>Sorumlu Koordinatörlük</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskAzaltmaPlaniSorumluBirimBos" xml:space="preserve">
+    <value>Sorumlu birim boş olamaz</value>
+  </data>
+  <data name="Kontrol.DurumDegistir.AzaltmaPlaniSorumlusuBulunamadi" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu seçilmeden onay işlemi tamamlanamaz</value>
+  </data>
+  <data name="Dugme.DenetimGorevlendirme" xml:space="preserve">
+    <value>Görevlendirme Bilgisi</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.GondermeSayisi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Denetlenen Birime Gönderildiği Yazının Sayısı</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.GondermeTarihi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Denetlenen Birime Gönderildiği Yazının Tarihi</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.OnaySayisi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Onay Sayısı</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.OnayTarihi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Onay Tarihi</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.RaporSayisi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Sayısı</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.RaporTarihi" xml:space="preserve">
+    <value>Nihai Denetim Raporunun Tarihi</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.YaziSayisi" xml:space="preserve">
+    <value>Görevlendirme Yazısının Sayısı</value>
+  </data>
+  <data name="DenetimGorevlendirme.Alan.YaziTarihi" xml:space="preserve">
+    <value>Görevlendirme Yazısının Tarihi</value>
+  </data>
+  <data name="Kontrol.Duzenle.DenetimGorevlendirmeTipAlaniBos" xml:space="preserve">
+    <value>Görevlendirme tip bilgisi okunamadı</value>
+  </data>
+  <data name="Kontrol.Duzenle.DenetimKodAlaniBos" xml:space="preserve">
+    <value>Denetim Kod bilgisi okunamadı</value>
+  </data>
+  <data name="StratejikPlan.Alan.RevizyonNedeni" xml:space="preserve">
+    <value>Revizyon Nedeni</value>
+  </data>
+  <data name="StratejikPlan.Alan.RevizyonTarihi" xml:space="preserve">
+    <value>Revizyon Tarihi</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiAciklamaAlaniBos" xml:space="preserve">
+    <value>Açıklama Alanı boş olamaz</value>
+  </data>
+  <data name="AnahtarRiskGostergesiDonemPeriyot.Aylik" xml:space="preserve">
+    <value>Aylık</value>
+  </data>
+  <data name="AnahtarRiskGostergesiDonemPeriyot.Aylik3" xml:space="preserve">
+    <value>3 Aylık</value>
+  </data>
+  <data name="AnahtarRiskGostergesiDonemPeriyot.Aylik6" xml:space="preserve">
+    <value>6 Aylık</value>
+  </data>
+  <data name="AnahtarRiskGostergesiDonemPeriyot.Yillik" xml:space="preserve">
+    <value>Yıllık</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Deger" xml:space="preserve">
+    <value>Değer</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.Periyot" xml:space="preserve">
+    <value>Sıklık</value>
+  </data>
+  <data name="BildirimSistemi.Alan.Aciklama" xml:space="preserve">
+    <value>Açıklama</value>
+  </data>
+  <data name="EnumTarihceIslemTur.AnahtarRiskGostergesi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi</value>
+  </data>
+  <data name="Menu.BGYSRiskleri" xml:space="preserve">
+    <value>BGYS Riskleri</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RiskYonetimiBeyannamesi.SayfaBaslik" xml:space="preserve">
+    <value>Yıllık Risk Yönetimi Taahhütnamesi</value>
+  </data>
+  <data name="Menu.RiskYonetimiTaahhutnamesi" xml:space="preserve">
+    <value>Yıllık Risk Yönetimi Taahhütnamesi</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.Alan.IslemTarihi" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.Alan.IslemYapanRol" xml:space="preserve">
+    <value>Rol</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.Alan.Onaylayan" xml:space="preserve">
+    <value>Onaylayan</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.Alan.Yil" xml:space="preserve">
+    <value>Yıl</value>
+  </data>
+  <data name="RiskYonetimiBeyannamesi.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="Surec.Alan.AltSurecNumara" xml:space="preserve">
+    <value>Alt Süreç Kodu</value>
+  </data>
+  <data name="Dugme.Pasif" xml:space="preserve">
+    <value>Pasif Yap</value>
+  </data>
+  <data name="Onay.KayitSil" xml:space="preserve">
+    <value>Kayıt silinecektir. Onaylıyor musunuz?</value>
+  </data>
+  <data name="Dugme.DetayGoster" xml:space="preserve">
+    <value>Detay Göster</value>
+  </data>
+  <data name="Baslik.RiskSahibiDegistir" xml:space="preserve">
+    <value>Risk Sahibini Değiştir</value>
+  </data>
+  <data name="Dugme.RiskSahibiDegistir" xml:space="preserve">
+    <value>Risk Sahibini Değiştir</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskSahibiBos" xml:space="preserve">
+    <value>Risk Sahibi bilgisi boş olamaz</value>
+  </data>
+  <data name="Baslik.OnayKaldir" xml:space="preserve">
+    <value>Onay Kaldır</value>
+  </data>
+  <data name="Dugme.OnayKaldir" xml:space="preserve">
+    <value>Onay Kaldır</value>
+  </data>
+  <data name="Onay.OnayKaldir" xml:space="preserve">
+    <value>Kayıt onayı kaldırılacaktır. Devam edilsin mi?</value>
+  </data>
+  <data name="Bildirim.OnayKaldirmaBasarili" xml:space="preserve">
+    <value>Onay kaldırma işlemi başarıyla tamamlandı</value>
+  </data>
+  <data name="Durum.Sil" xml:space="preserve">
+    <value>Silindi</value>
+  </data>
+  <data name="Denetim.Alan.Tarihler" xml:space="preserve">
+    <value>Denetim Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.RiskAdi" xml:space="preserve">
+    <value>Risk Adı</value>
+  </data>
+  <data name="Baslik.RiskYonetimiBeyannamesi" xml:space="preserve">
+    <value>Yıllık Risk Yönetimi Taahhütnamesi</value>
+  </data>
+  <data name="Dugme.DokumaniGoster" xml:space="preserve">
+    <value>Dokümanı Göster</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.AnahtarRiskGostergesiKayitBilgisi" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi Kayıt Bilgisi</value>
+  </data>
+  <data name="Dugme.YeniImzaSureciBaslat" xml:space="preserve">
+    <value>Yeni İmza Süreci Başlat</value>
+  </data>
+  <data name="Baslik.YeniImzaSureciBaslat" xml:space="preserve">
+    <value>Yeni İmza Süreci Başlat</value>
+  </data>
+  <data name="Bildirim.YeniImzaSureciBaslatBasarili" xml:space="preserve">
+    <value>Yeni imza süreci başlatıldı</value>
+  </data>
+  <data name="Onay.YeniImzaSureciBaslat" xml:space="preserve">
+    <value>Yeni imza süreci başlatılacak. Devam edilsin mi?</value>
+  </data>
+  <data name="Kontrol.Duzenle.DenetimKaynakAlaniBos" xml:space="preserve">
+    <value>Denetim Kaynak Bilgisi boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.IllerArasiRiskAtamasiYapilamaz" xml:space="preserve">
+    <value>İller arasında risk ataması yapılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskYonetimiRiskeVerilecekCevapBos" xml:space="preserve">
+    <value>Riske verilecek cevap boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.OnemDuzeyiAlaniBos" xml:space="preserve">
+    <value>Önem düzeyi sıfırdan büyük olmalıdır</value>
+  </data>
+  <data name="Dugme.DenetimTamamla" xml:space="preserve">
+    <value>Denetimi Tamamla</value>
+  </data>
+  <data name="Denetim.Tamamla" xml:space="preserve">
+    <value>Bu işlem ile, Denetim Durumu Tamamlandı yapılacak ve Bulgu Durumu Açık olan bulguların Bulgu Durumu Kapalı yapılacaktır. Onaylıyor musunuz?</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.DosyaFizikselAdi" xml:space="preserve">
+    <value>Dosya Adı</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskAdiAlaniBos" xml:space="preserve">
+    <value>Risk Adı alanı boş bırakılamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.RiskTanimiAlaniBos" xml:space="preserve">
+    <value>Riskin Kök Nedeni alanı boş bırakılamaz</value>
+  </data>
+  <data name="BilgiMerkezi.Alan.DosyaTarihi" xml:space="preserve">
+    <value>Yükleme Tarihi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.ArtikRiskPuani" xml:space="preserve">
+    <value>Artık Risk Puanı</value>
+  </data>
+  <data name="Baslik.HatirlatmaMailiGonder" xml:space="preserve">
+    <value>Hatırlatma e-postası gönder</value>
+  </data>
+  <data name="Bildirim.HatirlatmaMailiGonderBasarili" xml:space="preserve">
+    <value>Hatırlatma e-postası başarıyla gönderildi</value>
+  </data>
+  <data name="Dugme.HatirlatmaMailiGonder" xml:space="preserve">
+    <value>Hatırlatma e-postası gönder</value>
+  </data>
+  <data name="Kontrol.Duzenle.HatirlatmaGonderilecekKoordinatorlukBulunamadi" xml:space="preserve">
+    <value>Hatırlatma e-postası gönderilecek onaylamamış koordinatörlük bulunamadı</value>
+  </data>
+  <data name="Onay.HatirlatmaMailiGonder" xml:space="preserve">
+    <value>Hatırlatma e-postası gönderilecektir. Devam edilsin mi?</value>
+  </data>
+  <data name="RiskEvreni.Alan.IlIrtibatOfisi" xml:space="preserve">
+    <value>İl İrtibat Ofisi</value>
+  </data>
+  <data name="RiskEvreni.Alan.Yorum" xml:space="preserve">
+    <value>Yorum</value>
+  </data>
+  <data name="RiskYonetimi.Alan.MevcutKontrolBulunmamaktadir" xml:space="preserve">
+    <value>Mevcut kontrol bulunmamaktadır</value>
+  </data>
+  <data name="Baslik.DenetimYapanKurumYeniKayit" xml:space="preserve">
+    <value>Denetim Yapan Kurum Kayıt</value>
+  </data>
+  <data name="Dugme.DenetimYapanKurumEkle" xml:space="preserve">
+    <value>Denetim Yapan Kurum Ekle</value>
+  </data>
+  <data name="Raporlar.Adi" xml:space="preserve">
+    <value>Rapor Adı</value>
+  </data>
+  <data name="Raporlar.RPT001" xml:space="preserve">
+    <value>Üst Yönetim Risk Raporu</value>
+  </data>
+  <data name="Raporlar.RPT002" xml:space="preserve">
+    <value>Koordinatörler Risk Raporu</value>
+  </data>
+  <data name="Raporlar.RPT003" xml:space="preserve">
+    <value>Risk Sekretaryası Risk Raporu</value>
+  </data>
+  <data name="Raporlar.RPT004" xml:space="preserve">
+    <value>Risk Sahipleri Risk Raporu</value>
+  </data>
+  <data name="Raporlar.RPT005" xml:space="preserve">
+    <value>Trend Raporu</value>
+  </data>
+  <data name="Raporlar.RPT006" xml:space="preserve">
+    <value>İç Kontrol Zayıflıkları Raporu</value>
+  </data>
+  <data name="Raporlar.RPT007" xml:space="preserve">
+    <value>Yıllık Risk Planı (Özet Risk Kütüğü)</value>
+  </data>
+  <data name="Raporlar.RPT008" xml:space="preserve">
+    <value>Yarı Yıl Risk Azaltma Planı</value>
+  </data>
+  <data name="Raporlar.RPT009" xml:space="preserve">
+    <value>Üst Yönetim Stratejik Planlama Raporu</value>
+  </data>
+  <data name="Raporlar.RPT010" xml:space="preserve">
+    <value>Koordinatörler Stratejik Planlama Raporu</value>
+  </data>
+  <data name="Raporlar.RPT011" xml:space="preserve">
+    <value>Süreç/Alt Süreç Raporu</value>
+  </data>
+  <data name="Raporlar.RPT013" xml:space="preserve">
+    <value>Anahtar Risk Göstergesi Raporu</value>
+  </data>
+  <data name="Raporlar.RPT014" xml:space="preserve">
+    <value>Olay Raporu</value>
+  </data>
+  <data name="Raporlar.SiraNo" xml:space="preserve">
+    <value>Sıra No</value>
+  </data>
+  <data name="RaporSablon.Amac" xml:space="preserve">
+    <value>Amaç</value>
+  </data>
+  <data name="RaporSablon.ArtikRiskPuani" xml:space="preserve">
+    <value>Artık Risk Puanı</value>
+  </data>
+  <data name="RaporSablon.AzaltmaPlani" xml:space="preserve">
+    <value>Azaltma Planı</value>
+  </data>
+  <data name="RaporSablon.AzaltmaPlaniSorumlusu" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu</value>
+  </data>
+  <data name="RaporSablon.BirimUnite" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="RaporSablon.BitisTarihi" xml:space="preserve">
+    <value>Bitiş Tarihi</value>
+  </data>
+  <data name="RaporSablon.Hedef" xml:space="preserve">
+    <value>Hedef</value>
+  </data>
+  <data name="RaporSablon.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="RaporSablon.RiskAdi" xml:space="preserve">
+    <value>Risk Adı</value>
+  </data>
+  <data name="RaporSablon.RiskKategorisi" xml:space="preserve">
+    <value>Risk Kategorisi</value>
+  </data>
+  <data name="RaporSablon.RiskKokNedeni" xml:space="preserve">
+    <value>Risk Kök Nedeni</value>
+  </data>
+  <data name="RaporSablon.RiskNo" xml:space="preserve">
+    <value>Risk No</value>
+  </data>
+  <data name="RaporSablon.SiraNo" xml:space="preserve">
+    <value>Sıra No</value>
+  </data>
+  <data name="RaporSablon.YapisalRiskPuani" xml:space="preserve">
+    <value>Yapısal Risk Puanı</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.AlzatmaPlaniDetayları" xml:space="preserve">
+    <value>Azaltma Planı Detayları/ Notlar</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.Baslik" xml:space="preserve">
+    <value>Yarı Yıl Risk Azaltma Planı</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.ErtelenmisDegistirilmisZamanPlani" xml:space="preserve">
+    <value>Ertelenmiş/ Değiştirilmiş Zaman Planı</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.MevcutDurum" xml:space="preserve">
+    <value>Mevcut Durum</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.MevcutKontroller" xml:space="preserve">
+    <value>Mevcut Kontroller</value>
+  </data>
+  <data name="RaporSablon.RiskKayitYili" xml:space="preserve">
+    <value>Risk Kayıt Yılı</value>
+  </data>
+  <data name="RaporSablon.YariYilRiskAzaltmaPlani.ZamanPlanindakiDegisiklikNedeni" xml:space="preserve">
+    <value>Zaman Planındaki Erteleme/ Değişiklik Nedeni</value>
+  </data>
+  <data name="AnahtarRiskGostergesi.Alan.DurumDeger" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="MenuTanim.IlIrtibatOfisi" xml:space="preserve">
+    <value>İl İrtibat Ofisi Tanımları</value>
+  </data>
+  <data name="TanimIlIrtibatOfisi.SayfaAciklama" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TanimIlIrtibatOfisi.SayfaBaslik" xml:space="preserve">
+    <value>İl İrtibat Ofisi Tanımları</value>
+  </data>
+  <data name="RaporSablon.Donemi" xml:space="preserve">
+    <value>Dönem</value>
+  </data>
+  <data name="RaporSablon.IlIrtibatOfisi" xml:space="preserve">
+    <value>İl İrtibat Ofisi</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.DonemAciklama" xml:space="preserve">
+    <value>Aciklama</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.DonemDurum" xml:space="preserve">
+    <value>Durum</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.Donemler" xml:space="preserve">
+    <value>Azaltma Planı Dönem Notları</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.DonemTarih" xml:space="preserve">
+    <value>Tarih</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.DonemlerNotu" xml:space="preserve">
+    <value>Azaltma Planı Dönem Notu</value>
+  </data>
+  <data name="Onay.RiskKayitDegisiklikUyarisi" xml:space="preserve">
+    <value>Değişiklik yapmak istediğiniz riske bağlı Değerlendirme ve Yönetilme kayıtları sıfırlanacaktır. Onaylıyor musunuz?</value>
+  </data>
+  <data name="Kontrol.Duzenle.AciklamaBos" xml:space="preserve">
+    <value>Açıklama alanı boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.JenerikRiskOnayaGonderilemez" xml:space="preserve">
+    <value>Jenerik riskler onaya gönderilemez</value>
+  </data>
+  <data name="RiskEvreni.Alan.JenerikRisk" xml:space="preserve">
+    <value>Jenerik Risk</value>
+  </data>
+  <data name="Baslik.AzaltmaPlaniSorumlusuDegistir" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu Değiştir</value>
+  </data>
+  <data name="Dugme.AzaltmaPlaniSorumlusuDegistir" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu Değiştir</value>
+  </data>
+  <data name="Kontrol.Duzenle.AzaltmaPlaniSorumlusuBos" xml:space="preserve">
+    <value>Azlatma Planı Sorumlusu boş olamaz</value>
+  </data>
+  <data name="Onay.RisklerinDegerlendirilmesiDegisiklikUyarisi" xml:space="preserve">
+    <value>Değişiklik yapmak istediğiniz riske bağlı Yönetilme kayıtları sıfırlanacaktır. Onaylıyor musunuz?</value>
+  </data>
+  <data name="RiskEvreni.Alan.KontrolEdildi" xml:space="preserve">
+    <value>Kontrol Edildi</value>
+  </data>
+  <data name="Raporlar.Alan.Birim" xml:space="preserve">
+    <value>Birim/Ünite</value>
+  </data>
+  <data name="Raporlar.Alan.IlIrtibatOfisi" xml:space="preserve">
+    <value>İl İrtibat Ofisi</value>
+  </data>
+  <data name="Raporlar.Alan.Koordinatorluk" xml:space="preserve">
+    <value>Koordinatörlük</value>
+  </data>
+  <data name="RaporSablon.AltSurec" xml:space="preserve">
+    <value>Alt Süreç</value>
+  </data>
+  <data name="RaporSablon.IliskiliOlay" xml:space="preserve">
+    <value>İlişkili olay</value>
+  </data>
+  <data name="RaporSablon.RiskeVerilecekCevap" xml:space="preserve">
+    <value>Verilen Cevap</value>
+  </data>
+  <data name="RaporSablon.RiskGecerlilikTarihi" xml:space="preserve">
+    <value>Risk Geçerlilik Tarihi</value>
+  </data>
+  <data name="RaporSablon.RiskinNiteligi" xml:space="preserve">
+    <value>Riskin Niteliği</value>
+  </data>
+  <data name="RaporSablon.Surec" xml:space="preserve">
+    <value>Süreç</value>
+  </data>
+  <data name="RaporSablon.YillikRiskPlani.Baslik" xml:space="preserve">
+    <value>Yıllık Risk Planı</value>
+  </data>
+  <data name="RiskYonetimi.Alan.MevcutKontroller" xml:space="preserve">
+    <value>Mevcut Kontroller</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.IsbirligiBirim" xml:space="preserve">
+    <value>İşbirliği Birim/Ünite</value>
+  </data>
+  <data name="RiskAzaltmaPlani.Alan.IsbirligiKoordinatorluk" xml:space="preserve">
+    <value>İşbirliği Koordinatörlük</value>
+  </data>
+  <data name="RiskEvreni.Alan.BaskasiAdinaRiskDurumu" xml:space="preserve">
+    <value>Başkası Adına Risk Kayıt Durumu</value>
+  </data>
+  <data name="RiskEvreni.Alan.AzaltmaPlaniSorumlusu" xml:space="preserve">
+    <value>Azaltma Planı Sorumlusu</value>
+  </data>
+  <data name="Kontrol.Duzenle.BaslangicTarihiAlaniBos" xml:space="preserve">
+    <value>Başlangıç Tarihi boş olamaz</value>
+  </data>
+  <data name="Kontrol.Duzenle.BitisTarihiAlaniBos" xml:space="preserve">
+    <value>Bitiş Tarihi boş olamaz</value>
+  </data>
+  <data name="RaporSablon.SorumluBirimUnite" xml:space="preserve">
+    <value>Sorumlu Birim/Ünite</value>
+  </data>
+  <data name="RaporSablon.SorumluKoordinatorluk" xml:space="preserve">
+    <value>Sorumlu Koordinatorluk</value>
+  </data>
+  <data name="Kontrol.Duzenle.StratejikPlanPlanlananDegerAlaniBos" xml:space="preserve">
+    <value>Planlanan değer sıfırdan büyük olmalıdır</value>
+  </data>
+</root>

@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = CustomResource["Test.SayfaBaslik"];
+    ViewData["PageName"] = "Test";
+    ViewData["Heading"] = "<i class='subheader-icon fal fa-window mr-2'></i>" + ViewData["Title"];
+    ViewData["PageDescription"] = CustomResource["Test.SayfaAciklama"];
+    ViewData["Category1"] = "";
+    ViewData["Category1Url"] = "";
+    ViewData["Yardim"] = ViewData["PageName"];
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-hdr">
+                <h2></h2>
+                <div class="panel-toolbar">
+                </div>
+            </div>
+            <!--Datatables alanı-->
+            <div class="panel-container">
+                <div class="panel-content">
+                    <div class="frame-wrap">
+
+                        <form class="needs-validation-bilgilendirme" novalidate>
+
+                            <div class="mb-2"></div>
+
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label class="form-label" for="txtMailAdresi">@CustomResource["Kullanici.Kodu"]<span class="text-danger ml-1">*</span></label>
+                                    <textarea id="txtMailAdresi" rows="1" class="form-control form-control-sm" required></textarea>
+                                    <div class="invalid-feedback">
+                                        @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center flex-wrap flex-shrink-0">
+                                <div class="ml-auto">
+                                    <button type="button" id="btnMailGonder" class="btn btn-primary text-white mr-1">@CustomResource["Dugme.BilgilendirmeMailiGonder"]</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Datatables alanı -->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+
+        $("#btnMailGonder").click(function () {
+
+            var form = {
+                BelgeTipi: 55,
+                BelgeKod: '',
+                KoordinatorlukKod: '',
+                Birimler: '',
+                Islem: 2,
+                MailGonderilecekKisi: $('#txtMailAdresi').val(),
+            }
+
+            $.ajax({
+                url: "/BildirimSistemi/MailGonder",
+                data: { form: form },
+                type: "POST",
+                success: function (result) {
+
+                    if (result.IslemSonuc) {
+                        ShowToastr("success", "toast-top-right", result.Mesaj);
+                    }
+                    else {
+                        HataPenceresiGoster(result.Mesaj);
+                    }
+                }
+            });
+        });
+
+    });
+
+
+</script>
