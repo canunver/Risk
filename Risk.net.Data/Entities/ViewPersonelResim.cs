@@ -11,14 +11,7 @@ namespace Risk.net.Data.Entities
     {
         [Key]
         public string Kod { get; set; }
-        public string Adi { get; set; }
-        public string Soyadi { get; set; }
         public byte[] Resim { get; set; }
-
-        public virtual string AdiSoyadi
-        {
-            get { return Adi + " " + Soyadi; }
-        }
 
     }
 }

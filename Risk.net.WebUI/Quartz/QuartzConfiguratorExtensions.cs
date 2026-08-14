@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Spi;
@@ -14,26 +14,26 @@ namespace Risk.net.WebUI.Quartz
             where T : IJob
         {
             // Use the name of the IJob as the appsettings.json key
-            //string jobName = typeof(T).Name;
+            string jobName = typeof(T).Name;
 
-            //// Try and load the schedule from configuration
-            //var configKey = $"Quartz:{jobName}";
-            //var cronSchedule = config[configKey];
+            // Try and load the schedule from configuration
+            var configKey = $"Quartz:{jobName}";
+            var cronSchedule = config[configKey];
 
-            //// Some minor validation
-            //if (string.IsNullOrEmpty(cronSchedule))
-            //{
-            //    throw new Exception($"No Quartz.NET Cron schedule found for job in configuration at {configKey}");
-            //}
+            // Some minor validation
+            if (string.IsNullOrEmpty(cronSchedule))
+            {
+                throw new Exception($"No Quartz.NET Cron schedule found for job in configuration at {configKey}");
+            }
 
-            //// register the job as before
-            //var jobKey = new JobKey(jobName);
-            //quartz.AddJob<T>(opts => opts.WithIdentity(jobKey));
+            // register the job as before
+            var jobKey = new JobKey(jobName);
+            quartz.AddJob<T>(opts => opts.WithIdentity(jobKey));
 
-            //quartz.AddTrigger(opts => opts
-            //    .ForJob(jobKey)
-            //    .WithIdentity(jobName + "-trigger")
-            //    .WithCronSchedule(cronSchedule)); // use the schedule from configuration
+            quartz.AddTrigger(opts => opts
+                .ForJob(jobKey)
+                .WithIdentity(jobName + "-trigger")
+                .WithCronSchedule(cronSchedule)); // use the schedule from configuration
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using System;
 using System.IO;
@@ -11,6 +11,7 @@ using Risk.net.Data.Entities;
 using Risk.net.Utilities.Objects;
 using Risk.net.Utilities.Functions;
 using System.Collections.Generic;
+using Risk.net.WebUI.Classes;
 
 namespace Risk.net.WebUI.Quartz
 {
@@ -71,7 +72,27 @@ namespace Risk.net.WebUI.Quartz
 
             return Task.CompletedTask;
         }
-
     }
 
+
+    [DisallowConcurrentExecution]
+    public class BildirimSistemiMailGonderTestJob : IJob
+    {
+        private readonly IBildirimSistemiService _service;
+        private readonly IViewBildirimSistemiService _serviceView;
+        public BildirimSistemiMailGonderTestJob(IBildirimSistemiService service, IViewBildirimSistemiService serviceView)
+        {
+            _service = service;
+            _serviceView = serviceView;
+        }
+
+        public Task Execute(IJobExecutionContext context)
+        {
+            string hataDosyaYol = Arac.ConfigOku("Genel:HataDosyaYol");
+            string dosyaAdi = Path.Combine(hataDosyaYol, "BildirimSistemiMailGonderTestJob.txt");
+            Arac.HataStrYaz(dosyaAdi, "test");
+
+            return Task.CompletedTask;
+        }
+    }
 }

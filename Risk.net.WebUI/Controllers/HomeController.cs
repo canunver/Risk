@@ -489,31 +489,32 @@ namespace Risk.net.WebUI.Controllers
             var liste = new List<object>();
 
             dynamic kri = null;
-            foreach (Grafik item in sonuc.Liste)
+            if (sonuc.Liste != null)
             {
-                kri = new { Aciklama = "", Deger1 = 0 };
-                bool yeni = true;
-                int sira = 0;
-                foreach (dynamic kri2 in liste)
+                foreach (Grafik item in sonuc.Liste)
                 {
-                    if (kri2.Aciklama == item.EkAciklama)
+                    kri = new { Aciklama = "", Deger1 = 0 };
+                    bool yeni = true;
+                    int sira = 0;
+                    foreach (dynamic kri2 in liste)
                     {
-                        kri = kri2;
-                        yeni = false;
-                        break;
+                        if (kri2.Aciklama == item.EkAciklama)
+                        {
+                            kri = kri2;
+                            yeni = false;
+                            break;
+                        }
+                        sira++;
                     }
-                    sira++;
+
+                    kri = new { Aciklama = item.EkAciklama, Deger1 = kri.Deger1 + item.Deger1 };
+
+                    if (yeni)
+                        liste.Add(kri);
+                    else
+                        liste[sira] = kri;
                 }
-
-                kri = new { Aciklama = item.EkAciklama, Deger1 = kri.Deger1 + item.Deger1 };
-
-                if (yeni)
-                    liste.Add(kri);
-                else
-                    liste[sira] = kri;
-
             }
-
             sonuc.Liste = liste;
             return Ok(sonuc);
         }

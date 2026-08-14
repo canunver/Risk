@@ -238,7 +238,7 @@ namespace Risk.net.Services.Functions
             kosul = OrtakService.KosulEkle(kosul, "AND", OrtakService.KosulOl("RiskEvreni.Durum", "=", (int)ENUMDurum.Onayli));
             kosul = OrtakService.KosulEkle(kosul, "AND", OrtakService.KosulOl("RiskYonetimi.Durum", "=", (int)ENUMDurum.Onayli));
 
-            kosul += " AND ((RiskYonetimi.RiskeVerilecekCevap IN(1,2)) OR (RiskYonetimi.RiskeVerilecekCevap IN(4) AND (RiskAzaltmaPlani.Durum is null OR RiskAzaltmaPlani.Durum < 90) ))";   
+            kosul += " AND ((RiskYonetimi.RiskeVerilecekCevap IN(1,2)) OR (RiskYonetimi.RiskeVerilecekCevap IN(4) AND (RiskAzaltmaPlani.Durum is null OR RiskAzaltmaPlani.Durum < 90) ))";
 
             if (kosul != "")
                 kosul = " WHERE " + kosul;
@@ -956,7 +956,7 @@ namespace Risk.net.Services.Functions
 
 
             var kayitlar = await _unitOfWork.SQLCalistirAsync(sql);
-            if (kayitlar.Count > -1)
+            if (kayitlar != null && kayitlar.Count > -1)
             {
                 return new Sonuc(ENUMIslemDurum.Basarili, kayitlar.Cast<object>().ToList());
             }
@@ -1022,7 +1022,7 @@ namespace Risk.net.Services.Functions
                 sql = sql.Replace("{KOSUL}", kosul);
 
             var kayitlar = await _unitOfWork.SQLCalistirAsync(sql);
-            if (kayitlar.Count > -1)
+            if (kayitlar != null && kayitlar.Count > -1)
             {
                 return new Sonuc(ENUMIslemDurum.Basarili, kayitlar.Cast<object>().ToList());
             }

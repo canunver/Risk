@@ -67,8 +67,6 @@ namespace Risk.net.WebUI
                 options.WaitForJobsToComplete = true;
             });
 
-
-
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             
             //Yardim gösterilen ekranında Html.Raw çalıştırılması için
