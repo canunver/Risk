@@ -15,28 +15,28 @@ using System.Linq.Expressions;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// ViewBildirimSistemi işlemlerinin yapıldığı servis
+    /// ViewBildirimSistemi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class ViewBildirimSistemiService : IViewBildirimSistemiService
     {
         /// <summary>
-        /// IUnitOfWork<ViewBildirimSistemi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<ViewBildirimSistemi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<ViewBildirimSistemi> _unitOfWork;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTEKoordinatorluk;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.ViewBildirimSistemiService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.ViewBildirimSistemiService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceCTEKoordinatorluk"></param>
@@ -52,12 +52,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -106,12 +106,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, BildirimSistemi kriter)
         {
@@ -154,25 +154,25 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Onay işlemleri mail gönderilecek kayıtların listesini döndüren metod
+        /// Onay iÅŸlemleri mail gÃ¶nderilecek kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeMailGonderilecekKayitlarAsync()
         {
             /*
-            1- Risk evreni, 10 gün geçen onaylanmamış kayıtlar için mail gönderilecek
-            2- Risk yönetimi için, azaltma planı seçilirse ve 5 gün içinde azaltma planı oluşturulmazsa Risk Sahibine uyarı maili gidecek.
-            3- Risk azaltma planı, 10 gün geçen onaylanmamış kayıtlar için mail gönderilecek, azaltma planı sorumlusunada ayrı mail gidecek.
-            4- Risk azaltma planı, riskin sahibine azaltma planının bitiş tarihine 1 hafta kala “Azaltma planının bitiş tarihi yaklaşıyor.” şeklinde mail gönderilir. 	
-            5- Yetkili risk görevlisine 3 ayda 1 "İç Kontrol Zayıflıkları Raporunu UYG'ye bildiriniz." maili gönderilir.
-            6- Yetkili risk görevlisine 6 ayda 1 "Onaylanmış tüm riskler ve ilgili azaltma planlarının listesini UYG'ye bildiriniz." maili gönderilir.
-            7- Risk sekretaryasına 3 ayda 1 "Yüksek ve orta seviyedeki aktif riskleri ve azaltma planlarını merkez ve il koordinatörlüklerine bildiriniz." maili gönderilir.
-            8- Risk sekretaryasına yılda 1 "Risk Yönetimi Prosedürünü gözden geçiriniz." maili gönderilir.
-            9- Yıllık Risk Beyannamesini 1 ocak tarihinde imzalayın diye mail atılacak
-            10- Yıllık Risk Beyannamesini 1 ay içinde imzalanmazsa il ve merkez koordinatörlerine hatırlatma maili gönderilecek
+            1- Risk evreni, 10 gÃ¼n geÃ§en onaylanmamÄ±ÅŸ kayÄ±tlar iÃ§in mail gÃ¶nderilecek
+            2- Risk yÃ¶netimi iÃ§in, azaltma planÄ± seÃ§ilirse ve 5 gÃ¼n iÃ§inde azaltma planÄ± oluÅŸturulmazsa Risk Sahibine uyarÄ± maili gidecek.
+            3- Risk azaltma planÄ±, 10 gÃ¼n geÃ§en onaylanmamÄ±ÅŸ kayÄ±tlar iÃ§in mail gÃ¶nderilecek, azaltma planÄ± sorumlusunada ayrÄ± mail gidecek.
+            4- Risk azaltma planÄ±, riskin sahibine azaltma planÄ±nÄ±n bitiÅŸ tarihine 1 hafta kala â€œAzaltma planÄ±nÄ±n bitiÅŸ tarihi yaklaÅŸÄ±yor.â€ ÅŸeklinde mail gÃ¶nderilir. 	
+            5- Yetkili risk gÃ¶revlisine 3 ayda 1 "Ä°Ã§ Kontrol ZayÄ±flÄ±klarÄ± Raporunu UYG'ye bildiriniz." maili gÃ¶nderilir.
+            6- Yetkili risk gÃ¶revlisine 6 ayda 1 "OnaylanmÄ±ÅŸ tÃ¼m riskler ve ilgili azaltma planlarÄ±nÄ±n listesini UYG'ye bildiriniz." maili gÃ¶nderilir.
+            7- Risk sekretaryasÄ±na 3 ayda 1 "YÃ¼ksek ve orta seviyedeki aktif riskleri ve azaltma planlarÄ±nÄ± merkez ve il koordinatÃ¶rlÃ¼klerine bildiriniz." maili gÃ¶nderilir.
+            8- Risk sekretaryasÄ±na yÄ±lda 1 "Risk YÃ¶netimi ProsedÃ¼rÃ¼nÃ¼ gÃ¶zden geÃ§iriniz." maili gÃ¶nderilir.
+            9- YÄ±llÄ±k Risk Beyannamesini 1 ocak tarihinde imzalayÄ±n diye mail atÄ±lacak
+            10- YÄ±llÄ±k Risk Beyannamesini 1 ay iÃ§inde imzalanmazsa il ve merkez koordinatÃ¶rlerine hatÄ±rlatma maili gÃ¶nderilecek
 
              */
             var sql = "SELECT Kod, BelgeTipi, BelgeKod, KoordinatorlukKod, BirimKod, IslemYapanKod, IslemTarihi, OnaylayacakYetki, Durum, Aciklama, Islem FROM ViewBildirimSistemiMailGonderilecekler";
@@ -187,12 +187,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların sayısını döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n sayÄ±sÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<int> BildirimSayisiAsync(KullaniciDto kullanan)
         {

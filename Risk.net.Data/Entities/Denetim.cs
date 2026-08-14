@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki Denetim tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki Denetim tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class Denetim : EntityBase, IEntity
     {
@@ -19,7 +19,7 @@ namespace Risk.net.Data.Entities
         [Column(TypeName = "varchar(40)")]
         public string Kod { get; set; }
 
-        public int Kaynak { get; set; }//1-iç-2-dış
+        public int Kaynak { get; set; }//1-iÃ§-2-dÄ±ÅŸ
 
         [Column(TypeName = "varchar(10)")]
         public string DenetimNo { get; set; }

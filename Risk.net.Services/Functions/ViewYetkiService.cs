@@ -11,23 +11,23 @@ using Risk.net.Utilities.Objects;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// ViewYetki işlemlerinin yapıldığı servis
+    /// ViewYetki iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class ViewYetkiService : IViewYetkiService
     {
         /// <summary>
-        /// IUnitOfWork<ViewYetki> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<ViewYetki> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<ViewYetki> _unitOfWork;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.ViewYetkiService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.ViewYetkiService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="sharedResource"></param>
@@ -39,12 +39,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -72,12 +72,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, ViewYetki kriter)
         {
@@ -104,12 +104,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -143,12 +143,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait mail listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait mail listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleMailAsync(KullaniciDto kullanan, ViewYetki kriter)
         {

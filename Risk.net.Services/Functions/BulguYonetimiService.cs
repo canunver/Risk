@@ -12,38 +12,38 @@ using System.Collections.Generic;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// BulguYonetimi işlemlerinin yapıldığı servis
+    /// BulguYonetimi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class BulguYonetimiService : IBulguYonetimiService
     {
         /// <summary>
-        /// IUnitOfWork<BulguYonetimi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<BulguYonetimi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<BulguYonetimi> _unitOfWork;
         /// <summary>
-        /// IBulguYonetimiBirimService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiBirimService _serviceBulguYonetimiBirim;
         /// <summary>
-        /// IDenetimService servisine ulaşmak için kullanılan değişken
+        /// IDenetimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _serviceDenetim;
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.AltSurecService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.AltSurecService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceBulguYonetimiBirim"></param>
@@ -65,12 +65,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -98,12 +98,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="denetimKodu"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string denetimKodu)
         {
@@ -116,13 +116,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, BulguYonetimi kriter, DataTablesParam dataTablesParam)
         {
@@ -171,7 +171,7 @@ namespace Risk.net.Services.Functions
                     selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == aramaObj.Durum);
                 //if (!string.IsNullOrWhiteSpace(aramaObj.OnemDuzeyiKod))
                 //    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.OnemDuzeyiKod == aramaObj.OnemDuzeyiKod);
-                else if (kriter.SorguDurum > 0)//İzleme takip ekranında sadece açık olanlar listelenecek
+                else if (kriter.SorguDurum > 0)//Ä°zleme takip ekranÄ±nda sadece aÃ§Ä±k olanlar listelenecek
                 {
                     if (kriter.SorguDurum == (int)ENUMDurum.Aktif)
                         selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum < 10);
@@ -198,12 +198,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, BulguYonetimi gelenNesne)
         {
@@ -225,14 +225,14 @@ namespace Risk.net.Services.Functions
                 if (denetimSonuc.Nesne != null)
                 {
                     Denetim d = (Denetim)denetimSonuc.Nesne;
-                    if (d.Durum == (int)ENUMDurum.GeriGonderildi)//Denetim Tamamlandı
+                    if (d.Durum == (int)ENUMDurum.GeriGonderildi)//Denetim TamamlandÄ±
                     {
-                        hata += "<li>Denetim Tamamlandığı için Bulgu kaydında değişiklik yapılamaz";
+                        hata += "<li>Denetim TamamlandÄ±ÄŸÄ± iÃ§in Bulgu kaydÄ±nda deÄŸiÅŸiklik yapÄ±lamaz";
                     }
                 }
             }
             else
-                hata += "Denetim kaydına ulaşılamadı";
+                hata += "Denetim kaydÄ±na ulaÅŸÄ±lamadÄ±";
 
 
             if (hata != "")
@@ -308,12 +308,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, string kod)
         {
@@ -341,12 +341,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, BulguYonetimi gelenNesne)
         {
@@ -380,12 +380,12 @@ namespace Risk.net.Services.Functions
 
                 await _unitOfWork.KaydetAsync();
 
-                //Eğer denetimin tüm bulguları kapandı ise denetimi de kapat, açık ise denetimi de aç
+                //EÄŸer denetimin tÃ¼m bulgularÄ± kapandÄ± ise denetimi de kapat, aÃ§Ä±k ise denetimi de aÃ§
                 var bulguKayitlar = await _unitOfWork.ListeleAsync(a => a.DenetimKod == islemYapilan.DenetimKod && a.Durum < 10);
                 int denetimDurum = (int)ENUMDurum.Aktif;
                 if (bulguKayitlar.Count == 0)
                 {
-                    denetimDurum = (int)ENUMDurum.GeriGonderildi;//Denetim Kapalı
+                    denetimDurum = (int)ENUMDurum.GeriGonderildi;//Denetim KapalÄ±
                 }
                 Denetim denetimNesne = new Denetim();
                 denetimNesne.Kod = islemYapilan.DenetimKod;
@@ -401,12 +401,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kullanıcının yetkisinin olup olmadığını döndüren metod
+        /// Istemciden parametre ile talep edilen kullanÄ±cÄ±nÄ±n yetkisinin olup olmadÄ±ÄŸÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="tur"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string YetkisiVarmi(KullaniciDto kullanan, string tur)
         {
@@ -424,12 +424,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın İzleme Takip bilgilerini değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n Ä°zleme Takip bilgilerini deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> IzlemeTakipKaydetAsync(KullaniciDto kullanan, BulguYonetimi gelenNesne)
         {
@@ -467,12 +467,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen nihayi görüş bilgilerini kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen nihayi gÃ¶rÃ¼ÅŸ bilgilerini kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> NihaiGorusKaydetAsync(KullaniciDto kullanan, BulguYonetimi gelenNesne)
         {

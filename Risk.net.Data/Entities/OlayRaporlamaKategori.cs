@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki OlayRaporlamaKategori tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki OlayRaporlamaKategori tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class OlayRaporlamaKategori : EntityBase, IEntity
     {

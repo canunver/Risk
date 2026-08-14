@@ -12,23 +12,23 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Genel işlemlerinin yapıldığı sayfa
+    /// Genel iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class GenelController : Controller
     {
         /// <summary>
-        /// KullaniciDto servisine ulaşmak için kullanılan değişken
+        /// KullaniciDto servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly KullaniciDto _kullanan;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.GenelController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.GenelController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="httpContextAccessor"></param>
         /// <param name="sharedResource"></param>

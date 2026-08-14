@@ -6,44 +6,44 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Interfaces
 {
     /// <summary>
-    /// ViewYetki işlemlerinin yapıldığı servisin arayüzü
+    /// ViewYetki iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servisin arayÃ¼zÃ¼
     /// </summary>
     public interface IViewYetkiService
     {
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod);
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> ListeleAsync(KullaniciDto kullanan, ViewYetki kriter);
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam);
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait mail listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait mail listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> ListeleMailAsync(KullaniciDto kullanan, ViewYetki kriter);
     }

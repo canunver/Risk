@@ -16,19 +16,19 @@ using System.Linq;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Yetki işlemlerinin yapıldığı sayfa
+    /// Yetki iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class TanimYetkiController : GenelController
     {
         /// <summary>
-        /// IViewYetkiService servisine ulaşmak için kullanılan değişken
+        /// IViewYetkiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewYetkiService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.TanimYetkiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.TanimYetkiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -42,7 +42,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// TanimYetki View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// TanimYetki View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "SISTEMYONETICISI")]
         public IActionResult Index()
@@ -51,8 +51,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -68,7 +68,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -86,7 +86,7 @@ namespace Risk.net.WebUI.Controllers
                 {
                     if (string.IsNullOrWhiteSpace(koor)) continue;
 
-                    var kriter = new ViewYetki() { KoordinatorlukKod = koor.Replace("_",""), BirimKod = "" };//Eğer tüm personel listenirse koordinatorlukKod='_' olarak gönderiliyor Melih 20.12.2023
+                    var kriter = new ViewYetki() { KoordinatorlukKod = koor.Replace("_",""), BirimKod = "" };//EÄŸer tÃ¼m personel listenirse koordinatorlukKod='_' olarak gÃ¶nderiliyor Melih 20.12.2023
 
                     var sonuc = await _service.ListeleAsync(_kullanan, kriter);
 
@@ -141,7 +141,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -197,7 +197,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Ekranlardaki Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -253,7 +253,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Ekranlardaki İç Kontrol Koordinatörlüğüne ait Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Ä°Ã§ Kontrol KoordinatÃ¶rlÃ¼ÄŸÃ¼ne ait Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>

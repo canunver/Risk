@@ -16,98 +16,98 @@ using System.Linq.Expressions;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// Raporlama iþlemlerinin yapýldýðý servis
+    /// Raporlama iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class RaporlamaService : IRaporlamaService
     {
         /// <summary>
-        /// IUnitOfWork<RaporUstYonetimRisk> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporUstYonetimRisk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporUstYonetimRisk> _unitOfWorkRaporUstYonetimRisk;
         /// <summary>
-        /// IUnitOfWork<RaporKoordinatorlerRisk> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporKoordinatorlerRisk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporKoordinatorlerRisk> _unitOfWorkRaporKoordinatorlerRisk;
         /// <summary>
-        /// IUnitOfWork<RaporRiskSekretaryasiRisk> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporRiskSekretaryasiRisk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporRiskSekretaryasiRisk> _unitOfWorkRaporRiskSekretaryasiRisk;
         /// <summary>
-        /// IUnitOfWork<RaporRiskSahipleriRisk> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporRiskSahipleriRisk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporRiskSahipleriRisk> _unitOfWorkRaporRiskSahipleriRisk;
         /// <summary>
-        /// IUnitOfWork<RaporTrend> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporTrend> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporTrend> _unitOfWorkRaporTrend;
         /// <summary>
-        /// IUnitOfWork<RaporIcKontrolZayifliklari> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporIcKontrolZayifliklari> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporIcKontrolZayifliklari> _unitOfWorkRaporIcKontrolZayifliklari;
         /// <summary>
-        /// IUnitOfWork<RaporYillikRiskPlani> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporYillikRiskPlani> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporYillikRiskPlani> _unitOfWorkRaporYillikRiskPlani;
         /// <summary>
-        /// IUnitOfWork<RaporYariYilRiskAzaltmaPlani> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporYariYilRiskAzaltmaPlani> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporYariYilRiskAzaltmaPlani> _unitOfWorkRaporYariYilRiskAzaltmaPlani;
         /// <summary>
-        /// IUnitOfWork<RaporUstYonetimStratejikPlanlama> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporUstYonetimStratejikPlanlama> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporUstYonetimStratejikPlanlama> _unitOfWorkRaporUstYonetimStratejikPlanlama;
         /// <summary>
-        /// IUnitOfWork<RaporKoordinatorlerStratejikPlanlama> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporKoordinatorlerStratejikPlanlama> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporKoordinatorlerStratejikPlanlama> _unitOfWorkRaporKoordinatorlerStratejikPlanlama;
         /// <summary>
-        /// IUnitOfWork<RaporSurecAltSurec> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporSurecAltSurec> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporSurecAltSurec> _unitOfWorkRaporSurecAltSurec;
         /// <summary>
-        /// IUnitOfWork<RaporRiskIzleme> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporRiskIzleme> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporRiskIzleme> _unitOfWorkRaporRiskIzleme;
         /// <summary>
-        /// IUnitOfWork<RaporAnahtarRiskGostergesi> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporAnahtarRiskGostergesi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporAnahtarRiskGostergesi> _unitOfWorkRaporAnahtarRiskGostergesi;
         /// <summary>
-        /// IUnitOfWork<RaporOlay> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporOlay> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporOlay> _unitOfWorkRaporOlay;
         /// <summary>
-        /// IUnitOfWork<RaporRiskYonetimiBeyannamesi> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RaporRiskYonetimiBeyannamesi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporRiskYonetimiBeyannamesi> _unitOfWorkRaporRiskYonetimiBeyannamesi;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaþmak için kullanýlan deðiþken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaþmak için kullanýlan deðiþken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTE;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.RaporlamaService" /> 'ýn yeni bir örneðini baþlatan sýnýf
+        /// <see cref="Risk.net.Services.Functions.RaporlamaService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWorkRaporUstYonetimRisk"></param>
         /// <param name="unitOfWorkRaporKoordinatorlerRisk"></param>
@@ -162,12 +162,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> UstYonetimRiskHazirlaAsync(KullaniciDto kullanan, RaporUstYonetimRisk kriter)
         {
@@ -217,9 +217,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -269,19 +269,19 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KoordinatorlerRiskHazirlaAsync(KullaniciDto kullanan, RaporKoordinatorlerRisk kriter)
         {
             string sql = "";
             string kosul = "";
 
-            //!!!!DEÐÝÞECEK Anahtar DÖnem tablosu eklendi, dönem alanlarý AnahtarRiskGostergesi tablosunda çýkarýldý
+            //!!!!DEÄžÄ°ÅžECEK Anahtar DÃ–nem tablosu eklendi, dÃ¶nem alanlarÄ± AnahtarRiskGostergesi tablosunda Ã§Ä±karÄ±ldÄ±
             sql = @"SELECT 
                     ViewKoordinatorluk.Adi AS KoordinatorlukAdi, 
                     ViewBirim.Adi AS BirimAdi, 
@@ -337,9 +337,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -388,12 +388,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskSekretaryasiRiskHazirlaAsync(KullaniciDto kullanan, RaporRiskSekretaryasiRisk kriter)
         {
@@ -468,9 +468,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " (RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'" + " AND RiskAzaltmaPlani.SorumluKoordinatorlukKod = '" + Arac.TirnakYoket(k) + "') ";
                 }
@@ -478,7 +478,7 @@ namespace Risk.net.Services.Functions
                 if (!string.IsNullOrWhiteSpace(sqlKoordiler))
                     sql += " AND (" + sqlKoordiler + ")";
 
-                ////42 il koordinatörlüðü
+                ////42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                 //if (kriter.KoordinatorlukAdi == "-42")
                 //    sql += " AND ViewKoordinatorluk.Tur = 40";
                 //else
@@ -528,12 +528,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskSahipleriRiskHazirlaAsync(KullaniciDto kullanan, RaporRiskSahipleriRisk kriter)
         {
@@ -611,9 +611,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -662,12 +662,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> TrendHazirlaAsync(KullaniciDto kullanan, RaporTrend kriter)
         {
@@ -718,9 +718,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -769,12 +769,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> IcKontrolZayifliklariHazirlaAsync(KullaniciDto kullanan, RaporIcKontrolZayifliklari kriter)
         {
@@ -826,9 +826,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -877,12 +877,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> YillikRiskPlaniHazirlaAsync(KullaniciDto kullanan, RaporYillikRiskPlani kriter)
         {
@@ -960,9 +960,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1013,12 +1013,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> YariYilRiskAzaltmaPlaniHazirlaAsync(KullaniciDto kullanan, RaporYariYilRiskAzaltmaPlani kriter)
         {
@@ -1098,9 +1098,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1108,7 +1108,7 @@ namespace Risk.net.Services.Functions
                 if (!string.IsNullOrWhiteSpace(sqlKoordiler))
                     sql += " AND (" + sqlKoordiler + ")";
 
-                ////42 il koordinatörlüðü
+                ////42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                 //if (kriter.KoordinatorlukAdi == "-42")
                 //    sql += " AND ViewKoordinatorluk.Tur = 40";
                 //else
@@ -1155,12 +1155,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> UstYonetimStratejikPlanlamaHazirlaAsync(KullaniciDto kullanan, RaporUstYonetimStratejikPlanlama kriter)
         {
@@ -1222,9 +1222,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " [v].Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " [v].Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " [s0].Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " [s0].Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " [v].KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1256,12 +1256,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KoordinatorlerStratejikPlanlamaHazirlaAsync(KullaniciDto kullanan, RaporKoordinatorlerStratejikPlanlama kriter)
         {
@@ -1322,9 +1322,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " [v].Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " [v].Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " [s0].Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " [s0].Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " [v].KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1358,12 +1358,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SurecAltSurecHazirlaAsync(KullaniciDto kullanan, RaporSurecAltSurec kriter)
         {
@@ -1399,9 +1399,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " Surec.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1431,7 +1431,7 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Gönderilen kullanýcý parametresini yetki kontrolünden geçirilerek kriter parametresini düzenleyen metod
+        /// GÃ¶nderilen kullanÄ±cÄ± parametresini yetki kontrolÃ¼nden geÃ§irilerek kriter parametresini dÃ¼zenleyen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
@@ -1440,7 +1440,7 @@ namespace Risk.net.Services.Functions
             if (Arac.YetkisiVarmi("PLANLAMAUNITESI", kullanan))
                 return;
 
-            //https://app.clickup.com/t/8694tkywt : Ýç Denetçi/Ýç Denetim Koordinatörü Raporlar ekranýnda her koordinatörlüðü dökebilmeli - sadece kendi risklerini deðil
+            //https://app.clickup.com/t/8694tkywt : Ä°Ã§ DenetÃ§i/Ä°Ã§ Denetim KoordinatÃ¶rÃ¼ Raporlar ekranÄ±nda her koordinatÃ¶rlÃ¼ÄŸÃ¼ dÃ¶kebilmeli - sadece kendi risklerini deÄŸil
             if (Arac.YetkisiVarmi("UZMAN", kullanan))
             {
                 if (!string.IsNullOrWhiteSpace(kullanan.KoordinatorlukKod))
@@ -1449,12 +1449,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskIzlemeHazirlaAsync(KullaniciDto kullanan, RaporRiskIzleme kriter)
         {
@@ -1530,9 +1530,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " RiskEvreni.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1544,12 +1544,12 @@ namespace Risk.net.Services.Functions
                 sql += " AND RiskEvreni.BirimKod = " + kriter.BirimAdi;
 
 
-            //////Birim koþulunu uygula
+            //////Birim koÅŸulunu uygula
             ////****************************************************************************************
             //string[] birimKosul = await OrtakService.ListeleBirimKosulAsync(kullanan, _serviceCTE, "RISKYONETIMI", "", "");
 
-            //////Koordinatörlük
-            //var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatörlüðe sahip olduðu için
+            //////KoordinatÃ¶rlÃ¼k
+            //var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatÃ¶rlÃ¼ÄŸe sahip olduÄŸu iÃ§in
             //if (!string.IsNullOrWhiteSpace(koordinatorlukKosul[0]))
             //{
             //    var ekKosul = "";
@@ -1575,7 +1575,7 @@ namespace Risk.net.Services.Functions
             //        kosul = ekKosul;
             //}
 
-            ////Sadece Kendi kayýtlarý
+            ////Sadece Kendi kayÄ±tlarÄ±
             //if (kosul != "")
             //    kosul += " OR ";
             //kosul += " (RiskEvreni.RiskSahibiKod = '" + kullanan.PersonelKod + "')";
@@ -1624,12 +1624,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> AnahtarRiskGostergesiHazirlaAsync(KullaniciDto kullanan, RaporAnahtarRiskGostergesi kriter)
         {
@@ -1665,7 +1665,7 @@ namespace Risk.net.Services.Functions
 
             //if (!string.IsNullOrWhiteSpace(kriter.KoordinatorlukAdi))
             //{
-            //    //42 il koordinatörlüðü
+            //    //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
             //    if (kriter.KoordinatorlukAdi == "-42")
             //        sql += " AND [s0].[Tur] = 40";
             //    else
@@ -1717,12 +1717,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> OlayRaporlamaHazirlaAsync(KullaniciDto kullanan, RaporOlay kriter)
         {
@@ -1769,9 +1769,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " ViewKoordinatorluk.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }
@@ -1802,12 +1802,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskYonetimiBeyannamesiHazirlaAsync(KullaniciDto kullanan, RaporRiskYonetimiBeyannamesi kriter)
         {
@@ -1844,9 +1844,9 @@ namespace Risk.net.Services.Functions
                         sqlKoordiler += " OR ";
 
                     if (k == "-42")
-                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatörlüðü
+                        sqlKoordiler += " ViewKoordinatorluk.Tur = 40"; //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                     //else if (k == "-1")
-                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
+                    //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 TÃ¼m kurum
                     else
                         sqlKoordiler += " ViewKoordinatorluk.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
                 }

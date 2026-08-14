@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Interfaces
 {
     /// <summary>
-    /// RiskSahibiDegistir işlemlerinin yapıldığı servisin arayüzü
+    /// RiskSahibiDegistir iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servisin arayÃ¼zÃ¼
     /// </summary>
     public interface IRiskSahibiDegistirService
     {
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilerine yeniKod bilgisini eskiKod bilgisi ile güncelleyen metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgilerine yeniKod bilgisini eskiKod bilgisi ile gÃ¼ncelleyen metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="eskiKod"></param>
         /// <param name="yeniKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KaydetAsync(KullaniciDto kullanan, string eskiKod, string yeniKod);
 

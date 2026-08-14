@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Konfigurasyon işlemlerinin yapıldığı sayfa
+    /// Konfigurasyon iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class KonfigurasyonController : GenelController
     {
         /// <summary>
-        /// IKonfigurasyonService servisine ulaşmak için kullanılan değişken
+        /// IKonfigurasyonService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IKonfigurasyonService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.KonfigurasyonController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.KonfigurasyonController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Konfigurasyon View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// Konfigurasyon View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "SISTEMYONETICISI,PLANLAMAUNITESI,RISKSEKRETARYASI,YETKILIRISKGOREVLISI")]
         public IActionResult Index()
@@ -64,7 +64,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="durum"></param>
         /// <returns>
@@ -79,7 +79,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -94,7 +94,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderilme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderilme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -114,7 +114,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -132,7 +132,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın yapısal risk seviyesini getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n yapÄ±sal risk seviyesini getiren metod
         /// </summary>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
@@ -149,7 +149,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın etki kriter adını getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n etki kriter adÄ±nÄ± getiren metod
         /// </summary>
         /// <param name="seviye"></param>
         /// <param name="riskKategorisi"></param>
@@ -166,7 +166,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın artık risk seviyesini getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n artÄ±k risk seviyesini getiren metod
         /// </summary>
         /// <param name="artikRiskPuani"></param>
         /// <returns>

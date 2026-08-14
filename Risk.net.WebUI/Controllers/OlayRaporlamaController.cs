@@ -16,25 +16,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Olay Raporlama işlemlerinin yapıldığı sayfa
+    /// Olay Raporlama iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class OlayRaporlamaController : GenelController
     {
         /// <summary>
-        /// IOlayRaporlamaService servisine ulaşmak için kullanılan değişken
+        /// IOlayRaporlamaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IOlayRaporlamaService _service;
         /// <summary>
-        /// IRiskEvreniService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniService _serviceRiskEvreni;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.OlayRaporlamaController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.OlayRaporlamaController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceRiskEvreni"></param>
@@ -51,7 +51,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// OlayRaporlama View sayfası açıldığında çalışan metod
+        /// OlayRaporlama View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -78,8 +78,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -95,7 +95,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -110,7 +110,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -125,7 +125,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -145,7 +145,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -165,7 +165,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -185,7 +185,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <param name="koordinatorlukKod"></param>
         /// <param name="birimKod"></param>
@@ -222,7 +222,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns></returns>

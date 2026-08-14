@@ -6,80 +6,80 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Interfaces
 {
     /// <summary>
-    /// Konfigurasyon işlemlerinin yapıldığı servisin arayüzü
+    /// Konfigurasyon iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servisin arayÃ¼zÃ¼
     /// </summary>
     public interface IKonfigurasyonService
     {
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="durum"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, int durum);
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> ListeleAsync(KullaniciDto kullanan);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KaydetAsync(KullaniciDto kullanan, Konfigurasyon gelenNesne);
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, Konfigurasyon gelenNesne);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait etki kriteri adını döndüren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait etki kriteri adÄ±nÄ± dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="seviye"></param>
         /// <param name="riskKategorisi"></param>
         /// <returns>
-        /// Etki kriter adını göndürür
+        /// Etki kriter adÄ±nÄ± gÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<string> EtkiKriteriAdiVer(KullaniciDto kullanan, int seviye, string riskKategorisi);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait yapısal risk seviyesini döndüren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait yapÄ±sal risk seviyesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
         /// <returns>
-        /// Yapısal risk seviyesini göndürür
+        /// YapÄ±sal risk seviyesini gÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<object> YapisalRiskSeviyesiVer(KullaniciDto kullanan, int etki, int olasilik);
         /// <summary>
-        /// Etki olasılık matrisine ait tüm bilgileri döndüren metodun arayüzü
+        /// Etki olasÄ±lÄ±k matrisine ait tÃ¼m bilgileri dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// object nesnesi döndürür
+        /// object nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<object> EtkiOlasilikMatrisiVer(KullaniciDto kullanan);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait artık risk seviyesini döndüren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait artÄ±k risk seviyesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="artikRiskPuani"></param>
         /// <returns>
-        /// object nesnesi döndürür
+        /// object nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<object> ArtikRiskSeviyesiVer(KullaniciDto kullanan, double artikRiskPuani);
     }

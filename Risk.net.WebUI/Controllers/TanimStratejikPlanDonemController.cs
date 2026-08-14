@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Stratejik Plan Dönemleri tanımlama işlemlerinin yapıldığı sayfa
+    /// Stratejik Plan DÃ¶nemleri tanÄ±mlama iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class TanimStratejikPlanDonemController : GenelController
     {
         /// <summary>
-        /// ITanimStratejikPlanDonemService servisine ulaşmak için kullanılan değişken
+        /// ITanimStratejikPlanDonemService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITanimStratejikPlanDonemService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.TanimStratejikPlanDonemController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.TanimStratejikPlanDonemController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// TanimOlayKategori View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// TanimOlayKategori View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "PLANLAMAUNITESI,RISKSEKRETARYASI,SISTEMYONETICISI")]
         public IActionResult Index()
@@ -50,8 +50,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -67,7 +67,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -82,7 +82,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -97,7 +97,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın durumunu Pasif yaparak durumunun değiştirilmesini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n durumunu Pasif yaparak durumunun deÄŸiÅŸtirilmesini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -117,7 +117,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Olay Kategorisi seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Olay Kategorisi seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>

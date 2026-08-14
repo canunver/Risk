@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Risk Sahibini Değiştir işlemlerinin yapıldığı sayfa
+    /// Risk Sahibini DeÄŸiÅŸtir iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class RiskSahibiDegistirController : GenelController
     {
         /// <summary>
-        /// IRiskSahibiDegistirService servisine ulaşmak için kullanılan değişken
+        /// IRiskSahibiDegistirService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskSahibiDegistirService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RiskSahibiDegistirController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.RiskSahibiDegistirController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceKontrol"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// RiskSahibiDegistir View sayfası açıldığında çalışan metod
+        /// RiskSahibiDegistir View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -51,7 +51,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="eskiKod"></param>
         /// <param name="yeniKod"></param>

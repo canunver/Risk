@@ -14,25 +14,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Anahtar Risk Göstergesi işlemlerinin yapıldığı sayfa
+    /// Anahtar Risk GÃ¶stergesi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]//Yetki Tamam
     public class AnahtarRiskGostergesiController : GenelController
     {
         /// <summary>
-        /// IAnahtarRiskGostergesiService servisine ulaşmak için kullanılan değişken
+        /// IAnahtarRiskGostergesiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IAnahtarRiskGostergesiService _service;
         /// <summary>
-        /// IAnahtarRiskGostergesiDonemService servisine ulaşmak için kullanılan değişken
+        /// IAnahtarRiskGostergesiDonemService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IAnahtarRiskGostergesiDonemService _serviceDonem;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.AnahtarRiskGostergesiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.AnahtarRiskGostergesiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceDonem"></param>
@@ -49,7 +49,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// AnahtarRiskGostergesi View sayfası açıldığında çalışan metod.
+        /// AnahtarRiskGostergesi View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public async Task<IActionResult> Index()
         {
@@ -69,8 +69,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -86,7 +86,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -102,7 +102,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -128,7 +128,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -143,7 +143,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -163,7 +163,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -180,7 +180,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns>
         /// Ok(sunucudan gelen Sonuc tipinde nesne)
@@ -190,9 +190,9 @@ namespace Risk.net.WebUI.Controllers
         {
             List<SelectListesi> donenDeger = new List<SelectListesi>
             {
-                new SelectListesi { id = 0 + "", text = "Tümü" },
-                new SelectListesi { id = 1 + "", text = "Boş Kayıtlar" },
-                new SelectListesi { id = 2 + "", text = "Dolu Kayıtlar" },
+                new SelectListesi { id = 0 + "", text = "TÃ¼mÃ¼" },
+                new SelectListesi { id = 1 + "", text = "BoÅŸ KayÄ±tlar" },
+                new SelectListesi { id = 2 + "", text = "Dolu KayÄ±tlar" },
             };
 
             return Ok(donenDeger);

@@ -16,25 +16,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Olay Raporlama Onay işlemlerinin yapıldığı sayfa
+    /// Olay Raporlama Onay iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class OlayRaporlamaOnayController : GenelController
     {
         /// <summary>
-        /// IOlayRaporlamaService servisine ulaşmak için kullanılan değişken
+        /// IOlayRaporlamaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IOlayRaporlamaService _service;
         /// <summary>
-        /// IRiskEvreniService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniService _serviceRiskEvreni;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.OlayRaporlamaOnayController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.OlayRaporlamaOnayController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceRiskEvreni"></param>
@@ -51,7 +51,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// OlayRaporlamaOnay View sayfası açıldığında çalışan metod
+        /// OlayRaporlamaOnay View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -63,8 +63,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -80,7 +80,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -95,7 +95,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın geri gonderilmesi işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n geri gonderilmesi iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -113,7 +113,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın reddedilme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n reddedilme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -131,7 +131,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -149,7 +149,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kayıtların hepsini onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kayÄ±tlarÄ±n hepsini onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// KontrolKriterMatrisi işlemlerinin yapıldığı sayfa
+    /// KontrolKriterMatrisi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class KontrolKriterMatrisiViewComponent : ViewComponent
     {
         /// <summary>
-        /// KontrolKriterMatrisi ViewComponent sayfası açıldığında çalışan metod.
+        /// KontrolKriterMatrisi ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public IViewComponentResult Invoke()
         {

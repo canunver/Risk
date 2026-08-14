@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki RaporYariYilRiskAzaltmaPlani view ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki RaporYariYilRiskAzaltmaPlani view ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class RaporYariYilRiskAzaltmaPlani : RaporEntityBase, IEntity
     {

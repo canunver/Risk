@@ -12,25 +12,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// DenetimGorevlendirme işlemlerinin yapıldığı sayfa
+    /// DenetimGorevlendirme iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI")]
     public class DenetimGorevlendirmeViewComponent : ViewComponent
     {
         /// <summary>
-        /// IDenetimGorevlendirmeService servisine ulaşmak için kullanılan değişken
+        /// IDenetimGorevlendirmeService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimGorevlendirmeService _service;
         /// <summary>
-        /// Kullanıcı bilgisini taşıyan değişken
+        /// KullanÄ±cÄ± bilgisini taÅŸÄ±yan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly KullaniciDto _kullanan;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.DenetimGorevlendirmeViewComponent" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.DenetimGorevlendirmeViewComponent" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -42,7 +42,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// DenetimGorevlendirme ViewComponent sayfası açıldığında çalışan metod.
+        /// DenetimGorevlendirme ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         /// <param name="sayfaAdi"></param>
         public async Task<IViewComponentResult> InvokeAsync(string denetimKodu, int tip)

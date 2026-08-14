@@ -137,7 +137,7 @@ namespace Risk.net.Utilities.Functions
             //    if (sheet.Cells.IsRowHidden(i))
             //        sheet.Cells.UnhideRow(i, sheet.Cells.StandardHeightPixels);
 
-            //    //sheet.Cells.SetRowHeightPixel(i, sheet.Cells.StandardHeightPixels);//AutoFitRow çalýþmýyor.30.03.2014 Melih Cells 8.0.0 uncellemesinden sonra çalýþmamaya baþladý
+            //    //sheet.Cells.SetRowHeightPixel(i, sheet.Cells.StandardHeightPixels);//AutoFitRow Ã§alÄ±ÅŸmÄ±yor.30.03.2014 Melih Cells 8.0.0 uncellemesinden sonra Ã§alÄ±ÅŸmamaya baÅŸladÄ±
 
             //    //sheet.AutoFitRow(i);
             //    //sheet.AutoFitRows(i, i);
@@ -534,7 +534,7 @@ namespace Risk.net.Utilities.Functions
             {
                 int toplamSatir = satir2 - satir1 + 1;
                 int toplamSutun = sutun2 - sutun1 + 1;
-                Aspose.Cells.Range rangeSrc = XLS.Worksheets[kaynakSheet].Cells.CreateRange(satir1, sutun1, toplamSatir, toplamSutun);//toplamSatir --> 1 olarak deðiþtirildi. Melih 15.05.2014
+                Aspose.Cells.Range rangeSrc = XLS.Worksheets[kaynakSheet].Cells.CreateRange(satir1, sutun1, toplamSatir, toplamSutun);//toplamSatir --> 1 olarak deÄŸiÅŸtirildi. Melih 15.05.2014
                 Aspose.Cells.Range rangeDst = XLS.Worksheets[hedefSheet].Cells.CreateRange(hedefSatir, hedefSutun, toplamSatir, toplamSutun);
                 rangeDst.Copy(rangeSrc);
             }
@@ -731,7 +731,7 @@ namespace Risk.net.Utilities.Functions
         //        else
         //        {
         //            for (int sut = sutun1; sut <= sutun2; sut++)
-        //                cs.SetColumnWidth(sut, genislik);// / UZUNLUKCARPAN);//Jexcel zamaný çalýþan geliþtirilen rapor (Tarim Hibe) UZUNLUKCARPAN olmadan düzgün çalýþýyor Melih 15.05.2014
+        //                cs.SetColumnWidth(sut, genislik);// / UZUNLUKCARPAN);//Jexcel zamanÄ± Ã§alÄ±ÅŸan geliÅŸtirilen rapor (Tarim Hibe) UZUNLUKCARPAN olmadan dÃ¼zgÃ¼n Ã§alÄ±ÅŸÄ±yor Melih 15.05.2014
         //        }
         //    }
         //    catch { }
@@ -857,7 +857,7 @@ namespace Risk.net.Utilities.Functions
         //		public void DuseyHizala(int satir, int sutun, int deger)
         //		{
         //			//0-sol
-        //			//1-sað
+        //			//1-saÄŸ
         //			//2-orta
         //			//3-iki yana yasla
         //			CellFormatsNET.TCellHorizAlignment hiza=CellFormatsNET.TCellHorizAlignment.chaLeft;
@@ -1070,7 +1070,7 @@ namespace Risk.net.Utilities.Functions
         public void DuseyHizala(int satir1, int sutun1, int satir2, int sutun2, int deger)
         {
             //0-sol
-            //1-sað
+            //1-saÄŸ
             //2-orta
             //3-iki yana yasla
 
@@ -1101,7 +1101,7 @@ namespace Risk.net.Utilities.Functions
         public void YatayHizala(int satir1, int sutun1, int satir2, int sutun2, int deger)
         {
             //0-alt
-            //1-üst
+            //1-Ã¼st
             //2-orta
             //3-iki yana yasla
             //Aspose.Cells.Style style = XLS.Styles[XLS.Styles.Add()];
@@ -1126,7 +1126,7 @@ namespace Risk.net.Utilities.Functions
         public void ArkaPlanRenk(int satir1, int sutun1, int satir2, int sutun2, System.Drawing.Color renk)
         {
             //0-alt
-            //1-üst
+            //1-Ã¼st
             //2-orta
             //3-iki yana yasla
             //Aspose.Cells.Style style = XLS.Styles[XLS.Styles.Add()];
@@ -1160,7 +1160,7 @@ namespace Risk.net.Utilities.Functions
         public void YaziRenk(int satir1, int sutun1, int satir2, int sutun2, TabloRenk renk)
         {
             //0-alt
-            //1-üst
+            //1-Ã¼st
             //2-orta
             //3-iki yana yasla
             //Aspose.Cells.Style style = XLS.Styles[XLS.Styles.Add()];
@@ -1182,7 +1182,7 @@ namespace Risk.net.Utilities.Functions
         public void YaziRenk(int satir1, int sutun1, int satir2, int sutun2, System.Drawing.Color renk)
         {
             //0-alt
-            //1-üst
+            //1-Ã¼st
             //2-orta
             //3-iki yana yasla
             //Aspose.Cells.Style style = XLS.Styles[XLS.Styles.Add()];
@@ -1310,8 +1310,8 @@ namespace Risk.net.Utilities.Functions
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="yer">1 ise üst, deðil ise alt</param>
-        /// <param name="yanasik">1 ise sol, 2 ise sað, deðil ise orta</param>
+        /// <param name="yer">1 ise Ã¼st, deÄŸil ise alt</param>
+        /// <param name="yanasik">1 ise sol, 2 ise saÄŸ, deÄŸil ise orta</param>
         /// <param name="deger"></param>
         public void HFDegerAta(int yer, int yanasik, string deger)
         {
@@ -1389,7 +1389,7 @@ namespace Risk.net.Utilities.Functions
             picture.TopCM = top;
             return picture;
         }
-        ///////////////////////////// DOSYA ÝÞLEMLERÝ
+        ///////////////////////////// DOSYA Ä°ÅžLEMLERÄ°
         ///
 
         public void BosDosyaAc(string sonucDosya)
@@ -1432,10 +1432,10 @@ namespace Risk.net.Utilities.Functions
             //wbs.setFormulaAdjust(false);
             //wbs.setExcelRegionalSettings("tr-TR");
             //wbs.setEncoding(encoding);
-            //Workbook inputWorkBook = jxl.Workbook.getWorkbook(new java.io.File(dosyaAd)); //Xls dosyasýný açma/workbooku oluþturma
+            //Workbook inputWorkBook = jxl.Workbook.getWorkbook(new java.io.File(dosyaAd)); //Xls dosyasÄ±nÄ± aÃ§ma/workbooku oluÅŸturma
 
             //System.IO.FileStream f = System.IO.File.Open(dosyaAd, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-            //Workbook inputWorkBook = jxl.Workbook.getWorkbook(f, wbs); //Xls dosyasýný açma/workbooku oluþturma
+            //Workbook inputWorkBook = jxl.Workbook.getWorkbook(f, wbs); //Xls dosyasÄ±nÄ± aÃ§ma/workbooku oluÅŸturma
             //f.Close();
 
             //tmpFileStream = new java.io.FileOutputStream(tmpFile);
@@ -1458,7 +1458,7 @@ namespace Risk.net.Utilities.Functions
             else if (dosyaSaklamaFormat == "xlsm")
                 XLS.Save(tmpFile, SaveFormat.Xlsm);
             else
-                XLS.Save(tmpFile, SaveFormat.Xlsx);    // Geri kalaný Xlsx
+                XLS.Save(tmpFile, SaveFormat.Xlsx);    // Geri kalanÄ± Xlsx
         }
 
         public void DosyaKapat()

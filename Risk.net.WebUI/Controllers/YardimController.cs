@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Yardim tanımlama işlemlerinin yapıldığı sayfa
+    /// Yardim tanÄ±mlama iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class YardimController : GenelController
     {
         /// <summary>
-        /// IYardimService servisine ulaşmak için kullanılan değişken
+        /// IYardimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IYardimService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.YardimController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.YardimController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
                 }
 
         /// <summary>
-        /// Yardim View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// Yardim View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "SISTEMYONETICISI")]
         public IActionResult Index()
@@ -50,7 +50,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterler ile ilgili kayıtların sunucudan getirilmesini sağlayan metod
+        /// KullanÄ±cÄ±dan gelen kriterler ile ilgili kayÄ±tlarÄ±n sunucudan getirilmesini saÄŸlayan metod
         /// </summary>
         /// <returns>
         /// Ok(Sonuc tipinde sunucudan gelen bilgi)
@@ -64,8 +64,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -81,7 +81,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -96,7 +96,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -111,7 +111,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silinmesini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silinmesini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki RiskEvreni tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki RiskEvreni tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class RiskEvreni : EntityBase, IEntity
     {
@@ -217,7 +217,7 @@ namespace Risk.net.Data.Entities
             get
             {
                 //return !string.IsNullOrWhiteSpace(RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Koordinatorluk?.Kod) ? RiskYonetimi.RiskAzaltmaPlani.SorumluBirim?.Koordinatorluk : Koordinatorluk;
-                //Listeleme (TabloDoldur kafa karıştırıyor. Orada sorumlu koordinatörlük gösteriyor (Azaltma varsa). Eğer null ise bu durumda koordinatörlük gösteriliyorki bu hatalı Melih 25.09.2023 (Risklerin Yönetilmesi - Listeleme ekranında Sorumlu Koordinatörlük ve Birim sütunlarına da sıralama (aşağı yukarı ok) koyabilir miyiz? Clickup maddesi)
+                //Listeleme (TabloDoldur kafa karÄ±ÅŸtÄ±rÄ±yor. Orada sorumlu koordinatÃ¶rlÃ¼k gÃ¶steriyor (Azaltma varsa). EÄŸer null ise bu durumda koordinatÃ¶rlÃ¼k gÃ¶steriliyorki bu hatalÄ± Melih 25.09.2023 (Risklerin YÃ¶netilmesi - Listeleme ekranÄ±nda Sorumlu KoordinatÃ¶rlÃ¼k ve Birim sÃ¼tunlarÄ±na da sÄ±ralama (aÅŸaÄŸÄ± yukarÄ± ok) koyabilir miyiz? Clickup maddesi)
                 return !string.IsNullOrWhiteSpace(RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Koordinatorluk?.Kod) ? RiskYonetimi.RiskAzaltmaPlani.SorumluBirim?.Koordinatorluk : new ViewKoordinatorluk();
             }
         }
@@ -228,7 +228,7 @@ namespace Risk.net.Data.Entities
             {
                 //return !string.IsNullOrWhiteSpace(RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Kod) ? RiskYonetimi.RiskAzaltmaPlani.SorumluBirim : Birim;
 
-                //Listeleme (TabloDoldur kafa karıştırıyor. Orada sorumlu birim gösteriyor (Azaltma varsa). Eğer null ise bu durumda birim gösteriliyorki bu hatalı Melih 25.09.2023 (Risklerin Yönetilmesi - Listeleme ekranında Sorumlu Koordinatörlük ve Birim sütunlarına da sıralama (aşağı yukarı ok) koyabilir miyiz? Clickup maddesi)
+                //Listeleme (TabloDoldur kafa karÄ±ÅŸtÄ±rÄ±yor. Orada sorumlu birim gÃ¶steriyor (Azaltma varsa). EÄŸer null ise bu durumda birim gÃ¶steriliyorki bu hatalÄ± Melih 25.09.2023 (Risklerin YÃ¶netilmesi - Listeleme ekranÄ±nda Sorumlu KoordinatÃ¶rlÃ¼k ve Birim sÃ¼tunlarÄ±na da sÄ±ralama (aÅŸaÄŸÄ± yukarÄ± ok) koyabilir miyiz? Clickup maddesi)
                 return !string.IsNullOrWhiteSpace(RiskYonetimi?.RiskAzaltmaPlani?.SorumluBirim?.Kod) ? RiskYonetimi.RiskAzaltmaPlani.SorumluBirim : new ViewBirim();
 
             }

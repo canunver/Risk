@@ -16,38 +16,38 @@ using System.Text.RegularExpressions;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// RiskYonetimiBeyannamesi işlemlerinin yapıldığı servis
+    /// RiskYonetimiBeyannamesi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class RiskYonetimiBeyannamesiService : IRiskYonetimiBeyannamesiService
     {
         /// <summary>
-        /// IUnitOfWork<RiskYonetimiBeyannamesi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<RiskYonetimiBeyannamesi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskYonetimiBeyannamesi> _unitOfWork;
         /// <summary>
-        /// ITanimGenelService servisine ulaşmak için kullanılan değişken
+        /// ITanimGenelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITanimGenelService _serviceTanimGenel;
         /// <summary>
-        /// IBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBildirimSistemiService _serviceBildirimSistemi;
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.RiskYonetimiBeyannamesiService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.RiskYonetimiBeyannamesiService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="sharedResource"></param>
@@ -66,12 +66,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -99,11 +99,11 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, RiskYonetimiBeyannamesi kriter)
         {
@@ -123,19 +123,19 @@ namespace Risk.net.Services.Functions
                 foreach (RiskYonetimiBeyannamesi item in kayitlar)
                 {
                     if (item.Durum <= 1)
-                        item.DurumAdi = "Güncelleme";
+                        item.DurumAdi = "GÃ¼ncelleme";
                     else if (item.Durum == 2)
-                        item.DurumAdi = "Geri Gönderildi";
+                        item.DurumAdi = "Geri GÃ¶nderildi";
                     else if (item.Durum == 3)
-                        item.DurumAdi = "Onaya Gönderildi";
+                        item.DurumAdi = "Onaya GÃ¶nderildi";
                     else if (item.Durum == 10)
-                        item.DurumAdi = "Onaylandı";
+                        item.DurumAdi = "OnaylandÄ±";
                     else if (item.Durum == 98)
                         item.DurumAdi = "Reddedildi";
                     else if (item.Durum == 99)
-                        item.DurumAdi = "Pasif yapıldı";
+                        item.DurumAdi = "Pasif yapÄ±ldÄ±";
                     else if (item.Durum == 15)
-                        item.DurumAdi = "Bilgilendirme Maili Gönderildi";
+                        item.DurumAdi = "Bilgilendirme Maili GÃ¶nderildi";
                 }
 
                 return new Sonuc(ENUMIslemDurum.Basarili, kayitlar.Cast<object>().ToList());
@@ -144,12 +144,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -164,9 +164,9 @@ namespace Risk.net.Services.Functions
                     selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Yil == aramaObj.Yil);
 
                 if (aramaObj.KoordinatorlukKod == "-42")
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur == 40); //42 il koordinatörlüğü
+                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur == 40); //42 il koordinatÃ¶rlÃ¼ÄŸÃ¼
                 else if (aramaObj.KoordinatorlukKod == "-1")
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur < 1000); //Tüm Koordinatörlükler
+                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur < 1000); //TÃ¼m KoordinatÃ¶rlÃ¼kler
                 else if (!string.IsNullOrWhiteSpace(aramaObj.KoordinatorlukKod))
                     selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.KoordinatorlukKod == aramaObj.KoordinatorlukKod);
 
@@ -194,12 +194,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, RiskYonetimiBeyannamesi gelenNesne)
         {
@@ -234,11 +234,11 @@ namespace Risk.net.Services.Functions
 
 
         /// <summary>
-        /// Onaylı kayıtların onaylarını kaldıran metod
+        /// OnaylÄ± kayÄ±tlarÄ±n onaylarÄ±nÄ± kaldÄ±ran metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> OnayKaldirAsync(KullaniciDto kullanan)
         {
@@ -255,7 +255,7 @@ namespace Risk.net.Services.Functions
                 await _unitOfWork.KaydetAsync();
 
 
-                //İmza süreci yeniden başladığında 1 ay sonra hatırlatma maili göndermek için, sürecin başladığı tarih kayıt altına alınıyor.
+                //Ä°mza sÃ¼reci yeniden baÅŸladÄ±ÄŸÄ±nda 1 ay sonra hatÄ±rlatma maili gÃ¶ndermek iÃ§in, sÃ¼recin baÅŸladÄ±ÄŸÄ± tarih kayÄ±t altÄ±na alÄ±nÄ±yor.
                 TanimGenel formGenel = new TanimGenel();
 
                 formGenel.Durum = (int)ENUMDurum.Aktif;
@@ -273,7 +273,7 @@ namespace Risk.net.Services.Functions
 
                 if (sonuc.IslemSonuc)
                 {
-                    //Mail Gönder: İmza süreci yeniden başlatıldığında imza sürecindeki kişilere (MERKEZKOORDINATOR,ILKOORDINATOR) mail gönderilecek. 
+                    //Mail GÃ¶nder: Ä°mza sÃ¼reci yeniden baÅŸlatÄ±ldÄ±ÄŸÄ±nda imza sÃ¼recindeki kiÅŸilere (MERKEZKOORDINATOR,ILKOORDINATOR) mail gÃ¶nderilecek. 
                     var formBildirim = new BildirimSistemi()
                     {
                         Islem = EnumBildirimSistemiIslem.Bilgilendirme,
@@ -282,11 +282,11 @@ namespace Risk.net.Services.Functions
                         OnaylayacakYetki = "MERKEZKOORDINATOR,ILKOORDINATOR"
                     };
 
-                    //TEST işleminde mail atmasın kapatıldı. Yazılım çalışmaya başladığında açılacak Melih 29.09.2023
-                    //Talep üzerinde tekrar açıldı. Hüseyin 01.03.2024 
+                    //TEST iÅŸleminde mail atmasÄ±n kapatÄ±ldÄ±. YazÄ±lÄ±m Ã§alÄ±ÅŸmaya baÅŸladÄ±ÄŸÄ±nda aÃ§Ä±lacak Melih 29.09.2023
+                    //Talep Ã¼zerinde tekrar aÃ§Ä±ldÄ±. HÃ¼seyin 01.03.2024 
                     Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
 
-                    //Mail Gönder Bitiş
+                    //Mail GÃ¶nder BitiÅŸ
                 }
 
             }
@@ -300,17 +300,17 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Hatırlatma maili gönderilmesi işlemini sağlayan metod
+        /// HatÄ±rlatma maili gÃ¶nderilmesi iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> HatirlatmaMailiGonder(KullaniciDto kullanan)
         {
             try
             {
-                //Risk Yönetimi Taahhütnamesi imzalamayanlara hatırlatma e-postası gönder
+                //Risk YÃ¶netimi TaahhÃ¼tnamesi imzalamayanlara hatÄ±rlatma e-postasÄ± gÃ¶nder
                 var sql = @"SELECT '' Kod, 0 Yil, 0 Durum, null IslemTarihi, '' IslemYapanKod, '' IslemYapanRol, 
                             STUFF((SELECT ';' +  KoordinatorlukKod
                             FROM   ViewYetki
@@ -340,14 +340,14 @@ namespace Risk.net.Services.Functions
 
                     Tarihce tarihce = new Tarihce();
 
-                    //Tarihçe Başlangıç
+                    //TarihÃ§e BaÅŸlangÄ±Ã§
                     tarihce.IlgiKod = "RiskYonetimiBeyannamesiMailGonder";
                     tarihce.IlgiTur = EnumTarihceIslemTur.RiskYonetimiBeyannamesiMailGonder;
                     tarihce.IslemYapanKod = kullanan.PersonelKod;
                     tarihce.Durum = 19; // Bilgilendirme
 
                     var sonuc = await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                    //Tarihçe Bitiş
+                    //TarihÃ§e BitiÅŸ
 
 
                 }

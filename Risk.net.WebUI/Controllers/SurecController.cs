@@ -16,18 +16,18 @@ using static System.Net.WebRequestMethods;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Süreç işlemlerinin yapıldığı sayfa
+    /// SÃ¼reÃ§ iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class SurecController : GenelController
     {
         /// <summary>
-        /// ISurecService servisine ulaşmak için kullanılan değişken
+        /// ISurecService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ISurecService _service;
         /// <summary>
-        /// IAltSurecService servisine ulaşmak için kullanılan değişken
+        /// IAltSurecService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IAltSurecService _serviceAltSurec;
@@ -35,7 +35,7 @@ namespace Risk.net.WebUI.Controllers
         private readonly IViewBirimService _serviceBirim;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.SurecController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.SurecController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceAltSurec"></param>
@@ -56,7 +56,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Surec View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// Surec View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "*")]
         public IActionResult Index()
@@ -73,8 +73,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -90,7 +90,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -105,7 +105,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -120,7 +120,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -140,7 +140,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -160,7 +160,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Surec seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Surec seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -180,7 +180,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -195,7 +195,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -211,7 +211,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -231,7 +231,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Alt Surec seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Alt Surec seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -252,152 +252,152 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// İl bazında süreç ve alt süreçlerin kayıt edilmesini sağlar
-        /// Kurum tarafından kayıt edilmek istenen süreçler olduğu için yapıldı. Silinebilir Melih 12.06.2023
+        /// Ä°l bazÄ±nda sÃ¼reÃ§ ve alt sÃ¼reÃ§lerin kayÄ±t edilmesini saÄŸlar
+        /// Kurum tarafÄ±ndan kayÄ±t edilmek istenen sÃ¼reÃ§ler olduÄŸu iÃ§in yapÄ±ldÄ±. Silinebilir Melih 12.06.2023
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
         [HttpGet]
         public async Task<IActionResult> SurecAltSurecIlBazindaKaydet()
         {
-            string surecler = "İK.1.1\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tProje Başvuru Kayıt İşlemleri";
-            surecler += "\nİK.1.2\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tTamlık(İdari) / Uygunluk Kontrolleri Öncesi İşlemler";
-            surecler += "\nİK.1.3\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tProje Başvurularının Tamlık(İdari) / Uygunluk Kontrol İşlemleri";
-            surecler += "\nİK.1.4\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tİş Planı Kapsamındaki İşlemler";
-            surecler += "\nİK.1.5\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tBaşvurunun Uygun Kabul Edilmesi, Geri Çekilmesi ve Tamlık, Uygunluk veya İş Planı Analizi Sonucunda Reddedilmesine İlişkin İşlemler";
-            surecler += "\nİK.2.1\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tSözleşmenin Hazırlanması ve İmzalatılması veya Reddedilmesi";
-            surecler += "\nİK.2.2\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tZeyilname ve Fesih işlemleri";
-            surecler += "\nİK.2.3\tİl Koordinatörlüğü\tProje Başvuru Yönetimi Birimi\tSözleşme ile İlgili Diğer İşlemler";
-            surecler += "\nİK.3.1\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tSözleşme Öncesi Yerinde Kontrol İşlemleri";
-            surecler += "\nİK.3.2\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tÖdeme Öncesi Yerinde Kontrol İşlemleri";
-            surecler += "\nİK.3.3\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tUygulama Sonrası Yerinde Kontrol İşlemleri";
-            surecler += "\nİK.3.4\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tİtirazlar Kapsamında Yapılan İşlemler";
-            surecler += "\nİK.3.5\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tZeyilnameler Kapsamında Yapılan İşlemler";
-            surecler += "\nİK.3.6\tİl Koordinatörlüğü\tYerinde Kontrol Birimi\tYerinde Kontrol Verilerinin Kaydedilmesi";
-            surecler += "\nİK.4.1\tİl Koordinatörlüğü\tÖdeme Talep İşlemleri Birimi\tÖdeme Talep Paketi(ÖTP) İşlemleri";
-            surecler += "\nİK.4.2\tİl Koordinatörlüğü\tÖdeme Talep İşlemleri Birimi\tTahakkuk İşlemleri";
-            surecler += "\nİK.4.3\tİl Koordinatörlüğü\tÖdeme Talep İşlemleri Birimi\tÖTP ile ilgili yararlanıcıların bilgilendirilmesi";
-            surecler += "\nİK.4.4\tİl Koordinatörlüğü\tÖdeme Talep İşlemleri Birimi\tUsulsüzlük İşlemlerinin Yönetimi";
-            surecler += "\nİK.4.5\tİl Koordinatörlüğü\tÖdeme Talep İşlemleri Birimi\tProje Kaynaklı Geri Alım İşlemleri";
-            surecler += "\nİK.5.1\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tMaaş, Harcırah ve Satınalmaya Bağlı Ödeme İşlemleri";
-            surecler += "\nİK.5.2\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tİK Personel Özlük İşlemleri";
-            surecler += "\nİK.5.3\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tİşçi Özlük İşlemleri";
-            surecler += "\nİK.5.4\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tİdari İşler";
-            surecler += "\nİK.5.5\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tGenel Evrak İşlemlerinin Yürütülmesi";
-            surecler += "\nİK.5.6\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tİK'nın Diğer İş ve İşlemleri";
-            surecler += "\nİK.5.7\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tBilgi Güvenliği Yönetim Sistemi İşlemleri";
-            surecler += "\nİK.5.8\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tAğ, Sistem ve Güvenlik Yönetimi İşlemleri";
-            surecler += "\nİK.5.9\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tBasın ve Medya Faaliyetleri";
-            surecler += "\nİK.5.10\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tTanıtım ve Organizasyon Hizmetleri";
-            surecler += "\nİK.5.11\tİl Koordinatörlüğü\tDestek Hizmetleri Birimi\tHalkla İlişkiler Hizmetleri";
+            string surecler = "Ä°K.1.1\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tProje BaÅŸvuru KayÄ±t Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.1.2\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tTamlÄ±k(Ä°dari) / Uygunluk Kontrolleri Ã–ncesi Ä°ÅŸlemler";
+            surecler += "\nÄ°K.1.3\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tProje BaÅŸvurularÄ±nÄ±n TamlÄ±k(Ä°dari) / Uygunluk Kontrol Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.1.4\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tÄ°ÅŸ PlanÄ± KapsamÄ±ndaki Ä°ÅŸlemler";
+            surecler += "\nÄ°K.1.5\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tBaÅŸvurunun Uygun Kabul Edilmesi, Geri Ã‡ekilmesi ve TamlÄ±k, Uygunluk veya Ä°ÅŸ PlanÄ± Analizi Sonucunda Reddedilmesine Ä°liÅŸkin Ä°ÅŸlemler";
+            surecler += "\nÄ°K.2.1\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tSÃ¶zleÅŸmenin HazÄ±rlanmasÄ± ve Ä°mzalatÄ±lmasÄ± veya Reddedilmesi";
+            surecler += "\nÄ°K.2.2\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tZeyilname ve Fesih iÅŸlemleri";
+            surecler += "\nÄ°K.2.3\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tProje BaÅŸvuru YÃ¶netimi Birimi\tSÃ¶zleÅŸme ile Ä°lgili DiÄŸer Ä°ÅŸlemler";
+            surecler += "\nÄ°K.3.1\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tSÃ¶zleÅŸme Ã–ncesi Yerinde Kontrol Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.3.2\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tÃ–deme Ã–ncesi Yerinde Kontrol Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.3.3\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tUygulama SonrasÄ± Yerinde Kontrol Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.3.4\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tÄ°tirazlar KapsamÄ±nda YapÄ±lan Ä°ÅŸlemler";
+            surecler += "\nÄ°K.3.5\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tZeyilnameler KapsamÄ±nda YapÄ±lan Ä°ÅŸlemler";
+            surecler += "\nÄ°K.3.6\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tYerinde Kontrol Birimi\tYerinde Kontrol Verilerinin Kaydedilmesi";
+            surecler += "\nÄ°K.4.1\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tÃ–deme Talep Ä°ÅŸlemleri Birimi\tÃ–deme Talep Paketi(Ã–TP) Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.4.2\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tÃ–deme Talep Ä°ÅŸlemleri Birimi\tTahakkuk Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.4.3\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tÃ–deme Talep Ä°ÅŸlemleri Birimi\tÃ–TP ile ilgili yararlanÄ±cÄ±larÄ±n bilgilendirilmesi";
+            surecler += "\nÄ°K.4.4\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tÃ–deme Talep Ä°ÅŸlemleri Birimi\tUsulsÃ¼zlÃ¼k Ä°ÅŸlemlerinin YÃ¶netimi";
+            surecler += "\nÄ°K.4.5\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tÃ–deme Talep Ä°ÅŸlemleri Birimi\tProje KaynaklÄ± Geri AlÄ±m Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.1\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tMaaÅŸ, HarcÄ±rah ve SatÄ±nalmaya BaÄŸlÄ± Ã–deme Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.2\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tÄ°K Personel Ã–zlÃ¼k Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.3\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tÄ°ÅŸÃ§i Ã–zlÃ¼k Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.4\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tÄ°dari Ä°ÅŸler";
+            surecler += "\nÄ°K.5.5\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tGenel Evrak Ä°ÅŸlemlerinin YÃ¼rÃ¼tÃ¼lmesi";
+            surecler += "\nÄ°K.5.6\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tÄ°K'nÄ±n DiÄŸer Ä°ÅŸ ve Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.7\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tBilgi GÃ¼venliÄŸi YÃ¶netim Sistemi Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.8\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tAÄŸ, Sistem ve GÃ¼venlik YÃ¶netimi Ä°ÅŸlemleri";
+            surecler += "\nÄ°K.5.9\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tBasÄ±n ve Medya Faaliyetleri";
+            surecler += "\nÄ°K.5.10\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tTanÄ±tÄ±m ve Organizasyon Hizmetleri";
+            surecler += "\nÄ°K.5.11\tÄ°l KoordinatÃ¶rlÃ¼ÄŸÃ¼\tDestek Hizmetleri Birimi\tHalkla Ä°liÅŸkiler Hizmetleri";
 
-            string altSurecler = "İK.1.1\tİK 1.1.1\tBaşvuru paketinin kontrol edilerek teslim alınması";
-            altSurecler += "\nİK.1.1\tİK.1.1.2\tBaşvuru paketinin kaydının yapılması ve arşive teslim edilmesi";
-            altSurecler += "\nİK.1.1\tİK.1.1.3\tBaşvuru için  “İl Başvuru Dosyası” ve “Arşiv Klasörü” oluşturulması";
-            altSurecler += "\nİK.1.2\tİK.1.2.1\tBaşvuru izleme amaçlı veri tablolarının oluşturulması";
-            altSurecler += "\nİK.1.2\tİK.1.2.2\tDanışman Firma ve Tedarikçi Veritabanı (DFTV) formunun doldurulması";
-            altSurecler += "\nİK.1.2\tİK.1.2.3\tKopya ve manipülasyon olabilecek riskli başvuruların belirlenmesi ve ek kontrollerinin yapılması";
-            altSurecler += "\nİK.1.2\tİK.1.2.4\tRiskli başvuruların yerinde kontrol birimine bildirilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.1\tBaşvuru paketlerinin tamlık kontrolünün idari kontrol listeleri üzerinden gerçekleştirilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.2\tBaşvuruların “Uygunluk Kontrol Listelerine” göre kontrolünün yapılması";
-            altSurecler += "\nİK.1.3\tİK.1.3.3\tBeyan edilen harcamaların uygunluğunun kontrol edilmesi, gerektiğinde pazar araştırması yapılmasının talep edilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.4\tBaşvuru paketinde eksik belgesi olan ve/veya ek bilgi alınması gereken başvuru sahiplerinin bilgilendirilmesi ve eksikliklerin tamamlatılması";
-            altSurecler += "\nİK.1.3\tİK.1.3.5\tBaşvuru sahipleri tarafından sunulan bilgi ve belgelerin kontrol edilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.6\tKontroller sırasında tespit edilen muhtemel şüpheli dolandırıcılıkların Hukuk Müşavirliğine bildirilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.7\tUygun başvuruların listesinin sözleşme öncesi yerinde kontrollerinin yapılabilmesi amacıyla yerinde kontrol birimine iletilmesi";
-            altSurecler += "\nİK.1.3\tİK.1.3.8\tYKB'den iletilen ve yerinde kontrolü tamamlanan başvurular listesine göre Harcamaların Uygunluğu, Destek Seviyesi ve Miktarı Kontrol Listesinin (İK–1120) tamamlanması";
-            altSurecler += "\nİK.1.4\tİK.1.4.1\tTüm başvurular için başvuru sahibinin finansman kaynaklarının değerlendirilmesi (mali analiz) işlemleri";
-            altSurecler += "\nİK.1.4\tİK.1.4.2\tİş planı türünün B3 İş Planı olması durumunda İş Planı Analizinin yapılması";
-            altSurecler += "\nİK.1.5\tİK.1.5.1\tUygun olan başvurular listesinin (İl-1125) hazırlanması ve Merkeze (PYK) gönderilmesi";
-            altSurecler += "\nİK.1.5\tİK.1.5.2\tBaşvurunun geri çekilmesi veya reddedilmesine ilişkin işlemler";
-            altSurecler += "\nİK.1.5\tİK.1.5.3\tRedde itiraz işlemlerinin değerlendirilmesi ve sonucun Merkeze bildirilmesi";
-            altSurecler += "\nİK.1.5\tİK.1.5.4\tİşlemi tamamlanan başvuru paketlerinin ve il başvuru dosyalarının arşive teslim edilmesi";
-            altSurecler += "\nİK.2.1\tİK.2.1.1\tSözleşmenin hazırlanması, imzalatılması ve arşive gönderilmek üzere dosyanın düzenlenmesi";
-            altSurecler += "\nİK.2.1\tİK.2.1.2\t'Sözleşme Bildirim Dokümanı'nın oluşturulması ve başvuru sahibi ile İl Koordinatörlüklerindeki ilgili birimlere bildirilmesi";
-            altSurecler += "\nİK.2.1\tİK.2.1.3\tSözleşme aşamasında reddedilen projeler ile ilgili işlemlerin yerine getirilmesi";
-            altSurecler += "\nİK.2.2\tİK.2.2.1\tZeyilnamenin hazırlanması ve imzalatılması veya reddedilmesi ile arşive gönderilmek üzere dosyanın düzenlenmesi";
-            altSurecler += "\nİK.2.2\tİK.2.2.2\tSözleşme değişikliği ile ilgili olarak diğer birimlere ve faydalanıcıya  bilgi verilmesi";
-            altSurecler += "\nİK.2.2\tİK.2.2.3\tSözleşme feshi ile ilgili işlemlerin yerine getirilmesi";
-            altSurecler += "\nİK.2.3\tİK.2.3.1\tİmzalanmış sözleşmeler, zeyilname ve fesih ile ilgili gerekli bilgilerin sisteme girilmesi";
-            altSurecler += "\nİK.2.3\tİK.2.3.2\tSözleşme prosedürleri ile ilgili olarak başvuru sahibi/faydalanıcının itirazlarının değerlendirilmesi";
-            altSurecler += "\nİK.3.1\tİK.3.1.1\tProjelerin risk puanlarının belirlenmesi ve sınıflandırılması";
-            altSurecler += "\nİK.3.1\tİK.3.1.2\tHer bir başvuruya ilişkin teknik proje analizinin gerçekleştirilmesi";
-            altSurecler += "\nİK.3.1\tİK.3.1.3\tSözleşme Öncesi Yerinde Kontrol İşlemlerinin Gerçekleştirilmesi";
-            altSurecler += "\nİK.3.1\tİK.3.1.4\tTeknik proje değerlendirme sonuçları ve diğer ilgili/destekleyici dokümanların hazırlanması";
-            altSurecler += "\nİK.3.1\tİK.3.1.5\tKontroller tamamlandıktan sonra, başvuru paketi ve il başvuru dosyasının arşive/e-arşive teslim edilmesi";
-            altSurecler += "\nİK.3.1\tİK.3.1.6\tYerinde kontrolü tamamlanan başvurular listesinin PBYB'ye iletilmesi";
-            altSurecler += "\nİK.3.2\tİK.3.2.1\tProjelerin risk puanlarının belirlenmesi ve sınıflandırılması";
-            altSurecler += "\nİK.3.2\tİK.3.2.2\tAra dönem yerinde kontrol işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.3.2\tİK.3.2.3\tÖdeme öncesi yerinde kontrol işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.3.2\tİK.3.2.4\tYerinde kontrolü tamamlanan başvurular listesinin ÖTİB'e iletilmesi";
-            altSurecler += "\nİK.3.3\tİK.3.3.1\tProjelerin risk puanlarının belirlenmesi ve sınıflandırılması";
-            altSurecler += "\nİK.3.3\tİK.3.3.2\tYıllık olarak yenilenen sigorta poliçelerinin takibi";
-            altSurecler += "\nİK.3.3\tİK.3.3.3\tUygulama sonrası yerinde kontrol işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.3.4\tİK.3.4.1\tBaşvurunun reddine veya taslak sözleşmeye itiraz işlemleri kapsamında, ilgisi nedeniyle talep edilmesi durumunda; “İtiraz Değerlendirme Komisyonu Raporu ve Tutanağı”nın hazırlanması";
-            altSurecler += "\nİK.3.5\tİK.3.5.1\tPBYB iş ve işlemlerinde kullanılmak üzere; teknik değişiklik içeren büyük değişiklik kapsamındaki talepleri değerlendirme amaçlı 1225-A/B formlarının ve görüş yazılarının hazırlanması";
-            altSurecler += "\nİK.3.6\tİK.3.6.1\tYerinde kontrol verilerinin kaydedilmesi";
-            altSurecler += "\nİK.4.1\tİK.4.1.1\tÖdeme Talep Paketinin (ÖTP) kayıt işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.4.1\tİK.4.1.2\tÖTP'ler üzerinde İK İdari (Tamlık) Kontrol İşlemleri";
-            altSurecler += "\nİK.4.1\tİK.4.1.3\tÖTP'ler üzerinde İK İdari (Uygunluk) Kontrol İşlemleri";
-            altSurecler += "\nİK.4.1\tİK.4.1.4\tKontrol edilen ÖTP'nin yerinde kontrollerinin yapılması için YKB'ye gönderilmesi";
-            altSurecler += "\nİK.4.2\tİK.4.2.1\tTahakkuk tutarının hesaplanması";
-            altSurecler += "\nİK.4.2\tİK.4.2.2\tYerinde Kontrol Birimi tarafından hazırlanan rapora dayanarak 'Tahakkuk Formu'nun hazırlanması";
-            altSurecler += "\nİK.4.2\tİK.4.2.3\tTahakkuka ilişkin belgelerin kontrolünün yapılması";
-            altSurecler += "\nİK.4.2\tİK.4.2.4\tGerektiğinde ek tahakkuk işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.4.2\tİK.4.2.5\tİlgili Koordinatörlüklere tahakkuka ilişkin bildirim mektuplarının hazırlanamsı";
-            altSurecler += "\nİK.4.3\tİK.4.3.1\tÖTP'nin içeriği ve sözleşmede belirtilen teslim zamanı ile ilgili olarak yararlanıcılara tebligat gönderilmesi";
-            altSurecler += "\nİK.4.3\tİK.4.3.2\tYararlanıcıya gönderilmek üzere ÖTP'nin kabulüne ilişkin bildirim mektubunun hazırlanması ve gönderilmesi";
-            altSurecler += "\nİK.4.3\tİK.4.3.3\tÖTP'nin tamlık kontrollerinde herhangi bir eksikliğin belirlenmesi durumunda gerekli dokümanların sağlanması için yararlanıcıya bildirim mektubunun gönderilmesi";
-            altSurecler += "\nİK.4.3\tİK.4.3.4\tÖTP'nin uygunluk kontrollerinde herhangi bir eksikliğin belirlenmesi durumunda gerekli bilgilerin sağlanması için yararlanıcıya bildirim mektubunun gönderilmesi";
-            altSurecler += "\nİK.4.4\tİK.4.4.1\tUsulsüzlük bildirimlerinin Hukuk Müşavirliğine iletilmesi ";
-            altSurecler += "\nİK.4.4\tİK.4.4.2\tŞüpheli dolandırıcılık işlemlerinin Hukuk Müşavirliğine bildirilmesi";
-            altSurecler += "\nİK.4.4\tİK.4.4.3\tİdari hata bildirimlerinin kaydedilmesi ve Hukuk Müşavirliğine bildirilmesi";
-            altSurecler += "\nİK.4.4\tİK.4.4.4\tUsulsüzlük şüphesi içeren şikayet ve ihbarların değerlendirilmesi, ilgili Merkez Birimlerine bildirilmesi";
-            altSurecler += "\nİK.4.5\tİK.4.5.1\tBorç bildirim işlemleri";
-            altSurecler += "\nİK.4.5\tİK.4.5.2\tİcra ödeme emri işlemleri";
-            altSurecler += "\nİK.4.5\tİK.4.5.3\tHaciz İşlemlerinin (Tapu, Trafik, Banka Haciz Bildirileri ve Fiili Haciz İşlemleri) yapılması";
-            altSurecler += "\nİK.4.5\tİK.4.5.4\t6183 sayılı AATUHK kapsamında geri alım sürecinin tamamlanmasına yönelik işlemlerin yapılması";
-            altSurecler += "\nİK.5.1\tİK.5.1.1\tPersonel maaşlarının hesaplanması ve kontrolü";
-            altSurecler += "\nİK.5.1\tİK.5.1.2\tMaaş ödeme işlemlerinin yapılması";
-            altSurecler += "\nİK.5.1\tİK.5.1.3\tHarcırah ödeme işlemlerinin yapılması";
-            altSurecler += "\nİK.5.1\tİK.5.1.4\tSatınalmaya bağlı ödeme işlemlerinin yapılması";
-            altSurecler += "\nİK.5.1\tİK.5.1.5\tMal ve hizmet alımlarıyla ilgili doğrudan temin süreçlerinin yönetilmesi";
-            altSurecler += "\nİK.5.1\tİK.5.1.6\tİK'nin elektrik, su, doğalgaz, posta pulu, kargo hizmeti ihtiyaçlarının karşılanması";
-            altSurecler += "\nİK.5.1\tİK.5.1.7\tBeyannamelerin süresi içinde bildirimlerinin yapılarak ödemelerin gerçekleştirilmesi ";
-            altSurecler += "\nİK.5.1\tİK.5.1.8\tİK hizmet binasının kirasının ödenmesi";
-            altSurecler += "\nİK.5.2\tİK.5.2.1\tPersonel özlük dosyası içeriğindeki evrakın düzenlenmesi ve takip edilmesi (Atama, izin, geçici görevlendirme, yer değişiklikleri, iş tanımları, mal beyanları vb.)";
-            altSurecler += "\nİK.5.2\tİK.5.2.2\tÖzlük işlemlerinin 'Kurumsal Bilgi Sistemi - KBS üzerinden takip edilmesi";
-            altSurecler += "\nİK.5.2\tİK.5.2.3\tDisiplin işlemlerinin takip edilmesi";
-            altSurecler += "\nİK.5.2\tİK.5.2.4\tPersonel performans değerlendirme işlemlerinin (Ödül, başarı belgesi vb.) gerçekleştirilmesi";
-            altSurecler += "\nİK.5.2\tİK.5.2.5\tSağlık raporlarının SGK sistemine girişi ve gerekli işlemlerin takip edilmesi";
-            altSurecler += "\nİK.5.3\tİK.5.3.1\t696 sayılı KHK ile kadroya alınan sürekli işçilerin mali ve sosyal haklarının takip edilmesi";
-            altSurecler += "\nİK.5.3\tİK.5.3.2\t696 sayılı KHK ile kadroya alınan sürekli işçilerin disiplin işlemlerinin takip edilmesi";
-            altSurecler += "\nİK.5.3\tİK.5.3.3\t696 sayılı KHK ile kadroya alınan sürekli işçiler hakkındaki icra takip işlemlerini yürütülmesi";
-            altSurecler += "\nİK.5.3\tİK.5.3.4\tKurumdan ayrılan işçi personelin tazminat iş ve işlemlerinin yürütülmesi";
-            altSurecler += "\nİK.5.4\tİK.5.4.1\tSürekli işçilerin (Temizlik ve kat görevlileri, özel güvenlik görevlileri, şoförler, yemekhane personeli, teknik görevliler vb.) sevk ve idaresi";
-            altSurecler += "\nİK.5.4\tİK.5.4.2\tHizmet araçlarının sevk ve idaresinin gerçekleştirilmesi";
-            altSurecler += "\nİK.5.4\tİK.5.4.3\tİK'nin taşınır ve ambar işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.5.4\tİK.5.4.4\tHizmet araçlarının ve jeneratörlerin akaryakıt sarfiyatının kontrol edilmesi";
-            altSurecler += "\nİK.5.4\tİK.5.4.5\tHizmet binasının bakım onarım işlerinin yürütülmesi";
-            altSurecler += "\nİK.5.4\tİK.5.4.6\tSivil savunma işlemlerinin yürütülmesi";
-            altSurecler += "\nİK.5.5\tİK.5.5.1\tGenel Evrak / Genel Evrak Arşivi / İlgili Birimlere evrak havalesi ile ilgili iş ve işlemlerin Koordinasyonunun gerçekleştirilmesi";
-            altSurecler += "\nİK.5.5\tİK.5.5.2\tPostaya düşen evrakın gönderim işlemlerinin yapılması";
-            altSurecler += "\nİK.5.5\tİK.5.5.3\tİK (Genel Evrak) Arşivinin ve Arşiv malzemelerinin düzen ve fiziksel koşullarının yönetilmesi";
-            altSurecler += "\nİK.5.6\tİK.5.6.1\tProje dosyalarının muhafaza edilmesi ve erişimin sağlanması";
-            altSurecler += "\nİK.5.6\tİK.5.6.2\tDosyaların taranarak E-Arşiv sistemine kaydedilmesi";
-            altSurecler += "\nİK.5.6\tİK.5.6.3\tİdari davalara ilişkin kişi borç veya alacaklarına yönelik mali hakediş tablolarının oluşturulması ile tahakkuk ve ödeme işlemlerinin gerçekleştirilmesi";
-            altSurecler += "\nİK.5.6\tİK.5.6.4\tİK personeline yönelik eğitim faaliyetlerinin takip edilemsi";
-            altSurecler += "\nİK.5.7\tİK.5.7.1\t6698 Sayılı Kişisel Verilerin Korunması Kanunu gerekliliklerinin sağlanması";
-            altSurecler += "\nİK.5.7\tİK.5.7.2\tISO 27001 Bilgi Güvenliği Yönetim Sistemi Standartlarına yönelik faaliyetlerin gerçekleştirilmesi ve gerekliliklerinin sağlanması";
-            altSurecler += "\nİK.5.8\tİK.5.8.1\tİK fiziksel bilişim altyapısının kurulması, yönetilmesi ve güvenliğinin sağlanması";
-            altSurecler += "\nİK.5.8\tİK.5.8.2\tE-posta, dosya sunucuları, kullanıcı hesapları, güvenlik kameraları, telefon santrali, sistem odası gibi teknik hizmetlerin yürütülmesi";
-            altSurecler += "\nİK.5.9\tİK.5.9.1\tSosyal medya hesaplarının yönetilmesi";
-            altSurecler += "\nİK.5.9\tİK.5.9.2\tİK basın faaliyetlerinin yürütülmesi ve takip edilmesi";
-            altSurecler += "\nİK.5.9\tİK.5.9.3\tTanıtım ve bilgilendirme amaçlı film vb. görsel yayınların hazırlanması";
-            altSurecler += "\nİK.5.10\tİK.5.10.1\tKurumsal organizasyonların (Fuar, Organizasyon, Lansman vb.) gerçekleştirilmesi";
-            altSurecler += "\nİK.5.10\tİK.5.10.2\tKurumsal tanıtım faaliyetlerinin planlanması ve gerçekleştirilmesi";
-            altSurecler += "\nİK.5.11\tİK.5.11.1\tDilekçe ile  gelen başvuruların yönetilmesi";
-            altSurecler += "\nİK.5.11\tİK.5.11.2\tYardım Masası Telefon Hattına (444 85 35) ve Yardım Masası Sistemine gelen başvuruların yönetilmesi ve takip edilmesi";
+            string altSurecler = "Ä°K.1.1\tÄ°K 1.1.1\tBaÅŸvuru paketinin kontrol edilerek teslim alÄ±nmasÄ±";
+            altSurecler += "\nÄ°K.1.1\tÄ°K.1.1.2\tBaÅŸvuru paketinin kaydÄ±nÄ±n yapÄ±lmasÄ± ve arÅŸive teslim edilmesi";
+            altSurecler += "\nÄ°K.1.1\tÄ°K.1.1.3\tBaÅŸvuru iÃ§in  â€œÄ°l BaÅŸvuru DosyasÄ±â€ ve â€œArÅŸiv KlasÃ¶rÃ¼â€ oluÅŸturulmasÄ±";
+            altSurecler += "\nÄ°K.1.2\tÄ°K.1.2.1\tBaÅŸvuru izleme amaÃ§lÄ± veri tablolarÄ±nÄ±n oluÅŸturulmasÄ±";
+            altSurecler += "\nÄ°K.1.2\tÄ°K.1.2.2\tDanÄ±ÅŸman Firma ve TedarikÃ§i VeritabanÄ± (DFTV) formunun doldurulmasÄ±";
+            altSurecler += "\nÄ°K.1.2\tÄ°K.1.2.3\tKopya ve manipÃ¼lasyon olabilecek riskli baÅŸvurularÄ±n belirlenmesi ve ek kontrollerinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.1.2\tÄ°K.1.2.4\tRiskli baÅŸvurularÄ±n yerinde kontrol birimine bildirilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.1\tBaÅŸvuru paketlerinin tamlÄ±k kontrolÃ¼nÃ¼n idari kontrol listeleri Ã¼zerinden gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.2\tBaÅŸvurularÄ±n â€œUygunluk Kontrol Listelerineâ€ gÃ¶re kontrolÃ¼nÃ¼n yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.3\tBeyan edilen harcamalarÄ±n uygunluÄŸunun kontrol edilmesi, gerektiÄŸinde pazar araÅŸtÄ±rmasÄ± yapÄ±lmasÄ±nÄ±n talep edilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.4\tBaÅŸvuru paketinde eksik belgesi olan ve/veya ek bilgi alÄ±nmasÄ± gereken baÅŸvuru sahiplerinin bilgilendirilmesi ve eksikliklerin tamamlatÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.5\tBaÅŸvuru sahipleri tarafÄ±ndan sunulan bilgi ve belgelerin kontrol edilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.6\tKontroller sÄ±rasÄ±nda tespit edilen muhtemel ÅŸÃ¼pheli dolandÄ±rÄ±cÄ±lÄ±klarÄ±n Hukuk MÃ¼ÅŸavirliÄŸine bildirilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.7\tUygun baÅŸvurularÄ±n listesinin sÃ¶zleÅŸme Ã¶ncesi yerinde kontrollerinin yapÄ±labilmesi amacÄ±yla yerinde kontrol birimine iletilmesi";
+            altSurecler += "\nÄ°K.1.3\tÄ°K.1.3.8\tYKB'den iletilen ve yerinde kontrolÃ¼ tamamlanan baÅŸvurular listesine gÃ¶re HarcamalarÄ±n UygunluÄŸu, Destek Seviyesi ve MiktarÄ± Kontrol Listesinin (Ä°Kâ€“1120) tamamlanmasÄ±";
+            altSurecler += "\nÄ°K.1.4\tÄ°K.1.4.1\tTÃ¼m baÅŸvurular iÃ§in baÅŸvuru sahibinin finansman kaynaklarÄ±nÄ±n deÄŸerlendirilmesi (mali analiz) iÅŸlemleri";
+            altSurecler += "\nÄ°K.1.4\tÄ°K.1.4.2\tÄ°ÅŸ planÄ± tÃ¼rÃ¼nÃ¼n B3 Ä°ÅŸ PlanÄ± olmasÄ± durumunda Ä°ÅŸ PlanÄ± Analizinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.1.5\tÄ°K.1.5.1\tUygun olan baÅŸvurular listesinin (Ä°l-1125) hazÄ±rlanmasÄ± ve Merkeze (PYK) gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.1.5\tÄ°K.1.5.2\tBaÅŸvurunun geri Ã§ekilmesi veya reddedilmesine iliÅŸkin iÅŸlemler";
+            altSurecler += "\nÄ°K.1.5\tÄ°K.1.5.3\tRedde itiraz iÅŸlemlerinin deÄŸerlendirilmesi ve sonucun Merkeze bildirilmesi";
+            altSurecler += "\nÄ°K.1.5\tÄ°K.1.5.4\tÄ°ÅŸlemi tamamlanan baÅŸvuru paketlerinin ve il baÅŸvuru dosyalarÄ±nÄ±n arÅŸive teslim edilmesi";
+            altSurecler += "\nÄ°K.2.1\tÄ°K.2.1.1\tSÃ¶zleÅŸmenin hazÄ±rlanmasÄ±, imzalatÄ±lmasÄ± ve arÅŸive gÃ¶nderilmek Ã¼zere dosyanÄ±n dÃ¼zenlenmesi";
+            altSurecler += "\nÄ°K.2.1\tÄ°K.2.1.2\t'SÃ¶zleÅŸme Bildirim DokÃ¼manÄ±'nÄ±n oluÅŸturulmasÄ± ve baÅŸvuru sahibi ile Ä°l KoordinatÃ¶rlÃ¼klerindeki ilgili birimlere bildirilmesi";
+            altSurecler += "\nÄ°K.2.1\tÄ°K.2.1.3\tSÃ¶zleÅŸme aÅŸamasÄ±nda reddedilen projeler ile ilgili iÅŸlemlerin yerine getirilmesi";
+            altSurecler += "\nÄ°K.2.2\tÄ°K.2.2.1\tZeyilnamenin hazÄ±rlanmasÄ± ve imzalatÄ±lmasÄ± veya reddedilmesi ile arÅŸive gÃ¶nderilmek Ã¼zere dosyanÄ±n dÃ¼zenlenmesi";
+            altSurecler += "\nÄ°K.2.2\tÄ°K.2.2.2\tSÃ¶zleÅŸme deÄŸiÅŸikliÄŸi ile ilgili olarak diÄŸer birimlere ve faydalanÄ±cÄ±ya  bilgi verilmesi";
+            altSurecler += "\nÄ°K.2.2\tÄ°K.2.2.3\tSÃ¶zleÅŸme feshi ile ilgili iÅŸlemlerin yerine getirilmesi";
+            altSurecler += "\nÄ°K.2.3\tÄ°K.2.3.1\tÄ°mzalanmÄ±ÅŸ sÃ¶zleÅŸmeler, zeyilname ve fesih ile ilgili gerekli bilgilerin sisteme girilmesi";
+            altSurecler += "\nÄ°K.2.3\tÄ°K.2.3.2\tSÃ¶zleÅŸme prosedÃ¼rleri ile ilgili olarak baÅŸvuru sahibi/faydalanÄ±cÄ±nÄ±n itirazlarÄ±nÄ±n deÄŸerlendirilmesi";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.1\tProjelerin risk puanlarÄ±nÄ±n belirlenmesi ve sÄ±nÄ±flandÄ±rÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.2\tHer bir baÅŸvuruya iliÅŸkin teknik proje analizinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.3\tSÃ¶zleÅŸme Ã–ncesi Yerinde Kontrol Ä°ÅŸlemlerinin GerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.4\tTeknik proje deÄŸerlendirme sonuÃ§larÄ± ve diÄŸer ilgili/destekleyici dokÃ¼manlarÄ±n hazÄ±rlanmasÄ±";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.5\tKontroller tamamlandÄ±ktan sonra, baÅŸvuru paketi ve il baÅŸvuru dosyasÄ±nÄ±n arÅŸive/e-arÅŸive teslim edilmesi";
+            altSurecler += "\nÄ°K.3.1\tÄ°K.3.1.6\tYerinde kontrolÃ¼ tamamlanan baÅŸvurular listesinin PBYB'ye iletilmesi";
+            altSurecler += "\nÄ°K.3.2\tÄ°K.3.2.1\tProjelerin risk puanlarÄ±nÄ±n belirlenmesi ve sÄ±nÄ±flandÄ±rÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.3.2\tÄ°K.3.2.2\tAra dÃ¶nem yerinde kontrol iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.3.2\tÄ°K.3.2.3\tÃ–deme Ã¶ncesi yerinde kontrol iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.3.2\tÄ°K.3.2.4\tYerinde kontrolÃ¼ tamamlanan baÅŸvurular listesinin Ã–TÄ°B'e iletilmesi";
+            altSurecler += "\nÄ°K.3.3\tÄ°K.3.3.1\tProjelerin risk puanlarÄ±nÄ±n belirlenmesi ve sÄ±nÄ±flandÄ±rÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.3.3\tÄ°K.3.3.2\tYÄ±llÄ±k olarak yenilenen sigorta poliÃ§elerinin takibi";
+            altSurecler += "\nÄ°K.3.3\tÄ°K.3.3.3\tUygulama sonrasÄ± yerinde kontrol iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.3.4\tÄ°K.3.4.1\tBaÅŸvurunun reddine veya taslak sÃ¶zleÅŸmeye itiraz iÅŸlemleri kapsamÄ±nda, ilgisi nedeniyle talep edilmesi durumunda; â€œÄ°tiraz DeÄŸerlendirme Komisyonu Raporu ve TutanaÄŸÄ±â€nÄ±n hazÄ±rlanmasÄ±";
+            altSurecler += "\nÄ°K.3.5\tÄ°K.3.5.1\tPBYB iÅŸ ve iÅŸlemlerinde kullanÄ±lmak Ã¼zere; teknik deÄŸiÅŸiklik iÃ§eren bÃ¼yÃ¼k deÄŸiÅŸiklik kapsamÄ±ndaki talepleri deÄŸerlendirme amaÃ§lÄ± 1225-A/B formlarÄ±nÄ±n ve gÃ¶rÃ¼ÅŸ yazÄ±larÄ±nÄ±n hazÄ±rlanmasÄ±";
+            altSurecler += "\nÄ°K.3.6\tÄ°K.3.6.1\tYerinde kontrol verilerinin kaydedilmesi";
+            altSurecler += "\nÄ°K.4.1\tÄ°K.4.1.1\tÃ–deme Talep Paketinin (Ã–TP) kayÄ±t iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.4.1\tÄ°K.4.1.2\tÃ–TP'ler Ã¼zerinde Ä°K Ä°dari (TamlÄ±k) Kontrol Ä°ÅŸlemleri";
+            altSurecler += "\nÄ°K.4.1\tÄ°K.4.1.3\tÃ–TP'ler Ã¼zerinde Ä°K Ä°dari (Uygunluk) Kontrol Ä°ÅŸlemleri";
+            altSurecler += "\nÄ°K.4.1\tÄ°K.4.1.4\tKontrol edilen Ã–TP'nin yerinde kontrollerinin yapÄ±lmasÄ± iÃ§in YKB'ye gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.4.2\tÄ°K.4.2.1\tTahakkuk tutarÄ±nÄ±n hesaplanmasÄ±";
+            altSurecler += "\nÄ°K.4.2\tÄ°K.4.2.2\tYerinde Kontrol Birimi tarafÄ±ndan hazÄ±rlanan rapora dayanarak 'Tahakkuk Formu'nun hazÄ±rlanmasÄ±";
+            altSurecler += "\nÄ°K.4.2\tÄ°K.4.2.3\tTahakkuka iliÅŸkin belgelerin kontrolÃ¼nÃ¼n yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.4.2\tÄ°K.4.2.4\tGerektiÄŸinde ek tahakkuk iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.4.2\tÄ°K.4.2.5\tÄ°lgili KoordinatÃ¶rlÃ¼klere tahakkuka iliÅŸkin bildirim mektuplarÄ±nÄ±n hazÄ±rlanamsÄ±";
+            altSurecler += "\nÄ°K.4.3\tÄ°K.4.3.1\tÃ–TP'nin iÃ§eriÄŸi ve sÃ¶zleÅŸmede belirtilen teslim zamanÄ± ile ilgili olarak yararlanÄ±cÄ±lara tebligat gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.4.3\tÄ°K.4.3.2\tYararlanÄ±cÄ±ya gÃ¶nderilmek Ã¼zere Ã–TP'nin kabulÃ¼ne iliÅŸkin bildirim mektubunun hazÄ±rlanmasÄ± ve gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.4.3\tÄ°K.4.3.3\tÃ–TP'nin tamlÄ±k kontrollerinde herhangi bir eksikliÄŸin belirlenmesi durumunda gerekli dokÃ¼manlarÄ±n saÄŸlanmasÄ± iÃ§in yararlanÄ±cÄ±ya bildirim mektubunun gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.4.3\tÄ°K.4.3.4\tÃ–TP'nin uygunluk kontrollerinde herhangi bir eksikliÄŸin belirlenmesi durumunda gerekli bilgilerin saÄŸlanmasÄ± iÃ§in yararlanÄ±cÄ±ya bildirim mektubunun gÃ¶nderilmesi";
+            altSurecler += "\nÄ°K.4.4\tÄ°K.4.4.1\tUsulsÃ¼zlÃ¼k bildirimlerinin Hukuk MÃ¼ÅŸavirliÄŸine iletilmesi ";
+            altSurecler += "\nÄ°K.4.4\tÄ°K.4.4.2\tÅÃ¼pheli dolandÄ±rÄ±cÄ±lÄ±k iÅŸlemlerinin Hukuk MÃ¼ÅŸavirliÄŸine bildirilmesi";
+            altSurecler += "\nÄ°K.4.4\tÄ°K.4.4.3\tÄ°dari hata bildirimlerinin kaydedilmesi ve Hukuk MÃ¼ÅŸavirliÄŸine bildirilmesi";
+            altSurecler += "\nÄ°K.4.4\tÄ°K.4.4.4\tUsulsÃ¼zlÃ¼k ÅŸÃ¼phesi iÃ§eren ÅŸikayet ve ihbarlarÄ±n deÄŸerlendirilmesi, ilgili Merkez Birimlerine bildirilmesi";
+            altSurecler += "\nÄ°K.4.5\tÄ°K.4.5.1\tBorÃ§ bildirim iÅŸlemleri";
+            altSurecler += "\nÄ°K.4.5\tÄ°K.4.5.2\tÄ°cra Ã¶deme emri iÅŸlemleri";
+            altSurecler += "\nÄ°K.4.5\tÄ°K.4.5.3\tHaciz Ä°ÅŸlemlerinin (Tapu, Trafik, Banka Haciz Bildirileri ve Fiili Haciz Ä°ÅŸlemleri) yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.4.5\tÄ°K.4.5.4\t6183 sayÄ±lÄ± AATUHK kapsamÄ±nda geri alÄ±m sÃ¼recinin tamamlanmasÄ±na yÃ¶nelik iÅŸlemlerin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.1\tPersonel maaÅŸlarÄ±nÄ±n hesaplanmasÄ± ve kontrolÃ¼";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.2\tMaaÅŸ Ã¶deme iÅŸlemlerinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.3\tHarcÄ±rah Ã¶deme iÅŸlemlerinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.4\tSatÄ±nalmaya baÄŸlÄ± Ã¶deme iÅŸlemlerinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.5\tMal ve hizmet alÄ±mlarÄ±yla ilgili doÄŸrudan temin sÃ¼reÃ§lerinin yÃ¶netilmesi";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.6\tÄ°K'nin elektrik, su, doÄŸalgaz, posta pulu, kargo hizmeti ihtiyaÃ§larÄ±nÄ±n karÅŸÄ±lanmasÄ±";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.7\tBeyannamelerin sÃ¼resi iÃ§inde bildirimlerinin yapÄ±larak Ã¶demelerin gerÃ§ekleÅŸtirilmesi ";
+            altSurecler += "\nÄ°K.5.1\tÄ°K.5.1.8\tÄ°K hizmet binasÄ±nÄ±n kirasÄ±nÄ±n Ã¶denmesi";
+            altSurecler += "\nÄ°K.5.2\tÄ°K.5.2.1\tPersonel Ã¶zlÃ¼k dosyasÄ± iÃ§eriÄŸindeki evrakÄ±n dÃ¼zenlenmesi ve takip edilmesi (Atama, izin, geÃ§ici gÃ¶revlendirme, yer deÄŸiÅŸiklikleri, iÅŸ tanÄ±mlarÄ±, mal beyanlarÄ± vb.)";
+            altSurecler += "\nÄ°K.5.2\tÄ°K.5.2.2\tÃ–zlÃ¼k iÅŸlemlerinin 'Kurumsal Bilgi Sistemi - KBS Ã¼zerinden takip edilmesi";
+            altSurecler += "\nÄ°K.5.2\tÄ°K.5.2.3\tDisiplin iÅŸlemlerinin takip edilmesi";
+            altSurecler += "\nÄ°K.5.2\tÄ°K.5.2.4\tPersonel performans deÄŸerlendirme iÅŸlemlerinin (Ã–dÃ¼l, baÅŸarÄ± belgesi vb.) gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.2\tÄ°K.5.2.5\tSaÄŸlÄ±k raporlarÄ±nÄ±n SGK sistemine giriÅŸi ve gerekli iÅŸlemlerin takip edilmesi";
+            altSurecler += "\nÄ°K.5.3\tÄ°K.5.3.1\t696 sayÄ±lÄ± KHK ile kadroya alÄ±nan sÃ¼rekli iÅŸÃ§ilerin mali ve sosyal haklarÄ±nÄ±n takip edilmesi";
+            altSurecler += "\nÄ°K.5.3\tÄ°K.5.3.2\t696 sayÄ±lÄ± KHK ile kadroya alÄ±nan sÃ¼rekli iÅŸÃ§ilerin disiplin iÅŸlemlerinin takip edilmesi";
+            altSurecler += "\nÄ°K.5.3\tÄ°K.5.3.3\t696 sayÄ±lÄ± KHK ile kadroya alÄ±nan sÃ¼rekli iÅŸÃ§iler hakkÄ±ndaki icra takip iÅŸlemlerini yÃ¼rÃ¼tÃ¼lmesi";
+            altSurecler += "\nÄ°K.5.3\tÄ°K.5.3.4\tKurumdan ayrÄ±lan iÅŸÃ§i personelin tazminat iÅŸ ve iÅŸlemlerinin yÃ¼rÃ¼tÃ¼lmesi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.1\tSÃ¼rekli iÅŸÃ§ilerin (Temizlik ve kat gÃ¶revlileri, Ã¶zel gÃ¼venlik gÃ¶revlileri, ÅŸofÃ¶rler, yemekhane personeli, teknik gÃ¶revliler vb.) sevk ve idaresi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.2\tHizmet araÃ§larÄ±nÄ±n sevk ve idaresinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.3\tÄ°K'nin taÅŸÄ±nÄ±r ve ambar iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.4\tHizmet araÃ§larÄ±nÄ±n ve jeneratÃ¶rlerin akaryakÄ±t sarfiyatÄ±nÄ±n kontrol edilmesi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.5\tHizmet binasÄ±nÄ±n bakÄ±m onarÄ±m iÅŸlerinin yÃ¼rÃ¼tÃ¼lmesi";
+            altSurecler += "\nÄ°K.5.4\tÄ°K.5.4.6\tSivil savunma iÅŸlemlerinin yÃ¼rÃ¼tÃ¼lmesi";
+            altSurecler += "\nÄ°K.5.5\tÄ°K.5.5.1\tGenel Evrak / Genel Evrak ArÅŸivi / Ä°lgili Birimlere evrak havalesi ile ilgili iÅŸ ve iÅŸlemlerin Koordinasyonunun gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.5\tÄ°K.5.5.2\tPostaya dÃ¼ÅŸen evrakÄ±n gÃ¶nderim iÅŸlemlerinin yapÄ±lmasÄ±";
+            altSurecler += "\nÄ°K.5.5\tÄ°K.5.5.3\tÄ°K (Genel Evrak) ArÅŸivinin ve ArÅŸiv malzemelerinin dÃ¼zen ve fiziksel koÅŸullarÄ±nÄ±n yÃ¶netilmesi";
+            altSurecler += "\nÄ°K.5.6\tÄ°K.5.6.1\tProje dosyalarÄ±nÄ±n muhafaza edilmesi ve eriÅŸimin saÄŸlanmasÄ±";
+            altSurecler += "\nÄ°K.5.6\tÄ°K.5.6.2\tDosyalarÄ±n taranarak E-ArÅŸiv sistemine kaydedilmesi";
+            altSurecler += "\nÄ°K.5.6\tÄ°K.5.6.3\tÄ°dari davalara iliÅŸkin kiÅŸi borÃ§ veya alacaklarÄ±na yÃ¶nelik mali hakediÅŸ tablolarÄ±nÄ±n oluÅŸturulmasÄ± ile tahakkuk ve Ã¶deme iÅŸlemlerinin gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.6\tÄ°K.5.6.4\tÄ°K personeline yÃ¶nelik eÄŸitim faaliyetlerinin takip edilemsi";
+            altSurecler += "\nÄ°K.5.7\tÄ°K.5.7.1\t6698 SayÄ±lÄ± KiÅŸisel Verilerin KorunmasÄ± Kanunu gerekliliklerinin saÄŸlanmasÄ±";
+            altSurecler += "\nÄ°K.5.7\tÄ°K.5.7.2\tISO 27001 Bilgi GÃ¼venliÄŸi YÃ¶netim Sistemi StandartlarÄ±na yÃ¶nelik faaliyetlerin gerÃ§ekleÅŸtirilmesi ve gerekliliklerinin saÄŸlanmasÄ±";
+            altSurecler += "\nÄ°K.5.8\tÄ°K.5.8.1\tÄ°K fiziksel biliÅŸim altyapÄ±sÄ±nÄ±n kurulmasÄ±, yÃ¶netilmesi ve gÃ¼venliÄŸinin saÄŸlanmasÄ±";
+            altSurecler += "\nÄ°K.5.8\tÄ°K.5.8.2\tE-posta, dosya sunucularÄ±, kullanÄ±cÄ± hesaplarÄ±, gÃ¼venlik kameralarÄ±, telefon santrali, sistem odasÄ± gibi teknik hizmetlerin yÃ¼rÃ¼tÃ¼lmesi";
+            altSurecler += "\nÄ°K.5.9\tÄ°K.5.9.1\tSosyal medya hesaplarÄ±nÄ±n yÃ¶netilmesi";
+            altSurecler += "\nÄ°K.5.9\tÄ°K.5.9.2\tÄ°K basÄ±n faaliyetlerinin yÃ¼rÃ¼tÃ¼lmesi ve takip edilmesi";
+            altSurecler += "\nÄ°K.5.9\tÄ°K.5.9.3\tTanÄ±tÄ±m ve bilgilendirme amaÃ§lÄ± film vb. gÃ¶rsel yayÄ±nlarÄ±n hazÄ±rlanmasÄ±";
+            altSurecler += "\nÄ°K.5.10\tÄ°K.5.10.1\tKurumsal organizasyonlarÄ±n (Fuar, Organizasyon, Lansman vb.) gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.10\tÄ°K.5.10.2\tKurumsal tanÄ±tÄ±m faaliyetlerinin planlanmasÄ± ve gerÃ§ekleÅŸtirilmesi";
+            altSurecler += "\nÄ°K.5.11\tÄ°K.5.11.1\tDilekÃ§e ile  gelen baÅŸvurularÄ±n yÃ¶netilmesi";
+            altSurecler += "\nÄ°K.5.11\tÄ°K.5.11.2\tYardÄ±m MasasÄ± Telefon HattÄ±na (444 85 35) ve YardÄ±m MasasÄ± Sistemine gelen baÅŸvurularÄ±n yÃ¶netilmesi ve takip edilmesi";
 
 
             string[] satirlarSurec = surecler.Split("\n");

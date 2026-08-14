@@ -12,38 +12,38 @@ using System.Collections.Generic;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// StratejikPlanHedef işlemlerinin yapıldığı servis
+    /// StratejikPlanHedef iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class StratejikPlanHedefService : IStratejikPlanHedefService
     {
         /// <summary>
-        /// IUnitOfWork<StratejikPlanHedef> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<StratejikPlanHedef> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<StratejikPlanHedef> _unitOfWork;
         /// <summary>
-        /// IStratejikPlanHedefGostergeService servisine ulaşmak için kullanılan değişken
+        /// IStratejikPlanHedefGostergeService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStratejikPlanHedefGostergeService _serviceGosterge;
         /// <summary>
-        /// IUnitOfWork<StratejikPlan> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<StratejikPlan> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<StratejikPlan> _unitOfWorkStratejikPlan;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
         /// <summary>
-        /// IStratejikPlanIsbirligiBirimService servisine ulaşmak için kullanılan değişken
+        /// IStratejikPlanIsbirligiBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStratejikPlanIsbirligiBirimService _serviceIsbirligiBirim;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.StratejikPlanHedefService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.StratejikPlanHedefService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceGosterge"></param>
@@ -66,12 +66,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -87,7 +87,7 @@ namespace Risk.net.Services.Functions
             {
                 var kayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == kod, "Gostergeler,Koordinatorluk,Birim,IsbirligiBirimler,IsbirligiBirimler.Koordinatorluk,IsbirligiBirimler.Birim,Gostergeler.Birim");
 
-                //Göstergeleri sırala
+                //GÃ¶stergeleri sÄ±rala
                 kayit.Gostergeler = kayit.Gostergeler.OrderBy(o => o.GostergeNo).ToList();
 
                 List<StratejikPlanHedefGosterge> gostergeler = new List<StratejikPlanHedefGosterge>();
@@ -110,13 +110,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="stratejikPlanKod"></param>
         /// <param name="durumKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string stratejikPlanKod, int durumKod)
         {
@@ -129,12 +129,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -161,12 +161,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, StratejikPlanHedef gelenNesne)
         {
@@ -199,7 +199,7 @@ namespace Risk.net.Services.Functions
                     else
                         gelenNesne.Kod = gelenNesne.Kod.Replace("dtabloYeni_", "");
 
-                    //Numara alma işleminde Stratejik Plan Numarasını aldığı için
+                    //Numara alma iÅŸleminde Stratejik Plan NumarasÄ±nÄ± aldÄ±ÄŸÄ± iÃ§in
                     //*****************************************************************
                     string amacNo = gelenNesne.SorguAmacNo;
                     if (string.IsNullOrWhiteSpace(amacNo))
@@ -270,12 +270,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="stratejikPlanKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, string stratejikPlanKod)
         {
@@ -298,12 +298,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, StratejikPlanHedef gelenNesne)
         {
@@ -316,7 +316,7 @@ namespace Risk.net.Services.Functions
 
             var hedefGostergeler = await _serviceGosterge.ListeleAsync(kullanan, gelenNesne.Kod, (int)ENUMDurum.Aktif);
             if (hedefGostergeler.Liste.Count > 0)
-                hata = "<li>Silmek istediğiniz Hedefe bağlı Anahtar Performans Göstergeleri bulunmaktadır. İlk önce Göstergeleri silin.</li>";
+                hata = "<li>Silmek istediÄŸiniz Hedefe baÄŸlÄ± Anahtar Performans GÃ¶stergeleri bulunmaktadÄ±r. Ä°lk Ã¶nce GÃ¶stergeleri silin.</li>";
 
             if (hata != "")
                 return new Sonuc(ENUMIslemDurum.Uyari, hata);
@@ -325,7 +325,7 @@ namespace Risk.net.Services.Functions
             {
                 var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-                //Durum değişikliğine uygun mu?
+                //Durum deÄŸiÅŸikliÄŸine uygun mu?
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum == (int)ENUMDurum.Pasif)
                     hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.PasifKayitOnaylanamaz"] + "</li>";
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum == (int)ENUMDurum.Onayli)
@@ -349,12 +349,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetBirimAsync(KullaniciDto kullanan, StratejikPlanHedef gelenNesne)
         {

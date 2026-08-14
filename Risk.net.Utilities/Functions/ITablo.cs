@@ -60,7 +60,7 @@ namespace Risk.net.Utilities.Functions
     }
     public interface ITablo
     {
-        //tur=1 TIFF, 0/Diðer=JPEG
+        //tur=1 TIFF, 0/DiÄŸer=JPEG
         //void SheetToResim(int horRes, int verRes, string dosyaAd, int tur);
         //void YeniSheetEkle(string dosyaYol, string dosyaAd, int index);
 

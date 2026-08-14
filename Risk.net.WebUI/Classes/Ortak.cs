@@ -18,12 +18,12 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Classes
 {
     /// <summary>
-    /// WebUI projesinde ortak kullanılan metodların bulunduğu sınıf
+    /// WebUI projesinde ortak kullanÄ±lan metodlarÄ±n bulunduÄŸu sÄ±nÄ±f
     /// </summary>
     public class Ortak
     {
         /// <summary>
-        /// Yazılımda kullanılan Durum bilgisinin ekranlarda kullanılan seçim kutularına aktarılmasını sağlayan metod
+        /// YazÄ±lÄ±mda kullanÄ±lan Durum bilgisinin ekranlarda kullanÄ±lan seÃ§im kutularÄ±na aktarÄ±lmasÄ±nÄ± saÄŸlayan metod
         /// </summary>
         /// <param name="_sharedResource"></param>
         /// <param name="tur"></param>
@@ -51,7 +51,7 @@ namespace Risk.net.WebUI.Classes
         }
 
         /// <summary>
-        /// Artık Risk Seviyesini gelen parametreler ile hesaplayıp ismini ve seviye numarasını döndüren metor
+        /// ArtÄ±k Risk Seviyesini gelen parametreler ile hesaplayÄ±p ismini ve seviye numarasÄ±nÄ± dÃ¶ndÃ¼ren metor
         /// </summary>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
@@ -59,7 +59,7 @@ namespace Risk.net.WebUI.Classes
         /// <param name="_sharedResource"></param>
         /// <param name="seviye"></param>
         /// <returns>
-        /// string olarak adını, referans ile gelen seviye değişkeninde ise seviyes bilgisini döndürür
+        /// string olarak adÄ±nÄ±, referans ile gelen seviye deÄŸiÅŸkeninde ise seviyes bilgisini dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public static string ArtikRiskSeviyesiGetir(int etki, int olasilik, decimal kontrolKriteriAgirligi, IStringLocalizer<CustomResource> _sharedResource, ref int seviye)
         {
@@ -96,7 +96,7 @@ namespace Risk.net.WebUI.Classes
         }
 
         /// <summary>
-        /// Artık Risk Seviyesi bilgilerini renkleri ile birlikte ekranlarda kullanılan seçim kutularına aktarılmasını sağlayan metod
+        /// ArtÄ±k Risk Seviyesi bilgilerini renkleri ile birlikte ekranlarda kullanÄ±lan seÃ§im kutularÄ±na aktarÄ±lmasÄ±nÄ± saÄŸlayan metod
         /// </summary>
         /// <param name="_sharedResource"></param>
         /// <returns>
@@ -117,7 +117,7 @@ namespace Risk.net.WebUI.Classes
 
 
         /// <summary>
-        /// Yazılımda kullanılan RiskTuru bilgisinin ekranlarda kullanılan seçim kutularına aktarılmasını sağlayan metod
+        /// YazÄ±lÄ±mda kullanÄ±lan RiskTuru bilgisinin ekranlarda kullanÄ±lan seÃ§im kutularÄ±na aktarÄ±lmasÄ±nÄ± saÄŸlayan metod
         /// </summary>
         /// <param name="_sharedResource"></param>
         /// <returns>
@@ -135,7 +135,7 @@ namespace Risk.net.WebUI.Classes
 
 
         /// <summary>
-        /// Sayfada gösterilecek olan Risklere Verilecek Cevap listesinin doldurulması için
+        /// Sayfada gÃ¶sterilecek olan Risklere Verilecek Cevap listesinin doldurulmasÄ± iÃ§in
         /// </summary>
         /// <returns>
         /// List<SelectListesi>
@@ -156,7 +156,7 @@ namespace Risk.net.WebUI.Classes
 
 
         /// <summary>
-        /// Sayfada gösterilecek olan RiskAzaltmaPlani MevcutDurum listesinin doldurulması için
+        /// Sayfada gÃ¶sterilecek olan RiskAzaltmaPlani MevcutDurum listesinin doldurulmasÄ± iÃ§in
         /// </summary>
         /// <returns>
         /// List<SelectListesi>
@@ -178,7 +178,7 @@ namespace Risk.net.WebUI.Classes
 
 
         /// <summary>
-        /// AnahtarRiskGöstergesi Dönem Periyot bilgilerini ekranlarda kullanılan seçim kutularına aktarılmasını sağlayan metod
+        /// AnahtarRiskGÃ¶stergesi DÃ¶nem Periyot bilgilerini ekranlarda kullanÄ±lan seÃ§im kutularÄ±na aktarÄ±lmasÄ±nÄ± saÄŸlayan metod
         /// </summary>
         /// <param name="_sharedResource"></param>
         /// <returns>

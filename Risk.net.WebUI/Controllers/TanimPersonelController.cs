@@ -15,19 +15,19 @@ using Microsoft.AspNetCore.Http;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Personel işlemlerinin yapıldığı sayfa
+    /// Personel iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class TanimPersonelController : GenelController
     {
         /// <summary>
-        /// IViewPersonelService servisine ulaşmak için kullanılan değişken
+        /// IViewPersonelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewPersonelService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.TanimPersonelController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.TanimPersonelController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// TanimPersonel View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// TanimPersonel View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "SISTEMYONETICISI")]
         public IActionResult Index()
@@ -50,8 +50,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -67,7 +67,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -107,7 +107,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Parametre olarak verilen kod ile uyuşan personelin unvan bilgisini veren metod
+        /// Parametre olarak verilen kod ile uyuÅŸan personelin unvan bilgisini veren metod
         /// </summary>
         /// <param name="personelKod"></param>
         /// <returns>
@@ -134,7 +134,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki İç Kontrol Koordinatörlüğüne ait Personel seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Ä°Ã§ Kontrol KoordinatÃ¶rlÃ¼ÄŸÃ¼ne ait Personel seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>

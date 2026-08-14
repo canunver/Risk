@@ -15,19 +15,19 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Denetim işlemlerinin yapıldığı sayfa
+    /// Denetim iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class DenetimController : GenelController
     {
         /// <summary>
-        /// IDenetimService servisine ulaşmak için kullanılan değişken
+        /// IDenetimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.DenetimController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.DenetimController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -41,7 +41,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// IcDenetim View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// IcDenetim View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI")]//Yetki Tamam
         public IActionResult IcDenetim()
@@ -55,7 +55,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// DisDenetim View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// DisDenetim View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI")]//Yetki Tamam
         public IActionResult DisDenetim()
@@ -69,7 +69,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// DenetimListe View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// DenetimListe View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "*")]//Yetki Tamam
         public IActionResult DenetimListe(string tur)
@@ -96,8 +96,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -118,7 +118,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -161,7 +161,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -176,7 +176,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -196,7 +196,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -216,7 +216,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Rapor No bilgisinin güncellenemesini sağlayan metod
+        /// Rapor No bilgisinin gÃ¼ncellenemesini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -232,7 +232,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Rapor No bilgisinin güncellenemesini sağlayan metod
+        /// Rapor No bilgisinin gÃ¼ncellenemesini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -248,7 +248,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Denetim seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Denetim seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>

@@ -15,25 +15,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// RiskIzleme işlemlerinin yapıldığı sayfa
+    /// RiskIzleme iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class RiskEvreniController : GenelController
     {
         /// <summary>
-        /// IRiskEvreniService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniService _service;
         /// <summary>
-        /// IKonfigurasyonService servisine ulaşmak için kullanılan değişken
+        /// IKonfigurasyonService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IKonfigurasyonService _serviceKonfigurasyon;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RiskEvreniController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.RiskEvreniController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -49,7 +49,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Riskİzleme View sayfası açıldığında çalışan metod
+        /// RiskÄ°zleme View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -68,8 +68,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -85,7 +85,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -100,7 +100,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -116,7 +116,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -138,7 +138,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns>
         /// Ok(sunucudan gelen Sonuc tipinde nesne)
@@ -148,10 +148,10 @@ namespace Risk.net.WebUI.Controllers
         {
             List<SelectListesi> donenDeger = new List<SelectListesi>
             {
-                new SelectListesi { id = 0 + "", text = "Tümü" },
-                new SelectListesi { id = 1 + "", text = "Başkası adına kaydettiklerim" },
-                new SelectListesi { id = 2 + "", text = "Risk sahibi olduklarım" },
-                new SelectListesi { id = 3 + "", text = "Kaydettigim bütün riskler" },
+                new SelectListesi { id = 0 + "", text = "TÃ¼mÃ¼" },
+                new SelectListesi { id = 1 + "", text = "BaÅŸkasÄ± adÄ±na kaydettiklerim" },
+                new SelectListesi { id = 2 + "", text = "Risk sahibi olduklarÄ±m" },
+                new SelectListesi { id = 3 + "", text = "Kaydettigim bÃ¼tÃ¼n riskler" },
             };
 
             return Ok(donenDeger);
@@ -159,7 +159,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Ekranlardaki seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns>
         /// Ok(sunucudan gelen Sonuc tipinde nesne)
@@ -169,9 +169,9 @@ namespace Risk.net.WebUI.Controllers
         {
             List<SelectListesi> donenDeger = new List<SelectListesi>
             {
-                new SelectListesi { id = 0 + "", text = "Tümü" },
+                new SelectListesi { id = 0 + "", text = "TÃ¼mÃ¼" },
                 new SelectListesi { id = 1 + "", text = "Evet" },
-                new SelectListesi { id = 2 + "", text = "Hayır" },
+                new SelectListesi { id = 2 + "", text = "HayÄ±r" },
             };
 
             return Ok(donenDeger);

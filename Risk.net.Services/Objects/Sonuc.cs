@@ -8,7 +8,7 @@ using System.Reflection;
 namespace Risk.net.Services.Objects
 {
     /// <summary>
-    /// Entity verilerinin istemci katmanına göndermek için kullanılan değişken
+    /// Entity verilerinin istemci katmanÄ±na gÃ¶ndermek iÃ§in kullanÄ±lan deÄŸiÅŸken
     /// </summary>
     /// <remarks></remarks>
     public class Sonuc
@@ -62,7 +62,7 @@ namespace Risk.net.Services.Objects
 
         public static string MesajDuzenle(string deger)
         {
-            //Örnek: String or binary data would be truncated in table 'Risk.dbo.RiskEvreni', column 'AnahtarRiskGostergesiAdi'. Truncated value: 'yk sürecindeki proje sayısı, ekip sayısı, YK tamalanma süresinide içerir bir proje ağırlık oranı ile'.
+            //Ã–rnek: String or binary data would be truncated in table 'Risk.dbo.RiskEvreni', column 'AnahtarRiskGostergesiAdi'. Truncated value: 'yk sÃ¼recindeki proje sayÄ±sÄ±, ekip sayÄ±sÄ±, YK tamalanma sÃ¼resinide iÃ§erir bir proje aÄŸÄ±rlÄ±k oranÄ± ile'.
 
             if (!string.IsNullOrWhiteSpace(deger))
             {
@@ -108,7 +108,7 @@ namespace Risk.net.Services.Objects
                                 alanBoyut = columnAttribute.TypeName.Replace("varchar", "").Replace("nvarchar", "").Replace("(", "").Replace(")", "");
                         }
 
-                        string mesaj = alanAdi + " alanı için en fazla " + alanBoyut + " karakterlik veri girişi yapılabilir!";
+                        string mesaj = alanAdi + " alanÄ± iÃ§in en fazla " + alanBoyut + " karakterlik veri giriÅŸi yapÄ±labilir!";
 
                         if (deger.Contains("<small><li>"))
                             deger = "<small><li>" + mesaj + "</li></small>";

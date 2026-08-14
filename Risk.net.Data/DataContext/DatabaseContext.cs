@@ -9,7 +9,7 @@ namespace Risk.net.Data.DataContext
     public class DatabaseContext : DbContext
     {
         /// <summary>
-        /// Veritabanı işlemlerinin yapıldığı DBContext sınıfının kurucuları değiştirilerek DbContextOptions türünden bağlantı ayarlarını almaktadır.
+        /// VeritabanÄ± iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± DBContext sÄ±nÄ±fÄ±nÄ±n kurucularÄ± deÄŸiÅŸtirilerek DbContextOptions tÃ¼rÃ¼nden baÄŸlantÄ± ayarlarÄ±nÄ± almaktadÄ±r.
         /// </summary>
         /// <param name="options"></param>
         /// <returns>
@@ -19,7 +19,7 @@ namespace Risk.net.Data.DataContext
         }
 
         /// <summary>
-        /// Veritabanı bağlantı ayarları için kullanılan metodtur.
+        /// VeritabanÄ± baÄŸlantÄ± ayarlarÄ± iÃ§in kullanÄ±lan metodtur.
         /// </summary>
         /// <param name="optionsBuilder"></param>
         /// <returns>
@@ -36,18 +36,18 @@ namespace Risk.net.Data.DataContext
             else
             {
                 //optionsBuilder.UseMySql(baglantiSatiri, ServerVersion.AutoDetect(baglantiSatiri));
-                //update-database ile mysql de table ları oluşturabilirsin
+                //update-database ile mysql de table larÄ± oluÅŸturabilirsin
                 //Mysql download indir kur (Server kurulacak)
                 //DBeaver indir kur
-                //database adı risk > schema risk oluştur
-                //insert cümlesi insert into olacak [], 'N ve dbo olmayacak noktalı virgülle bitecek
-                //ör => INSERT INTO TanimBirim (Kod, Adi, Durum) VALUES ('F780B1C783B3480394DF3D19C2C65DEC', 'İç Denetim Koordinatörlüğü', 1);
+                //database adÄ± risk > schema risk oluÅŸtur
+                //insert cÃ¼mlesi insert into olacak [], 'N ve dbo olmayacak noktalÄ± virgÃ¼lle bitecek
+                //Ã¶r => INSERT INTO TanimBirim (Kod, Adi, Durum) VALUES ('F780B1C783B3480394DF3D19C2C65DEC', 'Ä°Ã§ Denetim KoordinatÃ¶rlÃ¼ÄŸÃ¼', 1);
 
 
             }
         }
 
-        #region DbSet Alanı
+        #region DbSet AlanÄ±
         public DbSet<Yardim> Yardim { get; set; }
         public DbSet<Konfigurasyon> Konfigurasyon { get; set; }
         public DbSet<BulguYonetimi> BulguYonetimi { get; set; }
@@ -132,9 +132,9 @@ namespace Risk.net.Data.DataContext
         #endregion
 
         /// <summary>
-        /// Veritabanı ilk defa oluşturulurken tetiklenen bir virtual metodtur, veritabanı tabloları oluşturulmadan araya girer, tablo isimlerine müdahale edilebilir.
-        /// View, Rapor Entity lerin veri tabanında fiziksel oluşturulması engellenir
-        /// View, Rapor Entity lerin anahtar alanlarının olmadığı belirtilir
+        /// VeritabanÄ± ilk defa oluÅŸturulurken tetiklenen bir virtual metodtur, veritabanÄ± tablolarÄ± oluÅŸturulmadan araya girer, tablo isimlerine mÃ¼dahale edilebilir.
+        /// View, Rapor Entity lerin veri tabanÄ±nda fiziksel oluÅŸturulmasÄ± engellenir
+        /// View, Rapor Entity lerin anahtar alanlarÄ±nÄ±n olmadÄ±ÄŸÄ± belirtilir
         /// </summary>
         /// <param name="modelBuilder"></param>
         /// <returns>

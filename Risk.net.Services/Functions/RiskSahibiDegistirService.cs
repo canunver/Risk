@@ -16,23 +16,23 @@ using System.Linq.Expressions;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// RiskSahibiDegistir işlemlerinin yapıldığı servis
+    /// RiskSahibiDegistir iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class RiskSahibiDegistirService : IRiskSahibiDegistirService
     {
         /// <summary>
-        /// IUnitOfWork<RiskEvreni> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<RiskEvreni> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskEvreni> _unitOfWorkRiskEvreni;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.RiskSahibiDegistirService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.RiskSahibiDegistirService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWorkRiskEvreni"></param>
         /// <param name="sharedResource"></param>
@@ -45,13 +45,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilerine yeniKod bilgisini eskiKod bilgisi ile güncelleyen metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilerine yeniKod bilgisini eskiKod bilgisi ile gÃ¼ncelleyen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="eskiKod"></param>
         /// <param name="yeniKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, string eskiKod, string yeniKod)
         {

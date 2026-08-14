@@ -22,69 +22,69 @@ using Newtonsoft.Json;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// BildirimSistemi iþlemlerinin yapýldýðý servis
+    /// BildirimSistemi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class BildirimSistemiService : IBildirimSistemiService
     {
         /// <summary>
-        /// IUnitOfWork<BildirimSistemi> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<BildirimSistemi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<BildirimSistemi> _unitOfWork;
         /// <summary>
-        /// IViewYetkiService servisine ulaþmak için kullanýlan deðiþken
+        /// IViewYetkiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewYetkiService _serviceYetki;
         /// <summary>
-        /// IViewPersonelService servisine ulaþmak için kullanýlan deðiþken
+        /// IViewPersonelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewPersonelService _servicePersonel;
         /// <summary>
-        /// IViewBirimService servisine ulaþmak için kullanýlan deðiþken
+        /// IViewBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBirimService _serviceViewBirim;
         /// <summary>
-        /// ITarihceService servisine ulaþmak için kullanýlan deðiþken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IMailTarihceService servisine ulaþmak için kullanýlan deðiþken
+        /// IMailTarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IMailTarihceService _serviceMailTarihce;
         /// <summary>
-        /// IUnitOfWork<RiskEvreni> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RiskEvreni> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskEvreni> _unitOfWorkRiskEvreni;
         /// <summary>
-        /// IUnitOfWork<RiskYonetimi> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<RiskYonetimi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskYonetimi> _unitOfWorkRiskYonetimi;
         /// <summary>
-        /// IUnitOfWork<OlayRaporlama> servisine ulaþmak için kullanýlan deðiþken
+        /// IUnitOfWork<OlayRaporlama> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<OlayRaporlama> _unitOfWorkOlayRaporlama;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaþmak için kullanýlan deðiþken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// IHttpContextAccessor servisine ulaþmak için kullanýlan deðiþken
+        /// IHttpContextAccessor servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.BildirimSistemiService" />yeni bir örneðini baþlatan sýnýf
+        /// <see cref="Risk.net.Services.Functions.BildirimSistemiService" />yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceYetki"></param>
@@ -123,12 +123,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydýn tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, int kod)
         {
@@ -160,12 +160,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -199,12 +199,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayýtlarýn listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, BildirimSistemi gelenNesne)
         {
@@ -232,12 +232,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, BildirimSistemi gelenNesne)
         {
@@ -284,23 +284,23 @@ namespace Risk.net.Services.Functions
 
                 //    if (gelenNesne.BelgeTipi == (int)EnumTarihceIslemTur.RiskEvreni)
                 //    {
-                //        konu = "Risk onayý";
+                //        konu = "Risk onayÄ±";
                 //        mesaj = "*** nolu risk onay bekliyor.";
                 //    }
                 //    else if (gelenNesne.BelgeTipi == (int)EnumTarihceIslemTur.RiskYonetimi)
                 //    {
-                //        konu = "Risk'e verilen cevap onayý";
+                //        konu = "Risk'e verilen cevap onayÄ±";
                 //        mesaj = "*** nolu risk'e verilen cevap onay bekliyor.";
                 //    }
                 //    else if (gelenNesne.BelgeTipi == (int)EnumTarihceIslemTur.RiskAzaltmaPlani)
                 //    {
-                //        konu = "Azaltma planý onayý";
-                //        mesaj = "*** nolu risk için oluþturulan azaltma planý onay bekliyor.";
+                //        konu = "Azaltma planÄ± onayÄ±";
+                //        mesaj = "*** nolu risk iÃ§in oluÅŸturulan azaltma planÄ± onay bekliyor.";
                 //    }
                 //    else if (gelenNesne.BelgeTipi == (int)EnumTarihceIslemTur.OlayRaporlama)
                 //    {
-                //        konu = "Olay paroru onayý";
-                //        mesaj = "*** tanýmlý olay onay bekliyor.";
+                //        konu = "Olay paroru onayÄ±";
+                //        mesaj = "*** tanÄ±mlÄ± olay onay bekliyor.";
                 //    }
 
                 //    Mail.MailAt("", mail, konu, mesaj);
@@ -317,7 +317,7 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile talep edilen bilgilere göre onaylayacak yetki biglisini döndüren metod
+        /// Istemciden parametere ile talep edilen bilgilere gÃ¶re onaylayacak yetki biglisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
@@ -384,7 +384,7 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile talep edilen bilgilere göre geri gönderilecek yetki biglisini döndüren metod
+        /// Istemciden parametere ile talep edilen bilgilere gÃ¶re geri gÃ¶nderilecek yetki biglisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
@@ -415,7 +415,7 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile talep edilen bilgilere göre onaylayacak son yetki biglisini döndüren metod
+        /// Istemciden parametere ile talep edilen bilgilere gÃ¶re onaylayacak son yetki biglisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
@@ -434,7 +434,7 @@ namespace Risk.net.Services.Functions
 
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere göre mail gönderen metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere gÃ¶re mail gÃ¶nderen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="b"></param>
@@ -585,14 +585,14 @@ namespace Risk.net.Services.Functions
                 {
                     Tarihce tarihce = new Tarihce();
 
-                    //Tarihçe Baþlangýç
+                    //TarihÃ§e BaÅŸlangÄ±Ã§
                     tarihce.IlgiKod = kriter.BelgeKod;
                     tarihce.IlgiTur = (EnumTarihceIslemTur)kriter.BelgeTipi;
                     tarihce.IslemYapanKod = kullanan.PersonelKod;
                     tarihce.Durum = 15; // Bilgilendirme
 
                     var sonuc = await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                    //Tarihçe Bitiþ
+                    //TarihÃ§e BitiÅŸ
 
                     string mail = string.Join(";", mailListe.Distinct().ToArray());
                     string konu = "";
@@ -603,7 +603,7 @@ namespace Risk.net.Services.Functions
                                              {ALANLAR}
                                            </div>";
                     string mesajSablonAlan = @"<div style='display: flex;'><span style='width:120px;font-weight:bold;'>{ALAN}</span> : {ACIKLAMA}</div>";
-                    string mesajSablonAlanUrl = @"<div style='display: flex;'><span style='width:120px;font-weight:bold;'>{ALAN}</span> : <a href='{ACIKLAMA}' target='_blank'> Görüntüle</a></div>";
+                    string mesajSablonAlanUrl = @"<div style='display: flex;'><span style='width:120px;font-weight:bold;'>{ALAN}</span> : <a href='{ACIKLAMA}' target='_blank'> GÃ¶rÃ¼ntÃ¼le</a></div>";
 
                     //string url = _httpContextAccessor.HttpContext.Request.Scheme + "://" + _httpContextAccessor.HttpContext.Request.Host;
                     string url = Arac.ConfigOku("Genel:YazilimURL");
@@ -614,30 +614,30 @@ namespace Risk.net.Services.Functions
 
                         if (kriter.Islem == EnumBildirimSistemiIslem.Yeni)
                         {
-                            konu = "Yeni Risk Kaydý";
+                            konu = "Yeni Risk KaydÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Risk kaydý yapýldý.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Risk kaydÄ± yapÄ±ldÄ±.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else
                         {
-                            konu = "Risk Onayý";
+                            konu = "Risk OnayÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk kaydý onay bekliyor.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk kaydÄ± onay bekliyor.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydiOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydiOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                     }
@@ -647,37 +647,37 @@ namespace Risk.net.Services.Functions
 
                         if (kriter.Islem == EnumBildirimSistemiIslem.Yeni)
                         {
-                            konu = "Yeni Risk Yönetimi Kaydý";
+                            konu = "Yeni Risk YÃ¶netimi KaydÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Risk Yönetimi kaydý yapýldý.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Risk YÃ¶netimi kaydÄ± yapÄ±ldÄ±.");
                             string alanlar = "";
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else if (kriter.Islem == EnumBildirimSistemiIslem.AzaltmaPlaniOlustur)
                         {
-                            konu = "Risk Azaltma Planý Oluþtur";
+                            konu = "Risk Azaltma PlanÄ± OluÅŸtur";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma Planý oluþturmak için Risk Azaltma Planý ekranýna gidiniz.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma PlanÄ± oluÅŸturmak iÃ§in Risk Azaltma PlanÄ± ekranÄ±na gidiniz.");
                             string alanlar = "";
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else if (kriter.Islem == EnumBildirimSistemiIslem.Uyari)
                         {
-                            //Azaltma Planý Bitiþ Tarihi Hatýrlatma E-posta (konfigürasyon ekranýnda) hem risk sahibine hem de azaltma planý sorumlusuna gönderilmeli.
+                            //Azaltma PlanÄ± BitiÅŸ Tarihi HatÄ±rlatma E-posta (konfigÃ¼rasyon ekranÄ±nda) hem risk sahibine hem de azaltma planÄ± sorumlusuna gÃ¶nderilmeli.
                             var sonucRiskSahibi = await _servicePersonel.KayitGetirAsync(kullanan, riskEvreni.RiskSahibiKod);
                             if (sonucRiskSahibi.IslemSonuc)
                             {
@@ -686,32 +686,32 @@ namespace Risk.net.Services.Functions
                                     mail += ";" + ePostaRiskSahibi;
                             }
 
-                            konu = "Risk Azaltma Planý Oluþturulmadý";
+                            konu = "Risk Azaltma PlanÄ± OluÅŸturulmadÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma Planý oluþturulmadý.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma PlanÄ± oluÅŸturulmadÄ±.");
                             string alanlar = "";
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else
                         {
-                            konu = "Risk Yönetimi Onayý";
+                            konu = "Risk YÃ¶netimi OnayÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk Yönetimi kaydý onay bekliyor.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk YÃ¶netimi kaydÄ± onay bekliyor.");
                             string alanlar = "";
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesiOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesiOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                     }
@@ -721,20 +721,20 @@ namespace Risk.net.Services.Functions
 
                         if (kriter.Islem == EnumBildirimSistemiIslem.Yeni)
                         {
-                            konu = "Yeni Risk Azaltma Planý Kaydý";
+                            konu = "Yeni Risk Azaltma PlanÄ± KaydÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Azaltma Planý kaydý yapýldý.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Yeni Azaltma PlanÄ± kaydÄ± yapÄ±ldÄ±.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
 
                         }
@@ -749,56 +749,56 @@ namespace Risk.net.Services.Functions
                                     mail = ePostaPersonel;
                             }
 
-                            konu = "Risk Azaltma Planýnýn Tarihi Yaklaþýyor";
+                            konu = "Risk Azaltma PlanÄ±nÄ±n Tarihi YaklaÅŸÄ±yor";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma Planýnýn tarihi yaklaþýyor.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma PlanÄ±nÄ±n tarihi yaklaÅŸÄ±yor.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else if (kriter.Islem == EnumBildirimSistemiIslem.SureGecti)
                         {
-                            konu = "Risk Azaltma Planýnýn Süresi Geçti";
+                            konu = "Risk Azaltma PlanÄ±nÄ±n SÃ¼resi GeÃ§ti";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Süresi geçen Risk Azaltma Planýný var.");
+                            mesaj = mesaj.Replace("{BASLIK}", "SÃ¼resi geÃ§en Risk Azaltma PlanÄ±nÄ± var.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else
                         {
-                            konu = "Risk Azaltma Planý Onayý";
+                            konu = "Risk Azaltma PlanÄ± OnayÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma Planý kaydý onay bekliyor.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Risk Azaltma PlanÄ± kaydÄ± onay bekliyor.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesiOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                     }
@@ -808,89 +808,89 @@ namespace Risk.net.Services.Functions
 
                         if (kriter.Islem == EnumBildirimSistemiIslem.Yeni)
                         {
-                            konu = "Yeni Olay Paroru Kaydý";
+                            konu = "Yeni Olay Raporu KaydÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Olay Raporu kaydý yapýldý.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Olay Raporu kaydÄ± yapÄ±ldÄ±.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", olayRaporlama.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", olayRaporlama.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", olayRaporlama.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", olayRaporlama.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(olayRaporlama.OlayTarihi));
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olayýn Kategorisi").Replace("{ACIKLAMA}", olayRaporlama.OlayKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay Tanýmý").Replace("{ACIKLAMA}", olayRaporlama.OlayTanimi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Tutarý").Replace("{ACIKLAMA}", olayRaporlama.Tutari.ToString("#.###,00"));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/OlayRaporlamaOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "OlayÄ±n Kategorisi").Replace("{ACIKLAMA}", olayRaporlama.OlayKategoriAdlari);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay TanÄ±mÄ±").Replace("{ACIKLAMA}", olayRaporlama.OlayTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "TutarÄ±").Replace("{ACIKLAMA}", olayRaporlama.Tutari.ToString("#.###,00"));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/OlayRaporlamaOnay");
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                         else
                         {
-                            konu = "Olay Paroru Onayý";
+                            konu = "Olay Raporu OnayÄ±";
 
                             mesaj = mesajSablon;
-                            mesaj = mesaj.Replace("{BASLIK}", "Olay Raporu kaydý onay bekliyor.");
+                            mesaj = mesaj.Replace("{BASLIK}", "Olay Raporu kaydÄ± onay bekliyor.");
                             string alanlar = "";
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", olayRaporlama.Koordinatorluk.Adi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", olayRaporlama.Birim.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", olayRaporlama.Koordinatorluk.Adi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", olayRaporlama.Birim.Adi);
                             alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(olayRaporlama.OlayTarihi));
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olayýn Kategorisi").Replace("{ACIKLAMA}", olayRaporlama.OlayKategoriAdlari);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay Tanýmý").Replace("{ACIKLAMA}", olayRaporlama.OlayTanimi);
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Tutarý").Replace("{ACIKLAMA}", olayRaporlama.Tutari.ToString("#.###,00"));
-                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/OlayRaporlamaOnay");
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "OlayÄ±n Kategorisi").Replace("{ACIKLAMA}", olayRaporlama.OlayKategoriAdlari);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Olay TanÄ±mÄ±").Replace("{ACIKLAMA}", olayRaporlama.OlayTanimi);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "TutarÄ±").Replace("{ACIKLAMA}", olayRaporlama.Tutari.ToString("#.###,00"));
+                            alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/OlayRaporlamaOnay");
 
                             mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                         }
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.IcKontrolZayifliklariRaporunuHatirlat)
                     {
-                        konu = "Hatýrlatma";
+                        konu = "HatÄ±rlatma";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Ýç Kontrol Zayýflýklarý Raporunu UYG'ye bildiriniz.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Ä°Ã§ Kontrol ZayÄ±flÄ±klarÄ± Raporunu UYG'ye bildiriniz.");
                         string alanlar = "";
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskVeAzaltmaPlaniListesiniHatirlat)
                     {
-                        konu = "Hatýrlatma";
+                        konu = "HatÄ±rlatma";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Onaylanmýþ tüm riskler ve ilgili azaltma planlarýnýn listesini UYG'ye bildiriniz.");
+                        mesaj = mesaj.Replace("{BASLIK}", "OnaylanmÄ±ÅŸ tÃ¼m riskler ve ilgili azaltma planlarÄ±nÄ±n listesini UYG'ye bildiriniz.");
                         string alanlar = "";
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.YuksekVeOrtaRiskleriHatirlat)
                     {
-                        konu = "Hatýrlatma";
+                        konu = "HatÄ±rlatma";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Yüksek ve orta seviyedeki aktif riskleri ve azaltma planlarýný merkez ve il koordinatörlüklerine bildiriniz.");
+                        mesaj = mesaj.Replace("{BASLIK}", "YÃ¼ksek ve orta seviyedeki aktif riskleri ve azaltma planlarÄ±nÄ± merkez ve il koordinatÃ¶rlÃ¼klerine bildiriniz.");
                         string alanlar = "";
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskYonetimiProsedurunuHatirlat)
                     {
-                        konu = "Hatýrlatma";
+                        konu = "HatÄ±rlatma";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk Yönetimi Prosedürünü gözden geçiriniz.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk YÃ¶netimi ProsedÃ¼rÃ¼nÃ¼ gÃ¶zden geÃ§iriniz.");
                         string alanlar = "";
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskDegerlendirmeyiHatirlat)
                     {
-                        konu = "Hatýrlatma";
+                        konu = "HatÄ±rlatma";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk deðerlendirmesini gözden geçiriniz.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk deÄŸerlendirmesini gÃ¶zden geÃ§iriniz.");
                         string alanlar = "";
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskYonetimiBeyannameImza)
                     {
-                        konu = "Yýllýk Risk Yönetimi Taahhütnamesi Ýmzala";
+                        konu = "YÄ±llÄ±k Risk YÃ¶netimi TaahhÃ¼tnamesi Ä°mzala";
 
                         mesaj = mesajSablon = @"<div style='padding:0 0 10px 0;'>
-                                                Kurumumuz Risk Yönetimi Prosedürü gereði risk yönetimi uygulamalarýnýn yýl boyunca biriminizde uygun þekilde yürürlükte olduðunu ve uygulandýðýný beyan etmeniz amacýyla hazýrlanan ?{YIL} yýlý Risk Yönetimi Taahhütnamesi? <a href='{URL}' target='_blank'>{URL}</a> adresinde onaylarýnýza sunulmaktadýr. 
+                                                Kurumumuz Risk YÃ¶netimi ProsedÃ¼rÃ¼ gereÄŸi risk yÃ¶netimi uygulamalarÄ±nÄ±n yÄ±l boyunca biriminizde uygun ÅŸekilde yÃ¼rÃ¼rlÃ¼kte olduÄŸunu ve uygulandÄ±ÄŸÄ±nÄ± beyan etmeniz amacÄ±yla hazÄ±rlanan ?{YIL} yÄ±lÄ± Risk YÃ¶netimi TaahhÃ¼tnamesi? <a href='{URL}' target='_blank'>{URL}</a> adresinde onaylarÄ±nÄ±za sunulmaktadÄ±r. 
                                                 </div>
                                               ";
                         mesaj = mesaj.Replace("{YIL}", DateTime.Now.AddYears(-1).Year.ToString());
@@ -898,10 +898,10 @@ namespace Risk.net.Services.Functions
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskYonetimiBeyannameImzaHatirlat)
                     {
-                        konu = "Yýllýk Risk Yönetimi Taahhütnamesi Hatýrlatma";
+                        konu = "YÄ±llÄ±k Risk YÃ¶netimi TaahhÃ¼tnamesi HatÄ±rlatma";
 
                         mesaj = mesajSablon = @"<div style='padding:0 0 10px 0;'>
-                                                Kurumumuz Risk Yönetimi Prosedürü gereði risk yönetimi uygulamalarýnýn yýl boyunca biriminizde uygun þekilde yürürlükte olduðunu ve uygulandýðýný beyan etmeniz amacýyla hazýrlanan ?{YIL} yýlý Risk Yönetimi Taahhütnamesi? <a href='{URL}' target='_blank'>{URL}</a> adresinde onaylarýnýza sunulmaktadýr. 
+                                                Kurumumuz Risk YÃ¶netimi ProsedÃ¼rÃ¼ gereÄŸi risk yÃ¶netimi uygulamalarÄ±nÄ±n yÄ±l boyunca biriminizde uygun ÅŸekilde yÃ¼rÃ¼rlÃ¼kte olduÄŸunu ve uygulandÄ±ÄŸÄ±nÄ± beyan etmeniz amacÄ±yla hazÄ±rlanan ?{YIL} yÄ±lÄ± Risk YÃ¶netimi TaahhÃ¼tnamesi? <a href='{URL}' target='_blank'>{URL}</a> adresinde onaylarÄ±nÄ±za sunulmaktadÄ±r. 
                                                 </div>
                                               ";
                         mesaj = mesaj.Replace("{YIL}", DateTime.Now.AddYears(-1).Year.ToString());
@@ -911,47 +911,47 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == kriter.BelgeKod, "Koordinatorluk,Birim");
 
-                        konu = "Risk Kaydý Pasif Yapýldý";
+                        konu = "Risk KaydÄ± Pasif YapÄ±ldÄ±";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydý pasif yapýldý.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydÄ± pasif yapÄ±ldÄ±.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskEvreniRiskSahibiDegisti)
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == kriter.BelgeKod, "Koordinatorluk,Birim");
 
-                        konu = "Risk Sahibi Deðiþti";
+                        konu = "Risk Sahibi DeÄŸiÅŸti";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk sahibi deðiþti.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk sahibi deÄŸiÅŸti.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
                     else if (kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskEvreniOnaydaDegisiklik)
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == kriter.BelgeKod, "Koordinatorluk,Birim");
 
-                        konu = "Risk Kaydý Onay Ýþleminde Deðiþiklik Yapýldý";
+                        konu = "Risk KaydÄ± Onay Ä°ÅŸleminde DeÄŸiÅŸiklik YapÄ±ldÄ±";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydý onay iþleminde bazý alanlarda deðiþiklik yapýldý.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydÄ± onay iÅŸleminde bazÄ± alanlarda deÄŸiÅŸiklik yapÄ±ldÄ±.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
 
                         var degisenDeger = "";
                         var ilgiliTarihce = await _serviceTarihce.ListeleAsync(riskEvreni.Kod);
@@ -965,7 +965,7 @@ namespace Risk.net.Services.Functions
                         }
 
                         if (!string.IsNullOrWhiteSpace(degisenDeger))
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Deðiþen Deðerler").Replace("{ACIKLAMA}", degisenDeger);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "DeÄŸiÅŸen DeÄŸerler").Replace("{ACIKLAMA}", degisenDeger);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -973,17 +973,17 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.Kod == kriter.BelgeKod, "Surec,AltSurec,Amac,Hedef,AnahtarRiskGostergesi,AnahtarRiskGostergesi.Donemler,RiskKategoriler.RiskKategori,RiskYonetimi,RiskYonetimi.Kontroller");
 
-                        konu = "Risklerin Deðerlendirilmesi Onay Ýþleminde Deðiþiklik Yapýldý";
+                        konu = "Risklerin DeÄŸerlendirilmesi Onay Ä°ÅŸleminde DeÄŸiÅŸiklik YapÄ±ldÄ±";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk deðerlendirilmesi onay iþleminde bazý alanlarda deðiþiklik yapýldý.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk deÄŸerlendirilmesi onay iÅŸleminde bazÄ± alanlarda deÄŸiÅŸiklik yapÄ±ldÄ±.");
                         string alanlar = "";
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
 
                         var degisenDeger = "";
                         var ilgiliTarihce = await _serviceTarihce.ListeleAsync(kriter.BelgeKod);
@@ -997,7 +997,7 @@ namespace Risk.net.Services.Functions
                         }
 
                         if (!string.IsNullOrWhiteSpace(degisenDeger))
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Deðiþen Deðerler").Replace("{ACIKLAMA}", degisenDeger);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "DeÄŸiÅŸen DeÄŸerler").Replace("{ACIKLAMA}", degisenDeger);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -1005,20 +1005,20 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.RiskAzaltmaPlani.Kod == kriter.BelgeKod, "Koordinatorluk, Birim, RiskKategoriler.RiskKategori,RiskYonetimi, RiskYonetimi.Kontroller, RiskYonetimi.RiskAzaltmaPlani, RiskYonetimi.RiskAzaltmaPlani.Riskler, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler, RiskYonetimi.RiskAzaltmaPlani.IliskiliPlanlar, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler.Koordinatorluk, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler.Birim");
 
-                        konu = "Risklerin Yönetilmesi Onay Ýþleminde Deðiþiklik Yapýldý";
+                        konu = "Risklerin YÃ¶netilmesi Onay Ä°ÅŸleminde DeÄŸiÅŸiklik YapÄ±ldÄ±";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk yönetilmesi onay iþleminde bazý alanlarda deðiþiklik yapýldý.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk yÃ¶netilmesi onay iÅŸleminde bazÄ± alanlarda deÄŸiÅŸiklik yapÄ±ldÄ±.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
 
                         var degisenDeger = "";
                         var ilgiliTarihce = await _serviceTarihce.ListeleAsync(kriter.BelgeKod);
@@ -1032,7 +1032,7 @@ namespace Risk.net.Services.Functions
                         }
 
                         if (!string.IsNullOrWhiteSpace(degisenDeger))
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Deðiþen Deðerler").Replace("{ACIKLAMA}", degisenDeger);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "DeÄŸiÅŸen DeÄŸerler").Replace("{ACIKLAMA}", degisenDeger);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -1040,17 +1040,17 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == kriter.BelgeKod, "Koordinatorluk,Birim");
 
-                        konu = "Risk Kaydý Durumu Deðiþti";
+                        konu = "Risk KaydÄ± Durumu DeÄŸiÅŸti";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydý durumu deðiþti.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydÄ± durumu deÄŸiÅŸti.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Durum Bilgisi").Replace("{ACIKLAMA}", kriter.Aciklama);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -1058,18 +1058,18 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.Kod == kriter.BelgeKod, "Surec,AltSurec,Amac,Hedef,AnahtarRiskGostergesi,AnahtarRiskGostergesi.Donemler,RiskKategoriler.RiskKategori,RiskYonetimi,RiskYonetimi.Kontroller");
 
-                        konu = "Risklerin Deðerlendirilmesi Durumu Deðiþti";
+                        konu = "Risklerin DeÄŸerlendirilmesi Durumu DeÄŸiÅŸti";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk deðerlendirilmesi durumu deðiþti.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk deÄŸerlendirilmesi durumu deÄŸiÅŸti.");
                         string alanlar = "";
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Yapýsal Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Artýk Risk Puaný").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "YapÄ±sal Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.YapisalRiskPuani.ToString());
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "ArtÄ±k Risk PuanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.ArtikRiskPuani.ToString());
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Durum Bilgisi").Replace("{ACIKLAMA}", kriter.Aciklama);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod);
 
                         var degisenDeger = "";
                         var ilgiliTarihce = await _serviceTarihce.ListeleAsync(kriter.BelgeKod);
@@ -1083,7 +1083,7 @@ namespace Risk.net.Services.Functions
                         }
 
                         if (!string.IsNullOrWhiteSpace(degisenDeger))
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Deðiþen Deðerler").Replace("{ACIKLAMA}", degisenDeger);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "DeÄŸiÅŸen DeÄŸerler").Replace("{ACIKLAMA}", degisenDeger);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -1091,21 +1091,21 @@ namespace Risk.net.Services.Functions
                     {
                         var riskEvreni = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.RiskAzaltmaPlani.Kod == kriter.BelgeKod, "Koordinatorluk, Birim, RiskKategoriler.RiskKategori,RiskYonetimi, RiskYonetimi.Kontroller, RiskYonetimi.RiskAzaltmaPlani, RiskYonetimi.RiskAzaltmaPlani.Riskler, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler, RiskYonetimi.RiskAzaltmaPlani.IliskiliPlanlar, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler.Koordinatorluk, RiskYonetimi.RiskAzaltmaPlani.IsbirligiBirimler.Birim");
 
-                        konu = "Risklerin Yönetilmesi Durumu Deðiþti";
+                        konu = "Risklerin YÃ¶netilmesi Durumu DeÄŸiÅŸti";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk yönetilmesi durumu deðiþti.");
+                        mesaj = mesaj.Replace("{BASLIK}", "Risk yÃ¶netilmesi durumu deÄŸiÅŸti.");
                         string alanlar = "";
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "KoordinatÃ¼rlÃ¼k").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ãœnite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin KÃ¶k Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk Kategorisi").Replace("{ACIKLAMA}", riskEvreni.RiskKategoriAdlari);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma Planý").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
-                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Bitiþ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ± No").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "Azaltma PlanÄ±").Replace("{ACIKLAMA}", riskEvreni.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani);
+                        alanlar += mesajSablonAlan.Replace("{ALAN}", "BitiÅŸ Tarihi").Replace("{ACIKLAMA}", Arac.DateTimeToDDMMYYYY(riskEvreni.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi));
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Durum Bilgisi").Replace("{ACIKLAMA}", kriter.Aciklama);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Eriþim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "EriÅŸim Adresi").Replace("{ACIKLAMA}", url + "/RisklerinYonetilmesi?r=" + riskEvreni.Kod);
 
                         var degisenDeger = "";
                         var ilgiliTarihce = await _serviceTarihce.ListeleAsync(kriter.BelgeKod);
@@ -1119,7 +1119,7 @@ namespace Risk.net.Services.Functions
                         }
 
                         if (!string.IsNullOrWhiteSpace(degisenDeger))
-                            alanlar += mesajSablonAlan.Replace("{ALAN}", "Deðiþen Deðerler").Replace("{ACIKLAMA}", degisenDeger);
+                            alanlar += mesajSablonAlan.Replace("{ALAN}", "DeÄŸiÅŸen DeÄŸerler").Replace("{ACIKLAMA}", degisenDeger);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }
@@ -1141,7 +1141,7 @@ namespace Risk.net.Services.Functions
             }
             catch (System.Exception ex)
             {
-                Arac.HataStrYaz("E-Posta gönderilirken hata oluþtu:" + ex.Message);
+                Arac.HataStrYaz("E-Posta gÃ¶nderilirken hata oluÅŸtu:" + ex.Message);
 
                 return new Sonuc(ENUMIslemDurum.Hata, "<small><li>" + ex.Message + "</li><li>" + ex.InnerException + "</li></small>");
             }
@@ -1149,12 +1149,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydý silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, BildirimSistemi kriter)
         {

@@ -22,25 +22,25 @@ using System.Collections.Generic;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Dosya iþlemlerinin yapýldýðý sayfa
+    /// Dosya iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class DosyaController : GenelController
     {
         /// <summary>
-        /// IDosyaService servisine ulaþmak için kullanýlan deðiþken
+        /// IDosyaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDosyaService _service;
         /// <summary>
-        /// IViewPersonelService servisine ulaþmak için kullanýlan deðiþken
+        /// IViewPersonelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewPersonelService _serviceViewPersonel;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.DosyaController" /> 'ýn yeni bir örneðini baþlatan sýnýf
+        /// <see cref="Risk.net.WebUI.Controllers.DosyaController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceViewPersonel"></param>
@@ -57,7 +57,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydýn dosyasýnýn indirme iþlemini saðlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n dosyasÄ±nÄ±n indirme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -68,10 +68,10 @@ namespace Risk.net.WebUI.Controllers
         {
             try
             {
-                //Ýstenen dosyayý oku
+                //Ä°stenen dosyayÄ± oku
                 Dosya dosya = await _service.IndirAsync(_kullanan, kod, "");
 
-                //Gönderilecek dosyayý geçici dosyaya yaz
+                //GÃ¶nderilecek dosyayÄ± geÃ§ici dosyaya yaz
                 string geciciDosya = Arac.DosyaAdUret();
                 await System.IO.File.WriteAllBytesAsync(geciciDosya, dosya.Icerik);
 
@@ -79,14 +79,14 @@ namespace Risk.net.WebUI.Controllers
             }
             catch (Exception e)
             {
-                Arac.HataStrYaz("Dosya indiriliken hata oluþtu:" + e.Message + "\nDosya parametresi:" + kod);
+                Arac.HataStrYaz("Dosya indiriliken hata oluÅŸtu:" + e.Message + "\nDosya parametresi:" + kod);
             }
 
             return NoContent();
         }
 
         /// <summary>
-        /// Listeden seçilen kaydýn dosyasýnýn indirme iþlemini saðlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n dosyasÄ±nÄ±n indirme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="baglantiKod"></param>
         /// <returns>
@@ -97,10 +97,10 @@ namespace Risk.net.WebUI.Controllers
         {
             try
             {
-                //Ýstenen dosyayý oku
+                //Ä°stenen dosyayÄ± oku
                 Dosya dosya = await _service.IndirAsync(_kullanan, "", baglantiKod);
 
-                //Gönderilecek dosyayý geçici dosyaya yaz
+                //GÃ¶nderilecek dosyayÄ± geÃ§ici dosyaya yaz
                 string geciciDosya = Arac.DosyaAdUret();
                 await System.IO.File.WriteAllBytesAsync(geciciDosya, dosya.Icerik);
 
@@ -108,14 +108,14 @@ namespace Risk.net.WebUI.Controllers
             }
             catch (Exception e)
             {
-                Arac.HataStrYaz("Dosya indiriliken hata oluþtu:" + e.Message + "\nDosya parametresi:" + baglantiKod);
+                Arac.HataStrYaz("Dosya indiriliken hata oluÅŸtu:" + e.Message + "\nDosya parametresi:" + baglantiKod);
             }
 
             return NoContent();
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterler ile ilgili kayýdýn resim bilgisinin sunucudan getirilmesini saðlayan metod
+        /// KullanÄ±cÄ±dan gelen kriterler ile ilgili kayÄ±dÄ±n resim bilgisinin sunucudan getirilmesini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -132,7 +132,7 @@ namespace Risk.net.WebUI.Controllers
                 try
                 {
                     //Arac.HataStrYaz("Resim indiriliyor");
-                    //Arac.HataStrYaz("boþ resim:" + bosResimAdresi);
+                    //Arac.HataStrYaz("boÅŸ resim:" + bosResimAdresi);
 
                     Sonuc dosya = await _serviceViewPersonel.ResimGetirAsync(kod);
 
@@ -141,7 +141,7 @@ namespace Risk.net.WebUI.Controllers
                     {
                         Arac.HataStrYaz("resim null");
                         resim = System.IO.File.ReadAllBytes(bosResimAdresi);
-                        Arac.HataStrYaz("boþ resim okundu" + resim.Length);
+                        Arac.HataStrYaz("boÅŸ resim okundu" + resim.Length);
                     }
 
                     return File(resim, "image/jpg");
@@ -155,7 +155,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterler ile ilgili kayýdýn dosyasýnýn varlýðýný sorgulayan metod
+        /// KullanÄ±cÄ±dan gelen kriterler ile ilgili kayÄ±dÄ±n dosyasÄ±nÄ±n varlÄ±ÄŸÄ±nÄ± sorgulayan metod
         /// </summary>
         /// <param name="baglantiKod"></param>
         /// <returns>
@@ -170,7 +170,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterler ile ilgili kayýdýn dosyasýnýn varlýðýný sorgulayan metod
+        /// KullanÄ±cÄ±dan gelen kriterler ile ilgili kayÄ±dÄ±n dosyasÄ±nÄ±n varlÄ±ÄŸÄ±nÄ± sorgulayan metod
         /// </summary>
         /// <param name="baglantiKod"></param>
         /// <returns>
@@ -185,7 +185,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        ///Kullanýcýdan gelen bilgilerinin ilgili servise kayýt edilmesi için gönderen metod
+        ///KullanÄ±cÄ±dan gelen bilgilerinin ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <returns>
         /// Ok(sunucudan gelen Sonuc tipinde nesne)
@@ -199,7 +199,7 @@ namespace Risk.net.WebUI.Controllers
             string baglantiKod = Request.Form["BaglantiKod"];
             if (string.IsNullOrEmpty(baglantiKod))
             {
-                sonuc = new Sonuc(ENUMIslemDurum.Uyari, "Kayýt edilecek dosya yok", null);
+                sonuc = new Sonuc(ENUMIslemDurum.Uyari, "KayÄ±t edilecek dosya yok", null);
                 return Ok(sonuc);
             }
 
@@ -254,14 +254,14 @@ namespace Risk.net.WebUI.Controllers
             }
             else
             {
-                sonuc = new Sonuc(ENUMIslemDurum.Uyari, "Kayýt edilecek dosya yok", null);
+                sonuc = new Sonuc(ENUMIslemDurum.Uyari, "KayÄ±t edilecek dosya yok", null);
             }
 
             return Ok(sonuc);
         }
 
         /// <summary>
-        /// Listeden seçilen kaydýn silinmesini saðlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silinmesini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -277,7 +277,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen eski ve yeni bilgileri ilgili servise kayýt edilmesi için gönderen metod
+        /// KullanÄ±cÄ±dan gelen eski ve yeni bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="eskiKod"></param>
         /// <param name="yeniKod"></param>
@@ -294,7 +294,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen açýklama bilgisini servise kayýt edilmesi için gönderen metod
+        /// KullanÄ±cÄ±dan gelen aÃ§Ä±klama bilgisini servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

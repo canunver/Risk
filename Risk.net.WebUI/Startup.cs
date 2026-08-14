@@ -71,7 +71,7 @@ namespace Risk.net.WebUI
 
             services.AddAuthentication(IISDefaults.AuthenticationScheme);
             
-            //Yardim gösterilen ekranýnda Html.Raw çalýþtýrýlmasý için
+            //Yardim gÃ¶sterilen ekranÄ±nda Html.Raw Ã§alÄ±ÅŸtÄ±rÄ±lmasÄ± iÃ§in
             services.Configure<IISServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
@@ -87,7 +87,7 @@ namespace Risk.net.WebUI
                 o.MultipartHeadersLengthLimit = int.MaxValue;
             });
 
-            //Theme ayarlarý
+            //Theme ayarlarÄ±
             services.Configure<SmartSettings>(Arac.ConfigSectionOku("SmartSettings"));
 
             // Note: This line is for demonstration purposes only, I would not recommend using this as a shorthand approach for accessing settings
@@ -160,7 +160,7 @@ namespace Risk.net.WebUI
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Risk.net.WebApi", Version = "v1" });
             //});
 
-            //Controller construstordan User bilgisini almak için
+            //Controller construstordan User bilgisini almak iÃ§in
             services.AddHttpContextAccessor();
 
             //Servisler

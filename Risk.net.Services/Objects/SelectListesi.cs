@@ -1,7 +1,7 @@
 namespace Risk.net.Services.Objects
 {
     /// <summary>
-    /// Entity verilerinin istemci katmanında kullanılan seçme kutularına göndermek için kullanılan değişken
+    /// Entity verilerinin istemci katmanÄ±nda kullanÄ±lan seÃ§me kutularÄ±na gÃ¶ndermek iÃ§in kullanÄ±lan deÄŸiÅŸken
     /// </summary>
     public class SelectListesi
     {

@@ -1,7 +1,7 @@
 namespace Risk.net.Services
 {
     /// <summary>
-    /// Yazılım içinden kaynak dosyasına ulaşımı sağlayan sınıf
+    /// YazÄ±lÄ±m iÃ§inden kaynak dosyasÄ±na ulaÅŸÄ±mÄ± saÄŸlayan sÄ±nÄ±f
     /// </summary>
     public class CustomResource
     {

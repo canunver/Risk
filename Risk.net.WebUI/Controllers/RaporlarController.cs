@@ -24,32 +24,32 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Rapor iþlemlerinin yapýldýðý sayfa
+    /// Rapor iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class RaporlarController : GenelController
     {
         /// <summary>
-        /// IRaporlamaService servisine ulaþmak için kullanýlan deðiþken
+        /// IRaporlamaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRaporlamaService _service;
 
         /// <summary>
-        /// ITanimGenelService servisine ulaþmak için kullanýlan deðiþken
+        /// ITanimGenelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITanimGenelService _serviceTanimGenel;
 
         /// <summary>
-        /// ITanimIlIrtibatOfisiService servisine ulaþmak için kullanýlan deðiþken
+        /// ITanimIlIrtibatOfisiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITanimIlIrtibatOfisiService _serviceIlIrtibatOfisi;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RaporlarController" /> 'ýn yeni bir örneðini baþlatan sýnýf
+        /// <see cref="Risk.net.WebUI.Controllers.RaporlarController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -67,7 +67,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Raporlama View sayfasý açýldýðýnda çalýþan metod
+        /// Raporlama View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -78,10 +78,10 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Rapor isimlerinin getirilmesini saðlayan metod
+        /// Rapor isimlerinin getirilmesini saÄŸlayan metod
         /// </summary>
         /// <returns>
-        /// List<object> tipinde deðer döndürür
+        /// List<object> tipinde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public List<object> RaporListe()
         {
@@ -90,20 +90,20 @@ namespace Risk.net.WebUI.Controllers
             //if (Arac.YetkisiVarmi("BASKAN", _kullanan))
             //else if (Arac.YetkisiVarmi("GENELKOORDINATOR,MERKEZKOORDINATOR,ILKOORDINATOR,ICDENETIMKOORDINATOR", _kullanan))
             //else if (Arac.YetkisiVarmi("RISKSEKRETARYASI,YETKILIRISKGOREVLISI,PLANLAMAUNITESI", _kullanan))
-            raporlar.Add(new { kod = "RPT001", adi = "" + _sharedResource["Raporlar.RPT001"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,GENELKOORDINATOR,BASKAN" });    //Üst Yönetim Risk Raporu
-            raporlar.Add(new { kod = "RPT002", adi = "" + _sharedResource["Raporlar.RPT002"] + "", Yetki = "MERKEZKOORDINATOR,ILKOORDINATOR,ICDENETIMKOORDINATOR,BIRIMAMIRI" });  //Koordinatörler Risk Raporu
-            raporlar.Add(new { kod = "RPT003", adi = "" + _sharedResource["Raporlar.RPT003"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" });    //"Risk Sekretaryasý Risk Raporu"
+            raporlar.Add(new { kod = "RPT001", adi = "" + _sharedResource["Raporlar.RPT001"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,GENELKOORDINATOR,BASKAN" });    //Ãœst YÃ¶netim Risk Raporu
+            raporlar.Add(new { kod = "RPT002", adi = "" + _sharedResource["Raporlar.RPT002"] + "", Yetki = "MERKEZKOORDINATOR,ILKOORDINATOR,ICDENETIMKOORDINATOR,BIRIMAMIRI" });  //KoordinatÃ¶rler Risk Raporu
+            raporlar.Add(new { kod = "RPT003", adi = "" + _sharedResource["Raporlar.RPT003"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" });    //"Risk SekretaryasÄ± Risk Raporu"
             raporlar.Add(new { kod = "RPT004", adi = "" + _sharedResource["Raporlar.RPT004"] + "", Yetki = "*" });    //"Risk Sahipleri Risk Raporu"
             raporlar.Add(new { kod = "RPT005", adi = "" + _sharedResource["Raporlar.RPT005"] + "", Yetki = "*" });    //"Trend Raporu"
-            raporlar.Add(new { kod = "RPT006", adi = "" + _sharedResource["Raporlar.RPT006"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"Ýç Kontrol Zayýflýklarý Raporu"
-            raporlar.Add(new { kod = "RPT007", adi = "" + _sharedResource["Raporlar.RPT007"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"Yýllýk Risk Planý (Özet Risk Kütüðü)"
-            raporlar.Add(new { kod = "RPT008", adi = "" + _sharedResource["Raporlar.RPT008"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"Yarý Yýl Risk Azaltma Planý"
-            raporlar.Add(new { kod = "RPT009", adi = "" + _sharedResource["Raporlar.RPT009"] + "", Yetki = "GENELKOORDINATOR,BASKAN" });  //"Üst Yönetim Stratejik Planlama Raporu"
-            raporlar.Add(new { kod = "RPT010", adi = "" + _sharedResource["Raporlar.RPT010"] + "", Yetki = "MERKEZKOORDINATOR,ILKOORDINATOR" }); //"Koordinatörler Stratejik Planlama Raporu"
-            raporlar.Add(new { kod = "RPT011", adi = "" + _sharedResource["Raporlar.RPT011"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,ICDENETIMKOORDINATOR,ICDENETIMUZMANI" }); //"Süreç/Alt Süreç Raporu"
-            raporlar.Add(new { kod = "RPT013", adi = "" + _sharedResource["Raporlar.RPT013"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,ICDENETIMKOORDINATOR,ICDENETIMUZMANI" }); //"Anahtar Risk Göstergesi Raporu"
+            raporlar.Add(new { kod = "RPT006", adi = "" + _sharedResource["Raporlar.RPT006"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"Ä°Ã§ Kontrol ZayÄ±flÄ±klarÄ± Raporu"
+            raporlar.Add(new { kod = "RPT007", adi = "" + _sharedResource["Raporlar.RPT007"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"YÄ±llÄ±k Risk PlanÄ± (Ã–zet Risk KÃ¼tÃ¼ÄŸÃ¼)"
+            raporlar.Add(new { kod = "RPT008", adi = "" + _sharedResource["Raporlar.RPT008"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" }); //"YarÄ± YÄ±l Risk Azaltma PlanÄ±"
+            raporlar.Add(new { kod = "RPT009", adi = "" + _sharedResource["Raporlar.RPT009"] + "", Yetki = "GENELKOORDINATOR,BASKAN" });  //"Ãœst YÃ¶netim Stratejik Planlama Raporu"
+            raporlar.Add(new { kod = "RPT010", adi = "" + _sharedResource["Raporlar.RPT010"] + "", Yetki = "MERKEZKOORDINATOR,ILKOORDINATOR" }); //"KoordinatÃ¶rler Stratejik Planlama Raporu"
+            raporlar.Add(new { kod = "RPT011", adi = "" + _sharedResource["Raporlar.RPT011"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,ICDENETIMKOORDINATOR,ICDENETIMUZMANI" }); //"SÃ¼reÃ§/Alt SÃ¼reÃ§ Raporu"
+            raporlar.Add(new { kod = "RPT013", adi = "" + _sharedResource["Raporlar.RPT013"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,ICDENETIMKOORDINATOR,ICDENETIMUZMANI" }); //"Anahtar Risk GÃ¶stergesi Raporu"
             raporlar.Add(new { kod = "RPT014", adi = "" + _sharedResource["Raporlar.RPT014"] + "", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI,ICDENETIMKOORDINATOR,ICDENETIMUZMANI" }); //"Olay Raporu"
-            //raporlar.Add(new { kod = "RPT015", adi = "Yýllýk Risk Yönetimi Beyannamesi", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" });
+            //raporlar.Add(new { kod = "RPT015", adi = "YÄ±llÄ±k Risk YÃ¶netimi Beyannamesi", Yetki = "RISKSEKRETARYASI,YETKILIRISKGOREVLISI" });
 
 
             List<object> gorulecekRaporlar = new List<object>();
@@ -119,7 +119,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Donem seçim kutularýnýn doldurulmasý için çaðrýlan metod
+        /// Ekranlardaki Donem seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns>
         /// Ok(Sonuc tipinde sunucudan gelen bilgi)
@@ -136,7 +136,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Ýl Ýrtibat Ofislerinin seçim kutularýnýn doldurulmasý için çaðrýlan metod
+        /// Ekranlardaki Ä°l Ä°rtibat Ofislerinin seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns>
         /// Ok(Sonuc tipinde sunucudan gelen bilgi)
@@ -146,7 +146,7 @@ namespace Risk.net.WebUI.Controllers
         {
             List<SelectListesi> donenDeger = new List<SelectListesi>();
 
-            donenDeger.Add(new SelectListesi { id = "-1", text = "Tümü" });
+            donenDeger.Add(new SelectListesi { id = "-1", text = "TÃ¼mÃ¼" });
 
             var sonuc = await _serviceIlIrtibatOfisi.ListeleAsync(_kullanan, (int)ENUMDurum.Onayli);
             foreach (TanimIlIrtibatOfisi item in sonuc.Liste)
@@ -164,7 +164,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen raporu ilgili servis aracýlýðýyla getiren metod
+        /// Listeden seÃ§ilen raporu ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -217,7 +217,7 @@ namespace Risk.net.WebUI.Controllers
             }
             catch (Exception e)
             {
-                Arac.HataStrYaz("Rapor oluþturulurken hata meydana geldi:" + e.Message + "\nRapor parametresi:" + form);
+                Arac.HataStrYaz("Rapor oluÅŸturulurken hata meydana geldi:" + e.Message + "\nRapor parametresi:" + form);
                 return NoContent();
             }
 
@@ -250,7 +250,7 @@ namespace Risk.net.WebUI.Controllers
         //}
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -284,9 +284,9 @@ namespace Risk.net.WebUI.Controllers
             {
                 XLS.HucreKopyala(kaynakSatir, 0, kaynakSatir, 35, satir, 0);
 
-                string artikRiskSeviyesi = "Yüksek";
+                string artikRiskSeviyesi = "YÃ¼ksek";
                 if (item.ArtikRiskSeviyesi == 5)
-                    artikRiskSeviyesi = "Çok Yüksek";
+                    artikRiskSeviyesi = "Ã‡ok YÃ¼ksek";
 
                 var sira = 0;
 
@@ -319,7 +319,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -390,7 +390,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -471,7 +471,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -550,7 +550,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -616,7 +616,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -679,7 +679,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -736,7 +736,7 @@ namespace Risk.net.WebUI.Controllers
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.MevcutDurum"]);
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.ErtelenmisDegistirilmisZamanPlani"]);
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.ZamanPlanindakiDegisiklikNedeni"]);
-            XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.AlzatmaPlaniDetaylarý"]);
+            XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.AlzatmaPlaniDetaylarÄ±"]);
 
             int siraNo = 1;
             foreach (RaporYillikRiskPlani item in sonuc.Liste)
@@ -825,7 +825,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -878,7 +878,7 @@ namespace Risk.net.WebUI.Controllers
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.MevcutDurum"]);
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.ErtelenmisDegistirilmisZamanPlani"]);
             XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.ZamanPlanindakiDegisiklikNedeni"]);
-            XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.AlzatmaPlaniDetaylarý"]);
+            XLS.HucreDegerYaz(satir - 1, sayac++, _sharedResource["RaporSablon.YariYilRiskAzaltmaPlani.AlzatmaPlaniDetaylarÄ±"]);
 
 
             int siraNo = 1;
@@ -953,7 +953,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1000,10 +1000,10 @@ namespace Risk.net.WebUI.Controllers
                 {
                     izlemeDonemiSutun += 3;
                     XLS.HucreBirlestir(izlemeDonemiSatir, izlemeDonemiSutun, izlemeDonemiSatir, izlemeDonemiSutun + 2);
-                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ýzleme Dönemi");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Planlanan Deðer");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "Gerçekleþen Deðer 1");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 2, "Gerçekleþen Deðer 2");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ä°zleme DÃ¶nemi");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Planlanan DeÄŸer");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "GerÃ§ekleÅŸen DeÄŸer 1");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 2, "GerÃ§ekleÅŸen DeÄŸer 2");
                 }
             }
 
@@ -1061,7 +1061,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1109,9 +1109,9 @@ namespace Risk.net.WebUI.Controllers
                 {
                     izlemeDonemiSutun += 2;
                     XLS.HucreBirlestir(izlemeDonemiSatir, izlemeDonemiSutun, izlemeDonemiSatir, izlemeDonemiSutun + 1);
-                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ýzleme Dönemi");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Planlanan Deðer");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "Gerçekleþen Deðer");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ä°zleme DÃ¶nemi");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Planlanan DeÄŸer");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "GerÃ§ekleÅŸen DeÄŸer");
                 }
             }
 
@@ -1167,7 +1167,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1222,7 +1222,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1270,9 +1270,9 @@ namespace Risk.net.WebUI.Controllers
                 {
                     izlemeDonemiSutun += 2;
                     XLS.HucreBirlestir(izlemeDonemiSatir, izlemeDonemiSutun, izlemeDonemiSatir, izlemeDonemiSutun + 1);
-                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ýzleme Dönemi");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Gerçekleþen Deðer");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "Sýklýk");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ä°zleme DÃ¶nemi");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "GerÃ§ekleÅŸen DeÄŸer");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "SÄ±klÄ±k");
                 }
             }
 
@@ -1344,7 +1344,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1390,9 +1390,9 @@ namespace Risk.net.WebUI.Controllers
                 {
                     izlemeDonemiSutun += 2;
                     XLS.HucreBirlestir(izlemeDonemiSatir, izlemeDonemiSutun, izlemeDonemiSatir, izlemeDonemiSutun + 1);
-                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ýzleme Dönemi");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "Gerçekleþen Deðer");
-                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "Sýklýk");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir, izlemeDonemiSutun, i + 2 + ". Ä°zleme DÃ¶nemi");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun, "GerÃ§ekleÅŸen DeÄŸer");
+                    XLS.HucreDegerYaz(izlemeDonemiSatir + 1, izlemeDonemiSutun + 1, "SÄ±klÄ±k");
                 }
             }
 
@@ -1448,7 +1448,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1515,7 +1515,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanýcýdan gelen kriterlere göre rapor dosyasý oluþturan metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re rapor dosyasÄ± oluÅŸturan metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns></returns>
@@ -1570,11 +1570,11 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Gönderilen kritere göre AnahtarRiskGostergesiDonemPeriyot adýný getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re AnahtarRiskGostergesiDonemPeriyot adÄ±nÄ± getiren metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string AnahtarRiskGostergesiDonemPeriyotAdGetir(int gelenKriter)
         {
@@ -1590,11 +1590,11 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre riske verilecek cevap adýný getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re riske verilecek cevap adÄ±nÄ± getiren metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string RiskeVerilecekCevapAdGetir(int gelenKriter)
         {
@@ -1610,11 +1610,11 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre risk azaltma plani mevcut durum adýný getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re risk azaltma plani mevcut durum adÄ±nÄ± getiren metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string RiskAzaltmaPlaniMevcutDurumAdGetir(int gelenKriter)
         {
@@ -1632,11 +1632,11 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre risk adýný getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re risk adÄ±nÄ± getiren metod
         /// </summary>
         /// <param name="gelenKriter"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string RiskTuruAdGetir(int gelenKriter)
         {
@@ -1648,13 +1648,13 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre yapýsal risk seviyesini getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re yapÄ±sal risk seviyesini getiren metod
         /// </summary>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
         /// <param name="etkiOlasilikMatrisi"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string YapisalRiskSeviyesiGetir(int etki, int olasilik, string etkiOlasilikMatrisi)
         {
@@ -1678,13 +1678,13 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre yapýsal risk seviyesinine ait renk bilgisini getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re yapÄ±sal risk seviyesinine ait renk bilgisini getiren metod
         /// </summary>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
         /// <param name="etkiOlasilikMatrisi"></param>
         /// <returns>
-        /// string türünde deðer döndürür
+        /// string tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private System.Drawing.Color YapisalRiskSeviyesiRenkGetir(decimal etki, int olasilik, string etkiOlasilikMatrisi)
         {
@@ -1713,11 +1713,11 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Gönderilen kritere göre renk bilgisi getiren metod
+        /// GÃ¶nderilen kritere gÃ¶re renk bilgisi getiren metod
         /// </summary>
         /// <param name="artikRiskSeviyesi"></param>
         /// <returns>
-        /// System.Drawing.Color türünde nesne döndürür
+        /// System.Drawing.Color tÃ¼rÃ¼nde nesne dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private System.Drawing.Color ArtikRiskSeviyesiRenkGetir(int artikRiskSeviyesi)
         {

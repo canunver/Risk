@@ -17,34 +17,34 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Denetim İzleme Takip işlemlerinin yapıldığı sayfa
+    /// Denetim Ä°zleme Takip iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class DenetimIzlemeTakipController : GenelController
     {
         /// <summary>
-        /// IBulguYonetimiService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiService _service;
         /// <summary>
-        /// IDenetimService servisine ulaşmak için kullanılan değişken
+        /// IDenetimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _serviceDenetim;
         /// <summary>
-        /// IBulguYonetimiCevapService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiCevapService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiCevapService _serviceCevap;
         /// <summary>
-        /// IDosyaService servisine ulaşmak için kullanılan değişken
+        /// IDosyaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDosyaService _serviceDosya;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.DenetimIzlemeTakipController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.DenetimIzlemeTakipController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceDenetim"></param>
@@ -66,7 +66,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// DenetimIzlemeTakip View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// DenetimIzlemeTakip View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI")]//Yetki Tamam
         public async Task<IActionResult> Index(string denetimKodu)
@@ -88,7 +88,7 @@ namespace Risk.net.WebUI.Controllers
             else
                 return RedirectToAction("AccessDenied", "Account");
 
-            //BUlgu değiştirme yetkisi vr mı?
+            //BUlgu deÄŸiÅŸtirme yetkisi vr mÄ±?
             bool kaydetYetki = false;
             Denetim kayit = (Denetim)sonuc.Nesne;
             foreach (DenetimDenetci item in kayit.Denetciler)
@@ -124,8 +124,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -145,7 +145,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -176,7 +176,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Eylem Planı yazdırma işlemini yapan metod
+        /// Eylem PlanÄ± yazdÄ±rma iÅŸlemini yapan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -277,7 +277,7 @@ namespace Risk.net.WebUI.Controllers
                 XLS.HucreDegerYaz(satir, 3, item.Sorumlusu);
                 XLS.HucreDegerYaz(satir, 4, Arac.DateTimeToDDMMYYYY(item.TamamlamaTarihi));
                 XLS.HucreDegerYaz(satir, 5, Arac.DateTimeToDDMMYYYY(item.BulguYonetimi.DenetimTarihi));
-                XLS.HucreDegerYaz(satir, 6, item.BulguYonetimi.EylemKarsilama == 1 ? "Evet" : "Hayır");
+                XLS.HucreDegerYaz(satir, 6, item.BulguYonetimi.EylemKarsilama == 1 ? "Evet" : "HayÄ±r");
                 XLS.HucreDegerYaz(satir, 7, kanitBelgesi);
                 XLS.HucreDegerYaz(satir, 8, _sharedResource["BulguYonetimi.Durum." + item.BulguYonetimi.Durum.ToString()]);
 

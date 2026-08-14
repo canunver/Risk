@@ -13,53 +13,53 @@ using System;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// BulguYonetimiCevap işlemlerinin yapıldığı servis
+    /// BulguYonetimiCevap iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class BulguYonetimiCevapService : IBulguYonetimiCevapService
     {
         /// <summary>
-        /// IUnitOfWork<BulguYonetimiCevap> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<BulguYonetimiCevap> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<BulguYonetimiCevap> _unitOfWork;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
         /// <summary>
-        /// IBulguYonetimiService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiService _serviceBulguYonetimi;
         /// <summary>
-        /// IDenetimService servisine ulaşmak için kullanılan değişken
+        /// IDenetimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _serviceDenetim;
         /// <summary>
-        /// IViewPersonelService servisine ulaşmak için kullanılan değişken
+        /// IViewPersonelService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewPersonelService _servicePersonel;
         /// <summary>
-        /// IUnitOfWork<ViewKoordinatorluk> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<ViewKoordinatorluk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<ViewKoordinatorluk> _unitOfWorkViewKoordinatorluk;
         /// <summary>
-        /// IBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBildirimSistemiService _serviceBildirimSistemi;
         /// <summary>
-        /// IViewBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IViewBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBildirimSistemiService _serviceViewBildirim;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.BulguYonetimiCevapService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.BulguYonetimiCevapService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceBulguYonetimi"></param>
@@ -87,12 +87,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -120,12 +120,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="bulguYonetimiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, BulguYonetimiCevap kriter)
         {
@@ -151,12 +151,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam, bool onay)
         {
@@ -227,12 +227,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, BulguYonetimiCevap gelenNesne)
         {
@@ -250,8 +250,8 @@ namespace Risk.net.Services.Functions
             if (!string.IsNullOrWhiteSpace(gelenNesne.Kod))//Sadece kod geldiyse
                 eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-            //Cevap isteği bulgu başına tekken bu oluyordu. Bir bulgu için aynı kişiye birden fazla kez gönderim yapılabilir isteği geldi.
-            //else if (!string.IsNullOrWhiteSpace(gelenNesne.BulguYonetimiKod) && !string.IsNullOrWhiteSpace(gelenNesne.IlgiliPersonelKod))//BulguKod ve Ilgili kişi kod geldiyse
+            //Cevap isteÄŸi bulgu baÅŸÄ±na tekken bu oluyordu. Bir bulgu iÃ§in aynÄ± kiÅŸiye birden fazla kez gÃ¶nderim yapÄ±labilir isteÄŸi geldi.
+            //else if (!string.IsNullOrWhiteSpace(gelenNesne.BulguYonetimiKod) && !string.IsNullOrWhiteSpace(gelenNesne.IlgiliPersonelKod))//BulguKod ve Ilgili kiÅŸi kod geldiyse
             //    eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.BulguYonetimiKod == gelenNesne.BulguYonetimiKod && c.IlgiliPersonelKod == gelenNesne.IlgiliPersonelKod);
 
             if (!string.IsNullOrWhiteSpace(eskiKayit?.Kod))
@@ -271,7 +271,7 @@ namespace Risk.net.Services.Functions
                 }
                 else
                 {
-                    //Onaya gönderilen kayıt değiştirilemez
+                    //Onaya gÃ¶nderilen kayÄ±t deÄŸiÅŸtirilemez
                     if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi || eskiKayit.Durum == (int)ENUMDurum.Onayli)
                         hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
 
@@ -280,7 +280,7 @@ namespace Risk.net.Services.Functions
 
                     if (gelenNesne.CevapTarihi.HasValue)
                     {
-                        //eskiKayit.Durum = (int)ENUMDurum.Onayli;//Cevaplandi   //Onaya gönderme eklendi
+                        //eskiKayit.Durum = (int)ENUMDurum.Onayli;//Cevaplandi   //Onaya gÃ¶nderme eklendi
                         eskiKayit.Aciklama = gelenNesne.Aciklama;
                         eskiKayit.BulguGorusuKod = gelenNesne.BulguGorusuKod;
                         eskiKayit.CevapTarihi = gelenNesne.CevapTarihi;
@@ -305,7 +305,7 @@ namespace Risk.net.Services.Functions
 
                 await _unitOfWork.KaydetAsync();
 
-                //Onay verildiğinde mail gönderilecek
+                //Onay verildiÄŸinde mail gÃ¶nderilecek
                 //if (gelenNesne.CevapTarihi.HasValue)
                 //    await CevapVerildiEPostaGonderAsync(kullanan, gelenNesne.Kod);
             }
@@ -320,12 +320,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, BulguYonetimiCevap gelenNesne)
         {
@@ -356,12 +356,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, BulguYonetimiCevap gelenNesne)
         {
@@ -379,7 +379,7 @@ namespace Risk.net.Services.Functions
             {
                 var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-                //Durum değişikliğine uygun mu?
+                //Durum deÄŸiÅŸikliÄŸine uygun mu?
                 hata = Arac.DurumDegisikligiUygunMu(kullanan, _sharedResource, eskiKayit, gelenNesne);
 
                 if (hata != "")
@@ -388,7 +388,7 @@ namespace Risk.net.Services.Functions
 
                 eskiKayit.Durum = gelenNesne.Durum;
 
-                //BildirimSistemi Başlangıç
+                //BildirimSistemi BaÅŸlangÄ±Ã§
                 if (gelenNesne.Durum == (int)ENUMDurum.OnayaGonderdi || gelenNesne.Durum == (int)ENUMDurum.Onayli || gelenNesne.Durum == (int)ENUMDurum.GeriGonderildi || gelenNesne.Durum == (int)ENUMDurum.Reddedildi)
                 {
                     var bs = new BildirimSistemi
@@ -409,7 +409,7 @@ namespace Risk.net.Services.Functions
                         if (bs.OnaylayacakYetki == "BIRIMAMIRI")
                             bs.OnaylayacakYetki = Arac.UstYetkiVer("BIRIMAMIRI", (EnumKoordinatorlukTur)koordinatorluk.Result.Tur);
 
-                        //Eğer onaylayan kişi koordinatör ise kendisinin onaylayacak demektir. Otomatik onay yapılsın Melih 31.07.2023 
+                        //EÄŸer onaylayan kiÅŸi koordinatÃ¶r ise kendisinin onaylayacak demektir. Otomatik onay yapÄ±lsÄ±n Melih 31.07.2023 
                         if (Arac.YetkisiVarmi("ILKOORDINATOR,MERKEZKOORDINATOR,GENELKOORDINATOR,ICDENETIMKOORDINATOR", kullanan))
                         {
                             bs.OnaylayacakYetki = kullanan.AktifRolKod;
@@ -421,7 +421,7 @@ namespace Risk.net.Services.Functions
                             hata += "<li>" + _sharedResource["Kontrol.DurumDegistir.OnaylayacakYetkiBulunamadi"] + "</li>";
                         else if (bs.OnaylayacakYetki == kullanan.AktifRolKod)
                         {
-                            //Eğer üst yetki aynı kişi ise onaya gönderilmeden onaylansın
+                            //EÄŸer Ã¼st yetki aynÄ± kiÅŸi ise onaya gÃ¶nderilmeden onaylansÄ±n
                             bs.Durum = (int)ENUMDurum.Onayli;
                             gelenNesne.Durum = (int)ENUMDurum.Onayli;
                             eskiKayit.Durum = (int)ENUMDurum.Onayli;
@@ -436,7 +436,7 @@ namespace Risk.net.Services.Functions
                     }
                     else if (gelenNesne.Durum == (int)ENUMDurum.GeriGonderildi)
                     {
-                        bs.Durum = (int)ENUMDurum.Pasif; //Geri Gönderilecek kişi yok
+                        bs.Durum = (int)ENUMDurum.Pasif; //Geri GÃ¶nderilecek kiÅŸi yok
                         bs.OnaylayacakYetki = "-";
                     }
                     else if (gelenNesne.Durum == (int)ENUMDurum.Reddedildi)
@@ -450,7 +450,7 @@ namespace Risk.net.Services.Functions
                     if (!sonucBildirimSistemi.IslemSonuc)
                         return new Sonuc(ENUMIslemDurum.Hata, sonucBildirimSistemi.Mesaj);
                 }
-                //BildirimSistemi Bitiş
+                //BildirimSistemi BitiÅŸ
 
                 islemYapilan = await _unitOfWork.GuncelleAsync(eskiKayit);
 
@@ -468,24 +468,24 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Kişilere atanan bulguların atanan kişiye haber verilmesi için eposta gönderiminin yapıldığı metod
+        /// KiÅŸilere atanan bulgularÄ±n atanan kiÅŸiye haber verilmesi iÃ§in eposta gÃ¶nderiminin yapÄ±ldÄ±ÄŸÄ± metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="bulgu"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> BilgiEPostaGonderAsync(KullaniciDto kullanan, string bulguKod, List<string> gelenNesne)
         {
             List<ViewPersonel> gidecekler = new List<ViewPersonel>();
 
-            //Görevlendirme yapılan bulgu bilgisini almak için
+            //GÃ¶revlendirme yapÄ±lan bulgu bilgisini almak iÃ§in
             Sonuc sonucBulgu = await _serviceBulguYonetimi.KayitGetirAsync(kullanan, bulguKod);
-            if (!sonucBulgu.IslemSonuc || sonucBulgu.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu bulunamadı");
+            if (!sonucBulgu.IslemSonuc || sonucBulgu.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu bulunamadÄ±");
             BulguYonetimi gidecekBulgu = (BulguYonetimi)sonucBulgu.Nesne;
 
-            //Görevlendirilen personelin eposta adreslerini almak için
+            //GÃ¶revlendirilen personelin eposta adreslerini almak iÃ§in
             foreach (var personelKod in gelenNesne)
             {
                 var sonucPersonel = await _servicePersonel.KayitGetirAsync(kullanan, personelKod);
@@ -503,23 +503,23 @@ namespace Risk.net.Services.Functions
                 foreach (var item in gidecekler)
                 {
                     string to = item.EPosta;
-                    string konu = "Bulguyu cevaplamak üzere görevlendirildiniz";
+                    string konu = "Bulguyu cevaplamak Ã¼zere gÃ¶revlendirildiniz";
                     string denetimAdi = gidecekBulgu.Denetim.DenetimAdi;
                     if (gidecekBulgu.Denetim.Kaynak == 2)
                         denetimAdi = gidecekBulgu.Denetim.DenetimYapanKurum.Adi;
 
-                    string mesaj = $"Sayın {item.AdiSoyadi};<br>" +
-                                   $"{denetimAdi} / {gidecekBulgu.Denetim.DenetimNo} nolu Denetim kapsamında " +
-                                   $"'{gidecekBulgu.BulguTanimi}' bulgusu ile ilgili, sorumlusu olarak belirlendiğiniz Eylem için " +
-                                   $"Risk Uygulamasından giriş yaparak ilgili kısımlara {Arac.DateTimeToDDMMYYYY(gidecekBulgu.SonCevapTarihi)} tarihine kadar cevap vermeniz beklenmektedir.<br><br>" +
-                                   $"Bilgilerinize önemle rica olunur.<br><br><br>" +
-                                   $"Saygılarımızla,<br>" +
-                                   $"İç Denetim Koordinatörlüğü";
+                    string mesaj = $"SayÄ±n {item.AdiSoyadi};<br>" +
+                                   $"{denetimAdi} / {gidecekBulgu.Denetim.DenetimNo} nolu Denetim kapsamÄ±nda " +
+                                   $"'{gidecekBulgu.BulguTanimi}' bulgusu ile ilgili, sorumlusu olarak belirlendiÄŸiniz Eylem iÃ§in " +
+                                   $"Risk UygulamasÄ±ndan giriÅŸ yaparak ilgili kÄ±sÄ±mlara {Arac.DateTimeToDDMMYYYY(gidecekBulgu.SonCevapTarihi)} tarihine kadar cevap vermeniz beklenmektedir.<br><br>" +
+                                   $"Bilgilerinize Ã¶nemle rica olunur.<br><br><br>" +
+                                   $"SaygÄ±larÄ±mÄ±zla,<br>" +
+                                   $"Ä°Ã§ Denetim KoordinatÃ¶rlÃ¼ÄŸÃ¼";
 
                     /*
-                “Sayın ……,
-                . …Denetim Adı…. Denetimi kapsamında …Bulgu… bulgusu ile ilgili olarak,  sorumlusu olarak belirlendiğiniz Eylem için …. uygulamasından giriş yaparak ilgili kısımlara ….. tarihine kadar cevap vermeniz beklenmektedir.
-                Bilgilerinize önemle rica olunur.”
+                â€œSayÄ±n â€¦â€¦,
+                . â€¦Denetim AdÄ±â€¦. Denetimi kapsamÄ±nda â€¦Bulguâ€¦ bulgusu ile ilgili olarak,  sorumlusu olarak belirlendiÄŸiniz Eylem iÃ§in â€¦. uygulamasÄ±ndan giriÅŸ yaparak ilgili kÄ±sÄ±mlara â€¦.. tarihine kadar cevap vermeniz beklenmektedir.
+                Bilgilerinize Ã¶nemle rica olunur.â€
                  */
 
                     Mail.MailAt("", to, konu, mesaj, true, false, null);
@@ -537,31 +537,31 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Kişilerin bulgulara verdiği cevap bilgisini ilgili denetcilere haber verilmesi için eposta gönderiminin yapıldığı metod
+        /// KiÅŸilerin bulgulara verdiÄŸi cevap bilgisini ilgili denetcilere haber verilmesi iÃ§in eposta gÃ¶nderiminin yapÄ±ldÄ±ÄŸÄ± metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="bulguCevapKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> CevapVerildiEPostaGonderAsync(KullaniciDto kullanan, string bulguCevapKod)
         {
-            //Cevap verilen kayıt bilgisini almak için
+            //Cevap verilen kayÄ±t bilgisini almak iÃ§in
             Sonuc sonucBulguCevap = await KayitGetirAsync(kullanan, bulguCevapKod);
-            if (!sonucBulguCevap.IslemSonuc || sonucBulguCevap.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu Cevap bulunamadı");
+            if (!sonucBulguCevap.IslemSonuc || sonucBulguCevap.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu Cevap bulunamadÄ±");
             BulguYonetimiCevap gidecekBulguCevap = (BulguYonetimiCevap)sonucBulguCevap.Nesne;
 
-            //Görevlendirme yapılan bulgu bilgisini almak için
+            //GÃ¶revlendirme yapÄ±lan bulgu bilgisini almak iÃ§in
             Sonuc sonucBulgu = await _serviceBulguYonetimi.KayitGetirAsync(kullanan, gidecekBulguCevap.BulguYonetimiKod);
-            if (!sonucBulgu.IslemSonuc || sonucBulgu.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu bulunamadı");
+            if (!sonucBulgu.IslemSonuc || sonucBulgu.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Bulgu bulunamadÄ±");
             BulguYonetimi gidecekBulgu = (BulguYonetimi)sonucBulgu.Nesne;
 
             Sonuc sonucDenetim = await _serviceDenetim.KayitGetirAsync(kullanan, gidecekBulgu.DenetimKod);
-            if (!sonucDenetim.IslemSonuc || sonucDenetim.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Denetim bulunamadı");
+            if (!sonucDenetim.IslemSonuc || sonucDenetim.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Denetim bulunamadÄ±");
             Denetim gidecekDenetim = (Denetim)sonucDenetim.Nesne;
 
             string denetimKisiPostalari = "";
-            //Denetim görevlilerinin eposta bilgisini bul
+            //Denetim gÃ¶revlilerinin eposta bilgisini bul
             foreach (var denetci in gidecekDenetim.Denetciler)
             {
                 var sonucPersonel = await _servicePersonel.KayitGetirAsync(kullanan, denetci.DenetciKod);
@@ -582,8 +582,8 @@ namespace Risk.net.Services.Functions
                 string to = denetimKisiPostalari;
                 string konu = "Bulguya cevap verildi";
 
-                string mesaj = $"'{gidecekBulgu.Denetim.DenetimNo}' nolu Denetim kapsamında " +
-                               $"'{gidecekBulgu.BulguTanimi}' bulgusu {gidecekBulguCevap.IlgiliPersonel.AdiSoyadi} tarafından cevaplanmıştır.";
+                string mesaj = $"'{gidecekBulgu.Denetim.DenetimNo}' nolu Denetim kapsamÄ±nda " +
+                               $"'{gidecekBulgu.BulguTanimi}' bulgusu {gidecekBulguCevap.IlgiliPersonel.AdiSoyadi} tarafÄ±ndan cevaplanmÄ±ÅŸtÄ±r.";
 
                 Mail.MailAt("", to, konu, mesaj, true, false, null);
             }
@@ -596,12 +596,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kullanıcının yetkisinin olup olmadığını döndüren metod
+        /// Istemciden parametre ile talep edilen kullanÄ±cÄ±nÄ±n yetkisinin olup olmadÄ±ÄŸÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="tur"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string YetkisiVarmi(KullaniciDto kullanan, string tur)
         {

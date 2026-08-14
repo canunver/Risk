@@ -5,12 +5,12 @@ using Risk.net.Utilities.Objects;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// DataTable işlemlerinin yapıldığı sayfa
+    /// DataTable iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class DataTableViewComponent : ViewComponent
     {
         /// <summary>
-        /// DataTable ViewComponent sayfası açıldığında çalışan metod.
+        /// DataTable ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         /// <param name="tabloAyar"></param>
         public IViewComponentResult Invoke(string tabloAyar)

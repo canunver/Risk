@@ -11,28 +11,28 @@ using Risk.net.Utilities.Objects;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// ViewBirim işlemlerinin yapıldığı servis
+    /// ViewBirim iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class ViewBirimService : IViewBirimService
     {
         /// <summary>
-        /// IUnitOfWork<ViewBirim> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<ViewBirim> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<ViewBirim> _unitOfWork;
         /// <summary>
-        /// IUnitOfWork<ViewKoordinatorluk> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<ViewKoordinatorluk> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<ViewKoordinatorluk> _unitOfWorkKoordinatorluk;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.SurecService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.SurecService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="unitOfWorkKoordinatorluk"></param>
@@ -46,12 +46,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -79,12 +79,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="koordinatorlukKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string koordinatorlukKod)
         {
@@ -97,12 +97,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -130,16 +130,16 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Koordinatorluk türüne göre yetki döndürüren metod
+        /// Koordinatorluk tÃ¼rÃ¼ne gÃ¶re yetki dÃ¶ndÃ¼rÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="koordinatorlukKod"></param>
         /// <param name="koordinatorlukTur"></param>
         /// <param name="birimKontrolu"></param>
-        /// <returns>String türünde değer döndürür</returns>
+        /// <returns>String tÃ¼rÃ¼nde deÄŸer dÃ¶ndÃ¼rÃ¼r</returns>
         public async Task<string> KoordinatorlukYetkiTipiBul(KullaniciDto kullanan, string koordinatorlukKod, int koordinatorlukTur, bool birimKontrolu)
         {
-            //birimKontrolu : Birimi olmayan koordinatörlük ile işlem yapıldığında
+            //birimKontrolu : Birimi olmayan koordinatÃ¶rlÃ¼k ile iÅŸlem yapÄ±ldÄ±ÄŸÄ±nda
 
             string yetki = "";
 

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// EtkiOlasilikMatrisi işlemlerinin yapıldığı sayfa
+    /// EtkiOlasilikMatrisi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class EtkiOlasilikMatrisiViewComponent : ViewComponent
     {
         /// <summary>
-        /// IKonfigurasyonService servisine ulaşmak için kullanılan değişken
+        /// IKonfigurasyonService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IKonfigurasyonService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.EtkiOlasilikMatrisi" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.EtkiOlasilikMatrisi" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <remarks></remarks>
@@ -28,7 +28,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// EtkiOlasilikMatrisi ViewComponent sayfası açıldığında çalışan metod.
+        /// EtkiOlasilikMatrisi ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public async Task<IViewComponentResult> InvokeAsync()
         {

@@ -15,40 +15,40 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Risk Azaltma Planı işlemlerinin yapıldığı sayfa
+    /// Risk Azaltma PlanÄ± iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]//Yetki Tamam
     public class RisklerinYonetilmesiController : GenelController
     {
         /// <summary>
-        /// IRiskAzaltmaPlaniService servisine ulaşmak için kullanılan değişken
+        /// IRiskAzaltmaPlaniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskAzaltmaPlaniService _service;
         /// <summary>
-        /// IRiskAzaltmaPlaniRiskService servisine ulaşmak için kullanılan değişken
+        /// IRiskAzaltmaPlaniRiskService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskAzaltmaPlaniRiskService _serviceRisk;
         /// <summary>
-        /// IRiskAzaltmaPlaniNotService servisine ulaşmak için kullanılan değişken
+        /// IRiskAzaltmaPlaniNotService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskAzaltmaPlaniNotService _serviceNot;
         /// <summary>
-        /// IRiskAzaltmaPlaniIliskiService servisine ulaşmak için kullanılan değişken
+        /// IRiskAzaltmaPlaniIliskiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskAzaltmaPlaniIliskiService _serviceIliski;
         /// <summary>
-        /// IRiskAzaltmaPlaniIsbirligiBirimService servisine ulaşmak için kullanılan değişken
+        /// IRiskAzaltmaPlaniIsbirligiBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskAzaltmaPlaniIsbirligiBirimService _serviceIsbirligiBirim;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RisklerinYonetilmesiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.RisklerinYonetilmesiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceRisk"></param>
@@ -74,7 +74,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// RiskAzaltmaPlani View sayfası açıldığında çalışan metod
+        /// RiskAzaltmaPlani View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -92,8 +92,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -109,7 +109,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="riskAzaltmaPlaniKod"></param>
         /// <param name="kod"></param>
@@ -125,7 +125,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -140,7 +140,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -160,7 +160,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -182,7 +182,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -193,7 +193,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -215,7 +215,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -230,7 +230,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -245,7 +245,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -260,7 +260,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen azaltma planı sorumlusunun güncellenmesi gonderilmesi işlemini sağlayan metod
+        /// Listeden seÃ§ilen azaltma planÄ± sorumlusunun gÃ¼ncellenmesi gonderilmesi iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

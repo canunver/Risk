@@ -15,24 +15,24 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Koordinatorluk işlemlerinin yapıldığı sayfa
+    /// Koordinatorluk iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class TanimKoordinatorlukController : GenelController
     {
         /// <summary>
-        /// IViewKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// IViewKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewKoordinatorlukService _service;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTE;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.TanimKoordinatorlukController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.TanimKoordinatorlukController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceCTE"></param>
@@ -49,7 +49,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// TanimKoordinatorluk View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// TanimKoordinatorluk View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "SISTEMYONETICISI")]
         public IActionResult Index()
@@ -58,8 +58,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -75,7 +75,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -90,7 +90,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Koordinatorluk seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Koordinatorluk seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -101,10 +101,10 @@ namespace Risk.net.WebUI.Controllers
             List<string> gorebilecekleri = new List<string>();
             if (yetki)
             {
-                //Bütün İl koordinatörlüklerde işlem yapabilirler
+                //BÃ¼tÃ¼n Ä°l koordinatÃ¶rlÃ¼klerde iÅŸlem yapabilirler
                 if (Arac.YetkisiVarmi("RISKSEKRETARYASI,PLANLAMAUNITESI,YETKILIRISKGOREVLISI,BASKAN,ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI", _kullanan))
                     yetki = false;
-                else if (Arac.YetkisiVarmi("GENELKOORDINATOR", _kullanan))//Kendi ve altındaki koordinatörlüklerde işlem yapabilirler
+                else if (Arac.YetkisiVarmi("GENELKOORDINATOR", _kullanan))//Kendi ve altÄ±ndaki koordinatÃ¶rlÃ¼klerde iÅŸlem yapabilirler
                 {
                     gorebilecekleri.Add(_kullanan.KoordinatorlukKod);
 
@@ -118,7 +118,7 @@ namespace Risk.net.WebUI.Controllers
                 }
                 else
                 {
-                    //Sadece kendi koordinatorlüklerinde işlem yapabilirler
+                    //Sadece kendi koordinatorlÃ¼klerinde iÅŸlem yapabilirler
                     //MERKEZKOORDINATOR,ILKOORDINATOR,BIRIMAMIRI,UZMAN
                     gorebilecekleri.Add(_kullanan.KoordinatorlukKod);
                 }
@@ -148,7 +148,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Koordinatorluk seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Koordinatorluk seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -159,10 +159,10 @@ namespace Risk.net.WebUI.Controllers
             List<string> gorebilecekleri = new List<string>();
             if (yetki)
             {
-                //Bütün İl koordinatörlüklerde işlem yapabilirler
+                //BÃ¼tÃ¼n Ä°l koordinatÃ¶rlÃ¼klerde iÅŸlem yapabilirler
                 if (Arac.YetkisiVarmi("RISKSEKRETARYASI,PLANLAMAUNITESI,YETKILIRISKGOREVLISI,BASKAN,ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI", _kullanan))
                     yetki = false;
-                else if (Arac.YetkisiVarmi("GENELKOORDINATOR", _kullanan))//Kendi ve altındaki koordinatörlüklerde işlem yapabilirler
+                else if (Arac.YetkisiVarmi("GENELKOORDINATOR", _kullanan))//Kendi ve altÄ±ndaki koordinatÃ¶rlÃ¼klerde iÅŸlem yapabilirler
                 {
                     gorebilecekleri.Add(_kullanan.KoordinatorlukKod);
 
@@ -176,7 +176,7 @@ namespace Risk.net.WebUI.Controllers
                 }
                 else
                 {
-                    //Sadece kendi koordinatorlüklerinde işlem yapabilirler
+                    //Sadece kendi koordinatorlÃ¼klerinde iÅŸlem yapabilirler
                     //MERKEZKOORDINATOR,ILKOORDINATOR,BIRIMAMIRI,UZMAN
                     gorebilecekleri.Add(_kullanan.KoordinatorlukKod);
                 }
@@ -186,8 +186,8 @@ namespace Risk.net.WebUI.Controllers
 
             if (sonuc.Liste.Count > 0)
             { 
-                donenDeger.Add(new SelectListesi { id = "-1", text = "Tüm Koordinatörlükler" });
-                donenDeger.Add(new SelectListesi { id = "-42", text = "42 İl Koordinatörlüğü" });
+                donenDeger.Add(new SelectListesi { id = "-1", text = "TÃ¼m KoordinatÃ¶rlÃ¼kler" });
+                donenDeger.Add(new SelectListesi { id = "-42", text = "42 Ä°l KoordinatÃ¶rlÃ¼ÄŸÃ¼" });
             }
 
             foreach (ViewKoordinatorluk item in sonuc.Liste)

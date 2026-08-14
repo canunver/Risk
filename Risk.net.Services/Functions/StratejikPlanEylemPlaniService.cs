@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// StratejikPlanEylemPlani işlemlerinin yapıldığı servis
+    /// StratejikPlanEylemPlani iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class StratejikPlanEylemPlaniService : IStratejikPlanEylemPlaniService
     {
         /// <summary>
-        /// IUnitOfWork<StratejikPlanEylemPlani> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<StratejikPlanEylemPlani> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<StratejikPlanEylemPlani> _unitOfWork;
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.StratejikPlanEylemPlaniService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.StratejikPlanEylemPlaniService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceTarihce"></param>
@@ -48,12 +48,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="hedefKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string hedefKod)
         {
@@ -66,12 +66,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, StratejikPlanHedef gelenNesne)
         {
@@ -104,10 +104,10 @@ namespace Risk.net.Services.Functions
                     await _unitOfWork.KaydetAsync();
                 }
 
-                //Tarihçe kaydı
+                //TarihÃ§e kaydÄ±
                 Tarihce tarihce = new Tarihce();
                 tarihce.YeniDeger = Arac.JSONSerialize(gelenNesne);
-                tarihce.IlgiKod = gelenNesne.Kod + "iz";//Tarihçe izleme kod kaydına göre tutulduğu için
+                tarihce.IlgiKod = gelenNesne.Kod + "iz";//TarihÃ§e izleme kod kaydÄ±na gÃ¶re tutulduÄŸu iÃ§in
                 tarihce.IlgiTur = EnumTarihceIslemTur.StratejikPlanIzleme;
                 tarihce.IslemYapanKod = kullanan.PersonelKod;
                 tarihce.Durum = (int)ENUMDurum.Aktif;
@@ -123,12 +123,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, StratejikPlanEylemPlani gelenNesne)
         {

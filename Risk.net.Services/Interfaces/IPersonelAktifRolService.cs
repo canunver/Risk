@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Interfaces
 {
     /// <summary>
-    /// PersonelAktifRol işlemlerinin yapıldığı servisin arayüzü
+    /// PersonelAktifRol iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servisin arayÃ¼zÃ¼
     /// </summary>
     public interface IPersonelAktifRolService
     {
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="personelKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string personelKod);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KaydetAsync(KullaniciDto kullanan, PersonelAktifRol gelen);
     }

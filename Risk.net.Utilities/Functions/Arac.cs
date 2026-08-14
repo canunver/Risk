@@ -171,11 +171,11 @@ namespace Risk.net.Utilities.Functions
                     kullanan.BirimKod = rol.BirimKod;
 
                     kullanan.Roller.Add(rol);
-                    Arac.HataStrYaz("Yetki alaný:" + rol.KoordinatorlukKod);
+                    Arac.HataStrYaz("Yetki alanÄ±:" + rol.KoordinatorlukKod);
                 }
             }
 
-            Arac.HataStrYaz("kullanan.KoordinatorlukKod:" + kullanan.KoordinatorlukKod + " , Rolsayýsý:" + kullanan.Roller.Count);
+            Arac.HataStrYaz("kullanan.KoordinatorlukKod:" + kullanan.KoordinatorlukKod + " , RolsayÄ±sÄ±:" + kullanan.Roller.Count);
 
             return kullanan;
         }
@@ -384,7 +384,7 @@ namespace Risk.net.Utilities.Functions
 
                 tcNo = Int64.Parse(kimlikNo);
 
-                // bolu yuz islemi int tanimlanmis degiskende son 2 haneyi silmek icin kullanýlýr.
+                // bolu yuz islemi int tanimlanmis degiskende son 2 haneyi silmek icin kullanÄ±lÄ±r.
 
                 atcNo = tcNo / 100;
                 btcNo = tcNo / 100;
@@ -595,9 +595,9 @@ namespace Risk.net.Utilities.Functions
             /*
             BASKAN
             ILKOORDINATOR-BASKAN
-            MERKEZKOORDINATOR-GENELKOORDINATOR     ---------Hatalý BASKAN
-            GENELKOORDINATOR-BASKAN                ---------Hatalý MERKEZKOORDINATOR
-            ICDENETIMKOORDINATOR-BASKAN            ---------Hatalý MERKEZKOORDINATOR
+            MERKEZKOORDINATOR-GENELKOORDINATOR     ---------HatalÄ± BASKAN
+            GENELKOORDINATOR-BASKAN                ---------HatalÄ± MERKEZKOORDINATOR
+            ICDENETIMKOORDINATOR-BASKAN            ---------HatalÄ± MERKEZKOORDINATOR
             ICDENETIMUZMANI-ICDENETIMKOORDINATOR
             BIRIMAMIRI-MERKEZ/IL/GENELKOORDINATOR/ICDENETIM/HUKUK
             PLANLAMAUNITESI-BIRIMAMIRI
@@ -605,7 +605,7 @@ namespace Risk.net.Utilities.Functions
             YETKILIRISKGOREVLISI-BIRIMAMIRI
             */
 
-            //Baþkan onayýna gönderilmesin
+            //BaÅŸkan onayÄ±na gÃ¶nderilmesin
 
             //if (yetki == "BASKAN")
             //    return "BASKAN";
@@ -658,7 +658,7 @@ namespace Risk.net.Utilities.Functions
         {
             string yetki = "";
 
-            //Baþkan onayýna gönderilmesin
+            //BaÅŸkan onayÄ±na gÃ¶nderilmesin
 
             if (tur == EnumKoordinatorlukTur.Baskan)
                 yetki = "BASKAN*";
@@ -694,7 +694,7 @@ namespace Risk.net.Utilities.Functions
         {
             string hata = "";
 
-            //Sistem yöneticisi her durumda riski pasif yapabilsin.
+            //Sistem yÃ¶neticisi her durumda riski pasif yapabilsin.
             if (gelenNesne.Durum == (int)ENUMDurum.Pasif || gelenNesne.Durum == (int)ENUMDurum.Sil)
             {
                 bool yonetici = Arac.YetkisiVarmi("SISTEMYONETICISI,PLANLAMAUNITESI,RISKSEKRETARYASI", kullanan);
@@ -736,7 +736,7 @@ namespace Risk.net.Utilities.Functions
                     hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.Onaylanmis"] + "</li>";
             }
 
-            //Her kullanýcý kendi giriþ yaptýðý kaydý onaya gönderebilmelidir.
+            //Her kullanÄ±cÄ± kendi giriÅŸ yaptÄ±ÄŸÄ± kaydÄ± onaya gÃ¶nderebilmelidir.
             if (eskiKayit.GetType().GetProperty("RiskSahibiKod") != null && eskiKayit.RiskSahibiKod != null && eskiKayit.RiskSahibiKod != kullanan.PersonelKod && (gelenNesne.Durum == (int)ENUMDurum.OnayaGonderdi || gelenNesne.Durum == (int)ENUMDurum.Pasif))
                 hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
 
@@ -748,21 +748,21 @@ namespace Risk.net.Utilities.Functions
             if (durum == (int)ENUMDurum.Aktif)
                 return "Aktif";
             else if (durum == (int)ENUMDurum.GeriGonderildi)
-                return "Geri Gönderildi";
+                return "Geri GÃ¶nderildi";
             else if (durum == (int)ENUMDurum.OnayaGonderdi)
-                return "Onaya Gönderildi";
+                return "Onaya GÃ¶nderildi";
             else if (durum == (int)ENUMDurum.Onayli)
-                return "Onaylandý";
+                return "OnaylandÄ±";
             else if (durum == (int)ENUMDurum.Reddedildi)
                 return "Reddedildi";
             else if (durum == (int)ENUMDurum.Pasif)
-                return "Pasif yapýldý";
+                return "Pasif yapÄ±ldÄ±";
             else if (durum == (int)ENUMDurum.BilgilendirmeMail)
-                return "Bilgilendirme Maili Gönderildi";
+                return "Bilgilendirme Maili GÃ¶nderildi";
             else if (durum == (int)ENUMDurum.RiskSahibiDegisti)
-                return "Risk Sahibi Deðiþti";
+                return "Risk Sahibi DeÄŸiÅŸti";
             else if (durum == (int)ENUMDurum.AzaltmaPlaniSorumlusuDegisti)
-                return "Azaltma Planý Sorumlusu Deðiþti";
+                return "Azaltma PlanÄ± Sorumlusu DeÄŸiÅŸti";
             else if (durum == (int)ENUMDurum.Sil)
                 return "Silindi";
 

@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// Yardim işlemlerinin yapıldığı sayfa
+    /// Yardim iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class YardimViewComponent : ViewComponent
     {
         /// <summary>
-        /// IYardimService servisine ulaşmak için kullanılan değişken
+        /// IYardimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IYardimService _service;
         /// <summary>
-        /// Kullanıcı bilgisini taşıyan değişken
+        /// KullanÄ±cÄ± bilgisini taÅŸÄ±yan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly KullaniciDto _kullanan;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.YardimViewComponent" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.YardimViewComponent" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -38,7 +38,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// Yardim ViewComponent sayfası açıldığında çalışan metod.
+        /// Yardim ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         /// <param name="sayfaAdi"></param>
         public async Task<IViewComponentResult> InvokeAsync(string sayfaAdi)

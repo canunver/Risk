@@ -13,23 +13,23 @@ using Newtonsoft.Json.Linq;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// Tarihce işlemlerinin yapıldığı servis
+    /// Tarihce iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class TarihceService : ITarihceService
     {
         /// <summary>
-        /// IUnitOfWork<Tarihce> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<Tarihce> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<Tarihce> _unitOfWork;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.TarihceService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.TarihceService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="sharedResource"></param>
@@ -41,12 +41,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -74,11 +74,11 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="ilgiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(string ilgiKod)
         {
@@ -88,33 +88,33 @@ namespace Risk.net.Services.Functions
                 bool ilkKayit = true;
                 foreach (Tarihce item in kayitlar)
                 {
-                    if (item.IlgiTur == EnumTarihceIslemTur.Konfigurasyon || item.Durum == (int)ENUMDurum.Kopyalandı || item.Durum == (int)ENUMDurum.HatirlatmaMail)
+                    if (item.IlgiTur == EnumTarihceIslemTur.Konfigurasyon || item.Durum == (int)ENUMDurum.KopyalandÄ± || item.Durum == (int)ENUMDurum.HatirlatmaMail)
                         ilkKayit = false;
 
                     if (ilkKayit)
-                        item.DurumAdi = "İlk kayıt";
+                        item.DurumAdi = "Ä°lk kayÄ±t";
                     else if (item.Durum <= 1)
-                        item.DurumAdi = "Güncelleme";
+                        item.DurumAdi = "GÃ¼ncelleme";
                     else if (item.Durum == 2)
-                        item.DurumAdi = "Geri Gönderildi";
+                        item.DurumAdi = "Geri GÃ¶nderildi";
                     else if (item.Durum == 3)
-                        item.DurumAdi = "Onaya Gönderildi";
+                        item.DurumAdi = "Onaya GÃ¶nderildi";
                     else if (item.Durum == 10)
-                        item.DurumAdi = "Onaylandı";
+                        item.DurumAdi = "OnaylandÄ±";
                     else if (item.Durum == 98)
                         item.DurumAdi = "Reddedildi";
                     else if (item.Durum == 99)
-                        item.DurumAdi = "Pasif yapıldı";
+                        item.DurumAdi = "Pasif yapÄ±ldÄ±";
                     else if (item.Durum == 15)
-                        item.DurumAdi = "Bilgilendirme Maili Gönderildi";
+                        item.DurumAdi = "Bilgilendirme Maili GÃ¶nderildi";
                     else if (item.Durum == 16)
-                        item.DurumAdi = "Risk Sahibi Değişti";
+                        item.DurumAdi = "Risk Sahibi DeÄŸiÅŸti";
                     else if (item.Durum == 17)
-                        item.DurumAdi = "Kopyalandı";
+                        item.DurumAdi = "KopyalandÄ±";
                     else if (item.Durum == 18)
-                        item.DurumAdi = "Azaltma Planı Sorumlusu Değişti";
+                        item.DurumAdi = "Azaltma PlanÄ± Sorumlusu DeÄŸiÅŸti";
                     else if (item.Durum == 19)
-                        item.DurumAdi = "Hatırlatma Maili Gönderildi";
+                        item.DurumAdi = "HatÄ±rlatma Maili GÃ¶nderildi";
                     else if (item.Durum == 999)
                         item.DurumAdi = "Silindi";
                     ilkKayit = false;
@@ -126,13 +126,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="ilgiTur"></param>
         /// <param name="siraNo"></param>
         /// <param name="islemYapanKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(EnumTarihceIslemTur ilgiTur, int siraNo, string islemYapanKod)
         {
@@ -151,12 +151,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -195,12 +195,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, Tarihce gelenNesne)
         {
@@ -258,12 +258,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile tapep edilen bilgilere göre son kaydın bütün bilgileri döndüren metod
+        /// Istemciden parametere ile tapep edilen bilgilere gÃ¶re son kaydÄ±n bÃ¼tÃ¼n bilgileri dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="ilgiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Tarihce> SonKaydiGetirAsync(KullaniciDto kullanan, string ilgiKod)
         {
@@ -283,12 +283,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile tapep edilen bilgilere göre son açıklama bilgisi kaydedilen kaydın bütün bilgileri döndüren metod
+        /// Istemciden parametere ile tapep edilen bilgilere gÃ¶re son aÃ§Ä±klama bilgisi kaydedilen kaydÄ±n bÃ¼tÃ¼n bilgileri dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="ilgiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Tarihce> SonAciklamaGetirAsync(KullaniciDto kullanan, string ilgiKod)
         {

@@ -20,25 +20,25 @@ using System.Collections.Generic;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Bildirim Sistemi işlemlerinin yapıldığı sayfa
+    /// Bildirim Sistemi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class TestController : GenelController
     {
         /// <summary>
-        /// IBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBildirimSistemiService _service;
         /// <summary>
-        /// IViewBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IViewBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBildirimSistemiService _serviceView;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.BildirimSistemiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.BildirimSistemiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceView"></param>
@@ -55,7 +55,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Test View sayfası açıldığında çalışan metod
+        /// Test View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -63,8 +63,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -80,7 +80,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıya ait bildirim sayısını ekranın üst kısmında göstermek için bildirim sayısını servisten alan metodtur
+        /// KullanÄ±cÄ±ya ait bildirim sayÄ±sÄ±nÄ± ekranÄ±n Ã¼st kÄ±smÄ±nda gÃ¶stermek iÃ§in bildirim sayÄ±sÄ±nÄ± servisten alan metodtur
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -98,7 +98,7 @@ namespace Risk.net.WebUI.Controllers
         /// </summary>
         /// <param name="_sharedResource"></param>
         /// <returns>
-        /// JSON tipinde bilgi döndürür
+        /// JSON tipinde bilgi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public static string BelgeTipiListesiVer(IStringLocalizer<CustomResource> _sharedResource)
         {
@@ -116,7 +116,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın mail gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n mail gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

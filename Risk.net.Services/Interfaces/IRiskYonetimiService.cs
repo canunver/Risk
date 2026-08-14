@@ -6,82 +6,82 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Interfaces
 {
     /// <summary>
-    /// RiskYonetimi işlemlerinin yapıldığı servisin arayüzü
+    /// RiskYonetimi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servisin arayÃ¼zÃ¼
     /// </summary>
     public interface IRiskYonetimiService
     {
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod);
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın kod bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n kod bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> RiskNoGetirAsync(KullaniciDto kullanan, string kod);
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> ListeleAsync(KullaniciDto kullanan);
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metodun arayüzü
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <param name="onay"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam, bool onay);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> KaydetAsync(KullaniciDto kullanan, RiskYonetimi gelenNesne);
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, RiskYonetimi gelenNesne);
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilerden güncel değerleri değişen alanları döndüren metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen bilgilerden gÃ¼ncel deÄŸerleri deÄŸiÅŸen alanlarÄ± dÃ¶ndÃ¼ren metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// string türünde değişen alanları döndürür
+        /// string tÃ¼rÃ¼nde deÄŸiÅŸen alanlarÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<string> DegisenAlanlariGetirAsync(KullaniciDto kullanan, RiskYonetimi gelenNesne);
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metodun arayüzü
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="riskYonetimi"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<Sonuc> SilAsync(KullaniciDto kullanan, RiskYonetimi riskYonetimi);
     }

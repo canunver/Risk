@@ -21,28 +21,28 @@ namespace Risk.net.WebUI.Controllers
     public class ViewComponentController : GenelController
     {
         /// <summary>
-        /// IYardimService servisine ulaşmak için kullanılan değişken
+        /// IYardimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>        
         private readonly IYardimService _serviceYardim;
         /// <summary>
-        /// IPersonelAktifRolService servisine ulaşmak için kullanılan değişken
+        /// IPersonelAktifRolService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>        
         private readonly IPersonelAktifRolService _serviceRol;
         /// <summary>
-        /// IDenetimGorevlendirmeService servisine ulaşmak için kullanılan değişken
+        /// IDenetimGorevlendirmeService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>        
         private readonly IDenetimGorevlendirmeService _serviceDenetimGorevlendirme;
         /// <summary>
-        /// IMemoryCache servisine ulaşmak için kullanılan değişken, Kullanıcının yazılımda kullanmakta olduğu rolü saklamak için
+        /// IMemoryCache servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken, KullanÄ±cÄ±nÄ±n yazÄ±lÄ±mda kullanmakta olduÄŸu rolÃ¼ saklamak iÃ§in
         /// </summary>
         /// <remarks></remarks>        
         private readonly IMemoryCache _cache;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.ViewComponentController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.ViewComponentController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="serviceYardim"></param>
         /// <param name="serviceRol"></param>
@@ -71,7 +71,7 @@ namespace Risk.net.WebUI.Controllers
         //}
 
         /// <summary>
-        /// KontrolKriterMatrisiGoster ViewComponent sayfası açıldığında çalışan metod
+        /// KontrolKriterMatrisiGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult KontrolKriterMatrisiGoster()
@@ -80,7 +80,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// EtkiOlasilikMatrisiGoster ViewComponent sayfası açıldığında çalışan metod
+        /// EtkiOlasilikMatrisiGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult EtkiOlasilikMatrisiGoster()
@@ -89,7 +89,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// TarihceGoster ViewComponent sayfası açıldığında çalışan metod
+        /// TarihceGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult TarihceGoster(string ilgiKod)
@@ -98,7 +98,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// AktifRolSecGoster ViewComponent sayfası açıldığında çalışan metod
+        /// AktifRolSecGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult AktifRolSecGoster()
@@ -107,8 +107,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcının AktifRol ViewComponentinden seçerek kullanmak istediği rolü
-        /// daha sonra yazılım açıldığında tekrar kullanmak için ilgili servis aracılığı ile kayıt eden metod
+        /// KullanÄ±cÄ±nÄ±n AktifRol ViewComponentinden seÃ§erek kullanmak istediÄŸi rolÃ¼
+        /// daha sonra yazÄ±lÄ±m aÃ§Ä±ldÄ±ÄŸÄ±nda tekrar kullanmak iÃ§in ilgili servis aracÄ±lÄ±ÄŸÄ± ile kayÄ±t eden metod
         /// </summary>
         /// <param name="rolAdi"></param>
         /// <returns>
@@ -135,7 +135,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// YardimGoster ViewComponent sayfası açıldığında çalışan metod
+        /// YardimGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult YardimGoster(string sayfaAdi)
@@ -144,7 +144,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -159,7 +159,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// DosyaKontrol ViewComponent sayfası açıldığında çalışan metod
+        /// DosyaKontrol ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult DosyaKontrolGoster(string form)
@@ -168,7 +168,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// DenetimGorevlendirmeGoster ViewComponent sayfası açıldığında çalışan metod
+        /// DenetimGorevlendirmeGoster ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [HttpGet]
         public IActionResult DenetimGorevlendirmeGoster(string denetimKodu, int tip)
@@ -184,7 +184,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -199,7 +199,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servisden getirilmesi için
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servisden getirilmesi iÃ§in
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

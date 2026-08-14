@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki Grafik view ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki Grafik view ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class Grafik : IEntity
     {

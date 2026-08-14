@@ -17,7 +17,7 @@ namespace Risk.net.WebUI.Classes
     //https://stackoverflow.com/questions/63303699/net-core-3-1-web-application-with-react-how-to-prevent-access-based-on-active/63441045#63441045
 
     /// <summary>
-    /// Windows Authentication yöntemiyle Kullanıcı yetkilerinin alınmasını sağlayan sınıf
+    /// Windows Authentication yÃ¶ntemiyle KullanÄ±cÄ± yetkilerinin alÄ±nmasÄ±nÄ± saÄŸlayan sÄ±nÄ±f
     /// </summary>
     public class ClaimsLoader : IClaimsTransformation
     {
@@ -38,7 +38,7 @@ namespace Risk.net.WebUI.Classes
         {
             var identity = (ClaimsIdentity)principal.Identity;
 
-            //Daha önce cache'e yazılmışsa onu kullan
+            //Daha Ã¶nce cache'e yazÄ±lmÄ±ÅŸsa onu kullan
             if (!string.IsNullOrEmpty(identity.Name)
                  && _cache.TryGetValue(identity.Name, out ClaimsIdentity cachedIdentity))
             {
@@ -78,8 +78,8 @@ namespace Risk.net.WebUI.Classes
                         Risk.net.Utilities.Functions.Arac.ConvertToStr(item.Personel.KoordinatorlukKod) == ytk.KoordinatorlukKod &&
                         Risk.net.Utilities.Functions.Arac.ConvertToStr(item.Personel.BirimKod) == ytk.BirimKod))
                     {
-                        //item.Personel.Rol boş ise daha önce işlem yapılmamıştır. İlk tanımlı rol alınır
-                        //item.Personel.Rol dolu ise daha önce işlem yapılmış ama rol geri alınmış ise tekrar kullanmasın kontrolü
+                        //item.Personel.Rol boÅŸ ise daha Ã¶nce iÅŸlem yapÄ±lmamÄ±ÅŸtÄ±r. Ä°lk tanÄ±mlÄ± rol alÄ±nÄ±r
+                        //item.Personel.Rol dolu ise daha Ã¶nce iÅŸlem yapÄ±lmÄ±ÅŸ ama rol geri alÄ±nmÄ±ÅŸ ise tekrar kullanmasÄ±n kontrolÃ¼
 
                         aktifRolKod = ytk.Rol;
                         identity.AddClaim(new Claim(ClaimTypes.Role, ytk.Rol));
@@ -88,7 +88,7 @@ namespace Risk.net.WebUI.Classes
                     }
                 }
 
-                //eğer aktifRol doldurulamadı ise ilk rol set edilsin (Daha önce aktif olan rol geri alınmıştır)
+                //eÄŸer aktifRol doldurulamadÄ± ise ilk rol set edilsin (Daha Ã¶nce aktif olan rol geri alÄ±nmÄ±ÅŸtÄ±r)
                 if (aktifRolKod == "")
                 {
                     foreach (Risk.net.Data.Entities.ViewYetki ytk in sonuc.Liste)
@@ -113,10 +113,10 @@ namespace Risk.net.WebUI.Classes
             }
             else
             {
-                //Yazılımı kullanan kullanıcıya herhangi bir yetki verilmemiş ise
-                //cache yazılmasın
+                //YazÄ±lÄ±mÄ± kullanan kullanÄ±cÄ±ya herhangi bir yetki verilmemiÅŸ ise
+                //cache yazÄ±lmasÄ±n
                 identity.AddClaim(new Claim("AdiSoyadi", identity.Name));
-                identity.AddClaim(new Claim("Unvan", "Yetkisiz kullanıcı"));
+                identity.AddClaim(new Claim("Unvan", "Yetkisiz kullanÄ±cÄ±"));
                 identity.AddClaim(new Claim("ResimUrl", "https://icon-library.com/images/block-user-icon/block-user-icon-16.jpg"));
                 identity.AddClaim(new Claim("Adi", ""));
                 identity.AddClaim(new Claim("Soyadi", ""));
@@ -128,7 +128,7 @@ namespace Risk.net.WebUI.Classes
                 return new ClaimsPrincipal(identity);
             }
 
-            //Kullanıcının yetkileri alındıktan sonra cache yazılsın
+            //KullanÄ±cÄ±nÄ±n yetkileri alÄ±ndÄ±ktan sonra cache yazÄ±lsÄ±n
             _cache.Set(identity.Name, identity, DateTime.Now.AddHours(12));
 
             return new ClaimsPrincipal(identity);
@@ -136,7 +136,7 @@ namespace Risk.net.WebUI.Classes
     }
 
     /// <summary>
-    /// sayfalara giriş sırasında kullanıcıya verilen yetkilerin kontrol edildiği sınıf
+    /// sayfalara giriÅŸ sÄ±rasÄ±nda kullanÄ±cÄ±ya verilen yetkilerin kontrol edildiÄŸi sÄ±nÄ±f
     /// </summary>
     public class YetkiKontrol : AuthorizeAttribute, IAuthorizationFilter
     {
@@ -158,7 +158,7 @@ namespace Risk.net.WebUI.Classes
             if (identity.HasClaim(ClaimTypes.Role, "PLANLAMAUNITESI"))
                 return;
 
-            if (Yetkiler == "*")//Herhangi bir yetkisi var mı kontrolü
+            if (Yetkiler == "*")//Herhangi bir yetkisi var mÄ± kontrolÃ¼
             {
                 foreach (string tanimliYetki in Enum.GetNames(typeof(Risk.net.Utilities.Objects.ENUMKullaniciRol)))
                 {
@@ -173,7 +173,7 @@ namespace Risk.net.WebUI.Classes
                     }
                 }
             }
-            else//Belirli bir yetkisi var mı kontrolü
+            else//Belirli bir yetkisi var mÄ± kontrolÃ¼
             {
                 string[] parcalar = Yetkiler.Split(',', ';', ' ');
                 foreach (string parca in parcalar)

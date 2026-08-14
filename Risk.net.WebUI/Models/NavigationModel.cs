@@ -50,7 +50,7 @@ namespace Risk.net.WebUI.Models
                 if (item.Href.IsVoid() && item.Items.Any())
                     item.Type = ItemType.Sibling;
 
-                ///Yetki kontrolü
+                ///Yetki kontrolÃ¼
                 bool hasAccess = false;
                 if (item.Type != ItemType.Category)
                 {

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki AnahtarRiskGostergesi tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki AnahtarRiskGostergesi tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class AnahtarRiskGostergesi : EntityBase, IEntity
     {
@@ -79,12 +79,12 @@ namespace Risk.net.Data.Entities
                 {
                     //YD:belirsiz, YDSON:40
                     //KD:75,       KDSSON:belirsiz
-                    //SonDonemDeger:60 ise Sarı
-                    //SonDonemDeger:15 ise Yeşil (40 isede)
-                    //SonDonemDeger:85 ise Kırmızı (75 isede)
+                    //SonDonemDeger:60 ise SarÄ±
+                    //SonDonemDeger:15 ise YeÅŸil (40 isede)
+                    //SonDonemDeger:85 ise KÄ±rmÄ±zÄ± (75 isede)
 
                     if (SonDonemDeger >= KirmiziDeger) return "KIRMIZI";
-                    else if (SonDonemDeger <= YesilDeger) return "YEŞİL";
+                    else if (SonDonemDeger <= YesilDeger) return "YEÅÄ°L";
                     else return "SARI";
                 }
 
@@ -116,7 +116,7 @@ namespace Risk.net.Data.Entities
                     {
                         if (SonDeger2 > SonDeger1) return "ARTAN";
                         if (SonDeger2 < SonDeger1) return "AZALAN";
-                        else return "SABİT";
+                        else return "SABÄ°T";
                     }
                 }
 

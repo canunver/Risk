@@ -17,13 +17,13 @@ using System.Collections.Generic;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// OrtakService iþlemlerinin yapýldýðý servis
+    /// OrtakService iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class OrtakService
     {
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait birim koþulunu döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait birim koÅŸulunu dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="serviceCTE"></param>
@@ -31,11 +31,11 @@ namespace Risk.net.Services.Functions
         /// <param name="koordinatorlukKod"></param>
         /// <param name="birimKod"></param>
         /// <returns>
-        /// string türünde koþul bilgisi döndürür
+        /// string tÃ¼rÃ¼nde koÅŸul bilgisi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public static async Task<string[]> ListeleBirimKosulAsync(KullaniciDto kullanan, ICTEKoordinatorlukService serviceCTE, string tur, string koordinatorlukKod, string birimKod)
         {
-            string[] kosul = { "", "" };//[0] koordinatörlük, [1] birim
+            string[] kosul = { "", "" };//[0] koordinatÃ¶rlÃ¼k, [1] birim
 
             if (Arac.YetkisiVarmi("RISKSEKRETARYASI,PLANLAMAUNITESI,YETKILIRISKGOREVLISI,BASKAN,SISTEMYONETICISI", kullanan))
             {
@@ -57,7 +57,7 @@ namespace Risk.net.Services.Functions
                 Sonuc sonucListe = await serviceCTE.ListeleAsync(kullanan, qKriter);
                 foreach (CTEKoordinatorluk item in sonucListe.Liste)
                 {
-                    //Kriter olarak verilen koordinatörlük görmeye yetkili deðilse koþula ekleme
+                    //Kriter olarak verilen koordinatÃ¶rlÃ¼k gÃ¶rmeye yetkili deÄŸilse koÅŸula ekleme
                     if (!string.IsNullOrWhiteSpace(koordinatorlukKod) && item.Kod != koordinatorlukKod) continue;
 
                     gorebilecekleri.Add(item.Kod);
@@ -77,13 +77,13 @@ namespace Risk.net.Services.Functions
             }
             else if (Arac.YetkisiVarmi("ILKOORDINATOR,MERKEZKOORDINATOR,ICDENETIMKOORDINATOR,BIRIMAMIRI", kullanan))
             {
-                kosul[0] = kullanan.KoordinatorlukKod;//kendi Koordinatörlüðü
+                kosul[0] = kullanan.KoordinatorlukKod;//kendi KoordinatÃ¶rlÃ¼ÄŸÃ¼
                 if (!string.IsNullOrWhiteSpace(birimKod))
                     kosul[1] = birimKod;
             }
             else if (Arac.YetkisiVarmi("ICDENETIMUZMANI,UZMAN", kullanan))
             {
-                kosul[0] = kullanan.KoordinatorlukKod;//kendi Koordinatörlüðü
+                kosul[0] = kullanan.KoordinatorlukKod;//kendi KoordinatÃ¶rlÃ¼ÄŸÃ¼
                 kosul[1] = kullanan.BirimKod;//kendi Birimi
             }
             else

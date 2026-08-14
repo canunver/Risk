@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki ViewKoordinatorluk view ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki ViewKoordinatorluk view ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class ViewKoordinatorluk : IEntity
     {
@@ -28,12 +28,12 @@ namespace Risk.net.Data.Entities
 
         /*  Tur : EnumKoordinatorlukTur
 
-            10:Başkan
-            20:Genel Koordinator, 21:İç Kontrol, 22:Hukuk
+            10:BaÅŸkan
+            20:Genel Koordinator, 21:Ä°Ã§ Kontrol, 22:Hukuk
             30:Merkez
-            40:İl Koordinator
+            40:Ä°l Koordinator
             
-            Üst Yetki
+            Ãœst Yetki
             10:10
             20:10
             30:20

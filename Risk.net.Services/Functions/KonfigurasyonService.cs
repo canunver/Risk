@@ -13,33 +13,33 @@ using System.Collections.Generic;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// Konfigurasyon işlemlerinin yapıldığı servis
+    /// Konfigurasyon iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class KonfigurasyonService : IKonfigurasyonService
     {
         /// <summary>
-        /// IUnitOfWork<Konfigurasyon> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<Konfigurasyon> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<Konfigurasyon> _unitOfWork;
         /// <summary>
-        /// IUnitOfWork<TanimGenel> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<TanimGenel> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<TanimGenel> _unitOfWorkGenel;
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.KonfigurasyonService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.KonfigurasyonService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="unitOfWorkGenel"></param>
@@ -57,12 +57,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="durum"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, int durum)
         {
@@ -97,7 +97,7 @@ namespace Risk.net.Services.Functions
 
                 if (durum != (int)ENUMDurum.Onayli)
                     kayit = onaysiz;
-                else if (kayit.Kod == "")//Onaylı kayıt istendi ve yoksa
+                else if (kayit.Kod == "")//OnaylÄ± kayÄ±t istendi ve yoksa
                     kayit = onaysiz;
 
                 return new Sonuc(ENUMIslemDurum.Basarili, kayit);
@@ -109,11 +109,11 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan)
         {
@@ -126,12 +126,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, Konfigurasyon gelenNesne)
         {
@@ -150,7 +150,7 @@ namespace Risk.net.Services.Functions
             {
                 if (!string.IsNullOrWhiteSpace(gelenNesne.Kod))
                 {
-                    //Onaylı kayıt kayıt edilmek isteniyorsa revize yapılıyordur
+                    //OnaylÄ± kayÄ±t kayÄ±t edilmek isteniyorsa revize yapÄ±lÄ±yordur
                     var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
                     if (eskiKayit.Durum == (int)ENUMDurum.Onayli)
                         gelenNesne.Kod = "";
@@ -190,12 +190,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, Konfigurasyon gelenNesne)
         {
@@ -215,7 +215,7 @@ namespace Risk.net.Services.Functions
             {
                 var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-                //Onaylı belge, onaya gönderilmez
+                //OnaylÄ± belge, onaya gÃ¶nderilmez
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum == (int)ENUMDurum.Onayli)
                     hata += "<li>" + _sharedResource["Kontrol.DurumDegistir.ZatenOnayli"] + "</li>";
 
@@ -229,7 +229,7 @@ namespace Risk.net.Services.Functions
 
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum != (int)ENUMDurum.Onayli)
                 {
-                    //Onaylı kayıtların hepsini iptal durumuna getir
+                    //OnaylÄ± kayÄ±tlarÄ±n hepsini iptal durumuna getir
                     var oListe = await _unitOfWork.SorguHazirlaAsync(x => x.Durum == (int)ENUMDurum.Onayli);
                     var kayitlar = oListe.Cast<Konfigurasyon>().ToList();
                     kayitlar.ForEach(a => a.Durum = (int)ENUMDurum.Pasif);
@@ -241,9 +241,9 @@ namespace Risk.net.Services.Functions
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli)
                 {
 
-                    //Tarihçe Başlangıç
+                    //TarihÃ§e BaÅŸlangÄ±Ã§
 
-                    //EtkiOlasilikMatrisi alanı json olduğu için sadece değişen json alanlarını almak için 
+                    //EtkiOlasilikMatrisi alanÄ± json olduÄŸu iÃ§in sadece deÄŸiÅŸen json alanlarÄ±nÄ± almak iÃ§in 
                     var eski = Newtonsoft.Json.Linq.JToken.Parse(eskiKayit.EtkiOlasilikMatrisi);
                     var yeni = Newtonsoft.Json.Linq.JToken.Parse(gelenNesne.EtkiOlasilikMatrisi);
                     var degisen = Arac.DegisenleriBul(yeni, eski);
@@ -259,7 +259,7 @@ namespace Risk.net.Services.Functions
                     }
                     //-----------------------------------------------------------------------------------------
 
-                    //RiskKategoriFinansal alanı json olduğu için sadece değişen json alanlarını almak için 
+                    //RiskKategoriFinansal alanÄ± json olduÄŸu iÃ§in sadece deÄŸiÅŸen json alanlarÄ±nÄ± almak iÃ§in 
                     eski = Newtonsoft.Json.Linq.JToken.Parse(eskiKayit.RiskKategoriFinansal);
                     yeni = Newtonsoft.Json.Linq.JToken.Parse(gelenNesne.RiskKategoriFinansal);
                     degisen = Arac.DegisenleriBul(yeni, eski);
@@ -308,7 +308,7 @@ namespace Risk.net.Services.Functions
                     tarihce.YeniDeger = Arac.JSONSerialize(tarihce_YeniKayit);
 
                     var sonuc = await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                    //Tarihçe Bitiş
+                    //TarihÃ§e BitiÅŸ
 
                     eskiKayit.AzaltmaPlaniBitis = gelenNesne.AzaltmaPlaniBitis;
                     eskiKayit.AzaltmaPlaniOlusturulmadi = gelenNesne.AzaltmaPlaniOlusturulmadi;
@@ -331,18 +331,18 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait etki kriteri adını döndüren metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait etki kriteri adÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="seviye"></param>
         /// <param name="riskKategorisi"></param>
         /// <returns>
-        /// Etki kriter adını göndürür
+        /// Etki kriter adÄ±nÄ± gÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<string> EtkiKriteriAdiVer(KullaniciDto kullanan, int seviye, string riskKategorisi)
         {
             //riskKategorisi==>FINANSAL, TEKNOLOJIK, ITIBAR, UYUM, STRATEJIK, OPERASYON
-            //seviye==>1 ile 5 arası
+            //seviye==>1 ile 5 arasÄ±
 
             string donenDeger = "";
             if (!string.IsNullOrWhiteSpace(riskKategorisi))
@@ -387,13 +387,13 @@ namespace Risk.net.Services.Functions
 
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait yapısal risk seviyesini döndüren metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait yapÄ±sal risk seviyesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="etki"></param>
         /// <param name="olasilik"></param>
         /// <returns>
-        /// Yapısal risk seviyesini göndürür
+        /// YapÄ±sal risk seviyesini gÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> YapisalRiskSeviyesiVer(KullaniciDto kullanan, int etki, int olasilik)
         {
@@ -423,11 +423,11 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Etki olasılık matrisine ait tüm bilgileri döndüren metod
+        /// Etki olasÄ±lÄ±k matrisine ait tÃ¼m bilgileri dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// object nesnesi döndürür
+        /// object nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> EtkiOlasilikMatrisiVer(KullaniciDto kullanan)
         {
@@ -451,12 +451,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere ait artık risk seviyesini döndüren metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere ait artÄ±k risk seviyesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="artikRiskPuani"></param>
         /// <returns>
-        /// object nesnesi döndürür
+        /// object nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> ArtikRiskSeviyesiVer(KullaniciDto kullanan, double artikRiskPuani)
         {
@@ -475,12 +475,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile talep edilen bilgiye göre yetki bilgisini döndüren metod
+        /// Istemciden parametere ile talep edilen bilgiye gÃ¶re yetki bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="tur"></param>
         /// <returns>
-        /// string türünde yetki bilgisi döndürür
+        /// string tÃ¼rÃ¼nde yetki bilgisi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string YetkisiVarmi(KullaniciDto kullanan, string tur)
         {

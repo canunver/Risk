@@ -12,7 +12,7 @@ namespace Risk.net.Services.Extensions
     {
         /// 
         /// <summary>
-        /// Yazılımda yer alan Entity ve Servicelerin gelen her bir web requesti için bir instance oluşturması ve gelen her aynı requestte aynı instance'ı kullanılmasını, farklı web requestler içinde yeni bir instance oluşturmasını sağlamak için kullanılan metod
+        /// YazÄ±lÄ±mda yer alan Entity ve Servicelerin gelen her bir web requesti iÃ§in bir instance oluÅŸturmasÄ± ve gelen her aynÄ± requestte aynÄ± instance'Ä± kullanÄ±lmasÄ±nÄ±, farklÄ± web requestler iÃ§inde yeni bir instance oluÅŸturmasÄ±nÄ± saÄŸlamak iÃ§in kullanÄ±lan metod
         /// </summary>
         /// <param name="serviceCollection"></param>
         public static IServiceCollection LoadMyServices(this IServiceCollection serviceCollection)

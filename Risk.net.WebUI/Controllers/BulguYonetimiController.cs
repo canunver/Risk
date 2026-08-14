@@ -15,29 +15,29 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Bulgu Yönetimi işlemlerinin yapıldığı sayfa
+    /// Bulgu YÃ¶netimi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class BulguYonetimiController : GenelController
     {
         /// <summary>
-        /// IBulguYonetimiService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiService _service;
         /// <summary>
-        /// IDenetimService servisine ulaşmak için kullanılan değişken
+        /// IDenetimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _serviceDenetim;
         /// <summary>
-        /// IBulguYonetimiCevapService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiCevapService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiCevapService _serviceCevap;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.BulguYonetimiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.BulguYonetimiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceCevap"></param>
@@ -57,7 +57,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// BulguYonetimi View sayfası açıldığında çalışan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayı görme yetkisi olan kullanıcılar belirlenir
+        /// BulguYonetimi View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod. <see cref="Risk.net.WebUI.Classes.YetkiKontrol" /> metodu ile sayfayÄ± gÃ¶rme yetkisi olan kullanÄ±cÄ±lar belirlenir
         /// </summary>
         [YetkiKontrol(Yetkiler = "ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI")]//Yetki Tamam
         [Route("/BulguYonetimi/{denetimKodu}")]
@@ -81,9 +81,9 @@ namespace Risk.net.WebUI.Controllers
                 yil = denetim.Yil;
                 kaynak = denetim.Kaynak;
                 if (denetim.Kaynak == 1)
-                    kaynakAdi = "İç Denetim";
+                    kaynakAdi = "Ä°Ã§ Denetim";
                 else
-                    kaynakAdi = "Dış Denetim";
+                    kaynakAdi = "DÄ±ÅŸ Denetim";
 
                 foreach (var item in denetim.Birimler)
                 {
@@ -94,7 +94,7 @@ namespace Risk.net.WebUI.Controllers
                 return RedirectToAction("AccessDenied", "Account");
 
 
-            //BUlgu değiştirme yetkisi vr mı?
+            //BUlgu deÄŸiÅŸtirme yetkisi vr mÄ±?
             bool kaydetYetki = false;
             Denetim kayit = (Denetim)sonuc.Nesne;
             foreach (DenetimDenetci item in kayit.Denetciler)
@@ -139,8 +139,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -160,7 +160,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -189,7 +189,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -205,7 +205,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -226,7 +226,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -246,7 +246,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın durumunun değiştirilmesini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n durumunun deÄŸiÅŸtirilmesini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -263,7 +263,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın İzleme Takip bilgilerini değiştiren metod
+        /// Listeden seÃ§ilen kaydÄ±n Ä°zleme Takip bilgilerini deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -280,7 +280,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="nesne"></param>
         /// <returns>
@@ -308,7 +308,7 @@ namespace Risk.net.WebUI.Controllers
                     personelListe.Add(item.IlgiliPersonelKod);
             }
 
-            if (string.IsNullOrWhiteSpace(bulguKod) || personelListe.Count == 0) return Ok(new Sonuc(ENUMIslemDurum.Uyari, "Bulgu Kod bilgisi olmadığı için işlem yapılamadı"));
+            if (string.IsNullOrWhiteSpace(bulguKod) || personelListe.Count == 0) return Ok(new Sonuc(ENUMIslemDurum.Uyari, "Bulgu Kod bilgisi olmadÄ±ÄŸÄ± iÃ§in iÅŸlem yapÄ±lamadÄ±"));
 
             sonuc = await _serviceCevap.BilgiEPostaGonderAsync(_kullanan, bulguKod, personelListe);
 
@@ -316,7 +316,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -337,7 +337,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen nihai görüş bilgilerini ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen nihai gÃ¶rÃ¼ÅŸ bilgilerini ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

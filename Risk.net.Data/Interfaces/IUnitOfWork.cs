@@ -7,128 +7,128 @@ using System.Threading.Tasks;
 namespace Risk.net.Data.Interfaces
 {
     /// <summary>
-    /// Veritabanı ile yapılacak olan tüm işlemleri, tek bir kanal aracılığı ile gerçekleştirme ve hafızada tutma işlemlerini sunmaktadır.Bu sayede işlemlerin toplu halde gerçekleştirilmesi ve hata durumunda geri alınabilmesi sağlamaktadır.
+    /// VeritabanÄ± ile yapÄ±lacak olan tÃ¼m iÅŸlemleri, tek bir kanal aracÄ±lÄ±ÄŸÄ± ile gerÃ§ekleÅŸtirme ve hafÄ±zada tutma iÅŸlemlerini sunmaktadÄ±r.Bu sayede iÅŸlemlerin toplu halde gerÃ§ekleÅŸtirilmesi ve hata durumunda geri alÄ±nabilmesi saÄŸlamaktadÄ±r.
     /// </summary>
     public interface IUnitOfWork<TEntity> : IAsyncDisposable where TEntity : class, IEntity, new()
     {
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kaydın (tek) döndürmeyi sağlayan metodun arayüzü
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kaydÄ±n (tek) dÃ¶ndÃ¼rmeyi saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="stringIncludes"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<TEntity> KayitGetirAsync(Expression<Func<TEntity, bool>> kosul, string stringIncludes = "", params Expression<Func<TEntity, object>>[] includeProperties);
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kayıtları döndürmeyi sağlayan metodun arayüzü
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kayÄ±tlarÄ± dÃ¶ndÃ¼rmeyi saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="siralama"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<IList<TEntity>> ListeleAsync(Expression<Func<TEntity, bool>> kosul = null, Expression<Func<TEntity, object>> siralama = null, params Expression<Func<TEntity, object>>[] includeProperties);
 
         /// <summary>
-        /// entity'ye ait tabloya parametre olarak gelen entity sınıfının kayıt (insert) edilmesini sağlayan metodun arayüzü
+        /// entity'ye ait tabloya parametre olarak gelen entity sÄ±nÄ±fÄ±nÄ±n kayÄ±t (insert) edilmesini saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıt edilen Entity nesnesi döndürür
+        /// KayÄ±t edilen Entity nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<TEntity> KayitEkleAsync(TEntity entity);
 
         /// <summary>
-        /// entity'ye ait tabloya parametre olarak gelen entity sınıfının kayıt (update) edilmesini sağlayan metodun arayüzü
+        /// entity'ye ait tabloya parametre olarak gelen entity sÄ±nÄ±fÄ±nÄ±n kayÄ±t (update) edilmesini saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıt edilen Entity nesnesi döndürür
+        /// KayÄ±t edilen Entity nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<TEntity> GuncelleAsync(TEntity entity);
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kayıtları silmeyi sağlayan metodun arayüzü
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kayÄ±tlarÄ± silmeyi saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kosul"></param>
         Task SilAsync(Expression<Func<TEntity, bool>> kosul);
 
         /// <summary>
-        /// entity'ye ait tabloda, parametre olarak gelen koşul ile sorgulayıp veri olmasını kontrol eden metodun arayüzü
+        /// entity'ye ait tabloda, parametre olarak gelen koÅŸul ile sorgulayÄ±p veri olmasÄ±nÄ± kontrol eden metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="kosul"></param>
         /// <returns>
-        /// bool dondürür
+        /// bool dondÃ¼rÃ¼r
         /// </returns>
         Task<bool> VarmiAsync(Expression<Func<TEntity, bool>> kosul);
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp kayıt sayısını  almayı sağlayan metodun arayüzü
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p kayÄ±t sayÄ±sÄ±nÄ±  almayÄ± saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kosul"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<int> KayitSayisiAsync(Expression<Func<TEntity, bool>> kosul);
 
         /// <summary>
-        /// entity'ye ait tablodaki kayıt sayısını almayı sağlayan metodun arayüzü
+        /// entity'ye ait tablodaki kayÄ±t sayÄ±sÄ±nÄ± almayÄ± saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<int> KayitSayisiAsync();
 
         /// <summary>
-        /// entity'ye ait tablodan sorgulma yapılması için koşulların IQueryable nesnesine eklenmesini sağlayan metodun arayüzü
+        /// entity'ye ait tablodan sorgulma yapÄ±lmasÄ± iÃ§in koÅŸullarÄ±n IQueryable nesnesine eklenmesini saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="stringIncludes"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<IQueryable<TEntity>> SorguHazirlaAsync(Expression<Func<TEntity, bool>> kosul, string stringIncludes = "", params Expression<Func<TEntity, object>>[] includeProperties);
 
         /// <summary>
-        /// Önceden oluşturulan IQueryable nesnesine ek koşulların eklenmesini sağlayan metodun arayüzü
+        /// Ã–nceden oluÅŸturulan IQueryable nesnesine ek koÅŸullarÄ±n eklenmesini saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="query"></param>
         /// <param name="kosul"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<IQueryable<TEntity>> KosulEkleAsync(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> kosul);
 
         /// <summary>
-        /// Raporlara ve grafiklere ait sql cümlelerinin çalıştırılmasını sağlayan metodun arayüzü
+        /// Raporlara ve grafiklere ait sql cÃ¼mlelerinin Ã§alÄ±ÅŸtÄ±rÄ±lmasÄ±nÄ± saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="sql"></param>
         /// <returns>
-        /// Sorgulama sonucunda alınan verilerin Entity tipinde Listesi
+        /// Sorgulama sonucunda alÄ±nan verilerin Entity tipinde Listesi
         /// </returns>
         Task<IList<TEntity>> SQLCalistirAsync(string sql);
 
         /// <summary>
-        /// Toplu güncelleme veya silme işlemlerinin yapılması için sql cümlelerinin çalıştırılmasını sağlayan metodun arayüzü
+        /// Toplu gÃ¼ncelleme veya silme iÅŸlemlerinin yapÄ±lmasÄ± iÃ§in sql cÃ¼mlelerinin Ã§alÄ±ÅŸtÄ±rÄ±lmasÄ±nÄ± saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <param name="sql"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<int> SQLNonQueryCalistirAsync(string sql);
 
         /// <summary>
-        /// Kaydet, Güncelleme ve Silme işlemleri sonucunda commit işleminin yapılmasını sağlayan metodun arayüzü
+        /// Kaydet, GÃ¼ncelleme ve Silme iÅŸlemleri sonucunda commit iÅŸleminin yapÄ±lmasÄ±nÄ± saÄŸlayan metodun arayÃ¼zÃ¼
         /// </summary>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         Task<int> KaydetAsync();
     }

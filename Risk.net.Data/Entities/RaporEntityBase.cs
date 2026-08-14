@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// RaporEntityBase den türüyen tüm Entity lere ortak alanların eklenmesini sağlayan base sınıftır
+    /// RaporEntityBase den tÃ¼rÃ¼yen tÃ¼m Entity lere ortak alanlarÄ±n eklenmesini saÄŸlayan base sÄ±nÄ±ftÄ±r
     /// </summary>
     public abstract class RaporEntityBase
     {

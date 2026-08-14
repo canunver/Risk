@@ -19,43 +19,43 @@ using Microsoft.EntityFrameworkCore.Metadata;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// GrafikService işlemlerinin yapıldığı servis
+    /// GrafikService iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class GrafikService : IGrafikService
     {
         /// <summary>
-        /// IUnitOfWork<Grafik> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<Grafik> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<Grafik> _unitOfWork;
         /// <summary>
-        /// IUnitOfWork<GrafikIzlemeMatrisi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<GrafikIzlemeMatrisi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<GrafikIzlemeMatrisi> _unitOfWorkIzlemeMatris;
         /// <summary>
-        /// IUnitOfWork<GrafikRiskYonetimi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<GrafikRiskYonetimi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<GrafikRiskYonetimi> _unitOfWorkRiskYonetimi;
         /// <summary>
-        /// IUnitOfWork<RaporTrend> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<RaporTrend> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RaporTrend> _unitOfWorkRaporTrend;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTE;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.GrafikService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.GrafikService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="unitOfWorkIzlemeMatris"></param>
@@ -79,12 +79,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// BulguDurumu için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// BulguDurumu iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> BulguDurumuHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -124,12 +124,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// BulguOnemDuzeyi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// BulguOnemDuzeyi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> BulguOnemDuzeyiHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -170,12 +170,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Surec için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Surec iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SurecHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -211,12 +211,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// YapisalRiskSeviyesi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// YapisalRiskSeviyesi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> YapisalRiskSeviyesiHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -261,12 +261,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// ArtıkRiskSeviyesi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// ArtÄ±kRiskSeviyesi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ArtikRiskSeviyesiHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -309,12 +309,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// RiskPuani için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// RiskPuani iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskPuaniHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -354,12 +354,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// RiskKategorileri için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// RiskKategorileri iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskKategorileriHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -404,12 +404,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// RiskIzlemeMatrisi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// RiskIzlemeMatrisi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         //public async Task<Sonuc> RiskIzlemeMatrisiHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         //{
@@ -516,12 +516,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// RiskYonetimi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// RiskYonetimi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskYonetimiHazirlaAsync(KullaniciDto kullanan, GrafikRiskYonetimi kriter)
         {
@@ -574,12 +574,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// BulguOnemDuzeyi için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// BulguOnemDuzeyi iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> AnahtarRiskGostergesiHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -636,12 +636,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// BulguDurumu için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// BulguDurumu iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskeVerilenYanitHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -684,12 +684,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Performans İzleme için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Performans Ä°zleme iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> PerformansIzlemeHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -718,8 +718,8 @@ namespace Risk.net.Services.Functions
             var kayitlar = new List<Grafik>();
 
 
-            //Risk bildiriminin Risk Sekretaryası tarafından  onaylanması ile kaydının tamamlanması ile riske cevap verilmesi arasında geçen ortalama süre
-            //**Risk Kaydı ekranında kaydın Risk Sekretaryası tarafından onaylanması ile Risklerin Değerlendirilmesi ekranında kaydın onaylanması arasında geçen ortalama süre**
+            //Risk bildiriminin Risk SekretaryasÄ± tarafÄ±ndan  onaylanmasÄ± ile kaydÄ±nÄ±n tamamlanmasÄ± ile riske cevap verilmesi arasÄ±nda geÃ§en ortalama sÃ¼re
+            //**Risk KaydÄ± ekranÄ±nda kaydÄ±n Risk SekretaryasÄ± tarafÄ±ndan onaylanmasÄ± ile Risklerin DeÄŸerlendirilmesi ekranÄ±nda kaydÄ±n onaylanmasÄ± arasÄ±nda geÃ§en ortalama sÃ¼re**
 
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
@@ -740,8 +740,8 @@ namespace Risk.net.Services.Functions
 
 
 
-            //Bir önceki yıla göre azalan olay raporlaması sayısı * *
-            //Örneğin geçen sene 10 tane olay girilip onaylanmış, bu sene 8 tane girilmiş onaylanmış, bir önceki yıla göre azalan olay raporlama sayısı 2 olarak görünecek
+            //Bir Ã¶nceki yÄ±la gÃ¶re azalan olay raporlamasÄ± sayÄ±sÄ± * *
+            //Ã–rneÄŸin geÃ§en sene 10 tane olay girilip onaylanmÄ±ÅŸ, bu sene 8 tane girilmiÅŸ onaylanmÄ±ÅŸ, bir Ã¶nceki yÄ±la gÃ¶re azalan olay raporlama sayÄ±sÄ± 2 olarak gÃ¶rÃ¼necek
             sql = "SELECT";
             sql += " CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,";
             sql += " (SELECT COUNT(*) FROM OlayRaporlama WHERE Durum = 10 AND YEAR(OlayRaporlama.KayitTarihi) = YEAR(GETDATE())-1";
@@ -765,8 +765,8 @@ namespace Risk.net.Services.Functions
                 kayitlar.Add(new Grafik());
 
 
-            //Mevcut kontroller ile risk iştahının altına düşürülen risklerin sayısı **
-            //Risklerin değerlendirilmesi ekranında bir risk kaydı için(yapısal risk seviyesi orta, yüksek veya çok yüksekken) kontroller uygulandıktan sonra artık risk seviyesi risk iştahının altına düşen(Düşük ve Çok Düşük olan) ve onaylı risk sayısı**
+            //Mevcut kontroller ile risk iÅŸtahÄ±nÄ±n altÄ±na dÃ¼ÅŸÃ¼rÃ¼len risklerin sayÄ±sÄ± **
+            //Risklerin deÄŸerlendirilmesi ekranÄ±nda bir risk kaydÄ± iÃ§in(yapÄ±sal risk seviyesi orta, yÃ¼ksek veya Ã§ok yÃ¼ksekken) kontroller uygulandÄ±ktan sonra artÄ±k risk seviyesi risk iÅŸtahÄ±nÄ±n altÄ±na dÃ¼ÅŸen(DÃ¼ÅŸÃ¼k ve Ã‡ok DÃ¼ÅŸÃ¼k olan) ve onaylÄ± risk sayÄ±sÄ±**
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
                     COUNT(*) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
@@ -785,8 +785,8 @@ namespace Risk.net.Services.Functions
                 kayitlar.Add(new Grafik());
 
 
-            //Risk azaltma planlarının uygulanması sonrası risk iştahının altına düşürülen risklerin sayısı **
-            //Risklerin yönetilmesi ekranında bir risk kaydı için(artık risk seviyesi orta, yüksek veya çok yüksekken) azaltma planı oluşturulup onaylandıktan sonra artık risk seviyesi risk iştahının altına düşen(Düşük ve Çok Düşük olan) risk sayısı**
+            //Risk azaltma planlarÄ±nÄ±n uygulanmasÄ± sonrasÄ± risk iÅŸtahÄ±nÄ±n altÄ±na dÃ¼ÅŸÃ¼rÃ¼len risklerin sayÄ±sÄ± **
+            //Risklerin yÃ¶netilmesi ekranÄ±nda bir risk kaydÄ± iÃ§in(artÄ±k risk seviyesi orta, yÃ¼ksek veya Ã§ok yÃ¼ksekken) azaltma planÄ± oluÅŸturulup onaylandÄ±ktan sonra artÄ±k risk seviyesi risk iÅŸtahÄ±nÄ±n altÄ±na dÃ¼ÅŸen(DÃ¼ÅŸÃ¼k ve Ã‡ok DÃ¼ÅŸÃ¼k olan) risk sayÄ±sÄ±**
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
                     COUNT(*) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
@@ -805,8 +805,8 @@ namespace Risk.net.Services.Functions
 
 
 
-            //Yıl içinde risk yönetimi yazılımı üzerinden risk belirleyen personel sayısının tüm personele oranı **
-            //Yıl içinde risk kaydı ekranında risk kaydeden(ve onaylı durumuna geçen) personel sayısının tüm personele oranı * *
+            //YÄ±l iÃ§inde risk yÃ¶netimi yazÄ±lÄ±mÄ± Ã¼zerinden risk belirleyen personel sayÄ±sÄ±nÄ±n tÃ¼m personele oranÄ± **
+            //YÄ±l iÃ§inde risk kaydÄ± ekranÄ±nda risk kaydeden(ve onaylÄ± durumuna geÃ§en) personel sayÄ±sÄ±nÄ±n tÃ¼m personele oranÄ± * *
             sql = "SELECT";
             sql += " CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,";
             sql += " CONVERT(int, ROUND((CONVERT(decimal, 100 * (SELECT COUNT(*) FROM (SELECT COUNT(*) AS PERSONELSAYISI FROM RiskEvreni";
@@ -822,7 +822,7 @@ namespace Risk.net.Services.Functions
                 sql += " AND " + OrtakService.KosulOl("RiskEvreni.KayitTarihi", "<=", kriter.sorguTarihi2.Value);
 
             sql += " GROUP BY RiskEvreni.RiskSahibiKod) AS PERSONELSAYISI))";
-            sql += " / ";//----------------------Sonraki SQL 0 döndüğünde 0 bölünme hatası alıyoruz 
+            sql += " / ";//----------------------Sonraki SQL 0 dÃ¶ndÃ¼ÄŸÃ¼nde 0 bÃ¶lÃ¼nme hatasÄ± alÄ±yoruz 
             sql += " (SELECT COUNT(*) FROM ViewPersonel WHERE 1=1";
 
             if (!string.IsNullOrEmpty(kriter.KoordinatorlukKod))
@@ -844,14 +844,14 @@ namespace Risk.net.Services.Functions
 
 
 
-            //Yıl içinde oluşturulan risk azaltma planı sayısının yıl içinde belirlenen risklere oranı * *
-            //Yıl içinde risklerin yönetilmesi ekranında onaylanan risk azaltma planı sayısının yıl içinde risk kaydı ekranında onaylanan risklere oranı * *
+            //YÄ±l iÃ§inde oluÅŸturulan risk azaltma planÄ± sayÄ±sÄ±nÄ±n yÄ±l iÃ§inde belirlenen risklere oranÄ± * *
+            //YÄ±l iÃ§inde risklerin yÃ¶netilmesi ekranÄ±nda onaylanan risk azaltma planÄ± sayÄ±sÄ±nÄ±n yÄ±l iÃ§inde risk kaydÄ± ekranÄ±nda onaylanan risklere oranÄ± * *
             sql = @"SELECT ";
             sql += " CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,";
             sql += " CONVERT(int, ROUND((CONVERT(decimal, 100 * (SELECT COUNT(*) FROM RiskAzaltmaPlani WHERE RiskAzaltmaPlani.Durum=10 ";
 
             if (!string.IsNullOrEmpty(kriter.KoordinatorlukKod))
-                sql += " AND " + OrtakService.KosulOl("RiskAzaltmaPlani.SorumluKoordinatorlukKod", "=", kriter.KoordinatorlukKod);//RiskAzaltmaPlani.KoordinatorlukKod alanı yok SorumluKoordinatorlukKod var. Melih 28.07.2023
+                sql += " AND " + OrtakService.KosulOl("RiskAzaltmaPlani.SorumluKoordinatorlukKod", "=", kriter.KoordinatorlukKod);//RiskAzaltmaPlani.KoordinatorlukKod alanÄ± yok SorumluKoordinatorlukKod var. Melih 28.07.2023
             if (!string.IsNullOrEmpty(kriter.BirimKod))
                 sql += " AND " + OrtakService.KosulOl("RiskAzaltmaPlani.BirimKod", "=", kriter.BirimKod);
             if (kriter.sorguTarihi1.HasValue)
@@ -859,7 +859,7 @@ namespace Risk.net.Services.Functions
             if (kriter.sorguTarihi2.HasValue)
                 sql += " AND " + OrtakService.KosulOl("RiskAzaltmaPlani.KayitTarihi", "<=", kriter.sorguTarihi2.Value);
 
-            sql += ")) / "; //----------------------Sonraki SQL 0 döndüğünde 0 bölünme hatası alıyoruz 
+            sql += ")) / "; //----------------------Sonraki SQL 0 dÃ¶ndÃ¼ÄŸÃ¼nde 0 bÃ¶lÃ¼nme hatasÄ± alÄ±yoruz 
 
             sql += "(SELECT COUNT(*) FROM RiskEvreni WHERE RiskEvreni.Durum=10 ";
 
@@ -893,12 +893,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// KRITolerans için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// KRITolerans iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KRIToleransHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -964,12 +964,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// KRITolerans için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// KRITolerans iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KRIToleransPieHazirlaAsync(KullaniciDto kullanan, Grafik kriter)
         {
@@ -996,10 +996,10 @@ namespace Risk.net.Services.Functions
                     from( 
                     select re.KoordinatorlukKod, re.BirimKod,
                     case  
-                    when (arg.GerceklesenDeger is null OR arg.GerceklesenDeger = 0) then 'Henüz değerlendirilmemiş' 
-                    when arg.GerceklesenDeger >= arg.KirmiziDeger then 'Kırmızı' 
-                    when arg.GerceklesenDeger <= arg.YesilDeger then 'Yeşil' 
-                    else 'Sarı' END Durum 
+                    when (arg.GerceklesenDeger is null OR arg.GerceklesenDeger = 0) then 'HenÃ¼z deÄŸerlendirilmemiÅŸ' 
+                    when arg.GerceklesenDeger >= arg.KirmiziDeger then 'KÄ±rmÄ±zÄ±' 
+                    when arg.GerceklesenDeger <= arg.YesilDeger then 'YeÅŸil' 
+                    else 'SarÄ±' END Durum 
                     FROM RiskEvreni re 
                     INNER JOIN RiskYonetimi ry ON ry.RiskEvreniKod = re.Kod 
                     LEFT JOIN RiskAzaltmaPlani ra ON ra.RiskYonetimiKod = ry.Kod
@@ -1030,12 +1030,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// KRIToleransPaneli için, istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// KRIToleransPaneli iÃ§in, istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KRIToleransPaneliHazirlaAsync(KullaniciDto kullanan, GrafikRiskYonetimi kriter)
         {

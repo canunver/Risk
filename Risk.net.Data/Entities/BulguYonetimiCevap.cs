@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki BulguYonetimiCevap tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki BulguYonetimiCevap tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class BulguYonetimiCevap : EntityBase, IEntity
     {
@@ -56,7 +56,7 @@ namespace Risk.net.Data.Entities
         public int Durum { get; set; }
 
         [Column(TypeName = "int")]
-        public int Tur { get; set; }//1 Eylem 2 İzleme Takip
+        public int Tur { get; set; }//1 Eylem 2 Ä°zleme Takip
 
         [Column(TypeName = "varchar(5000)")]
         public string NedenBulguKatilmiyor { get; set; }

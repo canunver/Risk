@@ -10,23 +10,23 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// DosyaKontrol işlemlerinin yapıldığı sayfa
+    /// DosyaKontrol iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class DosyaKontrolViewComponent : ViewComponent
     {
         /// <summary>
-        /// IDosyaService servisine ulaşmak için kullanılan değişken
+        /// IDosyaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDosyaService _service;
         /// <summary>
-        /// Kullanıcı bilgisini taşıyan değişken
+        /// KullanÄ±cÄ± bilgisini taÅŸÄ±yan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly KullaniciDto _kullanan;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.DosyaKontrolViewComponent" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.DosyaKontrolViewComponent" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -39,7 +39,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// DosyaKontrol ViewComponent sayfası açıldığında çalışan metod.
+        /// DosyaKontrol ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         /// <param name="baglantiKod"></param>
         [HttpPost]

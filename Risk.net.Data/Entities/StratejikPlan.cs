@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki StratejikPlan tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki StratejikPlan tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class StratejikPlan : EntityBase, IEntity
     {
@@ -83,12 +83,12 @@ namespace Risk.net.Data.Entities
         //            if (adlar != "") adlar += ", ";
         //            adlar += item.Koordinatorluk?.Adi + "-" + item.Birim?.Adi;
 
-        //            if (item.Koordinatorluk.Adi.IndexOf(" İl ") > -1)
+        //            if (item.Koordinatorluk.Adi.IndexOf(" Ä°l ") > -1)
         //                sayac++;
         //        }
 
         //        if (sayac == 42)
-        //            adlar = "Bütün İl Koordinatörlükleri";
+        //            adlar = "BÃ¼tÃ¼n Ä°l KoordinatÃ¶rlÃ¼kleri";
 
         //        return adlar;
         //    }

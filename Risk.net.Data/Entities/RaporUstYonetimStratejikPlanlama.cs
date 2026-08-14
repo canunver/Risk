@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki RaporUstYonetimStratejikPlanlama view ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki RaporUstYonetimStratejikPlanlama view ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class RaporUstYonetimStratejikPlanlama : RaporEntityBase, IEntity
     {
@@ -54,7 +54,7 @@ namespace Risk.net.Data.Entities
                 {
                     if (!string.IsNullOrWhiteSpace(IzlemeDonemleri))
                     {
-                        //1;35;30;32,2;50;40;35 (Dönem,Planlanan,Gerçekleşen,GerçekleşenYilSonu)
+                        //1;35;30;32,2;50;40;35 (DÃ¶nem,Planlanan,GerÃ§ekleÅŸen,GerÃ§ekleÅŸenYilSonu)
 
                         var d = IzlemeDonemleri.Split(',');
                         foreach (var deger in d)
@@ -100,7 +100,7 @@ namespace Risk.net.Data.Entities
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";
-                    else return "SABİT";
+                    else return "SABÄ°T";
                 }
 
                 return "";

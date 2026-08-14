@@ -17,30 +17,30 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Bulgu Yönetimi Cevap işlemlerinin yapıldığı sayfa
+    /// Bulgu YÃ¶netimi Cevap iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class BulguYonetimiCevapController : GenelController
     {
         /// <summary>
-        /// IBulguYonetimiCevapService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiCevapService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiCevapService _service;
         /// <summary>
-        /// IRiskEvreniService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniService _serviceRiskEvreni;
         /// <summary>
-        /// IBulguYonetimiBirimService servisine ulaşmak için kullanılan değişken
+        /// IBulguYonetimiBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBulguYonetimiBirimService _serviceBulguBirim;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.BulguYonetimiCevapController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.BulguYonetimiCevapController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceRiskEvreni"></param>
@@ -60,13 +60,13 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// BulguYonetimiCevap View sayfası açıldığında çalışan metod
+        /// BulguYonetimiCevap View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index(int onay)
         {
             int onayMesaj = 0;
             if (Arac.YetkisiVarmi("ILKOORDINATOR,MERKEZKOORDINATOR,GENELKOORDINATOR,ICDENETIMKOORDINATOR", _kullanan))
-                onayMesaj = 1;//Koordinator e gelen onay bilgisi bulguya cevap ekranına girildiğinde de görsün ONAY düğmesini Melih 31.07.2023
+                onayMesaj = 1;//Koordinator e gelen onay bilgisi bulguya cevap ekranÄ±na girildiÄŸinde de gÃ¶rsÃ¼n ONAY dÃ¼ÄŸmesini Melih 31.07.2023
 
 
             if (onay == 1)
@@ -75,7 +75,7 @@ namespace Risk.net.WebUI.Controllers
 
                 onayMesaj = 0;
 
-                //UZMAN, BIRIM AMIRI kısıtlaması konabilir. 
+                //UZMAN, BIRIM AMIRI kÄ±sÄ±tlamasÄ± konabilir. 
                 //if (!Arac.YetkisiVarmi("ICDENETIMUZMANI,ICDENETIMKOORDINATOR,SISTEMYONETICISI", _kullanan))
                 //    return RedirectToAction("AccessDenied", "Account");
             }
@@ -87,7 +87,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterler ile ilgili kayıtların sunucudan getirilmesini sağlayan metod
+        /// KullanÄ±cÄ±dan gelen kriterler ile ilgili kayÄ±tlarÄ±n sunucudan getirilmesini saÄŸlayan metod
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -118,8 +118,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -135,7 +135,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -150,7 +150,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -165,7 +165,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -186,7 +186,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Listeden seçilen kaydın onaylama işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaylama iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -204,7 +204,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Bulgu paylaşım formu yazdırma işlemini yapan metod
+        /// Bulgu paylaÅŸÄ±m formu yazdÄ±rma iÅŸlemini yapan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

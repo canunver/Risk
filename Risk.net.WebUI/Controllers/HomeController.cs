@@ -21,25 +21,25 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Home işlemlerinin yapıldığı sayfa
+    /// Home iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     public class HomeController : GenelController
     {
         /// <summary>
-        /// IGrafikService servisine ulaşmak için kullanılan değişken
+        /// IGrafikService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IGrafikService _service;
         /// <summary>
-        /// IViewBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IViewBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBildirimSistemiService _serviceViewBildirim;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.HomeController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.HomeController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceViewBildirim"></param>
@@ -57,7 +57,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Home View sayfası açıldığında çalışan metod.
+        /// Home View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public async Task<IActionResult> Index()
         {
@@ -93,7 +93,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre risk paneli için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re risk paneli iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -111,7 +111,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre bulgu durumunu ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re bulgu durumunu ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -131,7 +131,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre süreç için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re sÃ¼reÃ§ iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -146,7 +146,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre bulgu önem düzeyini ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re bulgu Ã¶nem dÃ¼zeyini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -161,7 +161,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre yapısal risk seviyesini ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re yapÄ±sal risk seviyesini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -181,7 +181,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre artık risk seviyesini ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re artÄ±k risk seviyesini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -201,7 +201,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre risk puanını ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re risk puanÄ±nÄ± ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -244,11 +244,11 @@ namespace Risk.net.WebUI.Controllers
         //        if (item.YapisalRiskSeviyesi < 3 && KontrolSeviyesi < 3)
         //            grup = "Riskleri izle";
         //        else if (item.YapisalRiskSeviyesi < 3 && KontrolSeviyesi > 2)
-        //            grup = "Optimize Et/Vazgeç";
+        //            grup = "Optimize Et/VazgeÃ§";
         //        else if (item.YapisalRiskSeviyesi > 2 && KontrolSeviyesi < 3)
-        //            grup = "İyileştir";
+        //            grup = "Ä°yileÅŸtir";
         //        else if (item.YapisalRiskSeviyesi > 2 && KontrolSeviyesi > 2)
-        //            grup = "Kontrolleri İzle";
+        //            grup = "Kontrolleri Ä°zle";
 
         //        bilgiler.Add(new
         //        {
@@ -266,7 +266,7 @@ namespace Risk.net.WebUI.Controllers
         //}
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre risk kategorilerini ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re risk kategorilerini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -281,7 +281,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre bulgu önem düzeyini ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re bulgu Ã¶nem dÃ¼zeyini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -294,7 +294,7 @@ namespace Risk.net.WebUI.Controllers
 
 
             Sonuc sonuc = await _service.AnahtarRiskGostergesiHazirlaAsync(_kullanan, form);
-            //'Kategori', 'Yeşil', 'Sarı', 'Kırmızı'
+            //'Kategori', 'YeÅŸil', 'SarÄ±', 'KÄ±rmÄ±zÄ±'
 
             GrafikAnahtarRiskGostergesiDto gr = new GrafikAnahtarRiskGostergesiDto();
             foreach (Grafik item in sonuc.Liste)
@@ -329,7 +329,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre süreç için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re sÃ¼reÃ§ iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -364,7 +364,7 @@ namespace Risk.net.WebUI.Controllers
         //}
 
         /// <summary>
-        /// Kullanıcı ekrandan dil değişikliği yaptığında cookie ye dil ile iligli bilgileri yazan metod
+        /// KullanÄ±cÄ± ekrandan dil deÄŸiÅŸikliÄŸi yaptÄ±ÄŸÄ±nda cookie ye dil ile iligli bilgileri yazan metod
         /// </summary>
         /// <param name="culture"></param>
         /// <param name="returnUrl"></param>
@@ -389,7 +389,7 @@ namespace Risk.net.WebUI.Controllers
         //}
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre risk paneli için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re risk paneli iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -404,7 +404,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre performans izleme paneli için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re performans izleme paneli iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -419,7 +419,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre KRITolerans grafiği için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re KRITolerans grafiÄŸi iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -475,7 +475,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre KRIToleransPie grafiği için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re KRIToleransPie grafiÄŸi iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -520,7 +520,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Kullanıcıdan gelen kriterlere göre risk paneli için gereken bilgiyi ilgili servis aracılığıyla getiren metod
+        /// KullanÄ±cÄ±dan gelen kriterlere gÃ¶re risk paneli iÃ§in gereken bilgiyi ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>

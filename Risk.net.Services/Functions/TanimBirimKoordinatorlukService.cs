@@ -35,20 +35,20 @@ namespace Risk.net.Services.Functions
             string hata = "";
 
             if (string.IsNullOrWhiteSpace(birimKod))
-                hata += "<li>" + "Birim kod boþ olamaz" + "</li>";//_sharedResource["Kontrol.Duzenle.KullaniciKodAlaniBos"]
+                hata += "<li>" + "Birim kod boÅŸ olamaz" + "</li>";//_sharedResource["Kontrol.Duzenle.KullaniciKodAlaniBos"]
             if (string.IsNullOrWhiteSpace(koordinatorlukKod))
-                hata += "<li>" + "Koordinatörlük kod boþ olamaz" + "</li>";
+                hata += "<li>" + "KoordinatÃ¶rlÃ¼k kod boÅŸ olamaz" + "</li>";
 
             if (hata != "")
                 return new Sonuc(ENUMIslemDurum.Uyari, hata);
 
             try
             {
-                //Kayýt edilmek istenen rol önceden kayýtlý mý?
+                //KayÄ±t edilmek istenen rol Ã¶nceden kayÄ±tlÄ± mÄ±?
                 var eskiKayit = await _unitOfWork.GetAsync(c => c.BirimKod == birimKod && c.KoordinatorlukKod == koordinatorlukKod);
                 if (eskiKayit != null)
                 {
-                    //Eðer kayýt bulunursa çýkýþ yap
+                    //EÄŸer kayÄ±t bulunursa Ã§Ä±kÄ±ÅŸ yap
                     return new Sonuc(ENUMIslemDurum.Basarili, _sharedResource["Bildirim.KayitBasarili"]);
                 }
 
@@ -74,9 +74,9 @@ namespace Risk.net.Services.Functions
             string hata = "";
 
             if (string.IsNullOrWhiteSpace(birimKod))
-                hata += "<li>" + "Birim kod boþ olamaz" + "</li>";//_sharedResource["Kontrol.Duzenle.KullaniciKodAlaniBos"]
+                hata += "<li>" + "Birim kod boÅŸ olamaz" + "</li>";//_sharedResource["Kontrol.Duzenle.KullaniciKodAlaniBos"]
             if (string.IsNullOrWhiteSpace(koordinatorlukKod))
-                hata += "<li>" + "Koordinatörlük kod boþ olamaz" + "</li>";
+                hata += "<li>" + "KoordinatÃ¶rlÃ¼k kod boÅŸ olamaz" + "</li>";
 
             if (hata != "")
                 return new Sonuc(ENUMIslemDurum.Uyari, hata);

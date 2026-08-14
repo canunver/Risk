@@ -16,48 +16,48 @@ using System.Security.Policy;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// AnahtarRiskGostergesi işlemlerinin yapıldığı servis
+    /// AnahtarRiskGostergesi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class AnahtarRiskGostergesiService : IAnahtarRiskGostergesiService
     {
         /// <summary>
-        /// IUnitOfWork<RiskEvreni> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<RiskEvreni> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskEvreni> _unitOfWorkRiskEvreni;
         /// <summary>
-        /// IUnitOfWork<AnahtarRiskGostergesi> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<AnahtarRiskGostergesi> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<AnahtarRiskGostergesi> _unitOfWorkAnahtar;
         /// <summary>
-        /// IAnahtarRiskGostergesiDonemService servisine ulaşmak için kullanılan değişken
+        /// IAnahtarRiskGostergesiDonemService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IAnahtarRiskGostergesiDonemService _serviceDonem;
         /// <summary>
-        /// IBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBildirimSistemiService _serviceBildirimSistemi;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTE;
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.AnahtarRiskGostergesiService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.AnahtarRiskGostergesiService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWorkRiskEvreni"></param>
         /// <param name="unitOfWorkAnahtar"></param>
@@ -84,12 +84,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -119,12 +119,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın kod bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n kod bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskNoGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -152,11 +152,11 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan)
         {
@@ -169,12 +169,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleOneriAsync(KullaniciDto kullanan, RiskEvreni kriter)
         {
@@ -208,47 +208,47 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
             var aramaDegeri = dataTablesParam.searchValue;
             var selectData = await _unitOfWorkRiskEvreni.SorguHazirlaAsync(null, "Koordinatorluk,Birim,Surec,AltSurec,RiskKategoriler.RiskKategori, AnahtarRiskGostergesi, AnahtarRiskGostergesi.Donemler");
 
-            //P2-234-(Risk Kaydı/Anahtar Risk Göstergesi/Risklerin Değerlendirilmesi/Risklerin Yönetilmesi) Uzman tüm riskleri görebilir. 05.04.2023 HÖ
+            //P2-234-(Risk KaydÄ±/Anahtar Risk GÃ¶stergesi/Risklerin DeÄŸerlendirilmesi/Risklerin YÃ¶netilmesi) Uzman tÃ¼m riskleri gÃ¶rebilir. 05.04.2023 HÃ–
             //selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskSahibiKod == kullanan.PersonelKod);
 
             selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.Durum == (int)ENUMDurum.Onayli);
             //selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.AnahtarRiskGostergesiAdi != "");
 
-            //P2-234-(Risk Kaydı/Anahtar Risk Göstergesi/Risklerin Değerlendirilmesi/Risklerin Yönetilmesi) Uzman tüm riskleri görebilir. 05.04.2023 HÖ
+            //P2-234-(Risk KaydÄ±/Anahtar Risk GÃ¶stergesi/Risklerin DeÄŸerlendirilmesi/Risklerin YÃ¶netilmesi) Uzman tÃ¼m riskleri gÃ¶rebilir. 05.04.2023 HÃ–
             /*
                 //****************************************************************************************
-                //Kullanici yetkisine göre koşul
+                //Kullanici yetkisine gÃ¶re koÅŸul
                 //****************************************************************************************
                 var predicate = PredicateBuilder.True<RiskEvreni>();
 
-                ////Birim koşulunu uygula
+                ////Birim koÅŸulunu uygula
                 //****************************************************************************************
                 string[] birimKosul = await OrtakService.ListeleBirimKosulAsync(kullanan, _serviceCTE, "RISKYONETIMI", "", "");
 
-                //Koordinatörlük
-                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatörlüğe sahip olduğu için
+                //KoordinatÃ¶rlÃ¼k
+                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatÃ¶rlÃ¼ÄŸe sahip olduÄŸu iÃ§in
                 if (!string.IsNullOrWhiteSpace(koordinatorlukKosul[0]))
                     predicate = predicate.And(a => koordinatorlukKosul.ToArray().Contains(a.KoordinatorlukKod));
                 else
-                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//Tüm koordinatörlükler
+                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//TÃ¼m koordinatÃ¶rlÃ¼kler
 
                 //Birim
                 if (!string.IsNullOrWhiteSpace(birimKosul[1]))
                     predicate = predicate.And(a => a.BirimKod == birimKosul[1]);
 
-                //Sadece Kendi kayıtları
+                //Sadece Kendi kayÄ±tlarÄ±
                 predicate = predicate.Or(a => a.RiskSahibiKod == kullanan.PersonelKod);
 
                 selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, predicate);
@@ -264,7 +264,7 @@ namespace Risk.net.Services.Functions
                 if (!Arac.YetkisiVarmi("RISKSEKRETARYASI", kullanan))
                     selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskYonetimi.Durum == (int)ENUMDurum.Onayli);
 
-                //Anahtar Risk Göstergesi boş olan kayıtları aranmak için
+                //Anahtar Risk GÃ¶stergesi boÅŸ olan kayÄ±tlarÄ± aranmak iÃ§in
                 if (aramaObj.SorguAnahtarRiskGostergesi == "1")
                     selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => (a.AnahtarRiskGostergesiAdi == null || a.AnahtarRiskGostergesiAdi == "") && (a.AnahtarRiskGostergesi.Adi == null || a.AnahtarRiskGostergesi.Adi == ""));
                 else if (aramaObj.SorguAnahtarRiskGostergesi == "2")
@@ -344,12 +344,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, AnahtarRiskGostergesi gelenNesne)
         {
@@ -402,18 +402,18 @@ namespace Risk.net.Services.Functions
                     var eskiKayit = await _unitOfWorkAnahtar.KayitGetirAsync(c => c.Kod == gelenNesne.Kod, "Donemler");
 
                     var kontrolKayit = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == gelenNesne.RiskEvreniKod, "RiskYonetimi");
-                    //Kayıtlı bir bilgi ancak sahibi tarafından değiştirilebilir
+                    //KayÄ±tlÄ± bir bilgi ancak sahibi tarafÄ±ndan deÄŸiÅŸtirilebilir
                     if (kontrolKayit.RiskSahibiKod != kullanan.PersonelKod)
                     {
                         hata = "<li>" + _sharedResource["Kontrol.Duzenle.AnahtarRiskGostergesiYetkinizYok"] + "</li>";
                         return new Sonuc(ENUMIslemDurum.Uyari, hata);
                     }
 
-                    //ARG değeri kırmızı değerin üzerine çıkarsa ilgili merkez/il koordinatörüne bildirim düşer. (Detay açıklamada)
-                    if (kontrolKayit?.RiskYonetimi?.Durum == (int)ENUMDurum.Onayli && durum == "KIRMIZI" && eskiKayit.DurumDeger != "KIRMIZI") //Kırmızı renge dönüştü
+                    //ARG deÄŸeri kÄ±rmÄ±zÄ± deÄŸerin Ã¼zerine Ã§Ä±karsa ilgili merkez/il koordinatÃ¶rÃ¼ne bildirim dÃ¼ÅŸer. (Detay aÃ§Ä±klamada)
+                    if (kontrolKayit?.RiskYonetimi?.Durum == (int)ENUMDurum.Onayli && durum == "KIRMIZI" && eskiKayit.DurumDeger != "KIRMIZI") //KÄ±rmÄ±zÄ± renge dÃ¶nÃ¼ÅŸtÃ¼
                     {
                         bildirimDurum = (int)ENUMBildirimSistemiDurum.ARGDegeriKirmiziDegerinUzerineCikti;
-                        bildirimAciklama = "{RiskNo} numaralı riskin anahtar risk göstergesi durumu " + durum + " değere çıkmıştır.";
+                        bildirimAciklama = "{RiskNo} numaralÄ± riskin anahtar risk gÃ¶stergesi durumu " + durum + " deÄŸere Ã§Ä±kmÄ±ÅŸtÄ±r.";
                     }
                     //----------------------------------------------------------------------------------------------------
 
@@ -456,7 +456,7 @@ namespace Risk.net.Services.Functions
 
                 await _unitOfWorkAnahtar.KaydetAsync();
 
-                //Riks Evreni AnahtarRiskGostergesi alanı güncellensin. https://app.clickup.com/t/86932nx0k
+                //Riks Evreni AnahtarRiskGostergesi alanÄ± gÃ¼ncellensin. https://app.clickup.com/t/86932nx0k
                 var riskEvreniArg = await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == gelenNesne.RiskEvreniKod);
                 if (riskEvreniArg != null)
                 {
@@ -508,12 +508,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, AnahtarRiskGostergesi gelenNesne)
         {
@@ -534,7 +534,7 @@ namespace Risk.net.Services.Functions
 
                 var eskiKayit = await _unitOfWorkAnahtar.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-                //Durum değişikliğine uygun mu?
+                //Durum deÄŸiÅŸikliÄŸine uygun mu?
                 hata = Arac.DurumDegisikligiUygunMu(kullanan, _sharedResource, eskiKayit, gelenNesne);
 
                 if (hata != "")
@@ -547,7 +547,7 @@ namespace Risk.net.Services.Functions
 
                 var islemYapilan = await _unitOfWorkAnahtar.GuncelleAsync(eskiKayit);
 
-                //Tarihçe Başlangıç
+                //TarihÃ§e BaÅŸlangÄ±Ã§
                 tarihce.IlgiKod = gelenNesne.Kod;
                 tarihce.IlgiTur = EnumTarihceIslemTur.AnahtarRiskGostergesi;
                 tarihce.IslemYapanKod = kullanan.PersonelKod;
@@ -556,7 +556,7 @@ namespace Risk.net.Services.Functions
                     tarihce.Aciklama = gelenNesne.Tarihce.Aciklama;
 
                 await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                //Tarihçe Bitiş
+                //TarihÃ§e BitiÅŸ
 
                 await _unitOfWorkAnahtar.KaydetAsync();
             }

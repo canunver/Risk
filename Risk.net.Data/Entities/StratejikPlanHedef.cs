@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki StratejikPlanHedef tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki StratejikPlanHedef tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class StratejikPlanHedef : EntityBase, IEntity
     {
@@ -54,16 +54,16 @@ namespace Risk.net.Data.Entities
                 int sayac = 0;
                 foreach (StratejikPlanIsbirligiBirim item in IsbirligiBirimler)
                 {
-                    if (item.Koordinatorluk?.Adi.IndexOf(" İl ") > -1)
+                    if (item.Koordinatorluk?.Adi.IndexOf(" Ä°l ") > -1)
                         sayac++;
                 }
 
                 if (sayac == 42)
-                    adlar = "Bütün İl Koordinatörlükleri";
+                    adlar = "BÃ¼tÃ¼n Ä°l KoordinatÃ¶rlÃ¼kleri";
 
                 foreach (StratejikPlanIsbirligiBirim item in IsbirligiBirimler)
                 {
-                    if (sayac == 42 && item.Koordinatorluk?.Adi.IndexOf(" İl ") > -1)
+                    if (sayac == 42 && item.Koordinatorluk?.Adi.IndexOf(" Ä°l ") > -1)
                         continue;
 
                     if (adlar != "") adlar += ", ";

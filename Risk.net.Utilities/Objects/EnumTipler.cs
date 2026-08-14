@@ -39,7 +39,7 @@ namespace Risk.net.Utilities.Objects
         Kapali = 12,//BULGUYONETIMI
         BilgilendirmeMail = 15,
         RiskSahibiDegisti = 16,
-        Kopyalandý = 17,
+        KopyalandÄ± = 17,
         AzaltmaPlaniSorumlusuDegisti = 18,
         HatirlatmaMail = 19,
         Reddedildi = 98,

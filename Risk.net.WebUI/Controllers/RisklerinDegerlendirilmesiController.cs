@@ -15,30 +15,30 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Risk Yonetimi işlemlerinin yapıldığı sayfa
+    /// Risk Yonetimi iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class RisklerinDegerlendirilmesiController : GenelController
     {
         /// <summary>
-        /// IRiskYonetimiService servisine ulaşmak için kullanılan değişken
+        /// IRiskYonetimiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskYonetimiService _service;
         /// <summary>
-        /// IRiskYonetimiKontrolService servisine ulaşmak için kullanılan değişken
+        /// IRiskYonetimiKontrolService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskYonetimiKontrolService _serviceKontrol;
         /// <summary>
-        /// IKonfigurasyonService servisine ulaşmak için kullanılan değişken
+        /// IKonfigurasyonService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IKonfigurasyonService _serviceKonfigurasyon;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RisklerinDegerlendirilmesiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.RisklerinDegerlendirilmesiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="serviceKontrol"></param>
@@ -58,7 +58,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// RiskYonetimi View sayfası açıldığında çalışan metod
+        /// RiskYonetimi View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public async Task<IActionResult> Index()
         {
@@ -85,8 +85,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -102,7 +102,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -118,7 +118,7 @@ namespace Risk.net.WebUI.Controllers
 
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -133,7 +133,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -151,7 +151,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -173,7 +173,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -188,7 +188,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -204,7 +204,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -224,7 +224,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -244,7 +244,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Onaylı risk değerlendirilmesi kaydında değişiklik yapılmak istenildiğinde uyarı bilgisini çağrılan metod
+        /// OnaylÄ± risk deÄŸerlendirilmesi kaydÄ±nda deÄŸiÅŸiklik yapÄ±lmak istenildiÄŸinde uyarÄ± bilgisini Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -258,8 +258,8 @@ namespace Risk.net.WebUI.Controllers
 
                 if (eskiKayit.RiskYonetimi != null)
                 {
-                    //Riske verilecek cevap azlaltma planı oluştursa ve burada değişiklik yapılırsa Onaylı bir kayıtta değiştirirse süreç en baştan başlayacak ve diğer ekranlar da sıfırlanacak.
-                    //(Uyarı da versin emin misiniz diye diğer ekranlardaki bilgileri sıfırlayacağına dair) Ama kalan alanlarda değişiklik yapılırsa diğer ekranlar sıfırlanmayacak.
+                    //Riske verilecek cevap azlaltma planÄ± oluÅŸtursa ve burada deÄŸiÅŸiklik yapÄ±lÄ±rsa OnaylÄ± bir kayÄ±tta deÄŸiÅŸtirirse sÃ¼reÃ§ en baÅŸtan baÅŸlayacak ve diÄŸer ekranlar da sÄ±fÄ±rlanacak.
+                    //(UyarÄ± da versin emin misiniz diye diÄŸer ekranlardaki bilgileri sÄ±fÄ±rlayacaÄŸÄ±na dair) Ama kalan alanlarda deÄŸiÅŸiklik yapÄ±lÄ±rsa diÄŸer ekranlar sÄ±fÄ±rlanmayacak.
                     if (eskiKayit.Durum == (int)ENUMDurum.Onayli && eskiKayit.RiskYonetimi.RiskeVerilecekCevap == EnumRiskYonetimiRiskeVerilecekCevap.Azalt && eskiKayit.RiskYonetimi.RiskeVerilecekCevap != form.RiskYonetimi.RiskeVerilecekCevap)
                     {
                         return Ok(new Sonuc(ENUMIslemDurum.Uyari, "", ""));

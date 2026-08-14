@@ -13,28 +13,28 @@ using System.Xml.Linq;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// Surec işlemlerinin yapıldığı servis
+    /// Surec iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class SurecService : ISurecService
     {
         /// <summary>
-        /// IUnitOfWork<Surec> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<Surec> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<Surec> _unitOfWork;
         /// <summary>
-        /// IAltSurecService servisine ulaşmak için kullanılan değişken
+        /// IAltSurecService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IAltSurecService _serviceAltSurec;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.SurecService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.SurecService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceAltSurec"></param>
@@ -48,12 +48,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -96,14 +96,14 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="koordinatorlukKod"></param>
         /// <param name="birimKod"></param>
         /// <param name="durumKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string koordinatorlukKod, string birimKod, int durumKod)
         {
@@ -117,12 +117,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -160,12 +160,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, Surec gelenNesne)
         {
@@ -189,7 +189,7 @@ namespace Risk.net.Services.Functions
             {
                 gelenNesne.Adi = gelenNesne.Adi.Trim();
 
-                //Koordinatörlük, Birim ve Süreç bilgileri aynı olan kayıt eklenmemeli.
+                //KoordinatÃ¶rlÃ¼k, Birim ve SÃ¼reÃ§ bilgileri aynÄ± olan kayÄ±t eklenmemeli.
                 var kontrolListe = await _unitOfWork.ListeleAsync(c => c.KoordinatorlukKod == gelenNesne.KoordinatorlukKod &&
                                                                 c.BirimKod == gelenNesne.BirimKod &&
                                                                 c.Adi == gelenNesne.Adi);
@@ -206,11 +206,11 @@ namespace Risk.net.Services.Functions
                 if (hata != "")
                     return new Sonuc(ENUMIslemDurum.Uyari, hata);
 
-                //sureckaydet işleminde altsurecler dolu olursa hata veriyor EF den dolayı
+                //sureckaydet iÅŸleminde altsurecler dolu olursa hata veriyor EF den dolayÄ±
                 List<AltSurec> altSurecler = gelenNesne.AltSurecler;
                 gelenNesne.AltSurecler = null;
 
-                //Kayıt yapıldığında durum aktif değerini alsın
+                //KayÄ±t yapÄ±ldÄ±ÄŸÄ±nda durum aktif deÄŸerini alsÄ±n
                 gelenNesne.Durum = (int)ENUMDurum.Aktif;
 
                 if (string.IsNullOrWhiteSpace(gelenNesne.Kod))
@@ -261,12 +261,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, string kod)
         {
@@ -297,12 +297,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, Surec gelenNesne)
         {
@@ -322,7 +322,7 @@ namespace Risk.net.Services.Functions
             {
                 var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod);
 
-                //Durum değişikliğine uygun mu?
+                //Durum deÄŸiÅŸikliÄŸine uygun mu?
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum == (int)ENUMDurum.Pasif)
                     hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.PasifKayitOnaylanamaz"] + "</li>";
                 if (gelenNesne.Durum == (int)ENUMDurum.Onayli && eskiKayit.Durum == (int)ENUMDurum.Onayli)
@@ -346,12 +346,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kullanıcının yetkisinin olup olmadığını döndüren metod
+        /// Istemciden parametre ile talep edilen kullanÄ±cÄ±nÄ±n yetkisinin olup olmadÄ±ÄŸÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="tur"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private string YetkisiVarmi(KullaniciDto kullanan, string tur)
         {

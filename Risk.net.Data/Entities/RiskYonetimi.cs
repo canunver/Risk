@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki RiskYonetimi tablosu ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki RiskYonetimi tablosu ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class RiskYonetimi : EntityBase, IEntity
     {
@@ -165,7 +165,7 @@ namespace Risk.net.Data.Entities
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";
-                    else return "SABİT";
+                    else return "SABÄ°T";
                 }
 
                 return "";
@@ -183,7 +183,7 @@ namespace Risk.net.Data.Entities
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";
-                    else return "SABİT";
+                    else return "SABÄ°T";
                 }
 
                 return "";

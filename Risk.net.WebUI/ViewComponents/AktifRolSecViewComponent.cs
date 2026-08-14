@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// AktifRolSec işlemlerinin yapıldığı sayfa
+    /// AktifRolSec iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class AktifRolSecViewComponent : ViewComponent
     {
         /// <summary>
-        /// IViewYetkiService servisine ulaşmak için kullanılan değişken
+        /// IViewYetkiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewYetkiService _service;
         /// <summary>
-        /// Kullanıcı bilgisini taşıyan değişken
+        /// KullanÄ±cÄ± bilgisini taÅŸÄ±yan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         public readonly KullaniciDto _kullanan;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.AktifRolSecViewComponent" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.AktifRolSecViewComponent" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -37,7 +37,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// AktifRolSec ViewComponent sayfası açıldığında çalışan metod.
+        /// AktifRolSec ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public async Task<IViewComponentResult> InvokeAsync()
         {

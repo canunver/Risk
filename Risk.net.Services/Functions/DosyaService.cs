@@ -16,23 +16,23 @@ using System.Linq.Expressions;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// Dosya işlemlerinin yapıldığı servis
+    /// Dosya iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class DosyaService : IDosyaService
     {
         /// <summary>
-        /// IUnitOfWork<Dosya> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<Dosya> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<Dosya> _unitOfWork;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.DosyaService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.DosyaService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="sharedResource"></param>
@@ -44,13 +44,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <param name="baglantiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod, string baglantiKod)
         {
@@ -85,12 +85,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="baglantiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, string baglantiKod)
         {
@@ -103,12 +103,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
         {
@@ -136,19 +136,19 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, Dosya gelenNesne)
         {
             Dosya islemYapilan = new Dosya();
 
             if (string.IsNullOrWhiteSpace(gelenNesne.IcerikBase64) && gelenNesne.Icerik == null)
-                return new Sonuc(ENUMIslemDurum.Uyari, "Dosya icerik bilgisi boş");
+                return new Sonuc(ENUMIslemDurum.Uyari, "Dosya icerik bilgisi boÅŸ");
 
             try
             {
@@ -180,12 +180,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, string kod)
         {
@@ -210,12 +210,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bağlantı kaydını silen metod
+        /// Istemciden parametere ile gÃ¶nderilen baÄŸlantÄ± kaydÄ±nÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="baglantiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilBaglantiKodAsync(KullaniciDto kullanan, string baglantiKod)
         {
@@ -245,13 +245,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bağlatı kod bilgisini güncelleyen metod
+        /// Istemciden parametere ile gÃ¶nderilen baÄŸlatÄ± kod bilgisini gÃ¼ncelleyen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="eskiKod"></param>
         /// <param name="yeniKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> BaglantiKodGuncelleAsync(KullaniciDto kullanan, string eskiKod, string yeniKod)
         {
@@ -290,12 +290,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen dosya bilgisini kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen dosya bilgisini kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private Sonuc DosyayaKaydet(KullaniciDto kullanan, Dosya gelenNesne)
         {
@@ -306,13 +306,13 @@ namespace Risk.net.Services.Functions
 
             try
             {
-                //Yolu oluştur
+                //Yolu oluÅŸtur
                 yol = Path.Combine(yol, "Dosya");
 
                 if (!Directory.Exists(yol))
                     Directory.CreateDirectory(yol);
 
-                //Yola dosya adını ekle
+                //Yola dosya adÄ±nÄ± ekle
                 yol = Path.Combine(yol, gelenNesne.Kod);
 
                 try
@@ -342,12 +342,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen dosya kaydını silen metod
+        /// Istemciden parametere ile gÃ¶nderilen dosya kaydÄ±nÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private Sonuc DosyayiSil(KullaniciDto kullanan, string kod)
         {
@@ -358,10 +358,10 @@ namespace Risk.net.Services.Functions
 
             try
             {
-                //Yolu oluştur
+                //Yolu oluÅŸtur
                 yol = Path.Combine(yol, "Dosya");
 
-                //Yola dosya adını ekle
+                //Yola dosya adÄ±nÄ± ekle
                 yol = Path.Combine(yol, kod);
 
                 try
@@ -380,12 +380,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen dosya bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen dosya bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         private async Task<Dosya> DosyayiOkuAsync(KullaniciDto kullanan, string kod)
         {
@@ -398,10 +398,10 @@ namespace Risk.net.Services.Functions
 
             try
             {
-                //Yolu oluştur
+                //Yolu oluÅŸtur
                 yol = Path.Combine(yol, "Dosya");
 
-                //Yola dosya adını ekle
+                //Yola dosya adÄ±nÄ± ekle
                 yol = Path.Combine(yol, kod);
 
                 try
@@ -423,13 +423,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen dosya bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen dosya bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <param name="baglantiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Dosya> IndirAsync(KullaniciDto kullanan, string kod, string baglantiKod)
         {
@@ -457,12 +457,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile kayda ait dosya sayısını döndüren metod
+        /// Istemciden parametere ile kayda ait dosya sayÄ±sÄ±nÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="baglantiKod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SayiVerAsync(KullaniciDto kullanan, string baglantiKod)
         {
@@ -476,12 +476,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile kayda ait açıklamayı güncelleyen metod
+        /// Istemciden parametere ile kayda ait aÃ§Ä±klamayÄ± gÃ¼ncelleyen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> AciklamaKaydetAsync(KullaniciDto kullanan, Dosya gelenNesne)
         {

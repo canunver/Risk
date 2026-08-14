@@ -16,20 +16,20 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Risk Evreni işlemlerinin yapıldığı sayfa
+    /// Risk Evreni iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     [Authorize]
     [YetkiKontrol(Yetkiler = "*")]
     public class RiskKaydiController : GenelController
     {
         /// <summary>
-        /// IRiskEvreniService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.Controllers.RiskKaydiController" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.Controllers.RiskKaydiController" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <param name="httpContextAccessor"></param>
@@ -43,7 +43,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// RiskEvreni View sayfası açıldığında çalışan metod
+        /// RiskEvreni View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         public IActionResult Index()
         {
@@ -62,8 +62,8 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı ekranından aldığı sayfa no, kayıt sayısı, sıralama alanı ve arama kriter 
-        /// bilgileriyle ilgili servisten DataTables kontrolüne yüklemek üzere liste olarak getiren metod 
+        /// KullanÄ±cÄ± ekranÄ±ndan aldÄ±ÄŸÄ± sayfa no, kayÄ±t sayÄ±sÄ±, sÄ±ralama alanÄ± ve arama kriter 
+        /// bilgileriyle ilgili servisten DataTables kontrolÃ¼ne yÃ¼klemek Ã¼zere liste olarak getiren metod 
         /// </summary>
         /// <returns>
         /// Ok(JSON tipinde sunucudan gelen bilgi)
@@ -79,7 +79,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın tüm bilgisini ilgili servis aracılığıyla getiren metod
+        /// Listeden seÃ§ilen kaydÄ±n tÃ¼m bilgisini ilgili servis aracÄ±lÄ±ÄŸÄ±yla getiren metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -94,7 +94,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Kullanıcı tarafından girilen bilgileri ilgili servise kayıt edilmesi için gönderen metod
+        /// KullanÄ±cÄ± tarafÄ±ndan girilen bilgileri ilgili servise kayÄ±t edilmesi iÃ§in gÃ¶nderen metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -109,7 +109,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydı pasif yapma işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ± pasif yapma iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -127,7 +127,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın silme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n silme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -145,7 +145,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen kaydın onaya gönderme işlemini sağlayan metod
+        /// Listeden seÃ§ilen kaydÄ±n onaya gÃ¶nderme iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="kod"></param>
         /// <returns>
@@ -165,7 +165,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Listeden seçilen risk sahibinin güncellenmesi gonderilmesi işlemini sağlayan metod
+        /// Listeden seÃ§ilen risk sahibinin gÃ¼ncellenmesi gonderilmesi iÅŸlemini saÄŸlayan metod
         /// </summary>
         /// <param name="form"></param>
         /// <returns>
@@ -181,14 +181,14 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Verilen koşullara göre Risk evreni listelemesi yapar
+        /// Verilen koÅŸullara gÃ¶re Risk evreni listelemesi yapar
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
         [HttpPost]
         public async Task<IActionResult> RiskListesi(RiskEvreni kriter)
         {
-            kriter.Durum = (int)ENUMDurum.Onayli;//Sadece onaylı riskler listelensin. !!Denetim Ekranında kullanılıyor Melih 25.10.2023
+            kriter.Durum = (int)ENUMDurum.Onayli;//Sadece onaylÄ± riskler listelensin. !!Denetim EkranÄ±nda kullanÄ±lÄ±yor Melih 25.10.2023
 
             Sonuc sonuc = await _service.ListeleAsync(_kullanan, kriter);
 
@@ -196,7 +196,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -212,7 +212,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -234,14 +234,14 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Ekranlardaki Kontrol seçim kutularının doldurulması için çağrılan metod
+        /// Ekranlardaki Kontrol seÃ§im kutularÄ±nÄ±n doldurulmasÄ± iÃ§in Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
         [HttpPost]
         public async Task<IActionResult> SelectListesiVerRiskAdi(RiskEvreni form)
         {
-            //Sorumlu birim değiştirilirse ilgili riski bulmak için
+            //Sorumlu birim deÄŸiÅŸtirilirse ilgili riski bulmak iÃ§in
             string riskKod = form.Kod;
 
             form.Kod = "";
@@ -277,7 +277,7 @@ namespace Risk.net.WebUI.Controllers
         }
 
         /// <summary>
-        /// Onaylı risklerde değişiklik yapılmak istenildiğinde uyarı bilgisini çağrılan metod
+        /// OnaylÄ± risklerde deÄŸiÅŸiklik yapÄ±lmak istenildiÄŸinde uyarÄ± bilgisini Ã§aÄŸrÄ±lan metod
         /// </summary>
         /// <returns></returns>
         /// <remarks></remarks>
@@ -289,8 +289,8 @@ namespace Risk.net.WebUI.Controllers
                 var kayit = await _service.KayitGetirAsync(_kullanan, form.Kod);
                 var eskiKayit = (RiskEvreni)kayit.Nesne;
 
-                //Risk Kaydı ekranında Koord Birim Risk Adı alanlarını riskin sahibi Onaylı bir kayıtta değiştirirse süreç en baştan başlayacak ve diğer ekranlar da sıfırlanacak.
-                //(Uyarı da versin emin misiniz diye diğer ekranlardaki bilgileri sıfırlayacağına dair) Ama kalan alanlarda değişiklik yapılırsa diğer ekranlar sıfırlanmayacak.
+                //Risk KaydÄ± ekranÄ±nda Koord Birim Risk AdÄ± alanlarÄ±nÄ± riskin sahibi OnaylÄ± bir kayÄ±tta deÄŸiÅŸtirirse sÃ¼reÃ§ en baÅŸtan baÅŸlayacak ve diÄŸer ekranlar da sÄ±fÄ±rlanacak.
+                //(UyarÄ± da versin emin misiniz diye diÄŸer ekranlardaki bilgileri sÄ±fÄ±rlayacaÄŸÄ±na dair) Ama kalan alanlarda deÄŸiÅŸiklik yapÄ±lÄ±rsa diÄŸer ekranlar sÄ±fÄ±rlanmayacak.
                 if (eskiKayit.Durum == (int)ENUMDurum.Onayli && (eskiKayit.KoordinatorlukKod + "" != form.KoordinatorlukKod + "" || eskiKayit.BirimKod + "" != form.BirimKod + ""))
                 {
                     return Ok(new Sonuc(ENUMIslemDurum.Uyari, "", ""));

@@ -11,28 +11,28 @@ using System.Threading.Tasks;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// DenetimGorevlendirme işlemlerinin yapıldığı servis
+    /// DenetimGorevlendirme iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class DenetimGorevlendirmeService : IDenetimGorevlendirmeService
     {
         /// <summary>
-        /// IUnitOfWork<DenetimGorevlendirme> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<DenetimGorevlendirme> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<DenetimGorevlendirme> _unitOfWork;
         /// <summary>
-        /// IUnitOfWork<DenetimGorevlendirme> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<DenetimGorevlendirme> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IDenetimService _serviceDenetim;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IStringLocalizer<CustomResource> _sharedResource;
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.DenetimGorevlendirmeService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.DenetimGorevlendirmeService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="sharedResource"></param>
@@ -47,12 +47,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, DenetimGorevlendirme gelenNesne)
         {
@@ -82,12 +82,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, DenetimGorevlendirme gelenNesne)
         {
@@ -108,7 +108,7 @@ namespace Risk.net.Services.Functions
                 if (!Arac.YetkisiVarmi("ICDENETIMKOORDINATOR", kullanan))
                 {
                     Sonuc sonucDenetim = await _serviceDenetim.KayitGetirAsync(kullanan, gelenNesne.DenetimKod);
-                    if (!sonucDenetim.IslemSonuc || sonucDenetim.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Denetim bulunamadı");
+                    if (!sonucDenetim.IslemSonuc || sonucDenetim.Nesne == null) return new Sonuc(ENUMIslemDurum.Uyari, "Denetim bulunamadÄ±");
                     Denetim denetimKaydi = (Denetim)sonucDenetim.Nesne;
                     bool bulundu = false;
                     foreach (var item in denetimKaydi.Sorumlular)
@@ -123,7 +123,7 @@ namespace Risk.net.Services.Functions
                     }
 
                     if (!bulundu)
-                        return new Sonuc(ENUMIslemDurum.Hata, "Kaydetme için yetkiniz yok. Kayıt işlemini, ilgili denetimde görevli kişiler yapabilir.");
+                        return new Sonuc(ENUMIslemDurum.Hata, "Kaydetme iÃ§in yetkiniz yok. KayÄ±t iÅŸlemini, ilgili denetimde gÃ¶revli kiÅŸiler yapabilir.");
                 }
 
                 await SilAsync(kullanan, gelenNesne);
@@ -142,12 +142,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, DenetimGorevlendirme gelenNesne)
         {

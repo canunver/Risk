@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace Risk.net.WebUI.Controllers
 {
     /// <summary>
-    /// Yazılımın sol kısmında gösterilen menü
+    /// YazÄ±lÄ±mÄ±n sol kÄ±smÄ±nda gÃ¶sterilen menÃ¼
     /// </summary>
     public class TanimMenuController : Controller
     {
         /// <summary>
-        /// TanimMenu (Sol Menu) View sayfası açıldığında çalışan metod
+        /// TanimMenu (Sol Menu) View sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod
         /// </summary>
         [Authorize]
         public IActionResult Index()

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Risk.net.Data.Entities
 {
     /// <summary>
-    /// Veritabanındaki RaporTrend view ile yazılım arasında ilişki kurmamızı sağlayan kalıcı nesnedir
+    /// VeritabanÄ±ndaki RaporTrend view ile yazÄ±lÄ±m arasÄ±nda iliÅŸki kurmamÄ±zÄ± saÄŸlayan kalÄ±cÄ± nesnedir
     /// </summary>
     public class RaporTrend : RaporEntityBase, IEntity
     {
@@ -47,7 +47,7 @@ namespace Risk.net.Data.Entities
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";
-                    else return "SABİT";
+                    else return "SABÄ°T";
                 }
 
                 return "";
@@ -65,7 +65,7 @@ namespace Risk.net.Data.Entities
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";
-                    else return "SABİT";
+                    else return "SABÄ°T";
                 }
 
                 return "";
@@ -88,12 +88,12 @@ namespace Risk.net.Data.Entities
                 {
                     //YD:belirsiz, YDSON:40
                     //KD:75,       KDSSON:belirsiz
-                    //SonDonemDeger:60 ise Sarı
-                    //SonDonemDeger:15 ise Yeşil (40 isede)
-                    //SonDonemDeger:85 ise Kırmızı (75 isede)
+                    //SonDonemDeger:60 ise SarÄ±
+                    //SonDonemDeger:15 ise YeÅŸil (40 isede)
+                    //SonDonemDeger:85 ise KÄ±rmÄ±zÄ± (75 isede)
 
                     if (sonDonemDeger >= KirmiziDeger) return "KIRMIZI";
-                    else if (sonDonemDeger <= YesilDeger) return "YEŞİL";
+                    else if (sonDonemDeger <= YesilDeger) return "YEÅÄ°L";
                     else return "SARI";
                 }
 
@@ -121,7 +121,7 @@ namespace Risk.net.Data.Entities
                         {
                             if (sonDeger2 > sonDeger1) return "ARTAN";
                             if (sonDeger2 < sonDeger1) return "AZALAN";
-                            else return "SABİT";
+                            else return "SABÄ°T";
                         }
                     }
                 }

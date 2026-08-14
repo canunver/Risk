@@ -15,18 +15,18 @@ using static System.Reflection.Metadata.BlobBuilder;
 namespace Risk.net.Data.Functions
 {
     /// <summary>
-    /// Veritabanı ile yapılacak olan tüm işlemleri, tek bir kanal aracılığı ile gerçekleştirme ve hafızada tutma işlemlerini sunmaktadır.Bu sayede işlemlerin toplu halde gerçekleştirilmesi ve hata durumunda geri alınabilmesi sağlamaktadır.
+    /// VeritabanÄ± ile yapÄ±lacak olan tÃ¼m iÅŸlemleri, tek bir kanal aracÄ±lÄ±ÄŸÄ± ile gerÃ§ekleÅŸtirme ve hafÄ±zada tutma iÅŸlemlerini sunmaktadÄ±r.Bu sayede iÅŸlemlerin toplu halde gerÃ§ekleÅŸtirilmesi ve hata durumunda geri alÄ±nabilmesi saÄŸlamaktadÄ±r.
     /// </summary>
     public class UnitOfWork<TEntity> : IUnitOfWork<TEntity> where TEntity : class, IEntity, new()
     {
         /// <summary>
-        /// DatabaseContext servisine ulaşmak için kullanılan değişken
+        /// DatabaseContext servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly DatabaseContext _context;
 
         /// <summary>
-        /// <see cref="Risk.net.Data.Functions.UnitOfWork" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Data.Functions.UnitOfWork" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="context"></param>
         /// <remarks></remarks>
@@ -36,11 +36,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tabloya parametre olarak gelen entity sınıfının kayıt (insert) edilmesini sağlayan metot
+        /// entity'ye ait tabloya parametre olarak gelen entity sÄ±nÄ±fÄ±nÄ±n kayÄ±t (insert) edilmesini saÄŸlayan metot
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıt edilen Entity nesnesi döndürür
+        /// KayÄ±t edilen Entity nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<TEntity> KayitEkleAsync(TEntity entity)
         {
@@ -49,11 +49,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tabloya parametre olarak gelen entity sınıfının kayıt (update) edilmesini sağlayan metot
+        /// entity'ye ait tabloya parametre olarak gelen entity sÄ±nÄ±fÄ±nÄ±n kayÄ±t (update) edilmesini saÄŸlayan metot
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıt edilen Entity nesnesi döndürür
+        /// KayÄ±t edilen Entity nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<TEntity> GuncelleAsync(TEntity entity)
         {
@@ -62,13 +62,13 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kayıtları döndürmeyi sağlayan metot
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kayÄ±tlarÄ± dÃ¶ndÃ¼rmeyi saÄŸlayan metot
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="siralama"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<IList<TEntity>> ListeleAsync(Expression<Func<TEntity, bool>> kosul = null, Expression<Func<TEntity, object>> siralama = null, params Expression<Func<TEntity, object>>[] includeProperties)
         {
@@ -104,13 +104,13 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kaydın (tek) döndürmeyi sağlayan metot
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kaydÄ±n (tek) dÃ¶ndÃ¼rmeyi saÄŸlayan metot
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="stringIncludes"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<TEntity> KayitGetirAsync(Expression<Func<TEntity, bool>> kosul, string stringIncludes, params Expression<Func<TEntity, object>>[] includeProperties)
         {
@@ -128,8 +128,8 @@ namespace Risk.net.Data.Functions
                 }
             }
 
-            //includeProperties Linq tipinde değer taşıyor, join (A ve B tabloları) ile yapılan sorguda B tablosuna bağlı kayıtların
-            //bağlı olduğu 3. derece kayıtları getirmek için kullanılıyor. Örnek RiskEvreni->RiskEvreniRiskKategori->TanimRiskKategori->Adi
+            //includeProperties Linq tipinde deÄŸer taÅŸÄ±yor, join (A ve B tablolarÄ±) ile yapÄ±lan sorguda B tablosuna baÄŸlÄ± kayÄ±tlarÄ±n
+            //baÄŸlÄ± olduÄŸu 3. derece kayÄ±tlarÄ± getirmek iÃ§in kullanÄ±lÄ±yor. Ã–rnek RiskEvreni->RiskEvreniRiskKategori->TanimRiskKategori->Adi
             string[] si = stringIncludes.Split(',');
             foreach (var item in si)
             {
@@ -141,13 +141,13 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodan sorgulma yapılması için koşulların IQueryable nesnesine eklenmesini sağlayan metot
+        /// entity'ye ait tablodan sorgulma yapÄ±lmasÄ± iÃ§in koÅŸullarÄ±n IQueryable nesnesine eklenmesini saÄŸlayan metot
         /// </summary>
         /// <param name="kosul"></param>
         /// <param name="stringIncludes"></param>
         /// <param name="includeProperties"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<IQueryable<TEntity>> SorguHazirlaAsync(Expression<Func<TEntity, bool>> kosul, string stringIncludes, params Expression<Func<TEntity, object>>[] includeProperties)
         {
@@ -166,8 +166,8 @@ namespace Risk.net.Data.Functions
                 }
             }
 
-            //includeProperties Linq tipinde değer taşıyor, join (A ve B tabloları) ile yapılan sorguda B tablosuna bağlı kayıtların
-            //bağlı olduğu 3. derece kayıtları getirmek için kullanılıyor. Örnek RiskEvreni->RiskEvreniRiskKategori->TanimRiskKategori->Adi
+            //includeProperties Linq tipinde deÄŸer taÅŸÄ±yor, join (A ve B tablolarÄ±) ile yapÄ±lan sorguda B tablosuna baÄŸlÄ± kayÄ±tlarÄ±n
+            //baÄŸlÄ± olduÄŸu 3. derece kayÄ±tlarÄ± getirmek iÃ§in kullanÄ±lÄ±yor. Ã–rnek RiskEvreni->RiskEvreniRiskKategori->TanimRiskKategori->Adi
             string[] si = stringIncludes.Split(',');
             foreach (var item in si)
             {
@@ -179,12 +179,12 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// Önceden oluşturulan IQueryable nesnesine ek koşulların eklenmesini sağlayan metot
+        /// Ã–nceden oluÅŸturulan IQueryable nesnesine ek koÅŸullarÄ±n eklenmesini saÄŸlayan metot
         /// </summary>
         /// <param name="query"></param>
         /// <param name="kosul"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<IQueryable<TEntity>> KosulEkleAsync(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> kosul)
         {
@@ -197,7 +197,7 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp uyuşan kayıtları silmeyi sağlayan metot
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p uyuÅŸan kayÄ±tlarÄ± silmeyi saÄŸlayan metot
         /// </summary>
         /// <param name="kosul"></param>
         public async Task SilAsync(Expression<Func<TEntity, bool>> kosul)
@@ -207,12 +207,12 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tabloda, parametre olarak gelen koşul ile sorgulayıp veri olmasını kontrol eden metot
+        /// entity'ye ait tabloda, parametre olarak gelen koÅŸul ile sorgulayÄ±p veri olmasÄ±nÄ± kontrol eden metot
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="kosul"></param>
         /// <returns>
-        /// bool dondürür
+        /// bool dondÃ¼rÃ¼r
         /// </returns>
         public async Task<bool> VarmiAsync(Expression<Func<TEntity, bool>> kosul)
         {
@@ -220,11 +220,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodaki kayıt sayısını almayı sağlayan metot
+        /// entity'ye ait tablodaki kayÄ±t sayÄ±sÄ±nÄ± almayÄ± saÄŸlayan metot
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<int> KayitSayisiAsync()
         {
@@ -232,11 +232,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// entity'ye ait tablodan parametre olarak gelen koşul ile sorgulayıp kayıt sayısını  almayı sağlayan metot
+        /// entity'ye ait tablodan parametre olarak gelen koÅŸul ile sorgulayÄ±p kayÄ±t sayÄ±sÄ±nÄ±  almayÄ± saÄŸlayan metot
         /// </summary>
         /// <param name="kosul"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<int> KayitSayisiAsync(Expression<Func<TEntity, bool>> kosul)
         {
@@ -244,11 +244,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// Raporlara ve grafiklere ait sql cümlelerinin çalıştırılmasını sağlayan metot
+        /// Raporlara ve grafiklere ait sql cÃ¼mlelerinin Ã§alÄ±ÅŸtÄ±rÄ±lmasÄ±nÄ± saÄŸlayan metot
         /// </summary>
         /// <param name="sql"></param>
         /// <returns>
-        /// Sorgulama sonucunda alınan verilerin Entity tipinde Listesi
+        /// Sorgulama sonucunda alÄ±nan verilerin Entity tipinde Listesi
         /// </returns>
         public async Task<IList<TEntity>> SQLCalistirAsync(string sql)
         {
@@ -267,11 +267,11 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// Toplu güncelleme veya silme işlemlerinin yapılması için sql cümlelerinin çalıştırılmasını sağlayan metot
+        /// Toplu gÃ¼ncelleme veya silme iÅŸlemlerinin yapÄ±lmasÄ± iÃ§in sql cÃ¼mlelerinin Ã§alÄ±ÅŸtÄ±rÄ±lmasÄ±nÄ± saÄŸlayan metot
         /// </summary>
         /// <param name="sql"></param>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<int> SQLNonQueryCalistirAsync(string sql)
         {
@@ -289,10 +289,10 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// Kaydet, Güncelleme ve Silme işlemleri sonucunda commit işleminin yapılmasını sağlayan metot
+        /// Kaydet, GÃ¼ncelleme ve Silme iÅŸlemleri sonucunda commit iÅŸleminin yapÄ±lmasÄ±nÄ± saÄŸlayan metot
         /// </summary>
         /// <returns>
-        /// Kayıtsayısını döndürür
+        /// KayÄ±tsayÄ±sÄ±nÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<int> KaydetAsync()
         {
@@ -300,7 +300,7 @@ namespace Risk.net.Data.Functions
         }
 
         /// <summary>
-        /// Bağlantı kaynakğını serbest bırakılmasını sağlayan metod
+        /// BaÄŸlantÄ± kaynakÄŸÄ±nÄ± serbest bÄ±rakÄ±lmasÄ±nÄ± saÄŸlayan metod
         /// </summary>
         public async ValueTask DisposeAsync()
         {

@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// Tarihçe işlemlerinin yapıldığı sayfa
+    /// TarihÃ§e iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class TarihceViewComponent : ViewComponent
     {
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _service;
 
         /// <summary>
-        /// <see cref="Risk.net.WebUI.ViewComponents.TarihceViewComponent" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.WebUI.ViewComponents.TarihceViewComponent" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="service"></param>
         /// <remarks></remarks>
@@ -28,7 +28,7 @@ namespace Risk.net.WebUI.ViewComponents
         }
 
         /// <summary>
-        /// Tarihce ViewComponent sayfası açıldığında çalışan metod.
+        /// Tarihce ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         /// <param name="ilgiKod"></param>
         public async Task<IViewComponentResult> InvokeAsync(string ilgiKod)

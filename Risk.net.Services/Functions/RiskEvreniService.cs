@@ -16,74 +16,74 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace Risk.net.Services.Functions
 {
     /// <summary>
-    /// RiskEvreni işlemlerinin yapıldığı servis
+    /// RiskEvreni iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± servis
     /// </summary>
     public class RiskEvreniService : IRiskEvreniService
     {
         /// <summary>
-        /// IUnitOfWork<RiskEvreni> servisine ulaşmak için kullanılan değişken
+        /// IUnitOfWork<RiskEvreni> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskEvreni> _unitOfWork;
         /// <summary>
-        /// IRiskEvreniRiskKategoriService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniRiskKategoriService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniRiskKategoriService _serviceRiskKategori;
         /// <summary>
-        /// IRiskEvreniIlIrtibatOfisiService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniIlIrtibatOfisiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniIlIrtibatOfisiService _serviceIIlIrtibatOfisi;
         /// <summary>
-        /// IRiskEvreniOlayRaporlamaService servisine ulaşmak için kullanılan değişken
+        /// IRiskEvreniOlayRaporlamaService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskEvreniOlayRaporlamaService _serviceOlayRaporlama;
         /// <summary>
-        /// IBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IBildirimSistemiService _serviceBildirimSistemi;
         /// <summary>
-        /// IViewBildirimSistemiService servisine ulaşmak için kullanılan değişken
+        /// IViewBildirimSistemiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBildirimSistemiService _serviceViewBildirim;
         /// <summary>
-        /// IViewBirimService servisine ulaşmak için kullanılan değişken
+        /// IViewBirimService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewBirimService _serviceViewBirim;
         /// <summary>
-        /// IViewYetkiService servisine ulaşmak için kullanılan değişken
+        /// IViewYetkiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IViewYetkiService _serviceYetki;
         /// <summary>
-        /// ITarihceService servisine ulaşmak için kullanılan değişken
+        /// ITarihceService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ITarihceService _serviceTarihce;
         /// <summary>
-        /// IStringLocalizer<CustomResource> servisine ulaşmak için kullanılan değişken
+        /// IStringLocalizer<CustomResource> servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         /// <summary>
-        /// IRiskYonetimiService servisine ulaşmak için kullanılan değişken
+        /// IRiskYonetimiService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly IRiskYonetimiService _serviceRiskYonetimi;
         private readonly IStringLocalizer<CustomResource> _sharedResource;
         /// <summary>
-        /// ICTEKoordinatorlukService servisine ulaşmak için kullanılan değişken
+        /// ICTEKoordinatorlukService servisine ulaÅŸmak iÃ§in kullanÄ±lan deÄŸiÅŸken
         /// </summary>
         /// <remarks></remarks>
         private readonly ICTEKoordinatorlukService _serviceCTE;
 
 
         /// <summary>
-        /// <see cref="Risk.net.Services.Functions.RiskEvreniService" /> 'ın yeni bir örneğini başlatan sınıf
+        /// <see cref="Risk.net.Services.Functions.RiskEvreniService" /> 'Ä±n yeni bir Ã¶rneÄŸini baÅŸlatan sÄ±nÄ±f
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="serviceRiskKategori"></param>
@@ -126,12 +126,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirAsync(KullaniciDto kullanan, string kod)
         {
@@ -151,10 +151,10 @@ namespace Risk.net.Services.Functions
                 {
                     kayit.Tarihce = await _serviceTarihce.SonAciklamaGetirAsync(kullanan, kod);
 
-                    //(Koord ve Birim değiştirilirse Risk Sahibi alan boşaltılsın.) Risk Sahibi; onaylayan Birim Amiri olur. 
+                    //(Koord ve Birim deÄŸiÅŸtirilirse Risk Sahibi alan boÅŸaltÄ±lsÄ±n.) Risk Sahibi; onaylayan Birim Amiri olur. 
                     if (kullanan.AktifRolKod == "BIRIMAMIRI")
                     {
-                        //Risk sahibinin koordinatorlük veya birim bilgisi farklı mı?
+                        //Risk sahibinin koordinatorlÃ¼k veya birim bilgisi farklÄ± mÄ±?
                         var kriter = new ViewYetki();
                         kriter.PersonelKod = kayit.RiskSahibiKod;
                         kriter.KoordinatorlukKod = kayit.KoordinatorlukKod;
@@ -182,12 +182,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen kaydın tüm bilgisini döndüren metod
+        /// Istemciden parametre ile talep edilen kaydÄ±n tÃ¼m bilgisini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KayitGetirHepsiAsync(KullaniciDto kullanan, string kod)
         {
@@ -206,7 +206,7 @@ namespace Risk.net.Services.Functions
                 if (kayit != null)
                 {
 
-                    //Risk Azaltma Planı Riskler
+                    //Risk Azaltma PlanÄ± Riskler
                     if (kayit.RiskYonetimi != null && kayit.RiskYonetimi.RiskAzaltmaPlani != null)
                     {
                         var listRiskKod = new List<string>();
@@ -230,7 +230,7 @@ namespace Risk.net.Services.Functions
                     }
                     //-------------------------------------------------------
 
-                    //Risk Azaltma Planı Notlar
+                    //Risk Azaltma PlanÄ± Notlar
                     if (kayit.RiskYonetimi != null && kayit.RiskYonetimi.RiskAzaltmaPlani != null)
                     {
                         var listRiskAzaltmaPlaniKod = new List<string>();
@@ -245,7 +245,7 @@ namespace Risk.net.Services.Functions
                     }
                     //-------------------------------------------------------
 
-                    //Risk Azaltma İlişlikili Planlar
+                    //Risk Azaltma Ä°liÅŸlikili Planlar
                     if (kayit.RiskYonetimi != null && kayit.RiskYonetimi.RiskAzaltmaPlani != null)
                     {
                         var listRiskAzaltmaPlaniKod = new List<string>();
@@ -284,12 +284,12 @@ namespace Risk.net.Services.Functions
 
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kriter"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> ListeleAsync(KullaniciDto kullanan, RiskEvreni kriter)
         {
@@ -318,13 +318,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametre ile talep edilen bilgilere ait kayıtların listesini döndüren metod
+        /// Istemciden parametre ile talep edilen bilgilere ait kayÄ±tlarÄ±n listesini dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="dataTablesParam"></param>
         /// <param name="onay"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam, bool onay, bool riskIzleme)
         {
@@ -350,29 +350,29 @@ namespace Risk.net.Services.Functions
             //var selectData = await _unitOfWork.SorguHazirlaAsync(null, "Amac,Amac.StratejikPlanDonem,RiskKategoriler,RiskKategoriler.RiskKategori,IlIrtibatOfisler,IlIrtibatOfisler.IlIrtibatOfisi,RiskSahibi", a => a.Birim, a => a.Koordinatorluk, a => a.Amac, a => a.Hedef, a => a.Surec, a => a.AltSurec);
             var selectData = await _unitOfWork.SorguHazirlaAsync(null, "Amac,Amac.StratejikPlanDonem,RiskKategoriler,RiskKategoriler.RiskKategori,IlIrtibatOfisler,IlIrtibatOfisler.IlIrtibatOfisi,RiskSahibi,RiskYonetimi, RiskYonetimi.Kontroller, RiskYonetimi.RiskAzaltmaPlani, RiskYonetimi.RiskAzaltmaPlani.SorumluBirim, RiskYonetimi.RiskAzaltmaPlani.SorumluBirim.Koordinatorluk, RiskYonetimi.RiskAzaltmaPlani.SorumluBirim.Koordinatorluk,RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniSorumlusu", a => a.Birim, a => a.Koordinatorluk, a => a.Amac, a => a.Hedef, a => a.Surec, a => a.AltSurec);
 
-            //P2-234-(Risk Kaydı/Anahtar Risk Göstergesi/Risklerin Değerlendirilmesi/Risklerin Yönetilmesi) Uzman tüm riskleri görebilir. 05.04.2023 HÖ
+            //P2-234-(Risk KaydÄ±/Anahtar Risk GÃ¶stergesi/Risklerin DeÄŸerlendirilmesi/Risklerin YÃ¶netilmesi) Uzman tÃ¼m riskleri gÃ¶rebilir. 05.04.2023 HÃ–
             /*
                 //****************************************************************************************
-                //Kullanici yetkisine göre koşul
+                //Kullanici yetkisine gÃ¶re koÅŸul
                 //****************************************************************************************
                 var predicate = PredicateBuilder.True<RiskEvreni>();
 
-                ////Birim koşulunu uygula
+                ////Birim koÅŸulunu uygula
                 //****************************************************************************************
                 string[] birimKosul = await OrtakService.ListeleBirimKosulAsync(kullanan, _serviceCTE, "RISKYONETIMI", "", "");
 
-                //Koordinatörlük
-                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatörlüğe sahip olduğu için
+                //KoordinatÃ¶rlÃ¼k
+                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatÃ¶rlÃ¼ÄŸe sahip olduÄŸu iÃ§in
                 if (!string.IsNullOrWhiteSpace(koordinatorlukKosul[0]))
                     predicate = predicate.And(a => koordinatorlukKosul.ToArray().Contains(a.KoordinatorlukKod));
                 else
-                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//Tüm koordinatörlükler
+                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//TÃ¼m koordinatÃ¶rlÃ¼kler
 
                 //Birim
                 if (!string.IsNullOrWhiteSpace(birimKosul[1]))
                     predicate = predicate.And(a => a.BirimKod == birimKosul[1]);
 
-                //Sadece Kendi kayıtları
+                //Sadece Kendi kayÄ±tlarÄ±
                 predicate = predicate.Or(a => a.RiskSahibiKod == kullanan.PersonelKod);
 
                 selectData = await _unitOfWork.KosulEkleAsync(selectData, predicate);
@@ -381,34 +381,34 @@ namespace Risk.net.Services.Functions
 
 
 
-            //2- Kullanıcı Risk Evreni ekranında Kopyala dediğinde Risk Kaydı ekranına ilgili kayıt düşecek ve süreç oradan ilerleyecek. Risk Kaydı ekranındaki yetkiler açıklamadaki gibi olacak.
+            //2- KullanÄ±cÄ± Risk Evreni ekranÄ±nda Kopyala dediÄŸinde Risk KaydÄ± ekranÄ±na ilgili kayÄ±t dÃ¼ÅŸecek ve sÃ¼reÃ§ oradan ilerleyecek. Risk KaydÄ± ekranÄ±ndaki yetkiler aÃ§Ä±klamadaki gibi olacak.
             /*
-                Uzman kendi girdiği riskleri görebilir.
-                Birim Amiri/Ünite Sorumlusu kendi ilindeki tüm birimlerin risklerini görebilir. 
-                İl Koordinatörleri kendi illerindeki tüm riskleri görebilir. 
-                İlgili Koordinatör/Hukuk Müşaviri kendi Koordinatörlüğündeki riskleri görebilir.
-                Risk Sekretaryası, Yetkili Risk Görevlisi ve Başkan tüm riskleri görebilir.  
+                Uzman kendi girdiÄŸi riskleri gÃ¶rebilir.
+                Birim Amiri/Ãœnite Sorumlusu kendi ilindeki tÃ¼m birimlerin risklerini gÃ¶rebilir. 
+                Ä°l KoordinatÃ¶rleri kendi illerindeki tÃ¼m riskleri gÃ¶rebilir. 
+                Ä°lgili KoordinatÃ¶r/Hukuk MÃ¼ÅŸaviri kendi KoordinatÃ¶rlÃ¼ÄŸÃ¼ndeki riskleri gÃ¶rebilir.
+                Risk SekretaryasÄ±, Yetkili Risk GÃ¶revlisi ve BaÅŸkan tÃ¼m riskleri gÃ¶rebilir.Â  
             */
 
 
             if (!riskIzleme)
             {
                 //****************************************************************************************
-                //Kullanici yetkisine göre koşul
+                //Kullanici yetkisine gÃ¶re koÅŸul
                 //****************************************************************************************
                 var predicate = PredicateBuilder.True<RiskEvreni>();
 
-                predicate = predicate.And(a => a.KoordinatorlukKod != "9999");//İl Koordinatörlüğüne sahip riskler sadece riskizleme ekranında gösterilecek Melih 09.01.2024
+                predicate = predicate.And(a => a.KoordinatorlukKod != "9999");//Ä°l KoordinatÃ¶rlÃ¼ÄŸÃ¼ne sahip riskler sadece riskizleme ekranÄ±nda gÃ¶sterilecek Melih 09.01.2024
 
-                //Uzman, Birim Amiri/Ünite Sorumlusu ve Koordinatörler Risk Kaydı ekranında kendi koordinatörlüklerindeki tüm riskleri görebilsin.
+                //Uzman, Birim Amiri/Ãœnite Sorumlusu ve KoordinatÃ¶rler Risk KaydÄ± ekranÄ±nda kendi koordinatÃ¶rlÃ¼klerindeki tÃ¼m riskleri gÃ¶rebilsin.
 
                 string[] birimKosul = await OrtakService.ListeleBirimKosulAsync(kullanan, _serviceCTE, "RISKYONETIMI", "", "");
-                //Koordinatörlük
-                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatörlüğe sahip olduğu için
+                //KoordinatÃ¶rlÃ¼k
+                var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatÃ¶rlÃ¼ÄŸe sahip olduÄŸu iÃ§in
                 if (!string.IsNullOrWhiteSpace(koordinatorlukKosul[0]))
                     predicate = predicate.And(a => koordinatorlukKosul.ToArray().Contains(a.KoordinatorlukKod));
                 else
-                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//Tüm koordinatörlükler
+                    predicate = predicate.And(a => a.KoordinatorlukKod != "");//TÃ¼m koordinatÃ¶rlÃ¼kler
 
 
                 if (Arac.YetkisiVarmi("ICDENETIMUZMANI,UZMAN,BIRIMAMIRI,ILKOORDINATOR,MERKEZKOORDINATOR,ICDENETIMKOORDINATOR,BIRIMAMIRI,GENELKOORDINATOR", kullanan))
@@ -422,20 +422,20 @@ namespace Risk.net.Services.Functions
 
                 //if (kullanan.AktifRolKod == "UZMAN")
                 //{
-                //    //Sadece Kendi kayıtları
+                //    //Sadece Kendi kayÄ±tlarÄ±
                 //    predicate = predicate.And(a => a.RiskSahibiKod == kullanan.PersonelKod);
                 //}
                 //else
                 //{
-                //    ////Birim koşulunu uygula
+                //    ////Birim koÅŸulunu uygula
                 //    //****************************************************************************************
                 //    string[] birimKosul = await OrtakService.ListeleBirimKosulAsync(kullanan, _serviceCTE, "RISKYONETIMI", "", "");
-                //    //Koordinatörlük
-                //    var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatörlüğe sahip olduğu için
+                //    //KoordinatÃ¶rlÃ¼k
+                //    var koordinatorlukKosul = birimKosul[0].Split(",");//Genel koord birden fazla koordinatÃ¶rlÃ¼ÄŸe sahip olduÄŸu iÃ§in
                 //    if (!string.IsNullOrWhiteSpace(koordinatorlukKosul[0]))
                 //        predicate = predicate.And(a => koordinatorlukKosul.ToArray().Contains(a.KoordinatorlukKod));
                 //    else
-                //        predicate = predicate.And(a => a.KoordinatorlukKod != "");//Tüm koordinatörlükler
+                //        predicate = predicate.And(a => a.KoordinatorlukKod != "");//TÃ¼m koordinatÃ¶rlÃ¼kler
 
                 //    //Birim
                 //    if (!string.IsNullOrWhiteSpace(birimKosul[1]))
@@ -526,10 +526,10 @@ namespace Risk.net.Services.Functions
                     }
 
                     /*
-                     * 0:Tümü
-                     * 1:Başkası adına kaydettiklerim
-                     * 2:Risk sahibi olduklarım
-                     * 3:Kaydettigim bütün riskler
+                     * 0:TÃ¼mÃ¼
+                     * 1:BaÅŸkasÄ± adÄ±na kaydettiklerim
+                     * 2:Risk sahibi olduklarÄ±m
+                     * 3:Kaydettigim bÃ¼tÃ¼n riskler
                      */
                     if (aramaObj.SorguBaskasiAdinaRiskDurumu == 1)
                         selectData = await _unitOfWork.KosulEkleAsync(selectData, a => belgeNolarPersonelTarihce.ToArray().Contains(a.Kod) && a.RiskSahibiKod != kullanan.PersonelKod);
@@ -614,12 +614,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgileri kaydeden metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgileri kaydeden metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> KaydetAsync(KullaniciDto kullanan, RiskEvreni gelenNesne)
         {
@@ -628,7 +628,7 @@ namespace Risk.net.Services.Functions
             string hata = "";
 
             if (gelenNesne == null)
-                hata += "<li>Risk Evreni içeriği boş geldi</li>";
+                hata += "<li>Risk Evreni iÃ§eriÄŸi boÅŸ geldi</li>";
             else
             {
                 if (string.IsNullOrWhiteSpace(gelenNesne.KoordinatorlukKod))
@@ -643,8 +643,8 @@ namespace Risk.net.Services.Functions
             }
 
 
-            //İller arasında risk ataması yapılamaz. Örneğin Aydın İl Koordinatörlüğünden bir kullanıcı, Balıkesir İl Koordinatörlüğüne bir risk atayamaz.
-            //Fakat İl ve Merkez arasında veya İl Koordinatörlüklerindeki Birimler arasında risk ataması yapılabilir. 
+            //Ä°ller arasÄ±nda risk atamasÄ± yapÄ±lamaz. Ã–rneÄŸin AydÄ±n Ä°l KoordinatÃ¶rlÃ¼ÄŸÃ¼nden bir kullanÄ±cÄ±, BalÄ±kesir Ä°l KoordinatÃ¶rlÃ¼ÄŸÃ¼ne bir risk atayamaz.
+            //Fakat Ä°l ve Merkez arasÄ±nda veya Ä°l KoordinatÃ¶rlÃ¼klerindeki Birimler arasÄ±nda risk atamasÄ± yapÄ±labilir. 
             bool uzman = Arac.YetkisiVarmi("UZMAN", kullanan);
             if (uzman && kullanan.KoordinatorlukKod != gelenNesne.KoordinatorlukKod)
             {
@@ -660,7 +660,7 @@ namespace Risk.net.Services.Functions
 
             try
             {
-                //Risk Yönetimi ve Risk Azaltma Planı verilerini silmek için RiskYonetimi bilgileri gönderiliyor. Daha sonra Tarhiçe karşılaştırması için null değeri veriliyor.
+                //Risk YÃ¶netimi ve Risk Azaltma PlanÄ± verilerini silmek iÃ§in RiskYonetimi bilgileri gÃ¶nderiliyor. Daha sonra TarhiÃ§e karÅŸÄ±laÅŸtÄ±rmasÄ± iÃ§in null deÄŸeri veriliyor.
 
                 var degerlendirmeYonetilmeSifirla = false;
                 var riskYonetimi = gelenNesne.RiskYonetimi;
@@ -697,20 +697,20 @@ namespace Risk.net.Services.Functions
                     bool yonetici = Arac.YetkisiVarmi("SISTEMYONETICISI,PLANLAMAUNITESI,RISKSEKRETARYASI", kullanan);
                     if (!yonetici)
                     {
-                        //Kayıtlı bir bilgi ancak sahibi tarafından değiştirilebilir
+                        //KayÄ±tlÄ± bir bilgi ancak sahibi tarafÄ±ndan deÄŸiÅŸtirilebilir
                         if (eskiKayit.RiskSahibiKod != kullanan.PersonelKod)
                             hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
                     }
 
-                    //Onaya gönderilen kayıt değiştirilemez
+                    //Onaya gÃ¶nderilen kayÄ±t deÄŸiÅŸtirilemez
                     if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
                         hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
-                    else if (eskiKayit.Durum == (int)ENUMDurum.Reddedildi)         //İptal edilen kayıt değiştirilemez
+                    else if (eskiKayit.Durum == (int)ENUMDurum.Reddedildi)         //Ä°ptal edilen kayÄ±t deÄŸiÅŸtirilemez
                         hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.UygunDegil"] + "</li>";
 
 
-                    //Risk Kaydı ekranında Koord Birim Risk Adı alanlarını riskin sahibi Onaylı bir kayıtta değiştirirse süreç en baştan başlayacak ve diğer ekranlar da sıfırlanacak.
-                    //(Uyarı da versin emin misiniz diye diğer ekranlardaki bilgileri sıfırlayacağına dair) Ama kalan alanlarda değişiklik yapılırsa diğer ekranlar sıfırlanmayacak.
+                    //Risk KaydÄ± ekranÄ±nda Koord Birim Risk AdÄ± alanlarÄ±nÄ± riskin sahibi OnaylÄ± bir kayÄ±tta deÄŸiÅŸtirirse sÃ¼reÃ§ en baÅŸtan baÅŸlayacak ve diÄŸer ekranlar da sÄ±fÄ±rlanacak.
+                    //(UyarÄ± da versin emin misiniz diye diÄŸer ekranlardaki bilgileri sÄ±fÄ±rlayacaÄŸÄ±na dair) Ama kalan alanlarda deÄŸiÅŸiklik yapÄ±lÄ±rsa diÄŸer ekranlar sÄ±fÄ±rlanmayacak.
                     if (eskiKayit.Durum == (int)ENUMDurum.Onayli && (eskiKayit.KoordinatorlukKod != gelenNesne.KoordinatorlukKod || eskiKayit.BirimKod != gelenNesne.BirimKod))
                         degerlendirmeYonetilmeSifirla = true;
 
@@ -749,24 +749,24 @@ namespace Risk.net.Services.Functions
                 tarihce.IslemYapanKod = kullanan.PersonelKod;
                 tarihce.Durum = gelenNesne.Durum;
 
-                //Kopyalama işlemiyle risk kaydı yapılıyorsa. Referans risk'in tarihçesine yeni riskin bilgisini kaydet
+                //Kopyalama iÅŸlemiyle risk kaydÄ± yapÄ±lÄ±yorsa. Referans risk'in tarihÃ§esine yeni riskin bilgisini kaydet
                 if (!string.IsNullOrWhiteSpace(gelenNesne.KopyaKod) && !string.IsNullOrWhiteSpace(gelenNesne.RiskNo))
                 {
                     var kopyaKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.KopyaKod);
 
                     Tarihce tarihceKopya = new Tarihce();
                     tarihceKopya.EskiDeger = Arac.JSONSerialize(kopyaKayit);
-                    tarihceKopya.Durum = (int)ENUMDurum.Kopyalandı;
+                    tarihceKopya.Durum = (int)ENUMDurum.KopyalandÄ±;
                     tarihceKopya.IlgiKod = gelenNesne.KopyaKod;
                     tarihceKopya.IlgiTur = EnumTarihceIslemTur.RiskEvreni;
                     tarihceKopya.IslemYapanKod = kullanan.PersonelKod;
-                    tarihceKopya.Aciklama = gelenNesne.RiskNo + " nolu risk oluşturuldu.";
+                    tarihceKopya.Aciklama = gelenNesne.RiskNo + " nolu risk oluÅŸturuldu.";
                     tarihceKopya.YeniDeger = Arac.JSONSerialize(kopyaKayit);
 
                     var sonucKopya = await _serviceTarihce.KaydetAsync(kullanan, tarihceKopya);
 
-                    tarihce.Durum = (int)ENUMDurum.Kopyalandı;
-                    tarihce.Aciklama = kopyaKayit.RiskNo + " nolu risk kaydından kopyalandı.";
+                    tarihce.Durum = (int)ENUMDurum.KopyalandÄ±;
+                    tarihce.Aciklama = kopyaKayit.RiskNo + " nolu risk kaydÄ±ndan kopyalandÄ±.";
                 }
 
                 var sonuc = await _serviceTarihce.KaydetAsync(kullanan, tarihce);
@@ -814,7 +814,7 @@ namespace Risk.net.Services.Functions
                 await _unitOfWork.KaydetAsync();
 
 
-                //Bildirim sisteminden kaydı sil
+                //Bildirim sisteminden kaydÄ± sil
                 var sonucBildirimSistemi = await _serviceBildirimSistemi.SilAsync(kullanan, new BildirimSistemi { BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreni, BelgeKod = gelenNesne.Kod, });
 
                 if (!string.IsNullOrWhiteSpace(riskYonetimi?.Kod) && degerlendirmeYonetilmeSifirla)
@@ -831,12 +831,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydı silen metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ± silen metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kod"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> SilAsync(KullaniciDto kullanan, string kod)
         {
@@ -867,12 +867,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, RiskEvreni gelenNesne)
         {
@@ -888,7 +888,7 @@ namespace Risk.net.Services.Functions
             {
                 var eskiKayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == gelenNesne.Kod, "Koordinatorluk");
 
-                //Durum değişikliğine uygun mu?
+                //Durum deÄŸiÅŸikliÄŸine uygun mu?
                 hata = Arac.DurumDegisikligiUygunMu(kullanan, _sharedResource, eskiKayit, gelenNesne);
 
                 if (hata == "" && gelenNesne.Durum == (int)ENUMDurum.OnayaGonderdi && eskiKayit.JenerikRisk == 1)
@@ -926,7 +926,7 @@ namespace Risk.net.Services.Functions
 
                     var islemYapilan = await _unitOfWork.GuncelleAsync(eskiKayit);
 
-                    //Tarihçe Başlangıç
+                    //TarihÃ§e BaÅŸlangÄ±Ã§
                     tarihce.IlgiKod = gelenNesne.Kod;
                     tarihce.IlgiTur = EnumTarihceIslemTur.RiskEvreni;
                     tarihce.IslemYapanKod = kullanan.PersonelKod;
@@ -937,7 +937,7 @@ namespace Risk.net.Services.Functions
                     tarihce.YeniDeger = Arac.JSONSerialize(eskiKayit);
 
                     await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                    //Tarihçe Bitiş
+                    //TarihÃ§e BitiÅŸ
 
                     var sonuc = await _unitOfWork.KaydetAsync();
 
@@ -952,7 +952,7 @@ namespace Risk.net.Services.Functions
                         var sonucRiskYonetimi = await _serviceRiskYonetimi.SilAsync(kullanan, riskYonetimi);
                     }
 
-                    //Mail Gönder: Bir risk kaydının durumu Pasif durumuna çekildiğinde Risk Sekreteryasına mail bildirimi gönder. 
+                    //Mail GÃ¶nder: Bir risk kaydÄ±nÄ±n durumu Pasif durumuna Ã§ekildiÄŸinde Risk SekreteryasÄ±na mail bildirimi gÃ¶nder. 
                     if (eskiKayit.Durum == (int)ENUMDurum.Pasif)
                     {
                         var formBildirim = new BildirimSistemi()
@@ -964,7 +964,7 @@ namespace Risk.net.Services.Functions
 
                         Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
                     }
-                    //Mail Gönder Bitiş
+                    //Mail GÃ¶nder BitiÅŸ
 
 
                 }
@@ -1014,7 +1014,7 @@ namespace Risk.net.Services.Functions
                     eskiKayit.Durum = gelenNesne.Durum;
 
 
-                    //BildirimSistemi Başlangıç
+                    //BildirimSistemi BaÅŸlangÄ±Ã§
                     if (gelenNesne.Durum == (int)ENUMDurum.OnayaGonderdi || gelenNesne.Durum == (int)ENUMDurum.Onayli || gelenNesne.Durum == (int)ENUMDurum.GeriGonderildi || gelenNesne.Durum == (int)ENUMDurum.Reddedildi)
                     {
                         var bs = new BildirimSistemi
@@ -1039,9 +1039,9 @@ namespace Risk.net.Services.Functions
 
                             if (kullanan.AktifRolKod == "RISKSEKRETARYASI")
                             {
-                                //Değişiklik : Risk sahibinin birimine bakılmaksızın her durumda risk sekretaryasından sonra birim amirinin onayına gönderilsin. Birim yok ise koordinatör yetksinin onayına gidecek.
+                                //DeÄŸiÅŸiklik : Risk sahibinin birimine bakÄ±lmaksÄ±zÄ±n her durumda risk sekretaryasÄ±ndan sonra birim amirinin onayÄ±na gÃ¶nderilsin. Birim yok ise koordinatÃ¶r yetksinin onayÄ±na gidecek.
                                 /*
-                                    //Risk sahibinin koordinatorlük veya birim bilgisi farklı ise birim amirine onaya gönder
+                                    //Risk sahibinin koordinatorlÃ¼k veya birim bilgisi farklÄ± ise birim amirine onaya gÃ¶nder
                                     var kriter = new ViewYetki();
                                     kriter.PersonelKod = eskiKayit.RiskSahibiKod;
                                     kriter.KoordinatorlukKod = eskiKayit.KoordinatorlukKod;
@@ -1057,7 +1057,7 @@ namespace Risk.net.Services.Functions
 
                                 bool birimAmirineGonder = true;
 
-                                //Risk Sekretaryasına onaya gönderen yetkiyi bul
+                                //Risk SekretaryasÄ±na onaya gÃ¶nderen yetkiyi bul
                                 var onayaGonderenYetki = "";
                                 var ilgiliTarihce = await _serviceTarihce.ListeleAsync(eskiKayit.Kod);
                                 if (ilgiliTarihce.IslemSonuc && ilgiliTarihce.Liste.Count > 0)
@@ -1070,12 +1070,12 @@ namespace Risk.net.Services.Functions
                                 }
 
 
-                                //Başkan/Genel Koord. kendi adına risk kaydı girdi. Risk Sekretaryası onayladı.
-                                //Başkan/Genel Koord. başkası adına risk kaydı girdi. Risk Sekretaryası onayladı. İlgili Birim Amiri risk sahibini değiştirmeden direkt onayladı.
+                                //BaÅŸkan/Genel Koord. kendi adÄ±na risk kaydÄ± girdi. Risk SekretaryasÄ± onayladÄ±.
+                                //BaÅŸkan/Genel Koord. baÅŸkasÄ± adÄ±na risk kaydÄ± girdi. Risk SekretaryasÄ± onayladÄ±. Ä°lgili Birim Amiri risk sahibini deÄŸiÅŸtirmeden direkt onayladÄ±.
 
                                 if (onayaGonderenYetki == "BASKAN" || onayaGonderenYetki == "GENELKOORDINATOR")
                                 {
-                                    //Risk sahibinin koordinatorlük veya birim bilgisi farklı mı? //Başkası adına risk kaydı mı?
+                                    //Risk sahibinin koordinatorlÃ¼k veya birim bilgisi farklÄ± mÄ±? //BaÅŸkasÄ± adÄ±na risk kaydÄ± mÄ±?
                                     var kriter = new ViewYetki();
                                     kriter.PersonelKod = eskiKayit.RiskSahibiKod;
                                     kriter.KoordinatorlukKod = eskiKayit.KoordinatorlukKod;
@@ -1094,7 +1094,7 @@ namespace Risk.net.Services.Functions
                                         }
 
                                         if (!string.IsNullOrWhiteSpace(onayaGonderenYetki))
-                                            onayaGonderenYetki = "BIRIMAMIRI"; //Birim amirine gönder
+                                            onayaGonderenYetki = "BIRIMAMIRI"; //Birim amirine gÃ¶nder
                                     }
 
 
@@ -1111,7 +1111,7 @@ namespace Risk.net.Services.Functions
                                         onaylayacakYetki = "BIRIMAMIRI"; //onaylayacakYetki = await _serviceBildirimSistemi.OnaylayacakYetkiVerAsync(kullanan, bs);
                                     else
                                     {
-                                        //Birimi olmayan koordinatörlük ile işlem yapıldığında
+                                        //Birimi olmayan koordinatÃ¶rlÃ¼k ile iÅŸlem yapÄ±ldÄ±ÄŸÄ±nda
                                         onaylayacakYetki = await _serviceViewBirim.KoordinatorlukYetkiTipiBul(kullanan, eskiKayit.KoordinatorlukKod, eskiKayit.Koordinatorluk.Tur, true);
                                     }
 
@@ -1140,10 +1140,10 @@ namespace Risk.net.Services.Functions
                                 //    eskiKayit.RiskSahibiKod = kullanan.PersonelKod;
 
 
-                                //(Koord ve Birim değiştirilirse Risk Sahibi alan boşaltılsın.) Risk Sahibi; onaylayan Birim Amiri olur. 
+                                //(Koord ve Birim deÄŸiÅŸtirilirse Risk Sahibi alan boÅŸaltÄ±lsÄ±n.) Risk Sahibi; onaylayan Birim Amiri olur. 
                                 if (kullanan.AktifRolKod == "BIRIMAMIRI" && string.IsNullOrWhiteSpace(gelenNesne.RiskSahibiKod))
                                 {
-                                    //Risk sahibinin koordinatorlük veya birim bilgisi farklı mı? //Başkası adına risk kaydı mı?
+                                    //Risk sahibinin koordinatorlÃ¼k veya birim bilgisi farklÄ± mÄ±? //BaÅŸkasÄ± adÄ±na risk kaydÄ± mÄ±?
                                     var kriter = new ViewYetki();
                                     kriter.PersonelKod = eskiKayit.RiskSahibiKod;
                                     kriter.KoordinatorlukKod = eskiKayit.KoordinatorlukKod;
@@ -1163,8 +1163,8 @@ namespace Risk.net.Services.Functions
                         }
                         else if (gelenNesne.Durum == (int)ENUMDurum.GeriGonderildi)
                         {
-                            eskiKayit.Durum = (int)ENUMDurum.GeriGonderildi; //Geri gönderildi
-                            bs.Durum = (int)ENUMDurum.Pasif; //Geri Gönderilecek kişi yok
+                            eskiKayit.Durum = (int)ENUMDurum.GeriGonderildi; //Geri gÃ¶nderildi
+                            bs.Durum = (int)ENUMDurum.Pasif; //Geri GÃ¶nderilecek kiÅŸi yok
                             bs.OnaylayacakYetki = "-";
 
                             var ilgiliTarihce = await _serviceTarihce.ListeleAsync(eskiKayit.Kod);
@@ -1179,13 +1179,13 @@ namespace Risk.net.Services.Functions
 
                             //if (kullanan.AktifRolKod != "RISKSEKRETARYASI")
                             //{
-                            //    eskiKayit.Durum = (int)ENUMDurum.GeriGonderildi; //RiskSekretaryasına geri gönderildi
+                            //    eskiKayit.Durum = (int)ENUMDurum.GeriGonderildi; //RiskSekretaryasÄ±na geri gÃ¶nderildi
                             //    bs.Durum = (int)ENUMDurum.GeriGonderildi;
                             //    bs.OnaylayacakYetki = "RISKSEKRETARYASI";
                             //}
                             //else
                             //{
-                            //    bs.Durum = (int)ENUMDurum.Pasif; //Geri Gönderilecek kişi yok
+                            //    bs.Durum = (int)ENUMDurum.Pasif; //Geri GÃ¶nderilecek kiÅŸi yok
                             //    bs.OnaylayacakYetki = "-";
                             //}
                         }
@@ -1209,12 +1209,12 @@ namespace Risk.net.Services.Functions
                             tarihce.IlgiliRol = bs.OnaylayacakUstYetki;
 
                     }
-                    //BildirimSistemi Bitiş
+                    //BildirimSistemi BitiÅŸ
 
                     var islemYapilan = await _unitOfWork.GuncelleAsync(eskiKayit);
 
 
-                    //Tarihçe Başlangıç
+                    //TarihÃ§e BaÅŸlangÄ±Ã§
                     tarihce.IlgiKod = gelenNesne.Kod;
                     tarihce.IlgiTur = EnumTarihceIslemTur.RiskEvreni;
                     tarihce.IslemYapanKod = kullanan.PersonelKod;
@@ -1264,13 +1264,13 @@ namespace Risk.net.Services.Functions
                     }
 
                     await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                    //Tarihçe Bitiş
+                    //TarihÃ§e BitiÅŸ
 
 
                     var sonuc = await _unitOfWork.KaydetAsync();
 
 
-                    //Mail Gönder: Bir riskin Risk Sahibi değiştiğinde riskin ilk sahibine bildirim maili gitmeli. Süreçten çıktığına dair eski sahibine mail gönder. 
+                    //Mail GÃ¶nder: Bir riskin Risk Sahibi deÄŸiÅŸtiÄŸinde riskin ilk sahibine bildirim maili gitmeli. SÃ¼reÃ§ten Ã§Ä±ktÄ±ÄŸÄ±na dair eski sahibine mail gÃ¶nder. 
                     if (!string.IsNullOrWhiteSpace(riskSahibiEski))
                     {
                         var formBildirim = new BildirimSistemi()
@@ -1283,11 +1283,11 @@ namespace Risk.net.Services.Functions
 
                         Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
                     }
-                    //Mail Gönder Bitiş
+                    //Mail GÃ¶nder BitiÅŸ
 
                     if (gelenNesne.Durum == (int)ENUMDurum.Onayli && !string.IsNullOrEmpty(tarihce.DegisenDeger))
                     {
-                        //Mail Gönder: Onaycı kişi kayıtta değişiklik yapıp onaylarsa, değişiklik risk sahibine mail olarak bildirilir. 
+                        //Mail GÃ¶nder: OnaycÄ± kiÅŸi kayÄ±tta deÄŸiÅŸiklik yapÄ±p onaylarsa, deÄŸiÅŸiklik risk sahibine mail olarak bildirilir. 
                         if (!string.IsNullOrWhiteSpace(eskiKayit.RiskSahibiKod))
                         {
                             var formBildirim = new BildirimSistemi()
@@ -1300,11 +1300,11 @@ namespace Risk.net.Services.Functions
 
                             Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
                         }
-                        //Mail Gönder Bitiş
+                        //Mail GÃ¶nder BitiÅŸ
                     }
                 }
 
-                //Mail Gönder: Tüm ekranlar için kaydın durum bilgisi değiştiğinde bilgilendirme maili gidebilir mi? (reddedildi, onaya gönderildi, geri gönderildi vs.). 
+                //Mail GÃ¶nder: TÃ¼m ekranlar iÃ§in kaydÄ±n durum bilgisi deÄŸiÅŸtiÄŸinde bilgilendirme maili gidebilir mi? (reddedildi, onaya gÃ¶nderildi, geri gÃ¶nderildi vs.). 
                 if (oncekiDurum != eskiKayit.Durum && !string.IsNullOrWhiteSpace(eskiKayit.RiskSahibiKod))
                 {
                     var formBildirim = new BildirimSistemi()
@@ -1318,7 +1318,7 @@ namespace Risk.net.Services.Functions
 
                     Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
                 }
-                //Mail Gönder Bitiş
+                //Mail GÃ¶nder BitiÅŸ
 
             }
             catch (System.Exception ex)
@@ -1330,13 +1330,13 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilere göre kaydın durumunu değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilere gÃ¶re kaydÄ±n durumunu deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="kodListe"></param>
         /// <param name="durum"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> DurumDegistirAsync(KullaniciDto kullanan, string[] kodListe, int durum)
         {
@@ -1375,12 +1375,12 @@ namespace Risk.net.Services.Functions
         }
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen bilgilerden güncel değerleri değişen alanları döndüren metod
+        /// Istemciden parametere ile gÃ¶nderilen bilgilerden gÃ¼ncel deÄŸerleri deÄŸiÅŸen alanlarÄ± dÃ¶ndÃ¼ren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// string türünde değişen alanları döndürür
+        /// string tÃ¼rÃ¼nde deÄŸiÅŸen alanlarÄ± dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<string> DegisenAlanlariGetirAsync(KullaniciDto kullanan, RiskEvreni gelenNesne)
         {
@@ -1407,12 +1407,12 @@ namespace Risk.net.Services.Functions
 
 
         /// <summary>
-        /// Istemciden parametere ile gönderilen risk sahibini değiştiren metod
+        /// Istemciden parametere ile gÃ¶nderilen risk sahibini deÄŸiÅŸtiren metod
         /// </summary>
         /// <param name="kullanan"></param>
         /// <param name="gelenNesne"></param>
         /// <returns>
-        /// Sonuc nesnesi döndürür
+        /// Sonuc nesnesi dÃ¶ndÃ¼rÃ¼r
         /// </returns>
         public async Task<Sonuc> RiskSahibiDegistirAsync(KullaniciDto kullanan, RiskEvreni gelenNesne)
         {
@@ -1462,7 +1462,7 @@ namespace Risk.net.Services.Functions
 
                 var islemYapilan = await _unitOfWork.GuncelleAsync(eskiKayit);
 
-                //Tarihçe Başlangıç
+                //TarihÃ§e BaÅŸlangÄ±Ã§
                 tarihce.IlgiKod = gelenNesne.Kod;
                 tarihce.IlgiTur = EnumTarihceIslemTur.RiskEvreni;
                 tarihce.IslemYapanKod = kullanan.PersonelKod;
@@ -1471,7 +1471,7 @@ namespace Risk.net.Services.Functions
                 tarihce.YeniDeger = Arac.JSONSerialize(eskiKayit);
 
                 await _serviceTarihce.KaydetAsync(kullanan, tarihce);
-                //Tarihçe Bitiş
+                //TarihÃ§e BitiÅŸ
 
                 var sonuc = await _unitOfWork.KaydetAsync();
 

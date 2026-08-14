@@ -4,12 +4,12 @@ using Risk.net.WebUI.Models;
 namespace Risk.net.WebUI.ViewComponents
 {
     /// <summary>
-    /// Menü işlemlerinin yapıldığı sayfa
+    /// MenÃ¼ iÅŸlemlerinin yapÄ±ldÄ±ÄŸÄ± sayfa
     /// </summary>
     public class NavigationViewComponent : ViewComponent
     {
         /// <summary>
-        /// Menu ViewComponent sayfası açıldığında çalışan metod.
+        /// Menu ViewComponent sayfasÄ± aÃ§Ä±ldÄ±ÄŸÄ±nda Ã§alÄ±ÅŸan metod.
         /// </summary>
         public IViewComponentResult Invoke()
         {
