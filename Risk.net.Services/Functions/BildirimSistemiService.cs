@@ -535,6 +535,8 @@ namespace Risk.net.Services.Functions
                                         yetki.KoordinatorlukKod = b.KoordinatorlukKod;
                                     if (b.Birimler != null && b.Birimler.Count > 0)
                                         yetki.BirimKod = string.Join(";", b.Birimler.ToArray());
+                                    else if (!string.IsNullOrWhiteSpace(b.BirimKod))
+                                        yetki.BirimKod = b.BirimKod;
 
                                     var sonucMailAdres = await _serviceYetki.ListeleMailAsync(kullanan, yetki);
                                     if (sonucMailAdres.IslemSonuc && !string.IsNullOrWhiteSpace(sonucMailAdres.AnahtarAlan))
@@ -1043,14 +1045,19 @@ namespace Risk.net.Services.Functions
                         konu = "Risk Kaydı Durumu Değişti";
 
                         mesaj = mesajSablon;
-                        mesaj = mesaj.Replace("{BASLIK}", "Risk kaydı durumu değişti.");
+                        bool riskKaydiOnaylandi = riskEvreni.Durum == (int)ENUMDurum.Onayli;
+                        mesaj = mesaj.Replace("{BASLIK}", riskKaydiOnaylandi
+                            ? "Risk kaydınız onaylandı. Riskinizi değerlendirmek için Risklerin Değerlendirilmesi ekranına gidiniz."
+                            : "Risk kaydı durumu değişti.");
                         string alanlar = "";
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Koordinatürlük").Replace("{ACIKLAMA}", riskEvreni.Koordinatorluk.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Birim/Ünite").Replace("{ACIKLAMA}", riskEvreni.Birim.Adi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Risk No").Replace("{ACIKLAMA}", riskEvreni.RiskNo);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Riskin Kök Nedeni").Replace("{ACIKLAMA}", riskEvreni.RiskTanimi);
                         alanlar += mesajSablonAlan.Replace("{ALAN}", "Durum Bilgisi").Replace("{ACIKLAMA}", kriter.Aciklama);
-                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Erişim Adresi").Replace("{ACIKLAMA}", url + "/RiskKaydi?r=" + riskEvreni.Kod);
+                        alanlar += mesajSablonAlanUrl.Replace("{ALAN}", "Erişim Adresi").Replace("{ACIKLAMA}", riskKaydiOnaylandi
+                            ? url + "/RisklerinDegerlendirilmesi?r=" + riskEvreni.Kod
+                            : url + "/RiskKaydi?r=" + riskEvreni.Kod);
 
                         mesaj = mesaj.Replace("{ALANLAR}", alanlar);
                     }

@@ -947,12 +947,16 @@ namespace Risk.net.Services.Functions
                     //Mail Gönder: Risk Azaltma Planı oluşturmak için Risk Azaltma Planı ekranına gidiniz. 
                     if (eskiKayit.Durum == (int)ENUMDurum.Onayli && eskiKayit.RiskeVerilecekCevap == EnumRiskYonetimiRiskeVerilecekCevap.Azalt)
                     {
+                        var guncelRiskSahibiKod = !string.IsNullOrWhiteSpace(gelenNesne.RiskSahibiKod)
+                            ? gelenNesne.RiskSahibiKod
+                            : riskEvreni.RiskSahibiKod;
+
                         var formBildirim = new BildirimSistemi()
                         {
                             Islem = EnumBildirimSistemiIslem.AzaltmaPlaniOlustur,
                             BelgeKod = gelenNesne.Kod,
                             BelgeTipi = (int)EnumTarihceIslemTur.RiskYonetimi,
-                            MailGonderilecekKisi = riskEvreni.RiskSahibiKod, //Risk azaltma planı oluşturma maili riskin sahibine gitmeli
+                            MailGonderilecekKisi = guncelRiskSahibiKod, //Risk azaltma planı oluşturma maili güncel risk sahibine gitmeli
                         };
 
                         Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);

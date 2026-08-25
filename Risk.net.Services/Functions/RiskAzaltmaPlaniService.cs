@@ -455,7 +455,9 @@ namespace Risk.net.Services.Functions
                 //if (string.IsNullOrWhiteSpace(gelenNesne.AzaltmaPlaniSorumlusuKod))
                 //    gelenNesne.AzaltmaPlaniSorumlusuKod = kullanan.PersonelKod;
 
-                if (string.IsNullOrWhiteSpace(gelenNesne.Kod))
+                bool yeniKayit = string.IsNullOrWhiteSpace(gelenNesne.Kod);
+
+                if (yeniKayit)
                 {
                     gelenNesne.Kod = Arac.GetGuid();
                     gelenNesne.TamamlamaYuzdesi = 0;
@@ -468,34 +470,6 @@ namespace Risk.net.Services.Functions
                     tarihce.Durum = gelenNesne.Durum.Value;
 
                     islemYapilan = await _unitOfWorkAnahtar.KayitEkleAsync(gelenNesne);
-
-                    //İlk kayıt sırasında iş birliği yapacak koordinatorlük ve birimlere mail gönderilsin
-                    if (isbirligiBirimler != null)
-                    {
-                        var formBildirim = new BildirimSistemi() { Liste = new List<BildirimSistemi>() };
-
-                        foreach (var item in isbirligiBirimler)
-                        {
-                            var b = new BildirimSistemi
-                            {
-                                Islem = EnumBildirimSistemiIslem.Yeni,
-                                BelgeKod = gelenNesne.Kod,
-                                BelgeTipi = (int)EnumTarihceIslemTur.RiskAzaltmaPlani,
-                                KoordinatorlukKod = item.KoordinatorlukKod,
-                                Birimler = new List<string>()
-                            };
-
-                            if (!string.IsNullOrWhiteSpace(item.BirimKod) && item.BirimKod != "undefined")
-                                b.Birimler.Add(item.BirimKod);
-
-                            formBildirim.Liste.Add(b);
-                        }
-
-                        Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
-
-                    }
-                    //------------------------------------------------------------------
-
 
                 }
                 else
@@ -681,6 +655,31 @@ namespace Risk.net.Services.Functions
 
                 await _unitOfWorkAnahtar.KaydetAsync();
 
+                // Mail şablonu azaltma planını veritabanından okuduğu için bildirim kayıt tamamlandıktan sonra gönderilir.
+                if (yeniKayit && isbirligiBirimler != null && isbirligiBirimler.Count > 0)
+                {
+                    var formBildirim = new BildirimSistemi() { Liste = new List<BildirimSistemi>() };
+
+                    foreach (var item in isbirligiBirimler)
+                    {
+                        var b = new BildirimSistemi
+                        {
+                            Islem = EnumBildirimSistemiIslem.Yeni,
+                            BelgeKod = gelenNesne.Kod,
+                            BelgeTipi = (int)EnumTarihceIslemTur.RiskAzaltmaPlani,
+                            KoordinatorlukKod = item.KoordinatorlukKod,
+                            Birimler = new List<string>()
+                        };
+
+                        if (!string.IsNullOrWhiteSpace(item.BirimKod) && item.BirimKod != "undefined")
+                            b.Birimler.Add(item.BirimKod);
+
+                        formBildirim.Liste.Add(b);
+                    }
+
+                    await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+                }
+
                 if (!onayli)
                 {
                     //Bildirim sisteminden kaydı sil
@@ -857,7 +856,7 @@ namespace Risk.net.Services.Functions
                             bs.Durum = (int)ENUMDurum.OnayaGonderdi;
 
                             if (!string.IsNullOrWhiteSpace(riskEvreni.BirimKod))
-                                bs.OnaylayacakYetki = Arac.UstYetkiVer(kullanan, (EnumKoordinatorlukTur)riskEvreni.Koordinatorluk.Tur);
+                                bs.OnaylayacakYetki = Arac.UstYetkiVer(kullanan.AktifRolKod, (EnumKoordinatorlukTur)riskEvreni.Koordinatorluk.Tur);
                             else
                             {
                                 //Birimi olmayan koordinatörlük ile işlem yapıldığında
