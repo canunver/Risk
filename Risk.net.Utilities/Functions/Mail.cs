@@ -221,7 +221,7 @@ namespace Risk.net.Utilities.Functions
                 }
                 donusDeger = "Mail gönderilemedi: " + hataIc + " bilgiler=> sunucu:" + smtpClient.Host + " Email Adresi:" + " to:" + mess.To + ";cc:" + cc + ";bcc:" + bcc;
                 string dosyaAdi = "epostaGonder" + DateTime.Now.Year.ToString() + "" + DateTime.Now.Month.ToString("00") + "Hata.txt";
-                Arac.HataStrYaz(dosyaAdi, "Gönderilemedi> donusDeger:" + donusDeger + "-smtpAdres:" + smtpAdres + "-smtpKullanici:" + smtpKullanici + "-smtpParola:" + smtpParola);
+                Arac.HataStrYaz(dosyaAdi, "Gönderilemedi> donusDeger:" + donusDeger + "-smtpAdres:" + smtpAdres + "-smtpKullanici:" + smtpKullanici);
             }
 
             mess.Dispose();

@@ -963,6 +963,7 @@ namespace Risk.net.Services.Functions
                         };
 
                         Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+
                     }
                     //Mail Gönder Bitiş
 
@@ -1203,6 +1204,24 @@ namespace Risk.net.Services.Functions
                         if (!sonucBildirimSistemi.IslemSonuc)
                             return new Sonuc(ENUMIslemDurum.Hata, sonucBildirimSistemi.Mesaj);
 
+                        // Risk Sekretaryası onayından sonra sıradaki Birim Amirine anlık bildirim gönder.
+                        if (gelenNesne.Durum == (int)ENUMDurum.Onayli
+                            && kullanan.AktifRolKod == "RISKSEKRETARYASI"
+                            && bs.OnaylayacakUstYetki == "BIRIMAMIRI")
+                        {
+                            var formBildirim = new BildirimSistemi
+                            {
+                                Islem = EnumBildirimSistemiIslem.OnayBekliyor,
+                                BelgeKod = eskiKayit.Kod,
+                                BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreni,
+                                KoordinatorlukKod = eskiKayit.KoordinatorlukKod,
+                                BirimKod = eskiKayit.BirimKod,
+                                OnaylayacakYetki = bs.OnaylayacakUstYetki
+                            };
+
+                            await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+                        }
+
                         if (bs.OnaylayacakYetki != kullanan.AktifRolKod && bs.OnaylayacakYetki != "-")
                             tarihce.IlgiliRol = bs.OnaylayacakYetki;
                         else if (bs.OnaylayacakUstYetki != kullanan.AktifRolKod)
@@ -1282,6 +1301,20 @@ namespace Risk.net.Services.Functions
                         };
 
                         Sonuc sonucMail = await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+
+                        if (!string.IsNullOrWhiteSpace(eskiKayit.RiskSahibiKod))
+                        {
+                            var yeniRiskSahibiBildirim = new BildirimSistemi
+                            {
+                                Islem = EnumBildirimSistemiIslem.Bilgilendirme,
+                                BelgeKod = gelenNesne.Kod,
+                                BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreniRiskSahibiDegisti,
+                                MailGonderilecekKisi = eskiKayit.RiskSahibiKod,
+                                Aciklama = "YENI_RISK_SAHIBI"
+                            };
+
+                            await _serviceBildirimSistemi.MailGonderAsync(kullanan, yeniRiskSahibiBildirim);
+                        }
                     }
                     //Mail Gönder Bitiş
 
@@ -1305,6 +1338,22 @@ namespace Risk.net.Services.Functions
                 }
 
                 //Mail Gönder: Tüm ekranlar için kaydın durum bilgisi değiştiğinde bilgilendirme maili gidebilir mi? (reddedildi, onaya gönderildi, geri gönderildi vs.). 
+                // Risk ilk kez onaya gönderildiğinde ilgili Risk Sekretaryasına anlık bildirim gönder.
+                if (oncekiDurum != eskiKayit.Durum && eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
+                {
+                    var formBildirim = new BildirimSistemi
+                    {
+                        Islem = EnumBildirimSistemiIslem.OnayBekliyor,
+                        BelgeKod = eskiKayit.Kod,
+                        BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreni,
+                        KoordinatorlukKod = eskiKayit.KoordinatorlukKod,
+                        BirimKod = eskiKayit.BirimKod,
+                        OnaylayacakYetki = "RISKSEKRETARYASI"
+                    };
+
+                    await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+                }
+
                 if (oncekiDurum != eskiKayit.Durum && !string.IsNullOrWhiteSpace(eskiKayit.RiskSahibiKod))
                 {
                     var formBildirim = new BildirimSistemi()
@@ -1457,6 +1506,7 @@ namespace Risk.net.Services.Functions
                 Tarihce tarihce = new Tarihce();
 
                 tarihce.EskiDeger = Arac.JSONSerialize(eskiKayit);
+                string eskiRiskSahibiKod = eskiKayit.RiskSahibiKod;
 
                 eskiKayit.RiskSahibiKod = gelenNesne.RiskSahibiKod;
 
@@ -1474,6 +1524,29 @@ namespace Risk.net.Services.Functions
                 //Tarihçe Bitiş
 
                 var sonuc = await _unitOfWork.KaydetAsync();
+
+                if (eskiRiskSahibiKod != eskiKayit.RiskSahibiKod)
+                {
+                    if (!string.IsNullOrWhiteSpace(eskiRiskSahibiKod))
+                    {
+                        await _serviceBildirimSistemi.MailGonderAsync(kullanan, new BildirimSistemi
+                        {
+                            Islem = EnumBildirimSistemiIslem.Bilgilendirme,
+                            BelgeKod = gelenNesne.Kod,
+                            BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreniRiskSahibiDegisti,
+                            MailGonderilecekKisi = eskiRiskSahibiKod
+                        });
+                    }
+
+                    await _serviceBildirimSistemi.MailGonderAsync(kullanan, new BildirimSistemi
+                    {
+                        Islem = EnumBildirimSistemiIslem.Bilgilendirme,
+                        BelgeKod = gelenNesne.Kod,
+                        BelgeTipi = (int)EnumTarihceIslemTur.RiskEvreniRiskSahibiDegisti,
+                        MailGonderilecekKisi = eskiKayit.RiskSahibiKod,
+                        Aciklama = "YENI_RISK_SAHIBI"
+                    });
+                }
 
             }
             catch (System.Exception ex)

@@ -433,42 +433,44 @@ namespace Risk.net.WebUI.Controllers
             var liste = new List<object>();
 
             dynamic kri = null;
-            foreach (Grafik item in sonuc.Liste)
+            if (sonuc != null && sonuc.Liste != null)
             {
-                kri = new { Aciklama = "", Sari = 0, SariBilgi = "", Yesil = 0, YesilBilgi = "", Kirmizi = 0, KirmiziBilgi = "" };
-                bool yeni = true;
-                int sira = 0;
-                foreach (dynamic kri2 in liste)
+                foreach (Grafik item in sonuc.Liste)
                 {
-                    if (kri2.Aciklama == item.Aciklama)
+                    kri = new { Aciklama = "", Sari = 0, SariBilgi = "", Yesil = 0, YesilBilgi = "", Kirmizi = 0, KirmiziBilgi = "" };
+                    bool yeni = true;
+                    int sira = 0;
+                    foreach (dynamic kri2 in liste)
                     {
-                        kri = kri2;
-                        yeni = false;
-                        break;
+                        if (kri2.Aciklama == item.Aciklama)
+                        {
+                            kri = kri2;
+                            yeni = false;
+                            break;
+                        }
+                        sira++;
                     }
-                    sira++;
+
+                    var Sari = kri.Sari;
+                    var Yesil = kri.Yesil;
+                    var Kirmizi = kri.Kirmizi;
+
+                    if (item.EkAciklama == "SARI")
+                        Sari += item.Deger1;
+                    else if (item.EkAciklama == "YESIL")
+                        Yesil += item.Deger1;
+                    else if (item.EkAciklama == "KIRMIZI")
+                        Kirmizi += item.Deger1;
+
+                    kri = new { item.Aciklama, Sari, SariBilgi = Sari > 0 ? Sari + "" : "", Yesil, YesilBilgi = Yesil > 0 ? Yesil + "" : "", Kirmizi, KirmiziBilgi = Kirmizi > 0 ? Kirmizi + "" : "" };
+
+                    if (yeni)
+                        liste.Add(kri);
+                    else
+                        liste[sira] = kri;
+
                 }
-
-                var Sari = kri.Sari;
-                var Yesil = kri.Yesil;
-                var Kirmizi = kri.Kirmizi;
-
-                if (item.EkAciklama == "SARI")
-                    Sari += item.Deger1;
-                else if (item.EkAciklama == "YESIL")
-                    Yesil += item.Deger1;
-                else if (item.EkAciklama == "KIRMIZI")
-                    Kirmizi += item.Deger1;
-
-                kri = new { item.Aciklama, Sari, SariBilgi = Sari > 0 ? Sari + "" : "", Yesil, YesilBilgi = Yesil > 0 ? Yesil + "" : "", Kirmizi, KirmiziBilgi = Kirmizi > 0 ? Kirmizi + "" : "" };
-
-                if (yeni)
-                    liste.Add(kri);
-                else
-                    liste[sira] = kri;
-
             }
-
             sonuc.Liste = liste;
             return Ok(sonuc);
         }

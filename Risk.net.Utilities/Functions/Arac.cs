@@ -171,11 +171,8 @@ namespace Risk.net.Utilities.Functions
                     kullanan.BirimKod = rol.BirimKod;
 
                     kullanan.Roller.Add(rol);
-                    Arac.HataStrYaz("Yetki alanı:" + rol.KoordinatorlukKod);
                 }
             }
-
-            Arac.HataStrYaz("kullanan.KoordinatorlukKod:" + kullanan.KoordinatorlukKod + " , Rolsayısı:" + kullanan.Roller.Count);
 
             return kullanan;
         }
@@ -362,7 +359,7 @@ namespace Risk.net.Utilities.Functions
 
         public static bool EPostaDogrula(string mailAdres)
         {
-            string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
+            string strRegex = @"^([a-zA-Z0-9_+\-\.]+)@((\[[0-9]{1,3}" +
                   @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
                   @".)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
             Regex re = new Regex(strRegex);

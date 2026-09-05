@@ -746,7 +746,7 @@
                     BelgeKod: $("#hdnKod").val(),
                     KoordinatorlukKod: $('#ddlKoordinatorlukBilgilendirme').val(),
                     Birimler: birimler,
-                    Islem: 2 //OnayBekliyor
+                    Islem: 8 //Bilgilendirme
                 }
 
                 $.ajax({
@@ -863,7 +863,18 @@
                 //Validation
                 $("#mdlTanimUyari").html("");
                 var formKontrol = ValidateForm();
-                if (!formKontrol) return;
+                if (!formKontrol) {
+                    HataYazisiGoster("mdlTanimUyari", "<li>Lütfen zorunlu alanları doldurunuz.</li>");
+                    var ilkGecersizAlan = $(".needs-validation:visible")
+                        .find("input, select, textarea")
+                        .filter(function () {
+                            return $(this).is(":visible") && !this.checkValidity();
+                        })
+                        .first();
+                    if (ilkGecersizAlan.length > 0)
+                        ilkGecersizAlan.focus();
+                    return;
+                }
 
 
                 var riskler = $("#ddlRiskAdi").val();

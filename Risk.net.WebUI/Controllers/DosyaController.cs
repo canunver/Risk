@@ -139,9 +139,7 @@ namespace Risk.net.WebUI.Controllers
                     byte[] resim = ((ViewPersonelResim)dosya.Nesne)?.Resim;
                     if (resim == null)
                     {
-                        Arac.HataStrYaz("resim null");
                         resim = System.IO.File.ReadAllBytes(bosResimAdresi);
-                        Arac.HataStrYaz("boş resim okundu" + resim.Length);
                     }
 
                     return File(resim, "image/jpg");

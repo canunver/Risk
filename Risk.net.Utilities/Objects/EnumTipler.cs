@@ -84,6 +84,8 @@ namespace Risk.net.Utilities.Objects
         RiskEvreniDurumDegisti = 106,
         RisklerinDegerlendirmesiDurumDegisti = 107,
         RisklerinYonetilmesiDurumDegisti = 108,
+        RiskAzaltmaPlaniSorumlusuDegisti = 109,
+        RiskAzaltmaPlaniOnaylandi = 110,
 
     }
 

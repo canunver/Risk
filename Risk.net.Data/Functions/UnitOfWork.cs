@@ -202,8 +202,11 @@ namespace Risk.net.Data.Functions
         /// <param name="kosul"></param>
         public async Task SilAsync(Expression<Func<TEntity, bool>> kosul)
         {
-            IQueryable<TEntity> query = _context.Set<TEntity>().Where(kosul);
-            await Task.Run(() => { _context.Set<TEntity>().RemoveRange(query.AsNoTracking()); });
+            var silinecekKayitlar = await _context.Set<TEntity>()
+                .Where(kosul)
+                .ToListAsync();
+
+            _context.Set<TEntity>().RemoveRange(silinecekKayitlar);
         }
 
         /// <summary>

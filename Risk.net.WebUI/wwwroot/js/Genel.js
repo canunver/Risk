@@ -465,7 +465,7 @@ function Select2YapTemplate(kontrolAdi, parentTanimla, data, clear, templateResu
 //2.<input type="text" required />
 //3.düğme işleminde burası çağrılacak
 //4.<div class="invalid-feedback"> alanı hemen controlün altında konulacak aynı div içinde olacak
-function ValidateForm(cssName) {
+function ValidateForm(cssName, eventObject) {
     var validation = true;
 
     var cssName = cssName;
@@ -487,8 +487,10 @@ function ValidateForm(cssName) {
 
             if (elementValidation === false) {
                 validation = elementValidation;
-                event.preventDefault();
-                event.stopPropagation();
+                if (eventObject) {
+                    eventObject.preventDefault();
+                    eventObject.stopPropagation();
+                }
             }
         }
 

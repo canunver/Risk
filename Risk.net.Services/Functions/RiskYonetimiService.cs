@@ -894,6 +894,28 @@ namespace Risk.net.Services.Functions
                         if (!sonucBildirimSistemi.IslemSonuc)
                             return new Sonuc(ENUMIslemDurum.Hata, sonucBildirimSistemi.Mesaj);
 
+                        string mailGonderilecekYetki = bs.Durum == (int)ENUMDurum.OnayaGonderdi
+                            ? bs.OnaylayacakYetki
+                            : bs.OnaylayacakUstYetki;
+
+                        if (!string.IsNullOrWhiteSpace(mailGonderilecekYetki)
+                            && mailGonderilecekYetki != "-"
+                            && mailGonderilecekYetki != "BASKAN*"
+                            && mailGonderilecekYetki != kullanan.AktifRolKod)
+                        {
+                            var formBildirim = new BildirimSistemi
+                            {
+                                Islem = EnumBildirimSistemiIslem.OnayBekliyor,
+                                BelgeKod = eskiKayit.Kod,
+                                BelgeTipi = (int)EnumTarihceIslemTur.RiskYonetimi,
+                                KoordinatorlukKod = riskEvreni.KoordinatorlukKod,
+                                BirimKod = riskEvreni.BirimKod,
+                                OnaylayacakYetki = mailGonderilecekYetki
+                            };
+
+                            await _serviceBildirimSistemi.MailGonderAsync(kullanan, formBildirim);
+                        }
+
                         if (bs.OnaylayacakYetki != kullanan.AktifRolKod && bs.OnaylayacakYetki != "-")
                             tarihce.IlgiliRol = bs.OnaylayacakYetki;
                         else if (bs.OnaylayacakUstYetki != kullanan.AktifRolKod)
