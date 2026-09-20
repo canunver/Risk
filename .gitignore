@@ -5,13 +5,14 @@
 
 # User-specific files
 appsettings.local.json
+/Risk.net.WebUI/appsettings.json
 *.rsuser
 *.suo
 *.user
 *.userosscache
 *.sln.docstates
 
-# lisans dosyalarý
+# lisans dosyalarÄ±
 *.lic
 
 # User-specific files (MonoDevelop/Xamarin Studio)
@@ -36,6 +37,20 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+/Risk.net.WebUI/Hata.txt
+
+# Temporary review/export artifacts
+/.tmp_doc_review/
+/.buildcheck/
+/.build-verify/
+/.publish-check/
+
+# VSdocman generated files
+*.vsdoc
+/Risk.net.Data/Risk.net.Data.xml
+/Risk.net.Services/Risk.net.Services.xml
+/Risk.net.Utilities/Risk.net.Utilities.xml
+/Risk.net.WebUI/Risk.net.WebUI.xml
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

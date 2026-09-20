@@ -35,7 +35,7 @@
                 aramaTipi = "combo",
                 aramaAlanAdi = "KayitTarihi",
                 aramaListeDoldurMetodu = "YilDoldur()",
-                render = "row.Yil",
+                render = "row.IzlemeYilAraligi",
             });
     tablo.alanlar.Add(new DataTablesAlanlar
             {
@@ -190,9 +190,6 @@
                                 <div class="col-md-12">
                                     <div class="p-3 rounded shadow-sm mb-g border border-faded">
                                         <label class="form-label">@CustomResource["StratejikPlanIzleme.Alan.DegerlendirmeDonemleri"]</label>
-                                        <div style="float:right;">
-                                            <a id="btnDonemTanimiEkle" class='btn btn-warning btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='DonemTanimiEkle()'><i class='fal fa-plus-circle'></i></a>
-                                        </div>
                                         <div id="divtblDonemTanimiVeriYok"></div>
                                         <table id="tblDonemTanimi" class="table table-bordered table-hover table-striped table-sm w-100" style="display:none">
                                             <thead></thead>
@@ -221,6 +218,8 @@
         var DTabloSadeceOkuma = false;
         var kayitYetki = @(ViewBag.KayitYetki.ToString().ToLower());
         var degerGirisYetki = @(ViewBag.DegerGirisYetki.ToString().ToLower());
+        var planBaslamaYili = 0;
+        var planBitisYili = 0;
 
         $(document).ready(function () {
 
@@ -278,9 +277,9 @@
         //ddlAramaYil combosunun doldurulmasını sağlar
         function YilDoldur() {
 
-            var aktifYil = new Date().getFullYear();;
+            var aktifYil = new Date().getFullYear();
             var yillar = [];
-            for (var i = aktifYil; i >= 2020; i--) {
+            for (var i = aktifYil + 10; i >= 2020; i--) {
                 var tarih = "01.01." + i;
                 var nesne = { id: tarih, text: i.toString() };
                 yillar.push(nesne);
@@ -359,6 +358,8 @@
 
             $("#hdnAmacKod").val(deger?.AmacKod);
             $("#hdnHedefKod").val(deger?.HedefKod);
+            planBaslamaYili = deger?.StratejikPlan?.StratejikPlanDonem?.BaslamaYil ?? 0;
+            planBitisYili = deger?.StratejikPlan?.StratejikPlanDonem?.BitisYil ?? 0;
 
             $(".divAmac").html(deger?.StratejikPlan?.Amac);
             $(".divHedef").html(deger?.Hedef?.Adi);
@@ -382,26 +383,39 @@
         }
 
         //Seçili göstergeye ait dönemsel verilerin arraye alınması işlemini yapar
+        function SayisalDegerAl(kontrol) {
+            var element = $(kontrol)[0];
+            var autoNumericKontrol = element ? AutoNumeric.getAutoNumericElement(element) : null;
+
+            if (autoNumericKontrol) {
+                var hamDeger = autoNumericKontrol.getNumber();
+                return isFinite(hamDeger) ? hamDeger : 0;
+            }
+
+            var deger = $(kontrol).val().trim().replace(/\./g, "").replace(",", ".");
+            var sayisalDeger = Number(deger);
+            return isFinite(sayisalDeger) ? sayisalDeger : 0;
+        }
+
         function Donemler() {
             //Donemlerin tablodan alınması
             var donemler = [];
-            var donemNo = 1;
             $.makeArray($('#tblDonemTanimi > tbody tr[id]').map(function () {
                 if ($(this).find("td:eq(0)").val() != null) {
                     var kod = this.id.replace("sttb_", "");
 
                     var gerceklesenAlanlar = $(this).find("td:eq(3) input");
-                    var gerceklesenDeger = $(gerceklesenAlanlar[0]).val();
-                    var gerceklesenDegerYilSonu = $(gerceklesenAlanlar[1]).val();
+                    var gerceklesenDeger = SayisalDegerAl(gerceklesenAlanlar[0]);
+                    var gerceklesenDegerYilSonu = SayisalDegerAl(gerceklesenAlanlar[1]);
 
                     var aForm = {
                         Kod: "",
                         StratejikPlanHedefGostergeKod: $("#hdnGostergeKod").val(),
-                        Donem: donemNo++,
+                        Donem: Number($(this).find("td:eq(0)").text()),
                         DonemAdi: $(this).find("td:eq(1) input").val(),
-                        PlanlananDeger: $(this).find("td:eq(2) input").val(),
-                        GerceklesenDeger: gerceklesenDeger.replace(".", ","),
-                        GerceklesenDegerYilSonu: gerceklesenDegerYilSonu.replace(".", ","),
+                        PlanlananDeger: SayisalDegerAl($(this).find("td:eq(2) input")),
+                        GerceklesenDeger: gerceklesenDeger.toString().replace(".", ","),
+                        GerceklesenDegerYilSonu: gerceklesenDegerYilSonu.toString().replace(".", ","),
                         SapmaOrani: $(this).find("td:eq(4) span").html().replace(".", ","),
                         SapmaNedeni: $(this).find("td:eq(5) input").val(),
                     };
@@ -454,7 +468,7 @@
 
                     DinamikTabloSatirEkle("tblDonemTanimi", result?.Nesne?.Kod, satirBilgi, "", "", "")
 
-                    $.each(result?.Nesne?.Donemler, function (a, b) { DTabloSatirEkle(b); });
+                    YilSatirlariniOlustur(result?.Nesne?.Donemler ?? []);
 
                     if (kayitYetki || degerGirisYetki)
                         $("#btnKaydet").show();
@@ -507,17 +521,55 @@
         }
 
         //Dinamik tablo üstünde bulunan Ekle ve Güncelle düğmesine basıldığında
+        function YilSatirlariniOlustur(mevcutDonemler) {
+            if (planBaslamaYili <= 0 || planBitisYili < planBaslamaYili)
+                return;
+
+            var mevcutDonemKayitlari = {};
+            $.each(mevcutDonemler, function (_, donem) {
+                mevcutDonemKayitlari[Number(donem.Donem)] = donem;
+            });
+
+            for (var yil = planBaslamaYili; yil <= planBitisYili; yil++) {
+                var donem = yil - planBaslamaYili + 1;
+                if (mevcutDonemKayitlari[donem]) {
+                    DTabloSatirEkle(mevcutDonemKayitlari[donem]);
+                    continue;
+                }
+
+                DTabloSatirEkle({
+                    Kod: "dtabloYeni_" + jQuery.guid++,
+                    Donem: donem,
+                    DonemAdi: yil.toString(),
+                    PlanlananDeger: 0,
+                    GerceklesenDeger: 0,
+                    GerceklesenDegerYilSonu: 0,
+                    SapmaNedeni: "",
+                    SapmaOrani: 0
+                });
+            }
+        }
+
         function DonemTanimiEkle() {
 
             if (DTabloSadeceOkuma) return;
 
             var knt = Donemler();
 
-            var donem = knt.length + 1;
+            var donem = 1;
+            $.each(knt, function (_, mevcutDonem) {
+                if (mevcutDonem.Donem >= donem)
+                    donem = mevcutDonem.Donem + 1;
+            });
+            var yil = planBaslamaYili + donem - 1;
+
+            if (planBitisYili > 0 && yil > planBitisYili)
+                return;
+
             var form = {
                 Kod: "dtabloYeni_" + jQuery.guid++,
                 Donem: donem,
-                DonemAdi: "Dönem " + donem,
+                DonemAdi: yil.toString(),
                 PlanlananDeger: 0,
                 GerceklesenDeger: 0,
                 GerceklesenDegerYilSonu: 0,
@@ -538,15 +590,16 @@
         //Dinamik tabloya satır eklemek için
         function DTabloSatirEkle(form) {
 
+            var yil = planBaslamaYili > 0 ? planBaslamaYili + Number(form.Donem) - 1 : form.DonemAdi;
             var satirBilgi = "<td width='10%' style='text-align: center;vertical-align: middle;'>" + form.Donem + "</td>";
-            satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric' required value='" + form.DonemAdi + "' /></td>";
+            satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm' required readonly value='" + yil + "' /></td>";
             satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.PlanlananDeger + "' /></td>";
             satirBilgi += "<td width='20%'><div class='input-group'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDeger + "' /><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDegerYilSonu + "' /></div></td>";
             satirBilgi += "<td width='10%'><span class='p-2'>" + form.SapmaOrani + "</span></td>";
             satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric' value='" + form.SapmaNedeni + "' /></td>";
 
             var duzenle = ""
-            var sil = "DonemTanimiSil";
+            var sil = "";
 
             if (DTabloSadeceOkuma) {
                 duzenle = "";
@@ -584,10 +637,11 @@
 
             var satir = $(kontrol).closest("tr");
 
-            var planlananDeger = $(satir).find("td:eq(2) input").val();
+            var planlananDeger = SayisalDegerAl($(satir).find("td:eq(2) input"));
             var gerceklesenAlanlar = $(satir).find("td:eq(3) input");
-            var gerceklesenDeger = $(gerceklesenAlanlar[0]).val().replace(",", ".");
-            var gerceklesenDegerYilSonu = $(gerceklesenAlanlar[1]).val().replace(",", ".");
+            var gerceklesenDeger = SayisalDegerAl(gerceklesenAlanlar[0]);
+            var gerceklesenDegerYilSonu = SayisalDegerAl(gerceklesenAlanlar[1]);
+            var gerceklesen;
 
             if (Number(gerceklesenDegerYilSonu) > 0)
                 gerceklesen = gerceklesenDegerYilSonu;
@@ -607,8 +661,8 @@
 
         //İzleme tablosunun başlık bilgilerini oluşturur
         function DonemTanimiBaslikOlustur() {
-            var satirBilgi = "<th width='10%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.Donem"])</th>";
-            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.DonemAdi"])<span class='text-danger ml-1'>*</span></th>";
+            var satirBilgi = "<th width='10%'>Sıra</th>";
+            satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.Yil"])</th>";
             satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.PlanlananDeger"])<span class='text-danger ml-1'>*</span></th>";
             satirBilgi += "<th width='17%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.GerceklesenDeger"])<br><span style='margin-left:20px'>1.</span><span style='margin-left:60px'>2.</span></th>";
             satirBilgi += "<th width='10%'>@Html.Raw(@CustomResource["StratejikPlanIzleme.Alan.SapmaOrani"]) %</th>";

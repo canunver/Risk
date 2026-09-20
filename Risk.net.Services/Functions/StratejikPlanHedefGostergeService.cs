@@ -228,9 +228,15 @@ namespace Risk.net.Services.Functions
                             hedefNo = strPlanHedefKaydi.HedefNo;
                         }
                     }
-                    hedefNo = hedefNo.Replace("H.", "");
+                    hedefNo = hedefNo.Trim()
+                        .Replace("PG.", "")
+                        .Replace("H.", "");
+                    if (hedefNo.StartsWith("P"))
+                        hedefNo = hedefNo.Substring(1).TrimStart('.');
 
-                    int kayitSayisi = await _unitOfWork.KayitSayisiAsync(a => a.StratejikPlanHedefKod == gelenNesne.StratejikPlanHedefKod);
+                    int kayitSayisi = await _unitOfWork.KayitSayisiAsync(a =>
+                        a.StratejikPlanHedefKod == gelenNesne.StratejikPlanHedefKod &&
+                        a.Durum == (int)ENUMDurum.Aktif);
                     gelenNesne.GostergeNo = "PG." + hedefNo + "." + (kayitSayisi + 1);
                     //*****************************************************************
 
@@ -299,6 +305,18 @@ namespace Risk.net.Services.Functions
                 {
                     foreach (var donem in gelenNesne.Donemler)
                     {
+                        if (double.IsNaN(donem.GerceklesenDeger) || double.IsInfinity(donem.GerceklesenDeger))
+                            donem.GerceklesenDeger = 0;
+                        if (double.IsNaN(donem.GerceklesenDegerYilSonu) || double.IsInfinity(donem.GerceklesenDegerYilSonu))
+                            donem.GerceklesenDegerYilSonu = 0;
+
+                        var gerceklesenDeger = donem.GerceklesenDegerYilSonu > 0
+                            ? donem.GerceklesenDegerYilSonu
+                            : donem.GerceklesenDeger;
+                        donem.SapmaOrani = donem.PlanlananDeger > 0
+                            ? gerceklesenDeger * 100 / donem.PlanlananDeger
+                            : 0;
+
                         await _serviceIzlemeDonem.KaydetAsync(kullanan, donem);
                     }
                 }

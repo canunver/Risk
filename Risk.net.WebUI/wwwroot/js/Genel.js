@@ -900,6 +900,11 @@ function DinamikDosyaBaglantiKoduylaIndir(baglantiKod) {
 }
 
 function DosyaIndirJS(blob, status, xhr) {
+    if (!(blob instanceof Blob) || blob.size === 0) {
+        alert("Dosya oluşturulamadı veya sunucudan boş yanıt alındı.");
+        return;
+    }
+
     // gelen dosya adını al
     var filename = "";
     var disposition = xhr.getResponseHeader('Content-Disposition');

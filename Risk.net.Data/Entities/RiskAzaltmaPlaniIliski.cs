@@ -20,5 +20,8 @@ namespace Risk.net.Data.Entities
         public string RiskAzaltmaPlaniKod { get; set; }
 
         public string IliskiKod { get; set; } = "";
+
+        [NotMapped]
+        public string IliskiAdi { get; set; } = "";
     }
 }

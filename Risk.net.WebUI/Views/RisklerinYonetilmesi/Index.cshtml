@@ -325,7 +325,7 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <label class="form-label" for="txtAzaltmaPlani">@CustomResource["RiskAzaltmaPlani.Alan.AzaltmaPlani"]<span class="text-danger ml-1">*</span></label>
-                            <textarea id="txtAzaltmaPlani" rows="1" class="form-control form-control-sm" autocomplete="off" required></textarea>
+                            <textarea id="txtAzaltmaPlani" rows="3" class="form-control form-control-sm" style="min-height: 90px; overflow-y: hidden; resize: vertical;" autocomplete="off" required></textarea>
                             <div class="invalid-feedback">
                                 @CustomResource["Kontrol.Kaydet.AlanBosOlamaz"]
                             </div>
@@ -604,6 +604,8 @@
         var riskSekretaryasi = @Html.Raw(ViewBag.RiskSekretaryasi);
 
         $(document).ready(function () {
+
+            $("#txtAzaltmaPlani").on("input", AzaltmaPlaniMetniniBoyutlandir);
 
             Select2Yap("ddlKontrolEdildi", true, null);
             Select2Yap("ddlAramaDurum", true, durumlarListe);
@@ -1069,6 +1071,13 @@
             jModalShow("mdlTanim", "@CustomResource["Baslik.Guncelle"]");
         }
 
+        function AzaltmaPlaniMetniniBoyutlandir() {
+            var alan = document.getElementById("txtAzaltmaPlani");
+            if (!alan) return;
+            alan.style.height = "auto";
+            alan.style.height = Math.max(90, alan.scrollHeight) + "px";
+        }
+
         function Temizle(deger) {
             ClearValidation();
 
@@ -1178,6 +1187,7 @@
             //$(".divKoordinatorluk").html(deger?.Koordinatorluk?.Adi);
             //$(".divSorumluBirim").html(deger?.Birim?.Adi);
             $("#txtAzaltmaPlani").val(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlani).trigger('change');
+            setTimeout(AzaltmaPlaniMetniniBoyutlandir, 0);
             $("#txtAzaltmaPlaniNotlar").val(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniNotlar).trigger('change');
             //$("#ddlSorumlu").val(deger?.RiskYonetimi?.RiskAzaltmaPlani?.AzaltmaPlaniSorumlusuKod).trigger('change');
 

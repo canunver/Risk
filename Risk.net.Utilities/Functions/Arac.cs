@@ -122,11 +122,21 @@ namespace Risk.net.Utilities.Functions
             }
             catch (Exception e)
             {
+                HataStrYaz("DataTables sorgusu çalıştırılırken hata oluştu:" + Environment.NewLine + e);
 
-                string hata = e.Message;
+                // DataTables, başarılı bir HTTP yanıtında mutlaka bir JSON nesnesi
+                // bekler. null dönülmesi ASP.NET Core tarafından boş (204) yanıta
+                // çevrildiği için istemci json.error alanını okurken ayrıca çöker ve
+                // asıl sunucu hatasını gizler.
+                return new
+                {
+                    draw = dataTablesParam.draw,
+                    recordsFiltered = 0,
+                    recordsTotal = 0,
+                    data = new List<object>(),
+                    error = "Tablo verileri yüklenirken bir hata oluştu. Ayrıntılar sunucu hata kaydına yazıldı."
+                };
             }
-
-            return null;
         }
 
         public static KullaniciDto KullaniciNesnesiOlustur(System.Security.Principal.IPrincipal user)

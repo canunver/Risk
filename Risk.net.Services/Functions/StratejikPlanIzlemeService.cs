@@ -99,7 +99,9 @@ namespace Risk.net.Services.Functions
                     selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Hedef.KoordinatorlukKod == aramaObj.SorguKoordinatorlukKod);
 
                 if (aramaObj.Yil > 0)
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.KayitTarihi.Value.Year == aramaObj.Yil);
+                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a =>
+                        a.StratejikPlan.StratejikPlanDonem.BaslamaYil <= aramaObj.Yil &&
+                        a.StratejikPlan.StratejikPlanDonem.BitisYil >= aramaObj.Yil);
 
                 if (aramaObj.Durum > 0)
                     selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == aramaObj.Durum);
@@ -112,7 +114,8 @@ namespace Risk.net.Services.Functions
                 selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == (int)ENUMDurum.Aktif);
                 selectData = await _unitOfWork.KosulEkleAsync(selectData, a => //a.StratejikPlan.Koordinatorluk.Adi.Contains(dataTablesParam.searchValue) ||
                                                                                 a.StratejikPlan.Amac.Contains(dataTablesParam.searchValue) ||
-                                                                                a.KayitTarihi.Value.Year == Arac.ConvertToInt(dataTablesParam.searchValue, 0) ||
+                                                                                (a.StratejikPlan.StratejikPlanDonem.BaslamaYil <= Arac.ConvertToInt(dataTablesParam.searchValue, 0) &&
+                                                                                 a.StratejikPlan.StratejikPlanDonem.BitisYil >= Arac.ConvertToInt(dataTablesParam.searchValue, 0)) ||
                                                                                 a.Hedef.Adi.Contains(dataTablesParam.searchValue));
             }
 

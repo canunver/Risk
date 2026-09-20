@@ -432,6 +432,44 @@ namespace Risk.net.Services.Functions
             return kayitlar.Count > 0 ? kayitlar[kayitlar.Count - 1] : new BildirimSistemi();
         }
 
+        private async Task<RiskEvreni> BildiriminRiskiniBulAsync(BildirimSistemi kriter)
+        {
+            switch ((EnumTarihceIslemTur)kriter.BelgeTipi)
+            {
+                case EnumTarihceIslemTur.RiskEvreni:
+                case EnumTarihceIslemTur.RiskEvreniDurumPasif:
+                case EnumTarihceIslemTur.RiskEvreniRiskSahibiDegisti:
+                case EnumTarihceIslemTur.RiskEvreniOnaydaDegisiklik:
+                case EnumTarihceIslemTur.RiskEvreniDurumDegisti:
+                    return await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.Kod == kriter.BelgeKod);
+
+                case EnumTarihceIslemTur.RiskYonetimi:
+                case EnumTarihceIslemTur.RisklerinDegerlendirmesiOnaydaDegisiklik:
+                case EnumTarihceIslemTur.RisklerinDegerlendirmesiDurumDegisti:
+                    return await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.Kod == kriter.BelgeKod);
+
+                case EnumTarihceIslemTur.RiskAzaltmaPlani:
+                case EnumTarihceIslemTur.RisklerinYonetilmesiOnaydaDegisiklik:
+                case EnumTarihceIslemTur.RisklerinYonetilmesiDurumDegisti:
+                case EnumTarihceIslemTur.RiskAzaltmaPlaniSorumlusuDegisti:
+                case EnumTarihceIslemTur.RiskAzaltmaPlaniOnaylandi:
+                    return await _unitOfWorkRiskEvreni.KayitGetirAsync(c => c.RiskYonetimi.RiskAzaltmaPlani.Kod == kriter.BelgeKod);
+
+                default:
+                    return null;
+            }
+        }
+
+        private static bool GuncelRiskSahibineGonderilmeli(int belgeTipi)
+        {
+            return belgeTipi == (int)EnumTarihceIslemTur.RiskEvreniOnaydaDegisiklik
+                || belgeTipi == (int)EnumTarihceIslemTur.RisklerinDegerlendirmesiOnaydaDegisiklik
+                || belgeTipi == (int)EnumTarihceIslemTur.RisklerinYonetilmesiOnaydaDegisiklik
+                || belgeTipi == (int)EnumTarihceIslemTur.RiskEvreniDurumDegisti
+                || belgeTipi == (int)EnumTarihceIslemTur.RisklerinDegerlendirmesiDurumDegisti
+                || belgeTipi == (int)EnumTarihceIslemTur.RisklerinYonetilmesiDurumDegisti;
+        }
+
 
         /// <summary>
         /// Istemciden parametere ile gönderilen bilgilere göre mail gönderen metod
@@ -444,6 +482,7 @@ namespace Risk.net.Services.Functions
             try
             {
                 var mailListe = new List<string>();
+                var riskSahibiMailAdresleri = new List<string>();
                 string bulunamayanOnayciAdi = "";
                 string uyariRiskNo = "";
 
@@ -456,6 +495,32 @@ namespace Risk.net.Services.Functions
                 foreach (var b in kriter.Liste)
                 {
                     string hata = "";
+
+                    // Durum/onay değişikliği bildirimlerinde çağıran serviste kalmış olabilecek
+                    // eski kişi kodunu kullanma; gönderim anındaki güncel risk sahibini esas al.
+                    if (GuncelRiskSahibineGonderilmeli(b.BelgeTipi))
+                    {
+                        var guncelRisk = await BildiriminRiskiniBulAsync(b);
+                        b.MailGonderilecekKisi = guncelRisk?.RiskSahibiKod;
+                    }
+
+                    // Yeni azaltma planı bildiriminde işbirliği birimi yetkililerine ek
+                    // olarak, gönderim anındaki güncel Risk Sahibini de bilgilendir.
+                    if (b.BelgeTipi == (int)EnumTarihceIslemTur.RiskAzaltmaPlani
+                        && b.Islem == EnumBildirimSistemiIslem.Yeni)
+                    {
+                        var guncelRisk = await BildiriminRiskiniBulAsync(b);
+                        if (!string.IsNullOrWhiteSpace(guncelRisk?.RiskSahibiKod))
+                        {
+                            var sonucRiskSahibi = await _servicePersonel.KayitGetirAsync(kullanan, guncelRisk.RiskSahibiKod);
+                            if (sonucRiskSahibi.IslemSonuc && sonucRiskSahibi.Nesne is ViewPersonel riskSahibi
+                                && !string.IsNullOrWhiteSpace(riskSahibi.EPosta))
+                            {
+                                mailListe.Add(riskSahibi.EPosta);
+                                riskSahibiMailAdresleri.Add(riskSahibi.EPosta);
+                            }
+                        }
+                    }
 
 
                     if (b.BelgeTipi < (int)EnumTarihceIslemTur.IcKontrolZayifliklariRaporunuHatirlat)
@@ -617,22 +682,35 @@ namespace Risk.net.Services.Functions
                     return new Sonuc(ENUMIslemDurum.Uyari, "Risk azaltma planı onay bildirimi gönderilecek geçerli bir alıcı bulunamadı.");
                 }
 
+                // Yeni azaltma planı bildirimi yalnızca seçilen işbirliği birimlerinin
+                // yetkililerine gönderilir. Yetkili bulunamadığında Risk Sahibine geri
+                // düşmek, özellikle Risk Sahibi değişikliklerinden sonra ilgisiz kişilere
+                // bildirim gitmesine neden olur.
+                if (mailListe.Count == 0
+                    && kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskAzaltmaPlani
+                    && kriter.Islem == EnumBildirimSistemiIslem.Yeni)
+                {
+                    return new Sonuc(ENUMIslemDurum.Uyari, "Yeni risk azaltma planı bildirimi gönderilecek geçerli bir işbirliği birimi yetkilisi bulunamadı.");
+                }
+
                 if (mailListe.Count == 0)
                 {
-                    var sonucKullanicilar = await _servicePersonel.ListeleAsync(kullanan, null, null);
-                    if (sonucKullanicilar.IslemSonuc && sonucKullanicilar.Nesne != null)
+                    var riskEvreni = await BildiriminRiskiniBulAsync(kriter);
+                    uyariRiskNo = riskEvreni?.RiskNo + "";
+
+                    if (!string.IsNullOrWhiteSpace(riskEvreni?.RiskSahibiKod))
                     {
-                        var kullanicilar = sonucKullanicilar.Nesne as List<object>;
-                        if (kullanicilar != null)
+                        var sonucRiskSahibi = await _servicePersonel.KayitGetirAsync(kullanan, riskEvreni.RiskSahibiKod);
+                        if (sonucRiskSahibi.IslemSonuc && sonucRiskSahibi.Nesne is ViewPersonel riskSahibi
+                            && !string.IsNullOrWhiteSpace(riskSahibi.EPosta) && Arac.EPostaDogrula(riskSahibi.EPosta))
                         {
-                            foreach (var item in kullanicilar)
-                            {
-                                var personel = item as ViewPersonel;
-                                if (personel != null && !string.IsNullOrWhiteSpace(personel.EPosta) && Arac.EPostaDogrula(personel.EPosta))
-                                    mailListe.Add(personel.EPosta);
-                            }
+                            mailListe.Add(riskSahibi.EPosta);
+                            bulunamayanOnayciAdi = "İlgili kişi";
                         }
                     }
+
+                    if (mailListe.Count == 0)
+                        return new Sonuc(ENUMIslemDurum.Uyari, "Bildirim alıcısı ve geçerli bir Risk Sahibi e-posta adresi bulunamadı.");
                 }
 
                 if (mailListe.Count > 0)
@@ -1243,13 +1321,38 @@ namespace Risk.net.Services.Functions
 
                     if (!string.IsNullOrWhiteSpace(bulunamayanOnayciAdi))
                     {
-                        konu = "Risk Onay Bildirimi Gönderilemedi";
+                        string gonderilemeyenMailKonusu = konu;
+                        konu = "E-posta Gönderilemedi";
                         mesaj = "<div>" + uyariRiskNo + " numaralı risk için " + bulunamayanOnayciAdi
-                            + " bulunamadığından onay maili gönderilemedi.</div>"
-                            + "<div>Yetki tanımlarının kontrol edilmesi gerekmektedir.</div>";
+                            + " bulunamadığından <strong>" + gonderilemeyenMailKonusu + "</strong> konulu e-posta gönderilemedi.</div>"
+                            + "<div>İlgili kişi ve yetki tanımlarının kontrol edilmesi gerekmektedir.</div>";
                     }
 
-                    Mail.MailAt("", mail, konu, mesaj, true, false, null);
+                    bool yeniAzaltmaPlaniBildirimi =
+                        kriter.BelgeTipi == (int)EnumTarihceIslemTur.RiskAzaltmaPlani
+                        && kriter.Islem == EnumBildirimSistemiIslem.Yeni
+                        && string.IsNullOrWhiteSpace(bulunamayanOnayciAdi);
+
+                    if (yeniAzaltmaPlaniBildirimi)
+                    {
+                        var riskSahibiMailleri = riskSahibiMailAdresleri
+                            .Where(a => !string.IsNullOrWhiteSpace(a) && Arac.EPostaDogrula(a))
+                            .Distinct()
+                            .ToList();
+                        var isbirligiBirimiMailleri = mailListe
+                            .Except(riskSahibiMailleri)
+                            .ToList();
+
+                        if (riskSahibiMailleri.Count > 0)
+                            Mail.MailAt("", string.Join(";", riskSahibiMailleri), konu + " (Risk Sahibi)", mesaj, true, false, null);
+
+                        if (isbirligiBirimiMailleri.Count > 0)
+                            Mail.MailAt("", string.Join(";", isbirligiBirimiMailleri), konu + " (Risk İşbirliği Birimi - Birim Amiri)", mesaj, true, false, null);
+                    }
+                    else
+                    {
+                        Mail.MailAt("", mail, konu, mesaj, true, false, null);
+                    }
 
 
                     var mailTarihce = new MailTarihce();

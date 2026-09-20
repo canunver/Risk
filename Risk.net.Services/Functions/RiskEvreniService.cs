@@ -239,7 +239,8 @@ namespace Risk.net.Services.Functions
 
                         var selectData = await _unitOfWork.SorguHazirlaAsync(null, "RiskYonetimi,RiskYonetimi.RiskAzaltmaPlani");
 
-                        selectData = await _unitOfWork.KosulEkleAsync(selectData, a => listRiskAzaltmaPlaniKod.ToArray().Contains(a.RiskYonetimi.RiskAzaltmaPlani.Kod));
+                        // IliskiKod alanına seçim ekranında RiskEvreni.Kod kaydediliyor.
+                        selectData = await _unitOfWork.KosulEkleAsync(selectData, a => listRiskAzaltmaPlaniKod.ToArray().Contains(a.Kod));
 
                         var notlar = selectData.ToList();
                     }
@@ -262,8 +263,12 @@ namespace Risk.net.Services.Functions
                             {
                                 foreach (var iliski in kayit.RiskYonetimi.RiskAzaltmaPlani.IliskiliPlanlar)
                                 {
-                                    if (iliski.IliskiKod == item.RiskYonetimi.RiskAzaltmaPlani.Kod)
-                                        iliski.IliskiKod = item.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani;
+                                    if (iliski.IliskiKod == item.Kod)
+                                    {
+                                        var planNo = item.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlaniNo;
+                                        var plan = item.RiskYonetimi.RiskAzaltmaPlani.AzaltmaPlani;
+                                        iliski.IliskiAdi = string.IsNullOrWhiteSpace(planNo) ? plan : planNo + " - " + plan;
+                                    }
                                 }
                             }
                     }

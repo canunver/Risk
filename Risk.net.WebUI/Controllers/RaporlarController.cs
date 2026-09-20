@@ -211,14 +211,14 @@ namespace Risk.net.WebUI.Controllers
                 else if (kod == "RPT015")
                     sonuc = await RiskYonetimiBeyannamesiRaporu(gelenKriter);
                 else
-                    return NoContent();
+                    return BadRequest("Geçersiz rapor kodu.");
 
                 //sonuc = TestBirMilyon(gelenKriter);
             }
             catch (Exception e)
             {
                 Arac.HataStrYaz("Rapor oluşturulurken hata meydana geldi:" + e.Message + "\nRapor parametresi:" + form);
-                return NoContent();
+                return StatusCode(500, "Rapor oluşturulurken bir hata meydana geldi.");
             }
 
             return sonuc;
@@ -1521,11 +1521,12 @@ namespace Risk.net.WebUI.Controllers
         /// <returns></returns>
         public async Task<FileContentResult> RiskYonetimiBeyannamesiRaporu(dynamic gelenKriter)
         {
+            var kriter = (JObject)gelenKriter;
             Sonuc sonuc = await _service.RiskYonetimiBeyannamesiHazirlaAsync(_kullanan, new RaporRiskYonetimiBeyannamesi()
             {
-                KriterYil = Arac.ConvertToInt(gelenKriter.Yil, 0),
-                KoordinatorlukAdi = gelenKriter.KoordinatorlukKod,
-                BirimAdi = gelenKriter.BirimKod,
+                KriterYil = Arac.ConvertToInt(kriter["Yil"], 0),
+                KoordinatorlukAdi = kriter.Value<string>("KoordinatorlukKod") ?? "",
+                BirimAdi = kriter.Value<string>("BirimKod") ?? "",
             });
 
             ITablo XLS = Arac.ExcelTablo();
@@ -1558,7 +1559,7 @@ namespace Risk.net.WebUI.Controllers
                 siraNo++;
             }
 
-            string ciktiTur = gelenKriter.CiktiTur.Value;
+            string ciktiTur = kriter.Value<string>("CiktiTur");
             if (string.IsNullOrWhiteSpace(ciktiTur)) ciktiTur = "PDF";
 
             XLS.DosyaSaklamaFormatAta(ciktiTur);

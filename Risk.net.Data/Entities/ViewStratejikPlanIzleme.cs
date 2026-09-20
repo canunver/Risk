@@ -48,6 +48,19 @@ namespace Risk.net.Data.Entities
                 return 0;
             }
         }
+
+        public virtual string IzlemeYilAraligi
+        {
+            get
+            {
+                if (StratejikPlan?.StratejikPlanDonem == null)
+                    return "";
+
+                return StratejikPlan.StratejikPlanDonem.BaslamaYil + " - " +
+                       StratejikPlan.StratejikPlanDonem.BitisYil;
+            }
+        }
+
     }
 
 }

@@ -792,9 +792,9 @@ namespace Risk.net.Services.Functions
 
                     if (!string.IsNullOrWhiteSpace(gelenNesne.RiskYonetimiKod) && (gelenNesne.Durum == (int)ENUMDurum.GeriGonderildi || gelenNesne.Durum == (int)ENUMDurum.Onayli))
                     {
-                        if (!gelenNesne.BaslangicTarihi.HasValue)
+                        if (gelenNesne.BaslangicTarihi.HasValue)
                             eskiKayit.BaslangicTarihi = gelenNesne.BaslangicTarihi;
-                        if (!gelenNesne.BitisTarihi.HasValue)
+                        if (gelenNesne.BitisTarihi.HasValue)
                             eskiKayit.BitisTarihi = gelenNesne.BitisTarihi;
 
                         if (!string.IsNullOrWhiteSpace(gelenNesne.AzaltmaPlani))
@@ -819,6 +819,17 @@ namespace Risk.net.Services.Functions
                     }
                     else
                         tarihce.EskiDeger = "";
+
+                    if (gelenNesne.Durum == (int)ENUMDurum.OnayaGonderdi || gelenNesne.Durum == (int)ENUMDurum.Onayli)
+                    {
+                        if (!eskiKayit.BaslangicTarihi.HasValue || eskiKayit.BaslangicTarihi.Value.Year < 2000)
+                            hata += "<li>" + _sharedResource["Kontrol.Duzenle.BaslangicTarihiAlaniBos"] + "</li>";
+                        if (!eskiKayit.BitisTarihi.HasValue || eskiKayit.BitisTarihi.Value.Year < 2000)
+                            hata += "<li>" + _sharedResource["Kontrol.Duzenle.BitisTarihiAlaniBos"] + "</li>";
+
+                        if (hata != "")
+                            return new Sonuc(ENUMIslemDurum.Uyari, hata);
+                    }
 
                     eskiKayit.Durum = gelenNesne.Durum;
 

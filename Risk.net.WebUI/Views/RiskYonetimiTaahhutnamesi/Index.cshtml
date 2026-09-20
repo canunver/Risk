@@ -388,7 +388,9 @@
         var form = {
             Kod: 'RPT015',
             CiktiTur: ciktiTur,
-            Yil: $("#txtRaporYil").val() == '' ? 0 : $("#txtRaporYil").val()
+            Yil: $("#txtRaporYil").val() == '' ? 0 : $("#txtRaporYil").val(),
+            KoordinatorlukKod: '',
+            BirimKod: ''
         };
 
         $.ajax({
@@ -400,6 +402,12 @@
             },
             success: function (blob, status, xhr) {
 
+                if (!(blob instanceof Blob) || blob.size === 0) {
+                    IslemYapiliyorBitir("btnRaporUret");
+                    alert("Rapor dosyası oluşturulamadı.");
+                    return;
+                }
+
                 DosyaIndirJS(blob, status, xhr);
 
                 IslemYapiliyorBitir("btnRaporUret");
@@ -408,7 +416,7 @@
 
                 IslemYapiliyorBitir("btnRaporUret");
 
-                alert(exception);
+                alert("Rapor oluşturulurken bir hata meydana geldi.");
             },
         });
 

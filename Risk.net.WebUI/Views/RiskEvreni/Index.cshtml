@@ -1238,7 +1238,9 @@
 
 
         var IliskiliPlanlarForm = [];
-        $.each(deger?.RiskYonetimi?.RiskAzaltmaPlani?.IliskiliPlanlar, function (a, b) { IliskiliPlanlarForm.push(b.IliskiKod); });
+        $.each(deger?.RiskYonetimi?.RiskAzaltmaPlani?.IliskiliPlanlar, function (a, b) {
+            IliskiliPlanlarForm.push(b.IliskiAdi || b.IliskiKod);
+        });
         $(".divIliskiliAzaltmaPlani").html(IliskiliPlanlarForm.join(', '));
 
 

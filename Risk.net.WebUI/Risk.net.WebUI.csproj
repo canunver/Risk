@@ -19,6 +19,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <!-- Deployment configuration is provisioned separately; never publish local secrets/logs. -->
+	  <Content Update="appsettings.json" CopyToPublishDirectory="Never" />
+	  <Content Remove="Hata.txt" />
 	  <Compile Remove="Log\**" />
 	  <Compile Remove="Views\IcDenetim\**" />
 	  <Compile Remove="Views\TanimAmac\**" />

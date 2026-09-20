@@ -718,19 +718,18 @@ namespace Risk.net.Services.Functions
             var kayitlar = new List<Grafik>();
 
 
-            //Risk bildiriminin Risk Sekretaryası tarafından  onaylanması ile kaydının tamamlanması ile riske cevap verilmesi arasında geçen ortalama süre
-            //**Risk Kaydı ekranında kaydın Risk Sekretaryası tarafından onaylanması ile Risklerin Değerlendirilmesi ekranında kaydın onaylanması arasında geçen ortalama süre**
+            //Risk bildiriminin Risk Sekretaryası tarafından onaylanmasından riske cevap verilmesine kadar geçen ortalama süre
 
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
-                    AVG(CONVERT(int, DATEDIFF(DAY,RiskEvreni.KayitTarihi,RiskAzaltmaPlani.KayitTarihi))) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
+                    COALESCE(AVG(CONVERT(int, DATEDIFF(DAY,RiskOnay.IslemTarihi,RiskCevap.IslemTarihi))), 0) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
                     FROM RiskEvreni
                     INNER JOIN RiskYonetimi ON RiskYonetimi.RiskEvreniKod = RiskEvreni.Kod
-                    INNER JOIN RiskAzaltmaPlani ON RiskAzaltmaPlani.RiskYonetimiKod = RiskYonetimi.Kod
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskEvreni.Kod AND IlgiTur=1 AND Durum=10) RiskOnay
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskYonetimi.Kod AND IlgiTur=6 AND Durum=10) RiskCevap
                     ";
             sql += kosul;
-            sql += " AND " + OrtakService.KosulOl("RiskAzaltmaPlani.Durum", "=", (int)ENUMDurum.Onayli);
-            sql = sql.Replace("RiskYonetimi.KayitTarihi", "RiskEvreni.KayitTarihi");
+            sql += " AND RiskOnay.IslemTarihi IS NOT NULL AND RiskCevap.IslemTarihi IS NOT NULL";
 
             var kayitlar1 = await _unitOfWork.SQLCalistirAsync(sql);
             if (kayitlar1 != null && kayitlar1.Count > 0)
@@ -738,45 +737,18 @@ namespace Risk.net.Services.Functions
             else
                 kayitlar.Add(new Grafik());
 
-
-
-            //Bir önceki yıla göre azalan olay raporlaması sayısı * *
-            //Örneğin geçen sene 10 tane olay girilip onaylanmış, bu sene 8 tane girilmiş onaylanmış, bir önceki yıla göre azalan olay raporlama sayısı 2 olarak görünecek
-            sql = "SELECT";
-            sql += " CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,";
-            sql += " (SELECT COUNT(*) FROM OlayRaporlama WHERE Durum = 10 AND YEAR(OlayRaporlama.KayitTarihi) = YEAR(GETDATE())-1";
-            if (!string.IsNullOrEmpty(kriter.KoordinatorlukKod))
-                sql += " AND " + OrtakService.KosulOl("KoordinatorlukKod", "=", kriter.KoordinatorlukKod);
-            if (!string.IsNullOrEmpty(kriter.BirimKod))
-                sql += " AND " + OrtakService.KosulOl("BirimKod", "=", kriter.BirimKod);
-            sql += ") - ";
-
-            sql += " (SELECT COUNT(*) FROM OlayRaporlama WHERE Durum = 10 AND YEAR(OlayRaporlama.KayitTarihi) = YEAR(GETDATE())";
-            if (!string.IsNullOrEmpty(kriter.KoordinatorlukKod))
-                sql += " AND " + OrtakService.KosulOl("KoordinatorlukKod", "=", kriter.KoordinatorlukKod);
-            if (!string.IsNullOrEmpty(kriter.BirimKod))
-                sql += " AND " + OrtakService.KosulOl("BirimKod", "=", kriter.BirimKod);
-            sql += ") AS Deger1, 0.0 AS Deger2, '' as EkAciklama";
-
-            var kayitlar2 = await _unitOfWork.SQLCalistirAsync(sql);
-            if (kayitlar2 != null && kayitlar2.Count > 0)
-                kayitlar.Add(kayitlar2[0]);
-            else
-                kayitlar.Add(new Grafik());
-
-
-            //Mevcut kontroller ile risk iştahının altına düşürülen risklerin sayısı **
+            //Mevcut kontroller ile risk iştahı seviyesine veya altına düşürülen risklerin toplam risklere oranı
             //Risklerin değerlendirilmesi ekranında bir risk kaydı için(yapısal risk seviyesi orta, yüksek veya çok yüksekken) kontroller uygulandıktan sonra artık risk seviyesi risk iştahının altına düşen(Düşük ve Çok Düşük olan) ve onaylı risk sayısı**
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
-                    COUNT(*) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
+                    COALESCE(CONVERT(int, ROUND(100.0 * SUM(CASE WHEN ViewRiskSeviyeleri.Seviye >= 3 AND RiskYonetimi.ArtikRiskSeviyesi <= 2 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0), 0)), 0) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
                     FROM RiskYonetimi
                     INNER JOIN RiskEvreni ON RiskYonetimi.RiskEvreniKod = RiskEvreni.Kod 
                     LEFT JOIN Konfigurasyon ON Konfigurasyon.Durum = 10
                     LEFT JOIN ViewRiskSeviyeleri ON RiskYonetimi.Etki=ViewRiskSeviyeleri.Etki AND RiskYonetimi.Olasilik=ViewRiskSeviyeleri.Olasilik 
                     ";
             sql += kosul;
-            sql += " AND ViewRiskSeviyeleri.Seviye >= 3 AND RiskYonetimi.ArtikRiskSeviyesi < 3";
+            
 
             var kayitlar3 = await _unitOfWork.SQLCalistirAsync(sql);
             if (kayitlar3 != null && kayitlar3.Count > 0)
@@ -785,17 +757,17 @@ namespace Risk.net.Services.Functions
                 kayitlar.Add(new Grafik());
 
 
-            //Risk azaltma planlarının uygulanması sonrası risk iştahının altına düşürülen risklerin sayısı **
+            //Risk azaltma planı uygulanarak risk iştahının altına düşürülen risklerin plan yapılan risklere oranı
             //Risklerin yönetilmesi ekranında bir risk kaydı için(artık risk seviyesi orta, yüksek veya çok yüksekken) azaltma planı oluşturulup onaylandıktan sonra artık risk seviyesi risk iştahının altına düşen(Düşük ve Çok Düşük olan) risk sayısı**
             sql = @"SELECT 
                     CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
-                    COUNT(*) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
+                    COALESCE(CONVERT(int, ROUND(100.0 * SUM(CASE WHEN RiskYonetimi.ArtikRiskSeviyesi < 3 AND RiskYonetimi.ArtikRiskSeviyesiOncekiDeger >= 3 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0), 0)), 0) AS Deger1, 0.0 AS Deger2, '' as EkAciklama
                     FROM RiskEvreni
                     INNER JOIN RiskYonetimi ON RiskYonetimi.RiskEvreniKod = RiskEvreni.Kod
                     INNER JOIN RiskAzaltmaPlani ON RiskAzaltmaPlani.RiskYonetimiKod = RiskYonetimi.Kod
                     ";
             sql += kosul;
-            sql += " AND RiskAzaltmaPlani.Durum = 10 AND RiskYonetimi.ArtikRiskSeviyesi < 3 AND RiskYonetimi.ArtikRiskSeviyesiOncekiDeger >= 3";
+            sql += " AND RiskAzaltmaPlani.Durum = 10";
 
             var kayitlar4 = await _unitOfWork.SQLCalistirAsync(sql);
             if (kayitlar4 != null && kayitlar4.Count > 0)
@@ -840,7 +812,50 @@ namespace Risk.net.Services.Functions
                 else
                     kayitlar.Add(new Grafik());
             }
-            catch { }
+            catch { kayitlar.Add(new Grafik()); }
+
+            //Risk bildirimlerinin Risk Sekretaryası tarafından ortalama onaylanma süresi
+            sql = @"SELECT CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
+                    COALESCE(AVG(CONVERT(int, DATEDIFF(DAY,IlkKayit.IslemTarihi,RiskOnay.IslemTarihi))), 0) AS Deger1,
+                    0.0 AS Deger2, '' AS EkAciklama
+                    FROM RiskEvreni
+                    INNER JOIN RiskYonetimi ON RiskYonetimi.RiskEvreniKod=RiskEvreni.Kod
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskEvreni.Kod AND IlgiTur=1) IlkKayit
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskEvreni.Kod AND IlgiTur=1 AND Durum=10) RiskOnay";
+            sql += kosul + " AND IlkKayit.IslemTarihi IS NOT NULL AND RiskOnay.IslemTarihi IS NOT NULL";
+            var kayitlar7 = await _unitOfWork.SQLCalistirAsync(sql);
+            kayitlar.Add(kayitlar7 != null && kayitlar7.Count > 0 ? kayitlar7[0] : new Grafik());
+
+            //Riskin belirlenmesi ile riske verilen cevap arasında geçen ortalama süre
+            sql = @"SELECT CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
+                    COALESCE(AVG(CONVERT(int, DATEDIFF(DAY,IlkKayit.IslemTarihi,RiskCevap.IslemTarihi))), 0) AS Deger1,
+                    0.0 AS Deger2, '' AS EkAciklama
+                    FROM RiskEvreni
+                    INNER JOIN RiskYonetimi ON RiskYonetimi.RiskEvreniKod=RiskEvreni.Kod
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskEvreni.Kod AND IlgiTur=1) IlkKayit
+                    CROSS APPLY (SELECT MIN(IslemTarihi) IslemTarihi FROM Tarihce WHERE IlgiKod=RiskYonetimi.Kod AND IlgiTur=6 AND Durum=10) RiskCevap";
+            sql += kosul + " AND IlkKayit.IslemTarihi IS NOT NULL AND RiskCevap.IslemTarihi IS NOT NULL";
+            var kayitlar8 = await _unitOfWork.SQLCalistirAsync(sql);
+            kayitlar.Add(kayitlar8 != null && kayitlar8.Count > 0 ? kayitlar8[0] : new Grafik());
+
+            //Risk kaydedilen süreç sayısının tüm süreçlere oranı
+            var surecKosulu = "Surec.Durum = 1";
+            if (!string.IsNullOrEmpty(kriter.KoordinatorlukKod))
+                surecKosulu += " AND " + OrtakService.KosulOl("Surec.KoordinatorlukKod", "=", kriter.KoordinatorlukKod);
+            if (!string.IsNullOrEmpty(kriter.BirimKod))
+                surecKosulu += " AND " + OrtakService.KosulOl("Surec.BirimKod", "=", kriter.BirimKod);
+            var riskTarihKosulu = "";
+            if (kriter.sorguTarihi1.HasValue)
+                riskTarihKosulu += " AND " + OrtakService.KosulOl("RiskEvreni.KayitTarihi", ">=", kriter.sorguTarihi1.Value);
+            if (kriter.sorguTarihi2.HasValue)
+                riskTarihKosulu += " AND " + OrtakService.KosulOl("RiskEvreni.KayitTarihi", "<=", kriter.sorguTarihi2.Value);
+            sql = @"SELECT CONVERT(varchar,YEAR(GETDATE())) AS Aciklama,
+                    COALESCE(CONVERT(int, ROUND(100.0 * SUM(CASE WHEN EXISTS
+                    (SELECT 1 FROM RiskEvreni WHERE RiskEvreni.SurecKod=Surec.Kod AND RiskEvreni.Durum=10" + riskTarihKosulu + @")
+                    THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0), 0)), 0) AS Deger1,
+                    0.0 AS Deger2, '' AS EkAciklama FROM Surec WHERE " + surecKosulu;
+            var kayitlar9 = await _unitOfWork.SQLCalistirAsync(sql);
+            kayitlar.Add(kayitlar9 != null && kayitlar9.Count > 0 ? kayitlar9[0] : new Grafik());
 
 
 
@@ -882,7 +897,7 @@ namespace Risk.net.Services.Functions
                 else
                     kayitlar.Add(new Grafik());
             }
-            catch { }
+            catch { kayitlar.Add(new Grafik()); }
 
 
             if (kayitlar.Count > -1)
