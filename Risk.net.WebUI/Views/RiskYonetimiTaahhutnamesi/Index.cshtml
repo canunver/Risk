@@ -20,6 +20,7 @@
     tablo.islemler.genislik = "2%";
     tablo.islemler.silme = false;
     tablo.islemler.duzenleme = false;
+    tablo.dataFunc = "BeyannameTabloParametreleri(d)";
     tablo.islemler.digerIslemler += "<a title='" + CustomResource["Dugme.DokumaniGoster"] + "' class='btn btn-success btn-sm btn-icon waves-effect waves-themed text-white genelTooltip' style='margin-right:5px;' onClick='BeyannameGoster(!!DATA!!)'><i class='fal fa-eye'></i></a>";
 
 
@@ -31,7 +32,7 @@
                 aramaAlanAdi = "Yil",
                 aramaListeDoldurUrl = "/RiskYonetimiTaahhutnamesi/SelectListesiVerBeyannemeYil",
                 tablodaGoster = true,
-                aramadaGoster = true
+                aramadaGoster = false
             });
 
     tablo.alanlar.Add(new DataTablesAlanlar
@@ -65,13 +66,14 @@
             });
     tablo.alanlar.Add(new DataTablesAlanlar
             {
-                veriAlani = "Durum",
-                adi = @CustomResource["Genel.Alan.Durum"],
+                veriAlani = "SurecDurumu",
+                adi = "İmza Süreci",
                 tipi = "int",
                 genislik = "10%",
-                render = "DurumAdiVer(data,'AKTIFPASIFONAYLI')",
+                render = "BeyannameSurecDurumuAdiVer(data)",
                 aramaTipi = "combo",
-                aramaListeDoldurMetodu = "DurumDoldur('ddlAramaDurum','AKTIFPASIFONAYLI',false)",
+                aramaAlanAdi = "SorguSurecDurumu",
+                aramaListeDoldurMetodu = "BeyannameSurecDurumuDoldur()",
                 aramadaGoster = true
             });
 
@@ -235,6 +237,8 @@
         });
 
         $("#txtRaporYil").val(new Date().getFullYear() - 1);
+        $("#txtRaporYil").on("change", BeyannameTablosunuYilaGoreYenile);
+        setTimeout(BeyannameTablosunuYilaGoreYenile, 0);
 
         $("#btnRaporUret").click(function () {
             RaporHazirla();
@@ -329,6 +333,7 @@
                 $.ajax({
                     url: "/RiskYonetimiTaahhutnamesi/OnayKaldir",
                     type: "POST",
+                    data: { yil: Number($("#txtRaporYil").val() || 0) },
                     success: function (result) {
 
                         if (result.IslemSonuc) {
@@ -391,6 +396,7 @@
             Yil: $("#txtRaporYil").val() == '' ? 0 : $("#txtRaporYil").val(),
             KoordinatorlukKod: '',
             BirimKod: ''
+            ,SurecDurumu: Number($("#ddlAramaSorguSurecDurumu").val() || 0)
         };
 
         $.ajax({
@@ -422,7 +428,41 @@
 
     }
 
+    function BeyannameSurecDurumuDoldur() {
+        Select2Yap("ddlAramaSorguSurecDurumu", false, [
+            { id: "0", text: "Hepsi" },
+            { id: "1", text: "İmzalı" },
+            { id: "2", text: "İmzasız" },
+            { id: "3", text: "Süreçte" },
+            { id: "4", text: "Süreç Başlamamış" }
+        ]);
+        $("#ddlAramaSorguSurecDurumu").val("0").trigger("change");
+    }
+
+    function BeyannameTablosunuYilaGoreYenile() {
+        if (typeof gTablo_tblTanim === "undefined") return;
+        gTablo_tblTanim.ajax.reload();
+    }
+
+    function BeyannameTabloParametreleri(data) {
+        data.yil = Number($("#txtRaporYil").val() || 0);
+        data.surecDurumu = Number($("#ddlAramaSorguSurecDurumu").val() || 0);
+        return data;
+    }
+
+    function BeyannameSurecDurumuAdiVer(durum) {
+        if (Number(durum) === 1) return "İmzalı";
+        if (Number(durum) === 3) return "Süreçte";
+        if (Number(durum) === 4) return "Süreç Başlamamış";
+        return "İmzasız";
+    }
+
     function BeyannameGoster(kod) {
+        if (!kod || kod.indexOf("SURECBASLAMADI_") === 0) {
+            ShowToastr("warning", "toast-top-right", "Bu koordinatörlük için imza süreci henüz başlamamıştır.");
+            return;
+        }
+
         $.ajax({
             type: "POST",
             dataType: "json",

@@ -40,5 +40,11 @@ namespace Risk.net.Data.Entities
 
         [NotMapped]
         public string DurumAdi { get; set; } = string.Empty;
+
+        [NotMapped]
+        public int SurecDurumu { get; set; }
+
+        [NotMapped]
+        public int SorguSurecDurumu { get; set; }
     }
 }

@@ -505,7 +505,7 @@ namespace Risk.net.Services.Functions
 
                         if (sonYetki.Durum == (int)ENUMDurum.GeriGonderildi)
                         {
-                            if (((sonYetki.OnaylayacakYetki != "" || sonYetki.OnaylayacakYetki != "-") && sonYetki.OnaylayacakYetki != kullanan.AktifRolKod)
+                            if ((!string.IsNullOrWhiteSpace(sonYetki.OnaylayacakYetki) && sonYetki.OnaylayacakYetki != "-" && sonYetki.OnaylayacakYetki != kullanan.AktifRolKod)
                                 || (kullanan.KoordinatorlukKod != "" && sonYetki.KoordinatorlukKod != kullanan.KoordinatorlukKod)
                                 || (kullanan.BirimKod != "" && sonYetki.BirimKod != kullanan.BirimKod))
                                 hata += "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>"; //Geri gönderilen kayıt gönderilen yetki tarafından düzenlenebilir.

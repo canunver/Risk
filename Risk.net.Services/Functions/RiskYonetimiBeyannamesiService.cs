@@ -25,6 +25,7 @@ namespace Risk.net.Services.Functions
         /// </summary>
         /// <remarks></remarks>
         private readonly IUnitOfWork<RiskYonetimiBeyannamesi> _unitOfWork;
+        private readonly IUnitOfWork<ViewKoordinatorluk> _unitOfWorkKoordinatorluk;
         /// <summary>
         /// ITanimGenelService servisine ulaşmak için kullanılan değişken
         /// </summary>
@@ -53,12 +54,14 @@ namespace Risk.net.Services.Functions
         /// <param name="sharedResource"></param>
         /// <remarks></remarks>
         public RiskYonetimiBeyannamesiService(IUnitOfWork<RiskYonetimiBeyannamesi> unitOfWork,
+            IUnitOfWork<ViewKoordinatorluk> unitOfWorkKoordinatorluk,
             ITanimGenelService serviceTanimGenel,
             IBildirimSistemiService serviceBildirimSistemi,
             ITarihceService serviceTarihce,
             IStringLocalizer<CustomResource> sharedResource)
         {
             _unitOfWork = unitOfWork;
+            _unitOfWorkKoordinatorluk = unitOfWorkKoordinatorluk;
             _serviceTanimGenel = serviceTanimGenel;
             _serviceBildirimSistemi = serviceBildirimSistemi;
             _serviceTarihce = serviceTarihce;
@@ -151,46 +154,106 @@ namespace Risk.net.Services.Functions
         /// <returns>
         /// Sonuc nesnesi döndürür
         /// </returns>
-        public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam)
+        public async Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam, int yil, int surecDurumu)
         {
             var aramaDegeri = dataTablesParam.searchValue;
-            var selectData = await _unitOfWork.SorguHazirlaAsync(null, "IslemYapan,Koordinatorluk", a => a.Koordinatorluk);
+            var aramaObj = new RiskYonetimiBeyannamesi();
 
             if (aramaDegeri.StartsWith("GELISMIS_ARAMA:"))
+                aramaObj = Arac.DataTablesAramaNesne<RiskYonetimiBeyannamesi>(aramaObj, aramaDegeri);
+
+            // İmza süreci filtresi, gelişmiş arama metninin oluşturulma biçimine bağlı
+            // kalmadan istemciden ayrıca gönderilir. Böylece ekran ve rapor aynı değeri kullanır.
+            if (surecDurumu > 0)
+                aramaObj.SorguSurecDurumu = surecDurumu;
+
+            var beyannameler = await _unitOfWork.SorguHazirlaAsync(null, "IslemYapan,Koordinatorluk", a => a.Koordinatorluk);
+            var tumBeyannameler = beyannameler.ToList();
+            var raporYil = yil > 0
+                ? yil
+                : (tumBeyannameler.Count > 0 ? tumBeyannameler.Max(a => a.Yil) : DateTime.Now.Year - 1);
+            var beyannameListesi = tumBeyannameler.Where(a => a.Yil == raporYil).GroupBy(a => a.KoordinatorlukKod).ToDictionary(a => a.Key, a => a.OrderByDescending(x => x.IslemTarihi).First());
+            var koordinatorluklar = await _unitOfWorkKoordinatorluk.SorguHazirlaAsync(a => a.Durum == (int)ENUMDurum.Aktif && a.Tur < 1000, "");
+
+            var liste = koordinatorluklar.ToList().Select(koordinatorluk =>
             {
-                var aramaObj = Arac.DataTablesAramaNesne<RiskYonetimiBeyannamesi>(new RiskYonetimiBeyannamesi(), aramaDegeri);
+                beyannameListesi.TryGetValue(koordinatorluk.Kod, out var beyanname);
+                if (beyanname == null)
+                {
+                    beyanname = new RiskYonetimiBeyannamesi
+                    {
+                        Kod = "SURECBASLAMADI_" + koordinatorluk.Kod,
+                        Yil = raporYil,
+                        KoordinatorlukKod = koordinatorluk.Kod,
+                        Koordinatorluk = koordinatorluk
+                    };
+                }
 
-                if (aramaObj.Yil > 0)
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Yil == aramaObj.Yil);
+                beyanname.SurecDurumu = beyanname.Kod.StartsWith("SURECBASLAMADI_", StringComparison.Ordinal)
+                    ? 4
+                    : (beyanname.Durum == (int)ENUMDurum.Onayli ? 1 : 3);
+                return beyanname;
+            });
 
-                if (aramaObj.KoordinatorlukKod == "-42")
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur == 40); //42 il koordinatörlüğü
-                else if (aramaObj.KoordinatorlukKod == "-1")
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Tur < 1000); //Tüm Koordinatörlükler
-                else if (!string.IsNullOrWhiteSpace(aramaObj.KoordinatorlukKod))
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.KoordinatorlukKod == aramaObj.KoordinatorlukKod);
+            if (aramaObj.KoordinatorlukKod == "-42")
+                liste = liste.Where(a => a.Koordinatorluk.Tur == 40);
+            else if (!string.IsNullOrWhiteSpace(aramaObj.KoordinatorlukKod) && aramaObj.KoordinatorlukKod != "-1")
+                liste = liste.Where(a => a.KoordinatorlukKod == aramaObj.KoordinatorlukKod);
 
+            if (aramaObj.SorguSurecDurumu == 1)
+                liste = liste.Where(a => a.SurecDurumu == 1);
+            else if (aramaObj.SorguSurecDurumu == 2)
+                liste = liste.Where(a => a.SurecDurumu == 3 || a.SurecDurumu == 4);
+            else if (aramaObj.SorguSurecDurumu == 3)
+                liste = liste.Where(a => a.SurecDurumu == 3);
+            else if (aramaObj.SorguSurecDurumu == 4)
+                liste = liste.Where(a => a.SurecDurumu == 4);
 
-                //if (!string.IsNullOrWhiteSpace(aramaObj.IslemYapanKod))
-                //    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.IslemYapan.Adi.Contains(aramaObj.IslemYapanKod) || a.IslemYapan.Soyadi.Contains(aramaObj.IslemYapanKod));
+            if (!aramaDegeri.StartsWith("GELISMIS_ARAMA:") && !string.IsNullOrWhiteSpace(aramaDegeri))
+                liste = liste.Where(a => a.Koordinatorluk.Adi.Contains(aramaDegeri, StringComparison.CurrentCultureIgnoreCase));
 
-                if (aramaObj.Durum > 0)
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == aramaObj.Durum);
-                else
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == (int)ENUMDurum.Onayli);
+            // Bu liste veritabanı sorgusu değil; beyannamesi bulunmayan koordinatörlükler
+            // için bellekte üretilen satırları da içeriyor. IQueryable<object> üzerinden
+            // dinamik sıralama yapmak özellikle SurecDurumu alanında hata oluşturduğu için
+            // DataTables sıralama ve sayfalamasını tip güvenli olarak burada uyguluyoruz.
+            var kayitlar = liste.ToList();
+            var azalan = string.Equals(dataTablesParam.sortColumnDirection, "desc", StringComparison.OrdinalIgnoreCase);
+            IEnumerable<RiskYonetimiBeyannamesi> siraliKayitlar;
 
-            }
-            else
+            switch (dataTablesParam.sortColumn)
             {
-                if (!string.IsNullOrWhiteSpace(dataTablesParam.searchValue))
-                    selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Koordinatorluk.Adi.Contains(dataTablesParam.searchValue)
-                                                                                     || a.IslemYapan.Adi.Contains(dataTablesParam.searchValue));
-
-                //selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Yil == DateAndTime.Now.Year);
-                selectData = await _unitOfWork.KosulEkleAsync(selectData, a => a.Durum == (int)ENUMDurum.Onayli);
+                case "Yil":
+                    siraliKayitlar = azalan ? kayitlar.OrderByDescending(a => a.Yil) : kayitlar.OrderBy(a => a.Yil);
+                    break;
+                case "Koordinatorluk.Adi":
+                    siraliKayitlar = azalan
+                        ? kayitlar.OrderByDescending(a => a.Koordinatorluk?.Adi ?? "")
+                        : kayitlar.OrderBy(a => a.Koordinatorluk?.Adi ?? "");
+                    break;
+                case "IslemYapan.AdiSoyadi":
+                    siraliKayitlar = azalan
+                        ? kayitlar.OrderByDescending(a => a.IslemYapan?.AdiSoyadi ?? "")
+                        : kayitlar.OrderBy(a => a.IslemYapan?.AdiSoyadi ?? "");
+                    break;
+                case "IslemTarihi":
+                    siraliKayitlar = azalan ? kayitlar.OrderByDescending(a => a.IslemTarihi) : kayitlar.OrderBy(a => a.IslemTarihi);
+                    break;
+                case "SurecDurumu":
+                    siraliKayitlar = azalan ? kayitlar.OrderByDescending(a => a.SurecDurumu) : kayitlar.OrderBy(a => a.SurecDurumu);
+                    break;
+                default:
+                    siraliKayitlar = kayitlar.OrderBy(a => a.Koordinatorluk?.Adi ?? "");
+                    break;
             }
 
-            return Arac.DataTablesJsonData(selectData, dataTablesParam);
+            var toplamKayit = kayitlar.Count;
+            return new
+            {
+                draw = dataTablesParam.draw,
+                recordsFiltered = toplamKayit,
+                recordsTotal = toplamKayit,
+                data = siraliKayitlar.Skip(dataTablesParam.skip).Take(dataTablesParam.pageSize).ToList()
+            };
         }
 
         /// <summary>
@@ -240,11 +303,14 @@ namespace Risk.net.Services.Functions
         /// <returns>
         /// Sonuc nesnesi döndürür
         /// </returns>
-        public async Task<Sonuc> OnayKaldirAsync(KullaniciDto kullanan)
+        public async Task<Sonuc> OnayKaldirAsync(KullaniciDto kullanan, int yil)
         {
+            if (yil <= 0)
+                return new Sonuc(ENUMIslemDurum.Uyari, "<li>İmza sürecinin başlatılacağı yıl seçilmelidir.</li>");
+
             try
             {
-                var kayitlar = await _unitOfWork.ListeleAsync(k => k.Durum == (int)ENUMDurum.Onayli);
+                var kayitlar = await _unitOfWork.ListeleAsync(k => k.Yil == yil && k.Durum == (int)ENUMDurum.Onayli);
 
                 foreach (RiskYonetimiBeyannamesi kayit in kayitlar)
                 {

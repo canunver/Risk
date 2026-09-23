@@ -19,6 +19,7 @@ namespace Risk.net.Data.Entities
         public DateTime? IslemTarihi { get; set; }
         public string IslemYapanAdi { get; set; }
         public string IslemYapanRol { get; set; }
+        public int SurecDurumu { get; set; }
     }
 
 

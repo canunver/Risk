@@ -36,7 +36,7 @@ namespace Risk.net.Services.Interfaces
         /// <returns>
         /// Sonuc nesnesi döndürür
         /// </returns>
-        Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam);
+        Task<object> TabloDoldurAsync(KullaniciDto kullanan, DataTablesParam dataTablesParam, int yil, int surecDurumu);
         /// <summary>
         /// Istemciden parametere ile gönderilen bilgileri kaydeden metodun arayüzü
         /// </summary>
@@ -54,7 +54,7 @@ namespace Risk.net.Services.Interfaces
         /// <returns>
         /// Sonuc nesnesi döndürür
         /// </returns>
-        Task<Sonuc> OnayKaldirAsync(KullaniciDto kullanan);
+        Task<Sonuc> OnayKaldirAsync(KullaniciDto kullanan, int yil);
 
         /// <summary>
         /// Hatırlatma maili gönderilmesi işlemini sağlayan metodun arayüzü

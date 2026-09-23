@@ -63,7 +63,7 @@ namespace Risk.net.Services.Functions
 
             try
             {
-                var kayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == kod, "StratejikPlan,StratejikPlan.Hedefler,StratejikPlan.Hedefler.Koordinatorluk,StratejikPlan.Hedefler.Birim,StratejikPlan.Hedefler.IsbirligiBirimler, StratejikPlan.Hedefler.IsbirligiBirimler.Koordinatorluk, StratejikPlan.Hedefler.IsbirligiBirimler.Birim");
+                var kayit = await _unitOfWork.KayitGetirAsync(c => c.Kod == kod, "StratejikPlan,StratejikPlan.StratejikPlanDonem,StratejikPlan.Hedefler,StratejikPlan.Hedefler.Koordinatorluk,StratejikPlan.Hedefler.Birim,StratejikPlan.Hedefler.IsbirligiBirimler, StratejikPlan.Hedefler.IsbirligiBirimler.Koordinatorluk, StratejikPlan.Hedefler.IsbirligiBirimler.Birim");
                 if (kayit != null)
                     return new Sonuc(ENUMIslemDurum.Basarili, kayit);
             }

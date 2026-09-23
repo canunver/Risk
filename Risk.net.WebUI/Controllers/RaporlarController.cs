@@ -1527,7 +1527,11 @@ namespace Risk.net.WebUI.Controllers
                 KriterYil = Arac.ConvertToInt(kriter["Yil"], 0),
                 KoordinatorlukAdi = kriter.Value<string>("KoordinatorlukKod") ?? "",
                 BirimAdi = kriter.Value<string>("BirimKod") ?? "",
+                SurecDurumu = kriter.Value<int?>("SurecDurumu") ?? 0,
             });
+
+            if (!sonuc.IslemSonuc || sonuc.Liste == null)
+                throw new InvalidOperationException(sonuc.Mesaj ?? "Yıllık risk yönetimi beyannamesi verileri hazırlanamadı.");
 
             ITablo XLS = Arac.ExcelTablo();
             int sutun = 0;

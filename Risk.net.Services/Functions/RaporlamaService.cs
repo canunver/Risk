@@ -1812,26 +1812,54 @@ namespace Risk.net.Services.Functions
         public async Task<Sonuc> RiskYonetimiBeyannamesiHazirlaAsync(KullaniciDto kullanan, RaporRiskYonetimiBeyannamesi kriter)
         {
             string sql = "";
-            string kosul = "";
+            var raporYil = kriter.KriterYil > 0 ? kriter.KriterYil : DateTime.Now.Year - 1;
 
             sql = @"SELECT 
                     ViewKoordinatorluk.Adi AS KoordinatorlukAdi,
                     '' AS BirimAdi,
-					RiskYonetimiBeyannamesi.Yil,
-					RiskYonetimiBeyannamesi.IslemTarihi,
-					ViewPersonel.Adi + ' ' + ViewPersonel.Soyadi AS IslemYapanAdi,
-					RiskYonetimiBeyannamesi.IslemYapanRol
+					" + raporYil + @" AS Yil,
+					Beyanname.IslemTarihi,
+					CASE
+                        WHEN Beyanname.Kod IS NULL THEN 'SÜREÇ BAŞLAMAMIŞ'
+                        WHEN Beyanname.Durum <> 10 THEN 'SÜREÇTE'
+                        ELSE COALESCE(ViewPersonel.Adi + ' ' + ViewPersonel.Soyadi, 'İMZALANDI')
+					END AS IslemYapanAdi,
+					Beyanname.IslemYapanRol,
+                    CASE
+                        WHEN Beyanname.Kod IS NULL THEN 4
+                        WHEN Beyanname.Durum = 10 THEN 1
+                        ELSE 3
+                    END AS SurecDurumu
 
-                    FROM RiskYonetimiBeyannamesi
+                    FROM ViewKoordinatorluk
 
-                    INNER JOIN ViewKoordinatorluk ON RiskYonetimiBeyannamesi.KoordinatorlukKod = ViewKoordinatorluk.Kod 
-                    LEFT JOIN ViewPersonelAdSoyad AS ViewPersonel ON ViewPersonel.Kod = RiskYonetimiBeyannamesi.IslemYapanKod
+                    OUTER APPLY
+                    (
+                        SELECT TOP (1)
+                            RiskYonetimiBeyannamesi.Kod,
+                            RiskYonetimiBeyannamesi.Durum,
+                            RiskYonetimiBeyannamesi.IslemTarihi,
+                            RiskYonetimiBeyannamesi.IslemYapanKod,
+                            RiskYonetimiBeyannamesi.IslemYapanRol
+                        FROM RiskYonetimiBeyannamesi
+                        WHERE RiskYonetimiBeyannamesi.KoordinatorlukKod = ViewKoordinatorluk.Kod
+                            AND RiskYonetimiBeyannamesi.Yil = " + raporYil + @"
+                        ORDER BY RiskYonetimiBeyannamesi.IslemTarihi DESC
+                    ) AS Beyanname
+                    LEFT JOIN ViewPersonelAdSoyad AS ViewPersonel ON ViewPersonel.Kod = Beyanname.IslemYapanKod
 
-                    WHERE RiskYonetimiBeyannamesi.Durum = 10
+                    WHERE ViewKoordinatorluk.Durum = 1
+                        AND ViewKoordinatorluk.Tur < 1000
                     ";
 
-            if (kriter.KriterYil > 0)
-                sql += " AND RiskYonetimiBeyannamesi.Yil = " + kriter.KriterYil;
+            if (kriter.SurecDurumu == 1)
+                sql += " AND Beyanname.Durum = 10";
+            else if (kriter.SurecDurumu == 2)
+                sql += " AND (Beyanname.Kod IS NULL OR Beyanname.Durum <> 10)";
+            else if (kriter.SurecDurumu == 3)
+                sql += " AND Beyanname.Kod IS NOT NULL AND Beyanname.Durum <> 10";
+            else if (kriter.SurecDurumu == 4)
+                sql += " AND Beyanname.Kod IS NULL";
 
             if (!string.IsNullOrWhiteSpace(kriter.KoordinatorlukAdi) && kriter.KoordinatorlukAdi != "-1")
             {
@@ -1848,7 +1876,7 @@ namespace Risk.net.Services.Functions
                     //else if (k == "-1")
                     //    sqlKoordiler += " ViewKoordinatorluk.Tur < 40"; //-1 Tüm kurum
                     else
-                        sqlKoordiler += " ViewKoordinatorluk.KoordinatorlukKod = '" + Arac.TirnakYoket(k) + "'";
+                        sqlKoordiler += " ViewKoordinatorluk.Kod = '" + Arac.TirnakYoket(k) + "'";
                 }
 
                 if (!string.IsNullOrWhiteSpace(sqlKoordiler))
@@ -1860,14 +1888,12 @@ namespace Risk.net.Services.Functions
             try
             {
                 var kayitlar = await _unitOfWorkRaporRiskYonetimiBeyannamesi.SQLCalistirAsync(sql);
-                if (kayitlar.Count > -1)
-                {
+                if (kayitlar != null)
                     return new Sonuc(ENUMIslemDurum.Basarili, kayitlar.Cast<object>().ToList());
-                }
             }
             catch (Exception e)
             {
-
+                return new Sonuc(ENUMIslemDurum.Hata, e.Message);
             }
             return new Sonuc(ENUMIslemDurum.Hata, _sharedResource["Bildirim.KayitBulunamadi"]);
 

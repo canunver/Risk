@@ -67,11 +67,11 @@ namespace Risk.net.WebUI.Controllers
         /// Ok(JSON tipinde sunucudan gelen bilgi)
         /// </returns>
         [HttpPost]
-        public async Task<IActionResult> TabloDoldur()
+        public async Task<IActionResult> TabloDoldur(int yil, int surecDurumu)
         {
             DataTablesParam dataTableInfo = new DataTablesParam(Request);
 
-            var jsonData = await _service.TabloDoldurAsync(_kullanan, dataTableInfo);
+            var jsonData = await _service.TabloDoldurAsync(_kullanan, dataTableInfo, yil, surecDurumu);
 
             return Ok(jsonData);
         }
@@ -144,9 +144,9 @@ namespace Risk.net.WebUI.Controllers
         /// </returns>
         /// <remarks></remarks>
         [HttpPost]
-        public async Task<IActionResult> OnayKaldir()
+        public async Task<IActionResult> OnayKaldir(int yil)
         {
-            Sonuc sonuc = await _service.OnayKaldirAsync(_kullanan);
+            Sonuc sonuc = await _service.OnayKaldirAsync(_kullanan, yil);
 
             return Ok(sonuc);
         }
