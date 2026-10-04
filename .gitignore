@@ -380,3 +380,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Claude veritabani koprusu: sorgular ve sonuclar repoya girmesin
+/_db/sorgu/
+/_db/sonuc/
+/_db/islenen/
+/_to_delete/

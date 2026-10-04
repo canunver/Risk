@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Risk.net.Utilities.Objects;
 
 namespace Risk.net.Data.Entities
 {
@@ -26,6 +27,9 @@ namespace Risk.net.Data.Entities
 
         [Column(TypeName = "int")]
         public int Etki { get; set; }
+
+        [Column(TypeName = "int")]
+        public EnumPerformansGostergesiYonu GostergeYonu { get; set; } = EnumPerformansGostergesiYonu.Artan;
 
         [Column(TypeName = "varchar(1200)")]
         public string Aciklama { get; set; }

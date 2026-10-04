@@ -115,6 +115,16 @@ namespace Risk.net.Utilities.Objects
         IptalEdildi = 99,
     }
 
+    /// <summary>
+    /// Performans göstergesinin hedefe ulaşma yönünü belirtir.
+    /// </summary>
+    public enum EnumPerformansGostergesiYonu
+    {
+        Artan = 1,
+        Azalan = 2,
+        Sabit = 3
+    }
+
     public enum EnumDenetimKaynak
     {
         Tanimsiz = 0,

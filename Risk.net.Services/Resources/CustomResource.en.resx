@@ -1848,6 +1848,21 @@
   <data name="Kontrol.Duzenle.BelgeTipiAlaniBos" xml:space="preserve">
     <value>ENTip alanı boş bırakılamaz</value>
   </data>
+  <data name="Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez" xml:space="preserve">
+    <value>This record has been sent for approval and cannot be changed. You can edit it after it is approved or sent back.</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Artan" xml:space="preserve">
+    <value>Increasing</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Azalan" xml:space="preserve">
+    <value>Decreasing</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Sabit" xml:space="preserve">
+    <value>Constant</value>
+  </data>
+  <data name="StratejikPlanIzleme.VeriYok" xml:space="preserve">
+    <value>No data</value>
+  </data>
   <data name="Kontrol.Duzenle.DuzenlemeYetkinizYok" xml:space="preserve">
     <value>ENDüzenleme yetkiniz bulunmamaktadır</value>
   </data>

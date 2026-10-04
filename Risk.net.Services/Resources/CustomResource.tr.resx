@@ -2286,6 +2286,21 @@
   <data name="DenetimListe.SayfaAciklama" xml:space="preserve">
     <value />
   </data>
+  <data name="Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez" xml:space="preserve">
+    <value>Kayıt onaya gönderildiği için değiştirilemez. Onay işlemi tamamlandıktan veya kayıt geri gönderildikten sonra düzenleyebilirsiniz.</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Artan" xml:space="preserve">
+    <value>Artan</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Azalan" xml:space="preserve">
+    <value>Azalan</value>
+  </data>
+  <data name="StratejikPlan.GostergeYonu.Sabit" xml:space="preserve">
+    <value>Sabit</value>
+  </data>
+  <data name="StratejikPlanIzleme.VeriYok" xml:space="preserve">
+    <value>Veri yok</value>
+  </data>
   <data name="Kontrol.Duzenle.DuzenlemeYetkinizYok" xml:space="preserve">
     <value>Düzenleme yetkiniz bulunmamaktadır</value>
   </data>

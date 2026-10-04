@@ -324,6 +324,12 @@ namespace Risk.net.Services.Functions
                     selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi >= aramaObj.BitisTarihi1);
                 if (aramaObj.BitisTarihi2.HasValue)
                     selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskYonetimi.RiskAzaltmaPlani.BitisTarihi <= aramaObj.BitisTarihi2);
+                if (aramaObj.SorguMevcutDurum > 0)
+                {
+                    var mevcutDurum = (EnumRiskAzaltmaPlaniMevcutDurum)aramaObj.SorguMevcutDurum;
+                    selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskYonetimi.RiskAzaltmaPlani.MevcutDurum == mevcutDurum);
+                }
+
                 if (aramaObj.SorguArtikRiskSeviyesi > 0)
                     selectData = await _unitOfWorkRiskEvreni.KosulEkleAsync(selectData, a => a.RiskYonetimi.ArtikRiskSeviyesi == aramaObj.SorguArtikRiskSeviyesi);
                 if (aramaObj.KayitTarihi1.HasValue)
@@ -477,6 +483,11 @@ namespace Risk.net.Services.Functions
                     var eskiKayit = await _unitOfWorkAnahtar.KayitGetirAsync(c => c.Kod == gelenNesne.Kod, "SorumluBirim,SorumluBirim.Koordinatorluk");
 
 
+                    //Onaya gönderilen kayıt sorumlusu dahil kimse tarafından değiştirilemez.
+                    //Bu kontrol sorumlu kontrolünden önce yapılır ki kullanıcı asıl nedeni görsün.
+                    if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
+                        return new Sonuc(ENUMIslemDurum.Uyari, "<li>" + _sharedResource["Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez"] + "</li>");
+
                     //Kayıtlı bir bilgi ancak sahibi tarafından değiştirilebilir
                     if (!(eskiKayit.Durum == (int)ENUMDurum.Onayli && kullanan.AktifRolKod == "RISKSEKRETARYASI") && !string.IsNullOrWhiteSpace(eskiKayit.AzaltmaPlaniSorumlusuKod) && eskiKayit.AzaltmaPlaniSorumlusuKod != kullanan.PersonelKod)
                     {
@@ -486,7 +497,7 @@ namespace Risk.net.Services.Functions
 
                     //Onaya gönderilen kayıt değiştirilemez
                     if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
-                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
+                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez"] + "</li>";
                     else if (eskiKayit.Durum == (int)ENUMDurum.Reddedildi)         //İptal edilen kayıt değiştirilemez
                         hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.UygunDegil"] + "</li>";
                     else if (eskiKayit.Durum == (int)ENUMDurum.GeriGonderildi)

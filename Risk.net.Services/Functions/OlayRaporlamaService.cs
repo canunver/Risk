@@ -311,7 +311,7 @@ namespace Risk.net.Services.Functions
 
                     //Onaya gönderilen kayıt değiştirilemez
                     if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
-                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
+                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez"] + "</li>";
 
                     if (hata != "")
                         return new Sonuc(ENUMIslemDurum.Uyari, hata);

@@ -216,6 +216,11 @@
                                         <div class="input-group input-group-sm mb-2">
                                             <input type="text" autocomplete="off" id="txtGostergeAdi" class="form-control form-control-sm" style="width:40%" placeholder="@CustomResource["StratejikPlan.Alan.GostergeAdi"] *" />
                                             <input type="text" autocomplete="off" id="txtHedefeEtkisi" class="form-control form-control-sm" style="width:10%" placeholder="@CustomResource["StratejikPlan.Alan.HedefeEtkisi"] *" />
+                                            <select id="ddlGostergeYonu" class="form-control form-control-sm" style="width:20%" title="Gösterge yönü">
+                                                <option value="1">Artan</option>
+                                                <option value="2">Azalan</option>
+                                                <option value="3">Sabit</option>
+                                            </select>
                                         </div>
                                         <div class="input-group input-group-sm mb-2">
                                             <select id="ddlBirimGosterge" style="width:40%" data-placeholder="@CustomResource["StratejikPlan.Alan.GostergeBirim"]"></select>
@@ -236,6 +241,7 @@
                                         <thead>
                                         <td>Gösterge Adı</td>
                                         <td>Etki</td>
+                                        <td>Gösterge Yönü</td>
                                         <td>Birim/Ünite</td>
                                         <td>Açıklama</td>
                                         <td>Revizyon Nedeni</td>
@@ -959,7 +965,7 @@
                     $.each(result.Nesne?.Gostergeler, function (index) {
                         var bilgi = result.Nesne?.Gostergeler[index]
                         var gostergeAdi = "<span class='fw-700 mr-2'>" + bilgi.GostergeNo + "</span>" + bilgi.Adi;
-                        DTabloSatirEkleGosterge(bilgi.Kod, gostergeAdi, bilgi.Etki, bilgi.Aciklama, bilgi.RevizyonNedeni, bilgi.RevizyonTarihi, bilgi.Birim?.Adi + "|" + bilgi.Birim?.Kod)
+                        DTabloSatirEkleGosterge(bilgi.Kod, gostergeAdi, bilgi.Etki, bilgi.GostergeYonu, bilgi.Aciklama, bilgi.RevizyonNedeni, bilgi.RevizyonTarihi, bilgi.Birim?.Adi + "|" + bilgi.Birim?.Kod)
                     });
 
                 }
@@ -1050,12 +1056,13 @@
         var kod = $(kontrol).closest('tr')[0].id;
         var adi = $(kontrol).closest('tr').find("td:eq(0)").clone().children().remove().end().text();
         var etki = $(kontrol).closest('tr').find("td:eq(1)").html();
-        var birim = $(kontrol).closest('tr').find("td:eq(2)").html();
-        var aciklama = $(kontrol).closest('tr').find("td:eq(3)").html();
-        var revizyonNedeni = $(kontrol).closest('tr').find("td:eq(4)").html();
-        var revizyonTarihi = $(kontrol).closest('tr').find("td:eq(5)").html();
+        var gostergeYonu = $(kontrol).closest('tr').data("gosterge-yonu") || 1;
+        var birim = $(kontrol).closest('tr').find("td:eq(3)").html();
+        var aciklama = $(kontrol).closest('tr').find("td:eq(4)").html();
+        var revizyonNedeni = $(kontrol).closest('tr').find("td:eq(5)").html();
+        var revizyonTarihi = $(kontrol).closest('tr').find("td:eq(6)").html();
 
-        var birimKod = $(kontrol).closest('tr').find("td:eq(2)").data("birim");
+        var birimKod = $(kontrol).closest('tr').find("td:eq(3)").data("birim");
 
         kod = kod.replace("sttb_", "");
 
@@ -1064,6 +1071,7 @@
         $("#hdnGostergeKod").val(kod);
         $("#txtGostergeAdi").val(adi);
         $("#txtHedefeEtkisi").val(etki);
+        $("#ddlGostergeYonu").val(gostergeYonu);
         $("#ddlBirimGosterge").val(birimKod).trigger('change');
         $("#txtGostergeAciklama").val(aciklama);
         $("#txtRevizyonNedeni").val(revizyonNedeni);
@@ -1128,6 +1136,7 @@
         var kod = $("#hdnGostergeKod").val();
         var adi = $("#txtGostergeAdi").val();
         var etki = $("#txtHedefeEtkisi").val();
+        var gostergeYonu = $("#ddlGostergeYonu").val();
         var aciklama = $("#txtGostergeAciklama").val();
         var revizyonNedeni = $("#txtRevizyonNedeni").val();
         var revizyonTarihi = $("#txtRevizyonTarihi").val();
@@ -1160,6 +1169,7 @@
             Kod: kod,
             Adi: adi,
             Etki: etki,
+            GostergeYonu: gostergeYonu,
             BirimKod: birimKod,
             Aciklama: aciklama,
             RevizyonNedeni: revizyonNedeni,
@@ -1177,7 +1187,7 @@
                 if (result.IslemSonuc) {
                     ShowToastr("success", "toast-top-right", result.Mesaj);
                     var gostergeAdi = "<span class='fw-700 mr-2'>" + result.Nesne.GostergeNo + "</span>" + result.Nesne.Adi;
-                    DTabloSatirEkleGosterge(result.Nesne.Kod, gostergeAdi, result.Nesne.Etki, result.Nesne.Aciklama, result.Nesne.RevizyonNedeni, result.Nesne.RevizyonTarihi, birimAdi + "|" + birimKod);
+                    DTabloSatirEkleGosterge(result.Nesne.Kod, gostergeAdi, result.Nesne.Etki, result.Nesne.GostergeYonu, result.Nesne.Aciklama, result.Nesne.RevizyonNedeni, result.Nesne.RevizyonTarihi, birimAdi + "|" + birimKod);
                     DTabloAlanTemizleGosterge();
                 }
                 else {
@@ -1188,7 +1198,7 @@
     }
 
     //Dinamik tabloya satır eklemek için
-    function DTabloSatirEkleGosterge(kod, adi, etki, aciklama, revizyonNedeni, revizyonTarihi, birim) {
+    function DTabloSatirEkleGosterge(kod, adi, etki, gostergeYonu, aciklama, revizyonNedeni, revizyonTarihi, birim) {
 
         if (aciklama == null) aciklama = "";
 
@@ -1201,7 +1211,8 @@
         else
             revizyonTarihi = TarihDegeriDDMMYYYY(revizyonTarihi);
 
-        var satirBilgi = "<td width='20%'>" + adi + "</td><td width='10%'>" + etki + "</td><td width='20%' data-birim='" + birimBilgi[1] + "'>" + birimBilgi[0] + "</td><td width='20%'>" + aciklama + "</td><td width='20%'>" + revizyonNedeni + "</td><td width='10%'>" + revizyonTarihi + "</td>";
+        var gostergeYonuAdi = gostergeYonu == 2 ? "Azalan" : (gostergeYonu == 3 ? "Sabit" : "Artan");
+        var satirBilgi = "<td width='20%'>" + adi + "</td><td width='10%'>" + etki + "</td><td width='10%'>" + gostergeYonuAdi + "</td><td width='20%' data-birim='" + birimBilgi[1] + "'>" + birimBilgi[0] + "</td><td width='15%'>" + aciklama + "</td><td width='15%'>" + revizyonNedeni + "</td><td width='10%'>" + revizyonTarihi + "</td>";
 
         var duzenle = "GostergeDuzenle"
         var sil = "GostergeSil";
@@ -1212,7 +1223,8 @@
             $(".dtabloVeriGirisGosterge").hide();
         }
 
-        DinamikTabloSatirEkle("tblGosterge", kod, satirBilgi, duzenle, sil, "")
+        DinamikTabloSatirEkle("tblGosterge", kod, satirBilgi, duzenle, sil, "");
+        $("#sttb_" + kod).attr("data-gosterge-yonu", gostergeYonu || 1);
     }
 
     //Dinamik tablo alanlarını temizlemek için
@@ -1220,6 +1232,7 @@
         $("#hdnGostergeKod").val("");
         $("#txtGostergeAdi").val("");
         $("#txtHedefeEtkisi").val("");
+        $("#ddlGostergeYonu").val("1");
         $("#txtGostergeAciklama").val("");
         $("#txtRevizyonNedeni").val("");
         $("#txtRevizyonTarihi").datepicker("update", "");

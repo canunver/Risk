@@ -2275,6 +2275,9 @@ namespace Risk.net.Data.Migrations
                     b.Property<string>("GostergeNo")
                         .HasColumnType("varchar(10)");
 
+                    b.Property<int>("GostergeYonu")
+                        .HasColumnType("int");
+
                     b.Property<string>("RevizyonNedeni")
                         .HasColumnType("varchar(250)");
 

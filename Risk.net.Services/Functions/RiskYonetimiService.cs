@@ -441,7 +441,7 @@ namespace Risk.net.Services.Functions
 
                     //Onaya gönderilen kayıt değiştirilemez
                     if (eskiKayit.Durum == (int)ENUMDurum.OnayaGonderdi)
-                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.DuzenlemeYetkinizYok"] + "</li>";
+                        hata = "<li>" + _sharedResource["Kontrol.Duzenle.OnaydaBekleyenKayitDegistirilemez"] + "</li>";
                     else if (eskiKayit.Durum == (int)ENUMDurum.Reddedildi)         //İptal edilen kayıt değiştirilemez
                         hata = "<li>" + _sharedResource["Kontrol.DurumDegistir.UygunDegil"] + "</li>";
 

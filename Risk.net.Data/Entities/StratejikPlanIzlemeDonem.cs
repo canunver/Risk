@@ -29,10 +29,10 @@ namespace Risk.net.Data.Entities
         public int PlanlananDeger { get; set; }
 
         [Column(TypeName = "decimal(13, 4)")]
-        public double GerceklesenDeger { get; set; }
+        public double? GerceklesenDeger { get; set; }
 
         [Column(TypeName = "decimal(13, 4)")]
-        public double GerceklesenDegerYilSonu { get; set; }
+        public double? GerceklesenDegerYilSonu { get; set; }
 
         [Column(TypeName = "decimal(13, 4)")]
         public double SapmaOrani { get; set; }

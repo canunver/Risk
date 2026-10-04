@@ -44,6 +44,25 @@ namespace Risk.net.Data.Entities
             }
         }
 
+        private static double? IzlemeDegeriOku(string[] degerler, int sira)
+        {
+            //SQL değeri her zaman nokta ile gönderir; boş değer "veri yok" anlamına gelir
+            if (degerler.Length <= sira || string.IsNullOrWhiteSpace(degerler[sira]))
+                return null;
+
+            return double.TryParse(degerler[sira], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var sayi)
+                ? sayi
+                : (double?)null;
+        }
+
+        private static double? TrendDegeri(double? gerceklesenDeger, double? gerceklesenDegerYilSonu)
+        {
+            if (gerceklesenDegerYilSonu.HasValue && gerceklesenDegerYilSonu.Value != 0)
+                return gerceklesenDegerYilSonu;
+
+            return gerceklesenDeger ?? gerceklesenDegerYilSonu;
+        }
+
         public virtual List<RaporStratejikPlanIzlemeDonem> Donemler
         {
             get
@@ -66,8 +85,8 @@ namespace Risk.net.Data.Entities
                                 var izlemeDonem = new RaporStratejikPlanIzlemeDonem();
                                 izlemeDonem.Donem = Convert.ToInt32(degerler[0]);
                                 izlemeDonem.PlanlananDeger = Convert.ToInt32(degerler[1]);
-                                izlemeDonem.GerceklesenDeger = Utilities.Functions.Arac.ConvertToDouble(degerler[2]?.Replace(".", ","));
-                                izlemeDonem.GerceklesenDegerYilSonu = Utilities.Functions.Arac.ConvertToDouble(degerler[3]?.Replace(".", ","));
+                                izlemeDonem.GerceklesenDeger = IzlemeDegeriOku(degerler, 2);
+                                izlemeDonem.GerceklesenDegerYilSonu = IzlemeDegeriOku(degerler, 3);
 
                                 donenDeger.Add(izlemeDonem);
                             }
@@ -90,13 +109,13 @@ namespace Risk.net.Data.Entities
             {
                 if (Donemler != null && Donemler.Count > 1)
                 {
-                    var SonDeger2 = Donemler[Donemler.Count - 1].GerceklesenDegerYilSonu;
-                    var SonDeger1 = Donemler[Donemler.Count - 2].GerceklesenDegerYilSonu;
+                    var donemler = Donemler;
+                    var SonDeger2 = TrendDegeri(donemler[donemler.Count - 1].GerceklesenDeger, donemler[donemler.Count - 1].GerceklesenDegerYilSonu);
+                    var SonDeger1 = TrendDegeri(donemler[donemler.Count - 2].GerceklesenDeger, donemler[donemler.Count - 2].GerceklesenDegerYilSonu);
 
-                    if (SonDeger2 == 0)
-                        SonDeger2 = Donemler[Donemler.Count - 1].GerceklesenDeger;
-                    if (SonDeger1 == 0)
-                        SonDeger1 = Donemler[Donemler.Count - 2].GerceklesenDeger;
+                    //Son iki dönemden birinde veri yoksa eğilim hesaplanmaz
+                    if (!SonDeger2.HasValue || !SonDeger1.HasValue)
+                        return "";
 
                     if (SonDeger2 > SonDeger1) return "ARTAN";
                     if (SonDeger2 < SonDeger1) return "AZALAN";

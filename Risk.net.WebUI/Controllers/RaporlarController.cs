@@ -1030,8 +1030,17 @@ namespace Risk.net.WebUI.Controllers
                 foreach (var donem in item.Donemler)
                 {
                     XLS.HucreDegerYaz(satir, sira++, donem.PlanlananDeger);
-                    XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDeger);
-                    XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDegerYilSonu);
+
+                    //Veri girilmeyen dönem hücresi boş bırakılır
+                    if (donem.GerceklesenDeger.HasValue)
+                        XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDeger.Value);
+                    else
+                        XLS.HucreDegerYaz(satir, sira++, "");
+
+                    if (donem.GerceklesenDegerYilSonu.HasValue)
+                        XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDegerYilSonu.Value);
+                    else
+                        XLS.HucreDegerYaz(satir, sira++, "");
                 }
 
                 if (maxDonem > item.Donemler.Count)
@@ -1138,7 +1147,12 @@ namespace Risk.net.WebUI.Controllers
                 foreach (var donem in item.Donemler)
                 {
                     XLS.HucreDegerYaz(satir, sira++, donem.PlanlananDeger);
-                    XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDeger);
+
+                    //Veri girilmeyen dönem hücresi boş bırakılır
+                    if (donem.GerceklesenDeger.HasValue)
+                        XLS.HucreDegerYaz(satir, sira++, donem.GerceklesenDeger.Value);
+                    else
+                        XLS.HucreDegerYaz(satir, sira++, "");
                 }
 
                 if (maxDonem > item.Donemler.Count)

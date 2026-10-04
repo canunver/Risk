@@ -220,6 +220,19 @@
         var degerGirisYetki = @(ViewBag.DegerGirisYetki.ToString().ToLower());
         var planBaslamaYili = 0;
         var planBitisYili = 0;
+        var gostergeYonu = 1;
+        var veriYokMetni = "@Html.Raw(CustomResource["StratejikPlanIzleme.VeriYok"])";
+        var gostergeYonuAdlari = {
+            1: "@Html.Raw(CustomResource["StratejikPlan.GostergeYonu.Artan"])",
+            2: "@Html.Raw(CustomResource["StratejikPlan.GostergeYonu.Azalan"])",
+            3: "@Html.Raw(CustomResource["StratejikPlan.GostergeYonu.Sabit"])"
+        };
+
+        //Gösterge adının yanında yönünü gösterir: "(Azalan)" gibi
+        function GostergeYonuEtiketi(yon) {
+            var adi = gostergeYonuAdlari[Number(yon || 1)] || gostergeYonuAdlari[1];
+            return " <span class='text-muted fw-400'>(" + adi + ")</span>";
+        }
 
         $(document).ready(function () {
 
@@ -397,6 +410,28 @@
             return isFinite(sayisalDeger) ? sayisalDeger : 0;
         }
 
+        //Gerçekleşen değer alanı boş bırakılmışsa "veri yok" kabul edilir ve null döner; 0 gerçek sıfırdır
+        function SayisalDegerAlBosNull(kontrol) {
+            var metin = ($(kontrol).val() || "").toString().trim();
+            if (metin === "" || metin === "-")
+                return null;
+
+            return SayisalDegerAl(kontrol);
+        }
+
+        //Orana esas değer: yıl sonu değeri 0'dan büyükse o, değilse dönem içi değer. İkisi de boşsa null (veri yok)
+        function GerceklesenDegerSec(gerceklesenDeger, gerceklesenDegerYilSonu) {
+            if (gerceklesenDegerYilSonu !== null && Number(gerceklesenDegerYilSonu) > 0)
+                return gerceklesenDegerYilSonu;
+
+            return gerceklesenDeger !== null ? gerceklesenDeger : gerceklesenDegerYilSonu;
+        }
+
+        //Sunucuya gönderilecek değer: boş ise boş metin (null), değilse virgüllü sayı
+        function SayiGonderimMetni(deger) {
+            return deger === null ? "" : deger.toString().replace(".", ",");
+        }
+
         function Donemler() {
             //Donemlerin tablodan alınması
             var donemler = [];
@@ -405,8 +440,13 @@
                     var kod = this.id.replace("sttb_", "");
 
                     var gerceklesenAlanlar = $(this).find("td:eq(3) input");
-                    var gerceklesenDeger = SayisalDegerAl(gerceklesenAlanlar[0]);
-                    var gerceklesenDegerYilSonu = SayisalDegerAl(gerceklesenAlanlar[1]);
+                    var gerceklesenDeger = SayisalDegerAlBosNull(gerceklesenAlanlar[0]);
+                    var gerceklesenDegerYilSonu = SayisalDegerAlBosNull(gerceklesenAlanlar[1]);
+
+                    //Oran hücresinde "veri yok" yazıyorsa sayı olarak 0 gönderilir; oran sunucuda yeniden hesaplanır
+                    var sapmaOraniMetin = $(this).find("td:eq(4) span").html().trim();
+                    if (sapmaOraniMetin === "" || !isFinite(Number(sapmaOraniMetin.replace(",", "."))))
+                        sapmaOraniMetin = "0";
 
                     var aForm = {
                         Kod: "",
@@ -414,9 +454,9 @@
                         Donem: Number($(this).find("td:eq(0)").text()),
                         DonemAdi: $(this).find("td:eq(1) input").val(),
                         PlanlananDeger: SayisalDegerAl($(this).find("td:eq(2) input")),
-                        GerceklesenDeger: gerceklesenDeger.toString().replace(".", ","),
-                        GerceklesenDegerYilSonu: gerceklesenDegerYilSonu.toString().replace(".", ","),
-                        SapmaOrani: $(this).find("td:eq(4) span").html().replace(".", ","),
+                        GerceklesenDeger: SayiGonderimMetni(gerceklesenDeger),
+                        GerceklesenDegerYilSonu: SayiGonderimMetni(gerceklesenDegerYilSonu),
+                        SapmaOrani: sapmaOraniMetin.replace(".", ","),
                         SapmaNedeni: $(this).find("td:eq(5) input").val(),
                     };
                     donemler.push(aForm);
@@ -433,7 +473,7 @@
 
         //Modal açıldığında gösterge tablosunun satırlarını oluşturur
         function GostergeTabloSatirEkle(form) {
-            var satirBilgi = "<td width='70%'><b>" + form.GostergeNo + "</b> " + form.Adi + "<div class='text-muted fw-700 fs-nano'>" + form.Birim?.Adi + "</div><div class='text-muted fs-nano'>" + form.Aciklama + "</div></td>";
+            var satirBilgi = "<td width='70%'><b>" + form.GostergeNo + "</b> " + form.Adi + GostergeYonuEtiketi(form.GostergeYonu) + "<div class='text-muted fw-700 fs-nano'>" + (form.Birim?.Adi ?? "") + "</div><div class='text-muted fs-nano'>" + (form.Aciklama ?? "") + "</div></td>";
             satirBilgi += "<td width='20%'>" + form.Etki + "</td>";
 
             DinamikTabloSatirEkle("tblGosterge", form.Kod, satirBilgi, "GostergeDuzenle", "", "");
@@ -455,11 +495,12 @@
                 type: "POST",
                 data: { kod: kod },
                 success: function (result) {
-                    $(".divAnahtarPerformansGostergesi").html("<b>" + result?.Nesne.GostergeNo + "</b> " + result?.Nesne.Adi);
-                    $(".divAnahtarPerformansGostergesiAciklama").html(result?.Nesne.Aciklama);
+                    $(".divAnahtarPerformansGostergesi").html("<b>" + result?.Nesne.GostergeNo + "</b> " + result?.Nesne.Adi + GostergeYonuEtiketi(result?.Nesne.GostergeYonu));
+                    $(".divAnahtarPerformansGostergesiAciklama").html(result?.Nesne.Aciklama ?? "");
                     $("#txtBaslangicTarihi").datepicker("update", TarihDegeriDDMMYYYY(result?.Nesne.BaslangicTarihi));
                     $("#txtBitisTarihi").datepicker("update", TarihDegeriDDMMYYYY(result?.Nesne.BitisTarihi));
                     $("#txtBaslangicDegeri").val(result?.Nesne.BaslangicDegeri);
+                    gostergeYonu = Number(result?.Nesne.GostergeYonu || 1);
 
                     $("#tblDonemTanimi > tbody").empty();
                     DinamikTabloVeriYok("tblDonemTanimi")
@@ -542,8 +583,8 @@
                     Donem: donem,
                     DonemAdi: yil.toString(),
                     PlanlananDeger: 0,
-                    GerceklesenDeger: 0,
-                    GerceklesenDegerYilSonu: 0,
+                    GerceklesenDeger: null,
+                    GerceklesenDegerYilSonu: null,
                     SapmaNedeni: "",
                     SapmaOrani: 0
                 });
@@ -571,8 +612,8 @@
                 Donem: donem,
                 DonemAdi: yil.toString(),
                 PlanlananDeger: 0,
-                GerceklesenDeger: 0,
-                GerceklesenDegerYilSonu: 0,
+                GerceklesenDeger: null,
+                GerceklesenDegerYilSonu: null,
                 SapmaNedeni: "",
                 SapmaOrani: 0
             };
@@ -591,11 +632,13 @@
         function DTabloSatirEkle(form) {
 
             var yil = planBaslamaYili > 0 ? planBaslamaYili + Number(form.Donem) - 1 : form.DonemAdi;
+            //İki gerçekleşen değer de boşsa dönem için veri yoktur
+            var veriYok = (form.GerceklesenDeger ?? null) === null && (form.GerceklesenDegerYilSonu ?? null) === null;
             var satirBilgi = "<td width='10%' style='text-align: center;vertical-align: middle;'>" + form.Donem + "</td>";
             satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm' required readonly value='" + yil + "' /></td>";
             satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.PlanlananDeger + "' /></td>";
-            satirBilgi += "<td width='20%'><div class='input-group'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDeger + "' /><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + form.GerceklesenDegerYilSonu + "' /></div></td>";
-            satirBilgi += "<td width='10%'><span class='p-2'>" + form.SapmaOrani + "</span></td>";
+            satirBilgi += "<td width='20%'><div class='input-group'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + (form.GerceklesenDeger ?? "") + "' /><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric sapmaOraniHesapla' value='" + (form.GerceklesenDegerYilSonu ?? "") + "' /></div></td>";
+            satirBilgi += "<td width='10%'><span class='p-2'>" + (veriYok ? veriYokMetni : form.SapmaOrani) + "</span></td>";
             satirBilgi += "<td width='20%'><input type='text' autocomplete='off' class='form-control form-control-sm autonumeric' value='" + form.SapmaNedeni + "' /></td>";
 
             var duzenle = ""
@@ -639,20 +682,26 @@
 
             var planlananDeger = SayisalDegerAl($(satir).find("td:eq(2) input"));
             var gerceklesenAlanlar = $(satir).find("td:eq(3) input");
-            var gerceklesenDeger = SayisalDegerAl(gerceklesenAlanlar[0]);
-            var gerceklesenDegerYilSonu = SayisalDegerAl(gerceklesenAlanlar[1]);
-            var gerceklesen;
+            var gerceklesenDeger = SayisalDegerAlBosNull(gerceklesenAlanlar[0]);
+            var gerceklesenDegerYilSonu = SayisalDegerAlBosNull(gerceklesenAlanlar[1]);
+            var gerceklesen = GerceklesenDegerSec(gerceklesenDeger, gerceklesenDegerYilSonu);
 
-            if (Number(gerceklesenDegerYilSonu) > 0)
-                gerceklesen = gerceklesenDegerYilSonu;
-            else
-                gerceklesen = gerceklesenDeger;
+            //Veri girilmemişse oran hesaplanmaz
+            if (gerceklesen === null) {
+                $(satir).find("td:eq(4) span").html(veriYokMetni);
+                return;
+            }
 
             //var sapmaOrani = (planlananDeger - gerceklesen) * 100 / planlananDeger;
 
             var gerceklesmeOrani = 0;
-            if (planlananDeger > 0) {
-                gerceklesmeOrani = (gerceklesen / planlananDeger) * 100;
+            if (planlananDeger > 0 && gerceklesen >= 0) {
+                if (gostergeYonu === 2)
+                    gerceklesmeOrani = gerceklesen === 0 ? 100 : (planlananDeger / gerceklesen) * 100;
+                else if (gostergeYonu === 3)
+                    gerceklesmeOrani = gerceklesen === 0 ? 0 : (Math.min(planlananDeger, gerceklesen) / Math.max(planlananDeger, gerceklesen)) * 100;
+                else
+                    gerceklesmeOrani = (gerceklesen / planlananDeger) * 100;
                 gerceklesmeOrani = gerceklesmeOrani.toFixed(2);
             }
 

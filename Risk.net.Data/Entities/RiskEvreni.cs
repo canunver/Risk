@@ -192,6 +192,8 @@ namespace Risk.net.Data.Entities
         public string SorguIsbirligiBirimKod { get; set; }
         [NotMapped]
         public int SorguBaskasiAdinaRiskDurumu { get; set; }
+        [NotMapped]
+        public int SorguMevcutDurum { get; set; }
 
         [NotMapped]
         public string KopyaKod { get; set; }

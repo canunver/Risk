@@ -248,6 +248,7 @@ namespace Risk.net.Services.Functions
                     eskiKayit.StratejikPlanHedefKod = gelenNesne.StratejikPlanHedefKod;
                     eskiKayit.Adi = gelenNesne.Adi;
                     eskiKayit.Etki = gelenNesne.Etki;
+                    eskiKayit.GostergeYonu = gelenNesne.GostergeYonu;
                     eskiKayit.Aciklama = gelenNesne.Aciklama;
                     eskiKayit.RevizyonNedeni = gelenNesne.RevizyonNedeni;
                     eskiKayit.RevizyonTarihi = gelenNesne.RevizyonTarihi;
@@ -305,16 +306,22 @@ namespace Risk.net.Services.Functions
                 {
                     foreach (var donem in gelenNesne.Donemler)
                     {
-                        if (double.IsNaN(donem.GerceklesenDeger) || double.IsInfinity(donem.GerceklesenDeger))
-                            donem.GerceklesenDeger = 0;
-                        if (double.IsNaN(donem.GerceklesenDegerYilSonu) || double.IsInfinity(donem.GerceklesenDegerYilSonu))
-                            donem.GerceklesenDegerYilSonu = 0;
+                        //Boş bırakılan değer "veri yok" anlamına gelir ve null olarak saklanır; 0 gerçek sıfırdır.
+                        if (donem.GerceklesenDeger.HasValue && (double.IsNaN(donem.GerceklesenDeger.Value) || double.IsInfinity(donem.GerceklesenDeger.Value)))
+                            donem.GerceklesenDeger = null;
+                        if (donem.GerceklesenDegerYilSonu.HasValue && (double.IsNaN(donem.GerceklesenDegerYilSonu.Value) || double.IsInfinity(donem.GerceklesenDegerYilSonu.Value)))
+                            donem.GerceklesenDegerYilSonu = null;
 
-                        var gerceklesenDeger = donem.GerceklesenDegerYilSonu > 0
+                        double? gerceklesenDeger = donem.GerceklesenDegerYilSonu > 0
                             ? donem.GerceklesenDegerYilSonu
-                            : donem.GerceklesenDeger;
-                        donem.SapmaOrani = donem.PlanlananDeger > 0
-                            ? gerceklesenDeger * 100 / donem.PlanlananDeger
+                            : (donem.GerceklesenDeger ?? donem.GerceklesenDegerYilSonu);
+
+                        //Veri girilmeyen dönemde oran hesaplanmaz (SapmaOrani kolonu boş olamadığı için 0 yazılır)
+                        donem.SapmaOrani = gerceklesenDeger.HasValue
+                            ? GerceklesmeOraniHesapla(
+                                eskiKayit.GostergeYonu,
+                                donem.PlanlananDeger,
+                                gerceklesenDeger.Value)
                             : 0;
 
                         await _serviceIzlemeDonem.KaydetAsync(kullanan, donem);
@@ -336,6 +343,25 @@ namespace Risk.net.Services.Functions
             }
 
             return new Sonuc(ENUMIslemDurum.Basarili, _sharedResource["Bildirim.KayitBasarili"], islemYapilan);
+        }
+
+        private static double GerceklesmeOraniHesapla(EnumPerformansGostergesiYonu gostergeYonu, double planlananDeger, double gerceklesenDeger)
+        {
+            if (planlananDeger <= 0 || gerceklesenDeger < 0)
+                return 0;
+
+            switch (gostergeYonu)
+            {
+                case EnumPerformansGostergesiYonu.Azalan:
+                    return gerceklesenDeger == 0 ? 100 : planlananDeger * 100 / gerceklesenDeger;
+                case EnumPerformansGostergesiYonu.Sabit:
+                    if (gerceklesenDeger == 0)
+                        return 0;
+                    return System.Math.Min(planlananDeger, gerceklesenDeger) * 100 /
+                           System.Math.Max(planlananDeger, gerceklesenDeger);
+                default:
+                    return gerceklesenDeger * 100 / planlananDeger;
+            }
         }
 
         /// <summary>

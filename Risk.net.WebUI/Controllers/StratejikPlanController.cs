@@ -356,15 +356,15 @@ namespace Risk.net.WebUI.Controllers
                     foreach (StratejikPlanIzlemeDonem d in item.Donemler)
                     {
                         if (d.Donem == 1)
-                            yil1 = d.GerceklesenDegerYilSonu;
+                            yil1 = d.GerceklesenDegerYilSonu ?? 0;
                         else if (d.Donem == 2)
-                            yil2 = d.GerceklesenDegerYilSonu;
+                            yil2 = d.GerceklesenDegerYilSonu ?? 0;
                         else if (d.Donem == 3)
-                            yil3 = d.GerceklesenDegerYilSonu;
+                            yil3 = d.GerceklesenDegerYilSonu ?? 0;
                         else if (d.Donem == 4)
-                            yil4 = d.GerceklesenDegerYilSonu;
+                            yil4 = d.GerceklesenDegerYilSonu ?? 0;
                         else if (d.Donem == 5)
-                            yil5 = d.GerceklesenDegerYilSonu;
+                            yil5 = d.GerceklesenDegerYilSonu ?? 0;
                     }
 
                     item.YilDegeri1 = yil1;

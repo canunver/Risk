@@ -1195,10 +1195,18 @@ namespace Risk.net.Services.Functions
                     LEFT JOIN (
                                 SELECT d.StratejikPlanHedefGostergeKod as Kod, 
                                 COUNT(*) ADET,
-                                CONVERT(decimal(13,4), SUM(((CASE WHEN d.GerceklesenDegerYilSonu > 0 THEN d.GerceklesenDegerYilSonu ELSE d.GerceklesenDeger END)*100.00/NULLIF(d.PlanlananDeger,0)))/COUNT(*)) AS SapmaOrani,
-                                STUFF((SELECT ',' + CONVERT(varchar, k.Donem) +';'+ CONVERT(varchar, k.PlanlananDeger) +';'+ CONVERT(varchar, k.GerceklesenDeger), +';'+ CONVERT(varchar, k.GerceklesenDegerYilSonu) FROM StratejikPlanIzlemeDonem as k WHERE k.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY k.Donem FOR XML PATH('')), 1, 1, '') AS IzlemeDonemleri,
+                                /* Gerçekleşme oranı gösterge yönüne göre hesaplanır (1: Artan, 2: Azalan, 3: Sabit); kural StratejikPlanHedefGostergeService.GerceklesmeOraniHesapla ile aynıdır. Veri girilmeyen dönemler ortalamaya katılmaz. */
+                                CONVERT(decimal(13,4), SUM(CASE WHEN x.Deger IS NULL THEN NULL
+                                                                WHEN d.PlanlananDeger <= 0 OR x.Deger < 0 THEN 0
+                                                                WHEN ISNULL(g.GostergeYonu, 1) = 2 THEN CASE WHEN x.Deger = 0 THEN 100 ELSE d.PlanlananDeger*100.00/x.Deger END
+                                                                WHEN ISNULL(g.GostergeYonu, 1) = 3 THEN CASE WHEN x.Deger = 0 THEN 0 WHEN x.Deger < d.PlanlananDeger THEN x.Deger*100.00/d.PlanlananDeger ELSE d.PlanlananDeger*100.00/x.Deger END
+                                                                ELSE x.Deger*100.00/d.PlanlananDeger END)/NULLIF(COUNT(x.Deger),0)) AS SapmaOrani,
+                                STUFF((SELECT ',' + CONVERT(varchar, k.Donem) +';'+ CONVERT(varchar, k.PlanlananDeger) +';'+ ISNULL(CONVERT(varchar, k.GerceklesenDeger), '') +';'+ ISNULL(CONVERT(varchar, k.GerceklesenDegerYilSonu), '') FROM StratejikPlanIzlemeDonem as k WHERE k.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY k.Donem FOR XML PATH('')), 1, 1, '') AS IzlemeDonemleri,
                                 (SELECT d2.SapmaNedeni FROM StratejikPlanIzlemeDonem as d2 WHERE d2.Kod = (SELECT TOP 1 d3.Kod FROM StratejikPlanIzlemeDonem as d3 WHERE d3.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY d3.Donem DESC)) AS SapmaNedeni
-                                FROM  StratejikPlanIzlemeDonem as d GROUP BY d.StratejikPlanHedefGostergeKod
+                                FROM  StratejikPlanIzlemeDonem as d
+                                LEFT JOIN StratejikPlanHedefGosterge as g ON g.Kod = d.StratejikPlanHedefGostergeKod
+                                CROSS APPLY (SELECT CASE WHEN d.GerceklesenDegerYilSonu > 0 THEN d.GerceklesenDegerYilSonu ELSE COALESCE(d.GerceklesenDeger, d.GerceklesenDegerYilSonu) END AS Deger) as x
+                                GROUP BY d.StratejikPlanHedefGostergeKod
                               ) AS [s4] ON [s4].Kod = [s2].Kod
                     LEFT JOIN (
 							    SELECT b.StratejikPlanHedefKod
@@ -1296,10 +1304,18 @@ namespace Risk.net.Services.Functions
                     LEFT JOIN (
                                 SELECT d.StratejikPlanHedefGostergeKod as Kod, 
                                 COUNT(*) ADET,
-                                CONVERT(decimal(13,4), SUM(((CASE WHEN d.GerceklesenDegerYilSonu > 0 THEN d.GerceklesenDegerYilSonu ELSE d.GerceklesenDeger END)*100.00/NULLIF(d.PlanlananDeger,0)))/COUNT(*)) AS SapmaOrani,
-                                STUFF((SELECT ',' + CONVERT(varchar, k.Donem) +';'+ CONVERT(varchar, k.PlanlananDeger) +';'+ CONVERT(varchar, k.GerceklesenDeger), +';'+ CONVERT(varchar, k.GerceklesenDegerYilSonu) FROM StratejikPlanIzlemeDonem as k WHERE k.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY k.Donem FOR XML PATH('')), 1, 1, '') AS IzlemeDonemleri,
+                                /* Gerçekleşme oranı gösterge yönüne göre hesaplanır (1: Artan, 2: Azalan, 3: Sabit); kural StratejikPlanHedefGostergeService.GerceklesmeOraniHesapla ile aynıdır. Veri girilmeyen dönemler ortalamaya katılmaz. */
+                                CONVERT(decimal(13,4), SUM(CASE WHEN x.Deger IS NULL THEN NULL
+                                                                WHEN d.PlanlananDeger <= 0 OR x.Deger < 0 THEN 0
+                                                                WHEN ISNULL(g.GostergeYonu, 1) = 2 THEN CASE WHEN x.Deger = 0 THEN 100 ELSE d.PlanlananDeger*100.00/x.Deger END
+                                                                WHEN ISNULL(g.GostergeYonu, 1) = 3 THEN CASE WHEN x.Deger = 0 THEN 0 WHEN x.Deger < d.PlanlananDeger THEN x.Deger*100.00/d.PlanlananDeger ELSE d.PlanlananDeger*100.00/x.Deger END
+                                                                ELSE x.Deger*100.00/d.PlanlananDeger END)/NULLIF(COUNT(x.Deger),0)) AS SapmaOrani,
+                                STUFF((SELECT ',' + CONVERT(varchar, k.Donem) +';'+ CONVERT(varchar, k.PlanlananDeger) +';'+ ISNULL(CONVERT(varchar, k.GerceklesenDeger), '') +';'+ ISNULL(CONVERT(varchar, k.GerceklesenDegerYilSonu), '') FROM StratejikPlanIzlemeDonem as k WHERE k.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY k.Donem FOR XML PATH('')), 1, 1, '') AS IzlemeDonemleri,
                                 (SELECT d2.SapmaNedeni FROM StratejikPlanIzlemeDonem as d2 WHERE d2.Kod = (SELECT TOP 1 d3.Kod FROM StratejikPlanIzlemeDonem as d3 WHERE d3.StratejikPlanHedefGostergeKod = d.StratejikPlanHedefGostergeKod ORDER BY d3.Donem DESC)) AS SapmaNedeni
-                                FROM  StratejikPlanIzlemeDonem as d GROUP BY d.StratejikPlanHedefGostergeKod
+                                FROM  StratejikPlanIzlemeDonem as d
+                                LEFT JOIN StratejikPlanHedefGosterge as g ON g.Kod = d.StratejikPlanHedefGostergeKod
+                                CROSS APPLY (SELECT CASE WHEN d.GerceklesenDegerYilSonu > 0 THEN d.GerceklesenDegerYilSonu ELSE COALESCE(d.GerceklesenDeger, d.GerceklesenDegerYilSonu) END AS Deger) as x
+                                GROUP BY d.StratejikPlanHedefGostergeKod
                               ) AS [s4] ON [s4].Kod = [s2].Kod
                     LEFT JOIN (
 							    SELECT b.StratejikPlanHedefKod
